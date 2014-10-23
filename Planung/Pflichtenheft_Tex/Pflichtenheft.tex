@@ -8,10 +8,12 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 
-\title{Pflichtenheft}
-\author{Auftraggeber: Ann-Cathrin Weger, Merten Nagel, Dennis Eylmanns (Gruppe 8) \and
-Auftragnehmer: Niklas Adams, David Südholt, Felix Kibellus(Gruppe 6)}
-\date{14.10.2014}
+\title{Pflichtenheft Evolutionssimulator}
+\author{Auftraggeber: \and
+Gruppe 8: Ann-Cathrin Weger, Merten Nagel, Dennis Eylmanns \and
+Auftragnehmer: \and
+Gruppe 6: Niklas Adams, David Südholt, Felix Kibellus}
+\date{20.10.2014}
 
 \begin{document}
 	\maketitle
@@ -72,95 +74,214 @@ Das Framework zur Betreibung der Applikation, darunter Java VM und graphische Be
 Grundsätzlich ist keine Netzwerkverbindung zum Betreiben der Software vonnöten. Es besteht allerdings die Möglichkeit zur Vernetzung und gemeinsamen Simulation mit anderen Geräten.
 \end{enumerate}
 
+\subsection{Use-Case-Diagramme}
+\subsubsection{Simulationsansicht}
+\begin{minipage}{100mm} 
+Der Simulierende hat auf dem Simulationsbildschirm zwei Möglichkeiten mit dem Programm zu interagieren:
+\begin{enumerate}
+\item Er kann sich einen Überblick über seine und andere Spezies (sofern er bisher andere Spezies getroffen hat) anzeigen lassen.
+Dafür muss noch das "andere Spezies anzeigen" integriert werden, welches überprüft, ob und wie viel der Simulierende von anderen Spezies sehen kann.
+\item Er kann seine eigene Spezies bearbeiten. Bei dieser Bearbeitung geht es um weitere Mutationen (Entwicklungen) der Spezies, den er mit seinen Punkten kaufen kann. Dafür muss ein Fähigkeitsbaum angezeigt werden, um dem Simulierenden einen Überblick über die Zusammenhänge der verschiedenen Entwicklungen zu verschaffen.
+\end{enumerate}
+\includegraphics[scale=0.26]{Bilder/UC_Simulation.jpg}
+\end{minipage}
+\newpage
+
+\subsubsection{Spezies erstellen}
+\begin{minipage}{100mm}
+Der Simulator kann verschiedene Konfigurationen beim Erstellen der angeben.
+\begin{enumerate}
+\item Es muss eine Grundspezies aus mehreren angegebenen ausgewählt werden. Dazu gibt es mehrere Schaltflächen welche der Nutzer auswählen kann. Er bekommt einen kurzen Überblick welche Auswirkungen die Wahr der Grundspezies auf seine Kernattribute hat.
+\item Der Benutzer hat des Weiteren die Möglichkeit in geringem Maße Einfluss auf die Kernattribute zu nehmen. Dazu kann er eine definierte Anzahl Punkte in die Kernattribute investieren. Über ein Balkendiagramm kann sich der Nutzer auch hier jederzeit anzeigen lassen welche Stärken oder Schwächen die Spezies unter der derzeitigen Modifikation besitzt.
+\end{enumerate}
+\includegraphics[scale=0.08]{Bilder/UC_Spezies_Erstellen.jpg}
+\end{minipage}
+\newpage
+
+\subsubsection{Welt erstellen}
+In dem Dialog, der zur Festlegung der Welt dient, werden dem Nutzer zwei Möglichkeiten geboten:
+\begin{enumerate}
+\item Zum einen kann er eine zufällige Welt erstellen lassen, die dann neu generiert wird
+\item Zum anderen kann er aus vorhandenen Welten auswählen. Das schließt von vornherein im Programm vorhandene Welten sowie zuvor durch die Option "zufällig erstellen" generierte Welten.
+\end{enumerate}
+\begin{minipage}{100mm} 
+\includegraphics[scale=0.18]{Bilder/UC_WeltWestellen.jpg}
+\end{minipage}
+\newpage
+
 \section{Produktfunktionen}
 \begin{enumerate}
-\item[(F01)] Die graphische Oberfläche wird für das Android-Betriebssystem entworfen und benutzt das von Google bereitgestellte Java-Framework. 
+%---------------------------------------------------------------------
+\item[(F01)]
+Es soll eine graphische Oberfläche zur Bedienung und Simulation vorhanden sein
 
-\item[(F02)] Es soll einen Startbildschirm geben, welcher dem Benutzer beim Programmstart angezeigt wird.
 \begin{enumerate}
-\item[(F02.1)]
-Der Benutzer kann sich eine Erklärung des Simulators in Textform anzeigen lassen. Dies soll jedoch nur eine kleine Hilfestellung sein, da der Simulator intuitiv und selbsterklärend aufgebaut sein wird.
-\item[(F02.2)]
-Es soll einen Button geben, mit welchem der Benutzer die Simulation starten kann.
-\item[(F02.3)]
-Der Benutzer soll die Möglichkeit haben unterbrochene Simulationen zu laden.
-\item[(F02.4)]
-Es soll einen Button geben, mit welchem der Benutzer die vergangenen Simulationen anzeigen lassen kann.
-\item[(F02.5)]
-Über den "Zurück-Button" kann das Programm beendet werden.
+\item[(F01.1)] 
+Die graphische Oberfläche wird für das Android-Betriebssystem entworfen und benutzt das von Google 		bereitgestellte Java-Framework. 
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\item[(F02)] Startfenster erstellen
+\begin{enumerate}
+\item [-]
+Es soll einen Startbildschirm geben, welcher dem Benutzer beim Programmstart angezeigt wird.
+\end{enumerate}
+
+\begin{enumerate}
+\item [(F02.1)] 
+Erklärung des Simulators mit Vorstellung der Welten
+
+\begin{enumerate}
+\item [(F02.1.1)] 
+Der Benutzer kann sich eine Erklärung des Simulators in Textform anzeigen lassen. 
+\item [(F02.1.2)]
+Dies soll jedoch nur eine kleine Hilfestellung sein, da der Simulator intuitiv und selbsterklärend aufgebaut sein wird.
 \end{enumerate}
 
 
-\item[(F03)]
-Der Benutzer hat die Möglichkeit aus einer festgelegten Menge vordefinierter Welten zu wählen um eine Simulation unter gleichen Bedingungen erneut durchzuführen.
-Es steht auch die Möglichkeit zur Verfügung eine Simulation auf einer neu generierten Welt vorzunehmen.
-Beim generieren der Welt werden größere Gebiete der gleichen Eigenschaft erstellt. Unterschiedliche Landbereiche haben unterschiedliche Eigenschaften.
+\item[(F02.2)]Starten einer neuen Simulation
+\begin{enumerate}
+\item [(F02.2.1)] Es soll einen Button geben, mit welchem der Benutzer die Simulation starten kann.
+\end{enumerate}
 
+\item[(F02.3)]Laden einer gespeicherten Simulation
+\begin{enumerate}
+\item [(F02.3.1)]Der Benutzer soll die Möglichkeit haben unterbrochene Simulationen zu laden.
+\end{enumerate}
+
+\item[(F02.4)]Anzeigen der abgeschlossenen Simulationen
+\begin{enumerate}
+\item [(F02.4.1)]Es soll einen Button geben, mit welchem der Benutzer die vergangenen Simulationen anzeigen lassen kann.
+\end{enumerate}
+
+\item[(F02.5)]Beenden der Simulation
+\begin{enumerate}
+\item [(F02.5.1)]Über den "Zurück-Button" kann das Programm beendet werden.
+\end{enumerate}
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\item[(F03)]Auswählen einer bestimmten oder generieren einer zufälligen Welt
+\begin{enumerate}
+\item[(F03.1)]Der Benutzer hat die Möglichkeit aus einer festgelegten Menge vordefinierter Welten zu wählen um eine Simulation unter gleichen Bedingungen erneut durchzuführen.
+\item[(F03.2)]
+Es steht auch die Möglichkeit zur Verfügung eine Simulation auf einer neu generierten Welt vorzunehmen.
+\item[(F03.3)]
+Beim generieren der Welt werden größere Gebiete der gleichen Eigenschaft erstellt. 
+\item[(F03.4)]
+Unterschiedliche Landbereiche haben unterschiedliche Eigenschaften.
+\end{enumerate}
+
+%---------------------------------------------------------------------
 \item[(F04)]
 Erstellen einer eigenen Spezies
+
 \begin{enumerate}
-\item[(F04.1)]
-Dem Benutzer wird ein Textfeld zur Benennung der Spezies zur Verfügung gestellt
-\item[(F04.2)] Spezifizierbare Eigenschaften der Spezies
+\item[(F04.1)]Namensgebung
 \begin{enumerate}
-\item[(F04.2.1)]
-Zu Beginn wird der Nutzer vor die Wahl zwischen gewissen Grundeigenschaften gestellt, darunter Art der Nahrungsaufnahme (Fleischfresser, Pflanzenfresser), Lebensraum (Land, Wasser, Luft), Lebensweise (Rudeltier, Einzelgänger) u.a.
+\item[(F04.1.1)]Dem Benutzer wird ein Textfeld zur Benennung der Spezies zur Verfügung gestellt
+\end{enumerate}
+
+\item[(F04.2)] Auswahl von Eigenschaften aus einem Pool von Eigenschaften
+
+\begin{enumerate}
+\item[(F04.2.1)] Eine Spezies besitzt mehrere spezifizierbare Eigenschaften
 \item[(F04.2.2)]
-Diese beeinflussen die fünf Kernattribute der Spezies: Physische Kraft, Geschicklichkeit, Intelligenz, soziale Kompetenz sowie Fortpflanzungsrate (inklusive Überlebensfähigkeit der Jungen)
+Zu Beginn wird der Nutzer vor die Wahl zwischen gewissen Grundeigenschaften gestellt, darunter Art der Nahrungsaufnahme (Fleischfresser, Pflanzenfresser), Lebensraum (Land, Wasser, Luft), Lebensweise (Rudeltier, Einzelgänger) u.a.
 \item[(F04.2.3)]
-Im Verlauf der Simulation erhält der Benutzer Punkte, die von der Größe seiner Population abhängt
+Diese beeinflussen die fünf Kernattribute der Spezies: Physische Kraft, Geschicklichkeit, Intelligenz, soziale Kompetenz sowie Fortpflanzungsrate (inklusive Überlebensfähigkeit der Jungen)
 \item[(F04.2.4)]
-Der Benutzer kann diese Punkte in einen Merkmalsbaum und einen Fähigkeitenbaum investieren, um seine Spezies zu entwickeln.
+Im Verlauf der Simulation erhält der Benutzer Punkte, die von der Größe seiner Population abhängt
 \item[(F04.2.5)]
-Der Merkmalsbaum enthält physische Charakteristika wie Gliedmaßen, Sinnesorgane etc.
+Der Benutzer kann diese Punkte in einen Merkmalsbaum und einen Fähigkeitenbaum investieren, um seine Spezies zu entwickeln.
 \item[(F04.2.6)]
-Der Fähigkeitenbaum enthält Fähigkeiten, deren Erlernbarkeit von den bereits ausgebildeten Merkmalen und Kernattributen abhängt. Beispielsweise hängt die Fähigkeit, Feuer zu machen, von dem Kernattribut Geschicklichkeit und der physischen Charakteristik Hände ab.
+Der Merkmalsbaum enthält physische Charakteristika wie Gliedmaßen, Sinnesorgane etc.
 \item[(F04.2.7)]
+Der Fähigkeitenbaum enthält Fähigkeiten, deren Erlernbarkeit von den bereits ausgebildeten Merkmalen und Kernattributen abhängt.
+\item[(F04.2.8)] Beispielsweise hängt die Fähigkeit, Feuer zu machen, von dem Kernattribut Geschicklichkeit und der physischen Charakteristik Hände ab.
+\item[(F04.2.9)]
 Die in den Bäumen verteilten Punkte beeinflussen die Kernattribute, Ausbreitung und Fortbestand der Spezies, im Besonderen in der Interaktion mit anderen Spezies.
 \end{enumerate}
 
-\item[(F04.3)]
-Bei Bestätigung der Konfiguration durch den Benutzer wird die Spezies gespeichert und die Simulation gestartet.
-\end{enumerate}
-
-\item[(F05)]
-Der Startort wird, abhängig von den gewählten Grundeigenschaften, zufällig auf der Karte festgelegt. Der Bereich, an dem die Spezies startet, wird aufgedeckt, der anfangs verdeckten Rest der Karte kann durch Besiedelung erkundet werden.
-
-
-\item[(L06)]
-Der Benutzer startet im Jahre 0. Eine Minute in Echtzeit entspricht 100.000 Jahren in der Simulation. Somit entspricht eine durchschnittliche Simulation (20 Minuten) 20.000.000 Jahren Evolution.
- 
-\item[(L07)]
-Die Erweiterungen und Veränderungen der Spezies wurden schon genauer in (L04) spezifiziert um die Erstellung der Spezies besser mit der Entwicklung in Verbindung zu setzen und zu erklären. Die Speicherung der Inhalte geschieht sobald sich der Datenbestand geändert hat. Sollte die Simulation unterbrochen werden oder abstürzen gehen keine Daten verloren. 
-
-\item[(L08)]
-Sollte eine andere Spezies vernichtet werden, so erscheint dem Benutzer ein kleines Dialogfenster, welches durch einen Button "Schließen" zu beenden ist. 
-
-\item[(L09)]
-Bei Negativereignissen bezüglich der eigenen Spezies soll ebenfalls ein Dialogfenster informieren. Dies ist der Fall, wenn das Wachstum der eigenen Spezies negativ wird oder die eigene Spezies kurz vor der Ausrottung steht.
-
-
-\item[(L10)]
-Es können verschiedene Zufallsereignisse auftreten
+\item[(F04.3)]Speichern der Spezies
 \begin{enumerate}
-\item[(L10.1))]
-Eiszeit
-\item[(L10.2))]
-Klimaerwärmung
-\item[(L10.3))]
-Meteoriteneinschlag auf ein Gebiet, welches nahezu die gesamte dort lebende Spezies ausrottet. 
-\item[(L10.4))]
-Erhöhte Radioaktive Belastung über kurzen Zeitraum
-In einem Gebiet sterben einige Individuen an der erhöhten Strahlung. Die anderen generieren zusätzliche Mutationspunkte, da es durch der Strahlung zu Mutationen kam.
+\item[(F04.3.1)]Bei Bestätigung der Konfiguration durch den Benutzer wird die Spezies gespeichert und die Simulation gestartet.
+\end{enumerate}
 
 \end{enumerate}
 
+%---------------------------------------------------------------------
+\item[(F05)]Startort auf der ausgewählten Welt festlegen. Restliche Welt ist zu diesem
+Zeitpunkt noch nicht einsehbar
+\begin{enumerate}
+\item[(F05.1)]Der Startort wird, abhängig von den gewählten Grundeigenschaften, zufällig auf der Karte festgelegt. Der Bereich, an dem die Spezies startet, wird aufgedeckt, der anfangs verdeckten Rest der Karte kann durch Besiedelung erkundet werden.
+\end{enumerate}
 
-\item[(L11)]
-Der Benutzer kann die Simulation jederzeit vorzeitig beenden. In diesem Fall erscheint ein Dialogfenster, in dem der Benutzer entscheiden kann, ob die derzeitige Simulation gespeichert werden soll. Möchte der Benutzer nicht speichert, werden alle zu der Simulation gehörigen Daten gelöscht.
+%---------------------------------------------------------------------
+\item[(L06)]Zeitmessung der Simulation nach LF05 starten
+\begin{enumerate}
+\item[(L06.1)]Der Benutzer startet im Jahre 0. Eine Minute in Echtzeit entspricht 100.000 Jahren in der Simulation. Somit entspricht eine durchschnittliche Simulation (20 Minuten) 20.000.000 Jahren Evolution.
+\end{enumerate}
 
-\item[(L12)]
-Beim natürlichen Ende der Simulation wird dem Benutzer eine Statistik Angezeigt. Diese enthält die Simulationszeit, die derzeitige Populationsgröße, die 5 Kernattribute und eine Wertung.
+ %---------------------------------------------------------------------
+\item[(L07)]Erweiterung und Veränderung der Eigenschaften (Mutationen)
+\begin{enumerate}
+\item[(L07.1)]
+Die Erweiterungen und Veränderungen der Spezies wurden schon genauer in (L04) spezifiziert um die Erstellung der Spezies besser mit der Entwicklung in Verbindung zu setzen und zu erklären.
+\item[(L07.2)]
+Die Speicherung der Inhalte geschieht sobald sich der Datenbestand geändert hat. Sollte die Simulation unterbrochen werden oder abstürzen gehen keine Daten verloren. 
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\item[(L08)]Meldung, wenn eine andere Spezies vernichtet wurde
+\begin{enumerate}
+\item[(L08.1)]Sollte eine andere Spezies vernichtet werden, so erscheint dem Benutzer ein kleines Dialogfenster, welches durch einen Button "Schließen" zu beenden ist. 
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\item[(L09)] Meldung, wenn die eigene Spezies droht vernichtet zu werden
+\begin{enumerate}
+\item[(L09.1)] Bei Negativereignissen bezüglich der eigenen Spezies soll ebenfalls ein Dialogfenster informieren. 
+\item[(L09.2)]
+Dies ist der Fall, wenn das Wachstum der eigenen Spezies negativ wird oder die eigene Spezies kurz vor der Ausrottung steht.
+\end{enumerate}
+
+
+%---------------------------------------------------------------------
+\item[(L10)] Zufallsereignisse auf den Welten, die die Simulation beeinflussen
+
+\begin{enumerate}
+\item[(L10.1))]Es können verschiedene Zufallsereignisse auftreten
+\item[(L10.2))]
+Eiszeit
+\item[(L10.3))]
+Klimaerwärmung
+\item[(L10.4))]
+Meteoriteneinschlag auf ein Gebiet, welches nahezu die gesamte dort lebende Spezies ausrottet. 
+\item[(L10.5))]
+Erhöhte Radioaktive Belastung über kurzen Zeitraum
+In einem Gebiet sterben einige Individuen an der erhöhten Strahlung. 
+\item[(L10.6))]
+Die anderen generieren zusätzliche Mutationspunkte, da es durch der Strahlung zu Mutationen kam.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\item[(L11)] Vorzeitiges Beenden der Simulation
+\begin{enumerate}
+\item[(L11.1)]Der Benutzer kann die Simulation jederzeit vorzeitig beenden. 
+\item[(L11.2)]
+In diesem Fall erscheint ein Dialogfenster, in dem der Benutzer entscheiden kann, ob die derzeitige Simulation gespeichert werden soll. 
+\item[(L11.3)]
+Möchte der Benutzer nicht speichert, werden alle zu der Simulation gehörigen Daten gelöscht.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\item[(L12)]Natürliches Simulationsende
+\begin{enumerate}
+\item[(L12.1)]Beim natürlichen Ende der Simulation wird dem Benutzer eine Statistik Angezeigt. 
+\item[(L12.2)]
+Diese enthält die Simulationszeit, die derzeitige Populationsgröße, die 5 Kernattribute und eine Wertung.
+\end{enumerate}
 
 \end{enumerate}
 
