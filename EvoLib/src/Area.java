@@ -1,3 +1,11 @@
+/**
+ * @author Niklas Adams
+ * Eine Area ist eine zusammenhängender Bereich von Feldern mit gemeinsamen Eigenschaft, wie
+ * eine Wüste oder ein Urwald. Area hält die zugehörigen Felder, seinen Landtypen
+ * und die zugehörigen Populationen aller Spezies.
+* Die Area gibt den Aufrauf zum Ausrechnen der Populaitonen an seine Felder weiter und kann sich
+* im Laufe der Simulation durch zufällige Ereignisse ändern. 
+*/
 import java.util.LinkedList;
 
 public class Area {
