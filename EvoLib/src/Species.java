@@ -1,25 +1,45 @@
 
 /**
- * Repraesentiert eine Spezies anhand der Attribute
+ * @author Felix Kibellus
+ * Repraesentiert eine Spezies anhand der Attribute.
  * */
 public class Species {
-	//attribute
-	private int intelligence;
-	private int agility;
-	private int strength;
-	private int social;
-	private int procreation;
-	private int minTemp;
-	private int maxTemp;
-	private int resourceDemand;
-	private int movementChance;
-	private int visibillity;
-	private boolean water;
 	
+	//#########################################################################
+	//#                           Attribute                                   #
+	//#      beeinflussen unterschiedliche Aspekte der Simulation             #
+	//#########################################################################
+	
+	private int intelligence; //Resourceneffizienz
+	
+	private int agility; //Resourcengewinn und Spezieskampf
+	
+	private int strength;//Aggressivitaet, Spezieskampf, natuerlichen Kampf
+	
+	private int social; //Aggressivitaet
+	
+	private int procreation; //Fortpflanzung
+	
+	private int minTemp;//minimale Ueberlebenstemperatur
+	
+	private int maxTemp;//maximale Ueberlebenstemperatur
+	
+	private int resourceDemand; //benoetigte Resourcen
+	
+	private int movementChance;//abwanderung in benachbarte Fields
+	
+	private int visibillity;//sichtweite der Spezies
+	
+	private boolean water;//Faehigkeit im Wasser zu leben
+	
+	/**
+	 * Erstellt ein Objekt der Klasse Species und initialisiert alle Attribute
+	 * mit den uebergebenen Parametern.
+	 * */
 	public Species(int intelligence, int agility, int strength, int social,
 			int procreation, int minTemp, int maxTemp, int resourceDemand,
 			int movementChance, int visibillity, boolean water) {
-		super();
+		
 		this.intelligence = intelligence;
 		this.agility = agility;
 		this.strength = strength;
