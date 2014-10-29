@@ -61,31 +61,55 @@ public class SimpleMapLogic implements IMapLogic {
 	public void simulateGrowth(Field field) {
 		LandType landType = field.getArea().getLandType();
 		int[] newPolulation = new int[species.length];
+		int[] dying = simulateDying(field, landType);
+		int[] resources = simulateResourceHandling(field, landType);
+		int[] procreations =  simulateProcreation(field);
+		int[] collisions = simulateCollision(field);
+		
 		for (int i = 0; i < species.length; i++) {
-			simulateCollision(field);
-			simulateDying(field, landType);
-			simulateResourceHandling(field, landType);
-			simulateProcreation(field);
+			newPolulation[i] = field.getPopulation()[i];
+			newPolulation[i] -= dying[i];
+			newPolulation[i] += resources[i];
+			newPolulation[i] += procreations[i];
+			newPolulation[i] += collisions[i];
 		}
-	}
-
-	//help method to simulate the collision
-	public void simulateCollision(Field field){
-		//TODO: implement this algorithm
+		field.setPopulation(newPolulation);
 	}
 	
 	//help method to simulate the dying
-	private void simulateDying(Field field, LandType landType) {
-		//TODO: implement this algorithm
+	private int[] simulateDying(Field field, LandType landType) {
+		int[] dying = new int[species.length];
+		int enemies = landType.getNaturalEnemies();
+		
+		for (int i = 0; i < dying.length; i++) {
+			int strengthDifference = species[i].getStrength() - enemies;
+			if(strengthDifference < 0)//the species is not stronger?
+				dying[i] = field.getPopulation()[i] * -strengthDifference/100;//DIE!
+			
+			if( field.getPopulation()[i] > dying[i])
+				dying[i] = field.getPopulation()[i];
+		}
+		return dying;
 	}
 	
 	//help method to simulate the resource-handling
-	private void simulateResourceHandling(Field field, LandType landType) {
+	private int[] simulateResourceHandling(Field field, LandType landType) {
+		int[] dying = new int[species.length];
 		//TODO: implement this algorithm
+		return dying;
 	}
 	
 	//help method to simulate the procreation
-	private void simulateProcreation(Field field) {
+	private int[] simulateProcreation(Field field) {
+		int[] dying = new int[species.length];
 		//TODO: implement this algorithm
+		return dying;
+	}
+	
+	//help method to simulate the collision
+	public int[] simulateCollision(Field field){
+		int[] dying = new int[species.length];
+		//TODO: implement this algorithm
+		return dying;
 	}
 }
