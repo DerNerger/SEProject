@@ -5,10 +5,13 @@ public class Map {
 
 	//attributes
 	private Field[][] fields;
+	private Species[] species;
 	private Area[] areas;
 	private IMapLogic logic;
 	
-	public Map(int length, int width){
+	public Map(int length, int width, Species[] species){
+		this.species =species;
+		this.logic = new SimpleMapLogic(species);
 		//generate map algorithm here
 		//TODO: Davids job
 	}
