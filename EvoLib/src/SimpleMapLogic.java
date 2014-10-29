@@ -59,7 +59,7 @@ public class SimpleMapLogic implements IMapLogic {
 	 * */
 	@Override
 	public void simulateGrowth(Field field) {
-		LandType landType = null; //TODO: get the landType
+		LandType landType = field.getArea().getLandType();
 		int[] newPolulation = new int[species.length];
 		for (int i = 0; i < species.length; i++) {
 			simulateCollision(field);
