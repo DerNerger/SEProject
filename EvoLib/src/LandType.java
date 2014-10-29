@@ -1,4 +1,10 @@
-
+/**
+ * 
+ * @author Niklas Adams
+ *Landtype hält Informationen über den Landschaftstypen einer Area und somit
+ *auch der Felder, aus der eine Area besteht. Diese Informationen wie Temperatur
+ *Ressources usw bestimmen die Überlebensfähigkeit der Spezies auf diesem LandType
+ */
 public class LandType {
 private int minTemp;
 private int maxTemp;
