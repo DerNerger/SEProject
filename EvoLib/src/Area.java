@@ -10,7 +10,7 @@ private int[] population;
 		//einzelne Felder der Area refreshen
 		for(Field currentField:fields){
 			//Changes in LinkedList packen
-			LinkedList.add(currentField.refreshField(logic));
+			LinkedList.addLast(currentField.refreshField(logic));
 		}
 		//Linked List zurückgeben
 		return toReturn;
@@ -23,12 +23,12 @@ private int[] population;
 		//TODO zur darstellung des neuen FieldTyp für die Gui enthält
 		
 	}
-	public LinkedList<Change>(float percentage){
+	public LinkedList<Change>changePopulation(float percentage){
 		LinkedList<Change> toReturn= new LinkedList<Change>();
 		//einzelne Felder der Area mit Prozentsatz neu berechnen
 		for(Field currentField:fields){
 			//die Changes Objekte in LinkedList packen und zurückgeben
-			LinkedList.add(currentField.changePopulationByPercentage(percentage));
+			LinkedList.addLast(currentField.changePopulationByPercentage(percentage));
 		}
 		return toReturn;
 	
