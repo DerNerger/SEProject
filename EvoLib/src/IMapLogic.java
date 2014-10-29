@@ -28,8 +28,6 @@ public interface IMapLogic {
 	 * Wachstum (Vermehrung) bzw. die Ausrottung simuliert. Die Aenderungen
 	 * werden direkt in das Uebergebene Field uebernommen.
 	 * @param field Das Field fuer welches das Wachstum simuliert werden soll
-	 * @param landType Der LandType der Area zu dem das uebergebene Field
-	 * gehoert
 	 * */
-	void simulateGrowth(Field field, LandType landType) ;
+	void simulateGrowth(Field field);
 }
