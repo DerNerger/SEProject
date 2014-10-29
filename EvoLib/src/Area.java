@@ -13,6 +13,9 @@ private Field[] fields;
 private LandType landType;
 private int[] population;
 
+	public LandType getLandType() {
+	return landType;
+}
 	public LinkedList<Change>refreshArea(IMapLogic logic){
 		LinkedList<Change> toReturn= new LinkedList<Change>();
 		//einzelne Felder der Area refreshen
