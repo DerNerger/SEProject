@@ -4,8 +4,8 @@
  * Einfache Klasse zum Testen der Populationsveraenderung
  * Mit der SimpleMapLogic koennen Abwanderung in andere Fields und das
  * Wachstum bzw die Kollisionen innerhalb eines Fields simuliert werden.
- * Achtung: Diese Klasse dient nur zu testzwecken und wird spaeter durch
- * eine Komplexere Klasse mit den richtigen Algorithmen ersetzt.
+ * Achtung: Diese Klasse dient nur zu Testzwecken und wird spaeter durch
+ * eine komplexere Klasse mit den richtigen Algorithmen ersetzt.
  * */
 public class SimpleMapLogic implements IMapLogic {
 	
@@ -83,8 +83,8 @@ public class SimpleMapLogic implements IMapLogic {
 		
 		for (int i = 0; i < dying.length; i++) {
 			int strengthDifference = species[i].getStrength() - enemies;
-			if(strengthDifference < 0)//the species is not stronger?
-				dying[i] = field.getPopulation()[i] * -strengthDifference/100;//DIE!
+			if(strengthDifference < 0)//the species is not stronger?//DIE!
+				dying[i] = field.getPopulation()[i] * -strengthDifference/100.0;
 			
 			if( field.getPopulation()[i] > dying[i])
 				dying[i] = field.getPopulation()[i];
