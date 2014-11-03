@@ -12,6 +12,7 @@ public class Area {
 private Field[] fields;
 private LandType landType;
 private int[] population;
+private int number;
 
 	public LandType getLandType() {
 	return landType;
@@ -21,7 +22,7 @@ private int[] population;
 		//einzelne Felder der Area refreshen
 		for(Field currentField:fields){
 			//Changes in LinkedList packen
-			LinkedList.addLast(currentField.refreshField(logic));
+			toReturn.addLast(currentField.refreshField(logic));
 		}
 		//Linked List zurückgeben
 		return toReturn;
@@ -32,6 +33,7 @@ private int[] population;
 		landType=newType;
 		//TODO Objekt des obertypen change zurückgeben, welche Informationen
 		//TODO zur darstellung des neuen FieldTyp für die Gui enthält
+		return new AreaLandTypeChange(number, newType);
 		
 	}
 	public LinkedList<Change>changePopulation(float percentage){
@@ -39,7 +41,7 @@ private int[] population;
 		//einzelne Felder der Area mit Prozentsatz neu berechnen
 		for(Field currentField:fields){
 			//die Changes Objekte in LinkedList packen und zurückgeben
-			LinkedList.addLast(currentField.changePopulationByPercentage(percentage));
+			toReturn.addLast(currentField.changePopulationByPercentage(percentage));
 		}
 		return toReturn;
 	

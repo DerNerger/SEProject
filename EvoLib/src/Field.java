@@ -48,23 +48,17 @@ public void setMigrations(int[] migrations) {
 	this.migrations = migrations;
 }
 public Change refreshField(IMapLogic logic){
-	//alte population speichern
-	int [] diff = population.clone();
 	//entwicklung simulieren
-	logic.simulateGroth(this);
+	logic.simulateGrowth(this);
 	//neue Population ausrechnen
-	for (int i=0; i<=3;i++){
-		diff[i]=population[i]-diff[i];
-	}
-	//TODO Change Objekt mit den zugehörigen Daten erstellen und zurück geben;
+	return new FieldChange(population);
 }
 public Change changePopulationByPercentage(float percentage){
 	//alte population speichern
-	int [] diff = population.clone();
 	for (int i=0; i<=3;i++){
 			population[i]*=percentage;
-			diff[i]=population[i]-diff[i];
+			
 	}
-	//TODO Change Objekt mit den zugehörigen Daten erstellen und zurück geben;
+	return new FieldChange(population);
 }
 }
