@@ -8,7 +8,7 @@ public class AreaLandTypeChange extends Change {
 	}
 	@Override
 	public void doChange(IPlayer player) {
-		// TODO Auto-generated method stub
+		player.changeAreaLandType(area, newLandType);
 
 	}
 

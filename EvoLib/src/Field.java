@@ -11,19 +11,24 @@ private final Area area;
 private int[] population;
 private boolean[] isVisible;
 private int[] migrations;
+private int x,y;
 
 /**
  * Field anlegen, Area muss bekannt sein.
  * Man kann mit Angabe der Area (diese muss bekannt sein) ein Field Objekt erstellen,
  * populationen und migrationen werden auf null gesetzt, die sichtbarkeit auf false
  * @param area
+ * @param x
+ * @param y
  */
-public Field(Area area){
+public Field(Area area,int x,int y){
 	this.area=area;
 	for(int i=0;i<=3;i++){
 		population[i]=0;
 		isVisible[i]=false;
 		migrations[i]=0;
+		this.x=x;
+		this.y=y;
 	}
 }
 public Area getArea() {
@@ -51,7 +56,7 @@ public Change refreshField(IMapLogic logic){
 	//entwicklung simulieren
 	logic.simulateGrowth(this);
 	//neue Population ausrechnen
-	return new FieldChange(population);
+	return new FieldChange(x,y,population);
 }
 public Change changePopulationByPercentage(float percentage){
 	//alte population speichern
@@ -59,6 +64,12 @@ public Change changePopulationByPercentage(float percentage){
 			population[i]*=percentage;
 			
 	}
-	return new FieldChange(population);
+	return new FieldChange(x,y,population);
+}
+public int getX() {
+	return x;
+}
+public int getY() {
+	return y;
 }
 }

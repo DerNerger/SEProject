@@ -13,6 +13,11 @@ private Field[] fields;
 private LandType landType;
 private int[] population;
 private int number;
+	public Area(int numberArea,LandType landType, Field[] fields){
+		this.number=numberArea;
+		this.landType=landType;
+		this.fields=fields;
+	}
 
 	public LandType getLandType() {
 	return landType;
