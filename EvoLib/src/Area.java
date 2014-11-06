@@ -1,5 +1,8 @@
+//Fertig implementiert
+
 /**
- * @author Niklas Adams
+ 
+* @author Niklas Adams
  * Eine Area ist eine zusammenhängender Bereich von Feldern mit gemeinsamen Eigenschaft, wie
  * eine Wüste oder ein Urwald. Area hält die zugehörigen Felder, seinen Landtypen
  * und die zugehörigen Populationen aller Spezies.
@@ -11,7 +14,7 @@ import java.util.LinkedList;
 public class Area {
 private Field[] fields;
 private LandType landType;
-private int[] population;
+private int[] population; //TODO wenn nicht gebraucht rausnehmen
 private int number;
 	public Area(int numberArea,LandType landType, Field[] fields){
 		this.number=numberArea;
@@ -29,6 +32,8 @@ private int number;
 			//Changes in LinkedList packen
 			toReturn.addLast(currentField.refreshField(logic));
 		}
+		//Changes der Population in der Area anhängnen und zurückgeben
+		toReturn.addLast(new AreaPopulationChange(number,calculatePopulation()));
 		//Linked List zurückgeben
 		return toReturn;
 	
@@ -48,7 +53,22 @@ private int number;
 			//die Changes Objekte in LinkedList packen und zurückgeben
 			toReturn.addLast(currentField.changePopulationByPercentage(percentage));
 		}
+		calculatePopulation();
+		toReturn.addLast(new AreaPopulationChange(number,calculatePopulation()));
 		return toReturn;
 	
 	}
+	private int[] calculatePopulation(){
+		int[] populations=new int [4];
+		for(int i =0;i<4;i++){
+			populations[i]=0;
+		}
+		for(Field field : fields){
+			for(int i =0;i<4;i++){
+				populations[i]+=field.getPopulation()[i];
+			}
+		}
+		return populations;
+	}
+
 }

@@ -6,6 +6,15 @@
  *Ressources usw bestimmen die Überlebensfähigkeit der Spezies auf diesem LandType
  */
 public class LandType {
+public LandType(int minTemp, int maxTemp, FieldType type,
+			int naturalEnemies, int resources) {
+		super();
+		this.minTemp = minTemp;
+		this.maxTemp = maxTemp;
+		this.type = type;
+		this.naturalEnemies = naturalEnemies;
+		this.resources = resources;
+	}
 private int minTemp;
 private int maxTemp;
 private FieldType type;

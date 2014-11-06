@@ -1,3 +1,8 @@
+//fertig implemeniert
+/**
+ * @author Niklas Adams
+ * Gibt aktuele Zeit und Punktzahl zurück an die gui
+ */
 import java.util.Date;
 
 

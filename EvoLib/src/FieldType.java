@@ -1,4 +1,9 @@
-
+//TODO restliche Typen hinzufügen
+/**
+ * 
+ * @author Niklas Adams
+ *
+ */
 public enum FieldType {
- LAND,WATER;
+ LAND,WATER,DESERT,JUNGLE,ICE;
 }

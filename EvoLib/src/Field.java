@@ -1,3 +1,5 @@
+//sollte fertig implementiert sein
+
 /**
 * @author Niklas Adams
 *Ein Objekt der Klasse Feld hält die Informationen zu einem Element 
