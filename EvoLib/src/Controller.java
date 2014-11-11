@@ -1,4 +1,8 @@
+import java.util.LinkedList;
 
+/**
+ * @author Felix Kibellus
+ * */
 public class Controller implements Runnable, Skillable{
 	
 	private Map map;
@@ -17,8 +21,24 @@ public class Controller implements Runnable, Skillable{
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		while(!Thread.interrupted()){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			LinkedList<Change> changes = new LinkedList<Change>();
+			changes.addAll(map.calculateVisibility());
+			map.simulateMigration();
+			changes.addAll(map.refreshMap());
+			MapEvent event = circumstancesGenerator.generateMapEvent();
+			changes.addAll(map.updateCircumstances(event));
+			//TODO: Fix some problems here
+			for(Change c : changes){
+				for(IPlayer p : player)
+					c.doChange(p);
+			}
+		}
 	}
 
 	@Override

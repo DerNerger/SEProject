@@ -84,7 +84,7 @@ public class SimpleMapLogic implements IMapLogic {
 		for (int i = 0; i < dying.length; i++) {
 			int strengthDifference = species[i].getStrength() - enemies;
 			if(strengthDifference < 0)//the species is not stronger?//DIE!
-				dying[i] = field.getPopulation()[i] * -strengthDifference/100.0;
+				dying[i] = (int) (field.getPopulation()[i] * -strengthDifference/100.0);
 			
 			if( field.getPopulation()[i] > dying[i])
 				dying[i] = field.getPopulation()[i];
