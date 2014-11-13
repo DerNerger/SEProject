@@ -68,10 +68,5 @@ public Change changePopulationByPercentage(float percentage){
 	}
 	return new FieldChange(x,y,population);
 }
-public int getX() {
-	return x;
-}
-public int getY() {
-	return y;
-}
+
 }
