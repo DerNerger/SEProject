@@ -3,6 +3,12 @@ import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Queue;
 
+import java.awt.Color;
+import javax.swing.*;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 public class Map {
 
 	//attributes
@@ -11,7 +17,7 @@ public class Map {
 	private Area[] areas;
 	private IMapLogic logic;
 	
-	public Map(int width, int height, Species[] species){
+	private Map(int width, int height, Species[] species){
 		this.species =species;
 		this.logic = new SimpleMapLogic(species);
 	}
@@ -44,11 +50,12 @@ public class Map {
 		double accumulator = 0;
 		for (FieldType ft : pct.keySet()) {
 			accumulator += pct.get(ft);
-			accPct.push(new Tuple<FieldType, Double>(ft, accumulator));
+			accPct.addLast(new Tuple<FieldType, Double>(ft, accumulator));
 		}
 		
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
+				fieldtypes[i][j] = null;
 				for (Tuple<FieldType, Double> t : accPct) {
 					if (fieldtypes[i][j] != null) break;
 					if (noise[i][j] < t.t2) fieldtypes[i][j] = t.t1;
@@ -56,6 +63,35 @@ public class Map {
 				fields[i][j] = new Field(i, j);
 			}
 		}
+		
+		/***************** TODO: DELETE*****************************
+		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if (fieldtypes[i][j] == FieldType.WATER)
+					image.setRGB(i, j, new Color(255, 0, 0).getRGB());
+				else
+					image.setRGB(i, j, new Color(0, 255, 0).getRGB());
+			}
+		}
+		
+		final JFrame frame = new JFrame();
+    	frame.setSize(width, height);
+    	
+		JPanel pane = new JPanel() {
+			@Override
+			public void paint(Graphics g) {
+				g.drawImage(image, 0, 0, null);
+			}
+		};
+		frame.add(pane);
+		
+		java.awt.EventQueue.invokeLater(new Runnable() {
+		    public void run() {
+		        frame.setVisible(true);
+		    }
+		} );
+		//***********************************************************/
 		
 		LinkedList<Area> areas = new LinkedList<Area>();
 		int numberArea = 0;
@@ -72,7 +108,13 @@ public class Map {
 		}
 		
 		res.fields = fields;
-		res.areas = (Area[])areas.toArray();
+		
+		Area[] areaArray = new Area[areas.size()];
+		
+		for (int i = 0; i < areas.size(); i++) {
+			areaArray[i] = areas.get(i);
+		}
+		res.areas = areaArray;
 		
 		return res;
 	}
@@ -103,7 +145,13 @@ public class Map {
 			}
 		}
 		
-		return (Field[])fieldsInArea.toArray();
+		Field[] result = new Field[fieldsInArea.size()];
+		
+		for (int i = 0; i < fieldsInArea.size(); i++) {
+			result[i] = fieldsInArea.get(i);
+		}
+		
+		return result;
 	}
 	
 	public LinkedList<Change> refreshMap(){
