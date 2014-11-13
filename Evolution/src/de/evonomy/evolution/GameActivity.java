@@ -1,11 +1,12 @@
 package de.evonomy.evolution;
 
+import main.IPlayer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class GameActivity extends Activity  {
+public class GameActivity extends Activity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
