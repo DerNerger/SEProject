@@ -9,24 +9,123 @@ package de.evonomy.evolution;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int agility=0x7f010001;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int intelligence=0x7f010000;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int recreation=0x7f010004;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int social=0x7f010003;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int strength=0x7f010002;
+    }
+    public static final class color {
+        public static final int aqua=0x7f040009;
+        public static final int black=0x7f04000f;
+        public static final int blue=0x7f04000d;
+        public static final int fuchsia=0x7f040002;
+        public static final int gray=0x7f040005;
+        public static final int green=0x7f04000c;
+        public static final int lightblue=0x7f040011;
+        public static final int lightred=0x7f040010;
+        public static final int lime=0x7f04000a;
+        public static final int maroon=0x7f040008;
+        public static final int navy=0x7f04000e;
+        public static final int olive=0x7f040006;
+        public static final int purple=0x7f040007;
+        public static final int red=0x7f040003;
+        public static final int silver=0x7f040004;
+        public static final int teal=0x7f04000b;
+        public static final int white=0x7f040000;
+        public static final int yellow=0x7f040001;
+    }
+    public static final class dimen {
+        /**  Default screen margins, per the Android Design guidelines. 
+         */
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int attribute_agility=0x7f020000;
+        public static final int attribute_intelligence=0x7f020001;
+        public static final int attribute_recreation=0x7f020002;
+        public static final int attribute_social=0x7f020003;
+        public static final int attribute_strength=0x7f020004;
+        public static final int circle_black_white=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int no_rounded_corner_black_white=0x7f020007;
+        public static final int rounded_corner=0x7f020008;
+        public static final int rounded_corner_black_white=0x7f020009;
+        public static final int rounded_corner_red=0x7f02000a;
+    }
+    public static final class id {
+        public static final int agility_species_attribute_view=0x7f08000e;
+        public static final int explanations_button_startmenu=0x7f080005;
+        public static final int intelligence_species_attribute_view=0x7f08000d;
+        public static final int left_container_ll_startmenu=0x7f080000;
+        public static final int load_simulation_button_startmenu=0x7f080003;
+        public static final int map_holder_ll_simulation_layout=0x7f08000b;
+        public static final int planet1_button_selcet_world=0x7f080007;
+        public static final int planet2_button_selcet_world=0x7f080009;
+        public static final int planet3_button_selcet_world=0x7f080008;
+        public static final int planet4_button_selcet_world=0x7f08000a;
+        public static final int recreation_relative_layout_species_attribute_view=0x7f080011;
+        public static final int recreation_species_attribute_view=0x7f080012;
+        public static final int right_container_ll_startmenu=0x7f080001;
+        public static final int social_species_attribute_view=0x7f080010;
+        public static final int species_attribute_view_create_species=0x7f080006;
+        public static final int speciesoverview_button_simulation_layout=0x7f08000c;
+        public static final int start_simulation_button_startmenu=0x7f080002;
+        public static final int statistics_button_startmenu=0x7f080004;
+        public static final int strength_species_attribute_view=0x7f08000f;
+    }
+    public static final class layout {
+        public static final int activity_start_menu=0x7f030000;
+        public static final int create_species=0x7f030001;
+        public static final int select_world=0x7f030002;
+        public static final int simulation_layout=0x7f030003;
+        public static final int species_attribute_view=0x7f030004;
     }
     public static final class string {
-        public static final int app_name=0x7f030000;
+        public static final int action_settings=0x7f060002;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060001;
+        public static final int random_generate_world=0x7f060003;
+        public static final int title_activity_game=0x7f060004;
     }
     public static final class style {
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
@@ -38,10 +137,108 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f040000;
-        /**  Application theme. 
+        public static final int AppBaseTheme=0x7f070001;
+        /** 
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    
+ Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f040001;
+        public static final int AppTheme=0x7f070000;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a SpeciesAttributeView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SpeciesAttributeView_agility de.evonomy.evolution:agility}</code></td><td></td></tr>
+           <tr><td><code>{@link #SpeciesAttributeView_intelligence de.evonomy.evolution:intelligence}</code></td><td></td></tr>
+           <tr><td><code>{@link #SpeciesAttributeView_recreation de.evonomy.evolution:recreation}</code></td><td></td></tr>
+           <tr><td><code>{@link #SpeciesAttributeView_social de.evonomy.evolution:social}</code></td><td></td></tr>
+           <tr><td><code>{@link #SpeciesAttributeView_strength de.evonomy.evolution:strength}</code></td><td></td></tr>
+           </table>
+           @see #SpeciesAttributeView_agility
+           @see #SpeciesAttributeView_intelligence
+           @see #SpeciesAttributeView_recreation
+           @see #SpeciesAttributeView_social
+           @see #SpeciesAttributeView_strength
+         */
+        public static final int[] SpeciesAttributeView = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004
+        };
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#agility}
+          attribute's value can be found in the {@link #SpeciesAttributeView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:agility
+        */
+        public static final int SpeciesAttributeView_agility = 1;
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#intelligence}
+          attribute's value can be found in the {@link #SpeciesAttributeView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:intelligence
+        */
+        public static final int SpeciesAttributeView_intelligence = 0;
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#recreation}
+          attribute's value can be found in the {@link #SpeciesAttributeView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:recreation
+        */
+        public static final int SpeciesAttributeView_recreation = 4;
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#social}
+          attribute's value can be found in the {@link #SpeciesAttributeView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:social
+        */
+        public static final int SpeciesAttributeView_social = 3;
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#strength}
+          attribute's value can be found in the {@link #SpeciesAttributeView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:strength
+        */
+        public static final int SpeciesAttributeView_strength = 2;
+    };
 }

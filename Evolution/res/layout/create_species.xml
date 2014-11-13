@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/de.evonomy.evolution"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+    <!-- relative layout for species name -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+        <EditText 
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="@string/app_name"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rounded_corner_black_white"
+            />
+        
+    </RelativeLayout>
+    <!-- Linear layout which contians all choosing options and the attribut views -->
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="horizontal">
+        <!--  choosing options container -->
+        <LinearLayout
+            	android:layout_width="0dp"
+            	android:layout_height="fill_parent"
+            	android:layout_weight="5"
+            	android:paddingTop="20dp"
+            	android:paddingBottom="20dp"
+            	android:paddingRight="10dp"
+            	android:orientation="vertical" >
+        		<LinearLayout 
+            		android:layout_width="fill_parent"
+            		android:layout_height="fill_parent"
+            		android:background="@drawable/rounded_corner_black_white"
+            		android:orientation="vertical">
+            
+        	</LinearLayout>
+        </LinearLayout>
+        <!-- attributs view container -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:paddingLeft="10dp"
+            android:orientation="vertical" >
+        	<LinearLayout 
+            	android:layout_width="fill_parent"
+            	android:layout_height="fill_parent"
+            	android:background="@drawable/rounded_corner_black_white"
+            	android:orientation="vertical">
+            	<de.evonomy.evolution.SpeciesAttributeView
+            	    android:id="@+id/species_attribute_view_create_species"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="fill_parent"
+            	    custom:intelligence="99"
+            	    custom:agility="50"
+            	    custom:strength="25"
+            	    custom:social="12"
+            	    custom:recreation="25"/>
+            	
+            
+        </LinearLayout>
+        </LinearLayout>
+        
+    </LinearLayout>
+    
+
+</LinearLayout>
