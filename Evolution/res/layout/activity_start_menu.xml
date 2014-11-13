@@ -1,0 +1,156 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:orientation="horizontal"
+    tools:context="de.evolution.evolution.StartMenuActivity" >
+    <!--  left container which holds the logo of evolution -->
+	<LinearLayout
+	    android:id="@+id/left_container_ll_startmenu" 
+	    android:layout_height="fill_parent"
+	    android:layout_width="0dp"
+	    android:layout_weight="3"
+	    android:orientation="vertical">
+	    <!-- For padding vertical above image-->
+	     <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="2"
+	        android:orientation="horizontal"></LinearLayout>
+	     <!-- hold image and horizontal paddings -->
+	     <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="4"
+	        android:orientation="horizontal">
+	        <!-- for padding left to image -->
+	        <LinearLayout 
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:layout_weight="1"
+	        	android:orientation="vertical"></LinearLayout>
+	        <!-- holds the image!!! -->
+	        <LinearLayout 
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:layout_weight="5"
+	        	android:orientation="horizontal">
+	            <ImageView 
+	                android:layout_width="fill_parent"
+	                android:layout_height="fill_parent"
+	                android:src="@drawable/ic_launcher"/>
+	        </LinearLayout>
+	        <!-- for pedding right to image -->
+	        <LinearLayout 
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:layout_weight="1"
+	        	android:orientation="horizontal"></LinearLayout>
+	         
+	     </LinearLayout>
+	     <!-- for padding vertical under image-->
+	     <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="2"
+	        android:orientation="horizontal"></LinearLayout>
+	    
+	    
+	</LinearLayout>
+	<!-- right container wich holds buttons and paddings for them -->
+	<LinearLayout
+	    android:id="@+id/right_container_ll_startmenu"
+	    android:layout_height="fill_parent"
+	    android:layout_width="0dp"
+	    android:layout_weight="2"
+	    android:orientation="vertical">   
+	    <!--  For padding vertical above buttons -->
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:orientation="horizontal"></LinearLayout>
+	    <!-- Container for buttons and padding  -->
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="6"
+	        android:orientation="horizontal">
+	        <!--  Button Container -->
+	        <LinearLayout 
+	            android:layout_width="0dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="4"
+	            android:orientation="vertical" >
+	            <!-- Here Buttons -->
+	            <LinearLayout 
+	                android:layout_width="fill_parent"
+	                android:layout_height="0dp"
+	                android:layout_weight="1"
+	                android:padding="4dp">
+	            <Button 
+	                android:id="@+id/start_simulation_button_startmenu"
+	                android:layout_width="fill_parent"
+	                android:layout_height="fill_parent"	                
+	                android:text="@string/app_name"
+	                android:background="@drawable/rounded_corner" />
+	            </LinearLayout>
+	            <LinearLayout 
+	                android:layout_width="fill_parent"
+	                android:layout_height="0dp"
+	                android:layout_weight="1"
+	                android:padding="4dp">
+	            <Button 
+	                android:id="@+id/load_simulation_button_startmenu"
+	                android:layout_width="fill_parent"
+	                android:layout_height="fill_parent"
+	                android:text="@string/app_name"
+	                android:background="@drawable/rounded_corner" />
+	            </LinearLayout>
+	            <LinearLayout 
+	                android:layout_width="fill_parent"
+	                android:layout_height="0dp"
+	                android:layout_weight="1"
+	                android:padding="4dp">
+	            <Button 
+	                android:id="@+id/statistics_button_startmenu"
+	                android:layout_width="fill_parent"
+	                android:layout_height="fill_parent"
+	                android:text="@string/app_name"
+	                android:background="@drawable/rounded_corner" />
+	            </LinearLayout>
+	            <LinearLayout 
+	                android:layout_width="fill_parent"
+	                android:layout_height="0dp"
+	                android:layout_weight="1"
+	                android:padding="4dp">
+	            <Button 
+	                android:id="@+id/explanations_button_startmenu"
+	                android:layout_width="fill_parent"
+	                android:layout_height="fill_parent"
+	                android:text="@string/app_name"
+	                android:background="@drawable/rounded_corner" />
+	            </LinearLayout>
+	            
+	        </LinearLayout>
+	        <!--  for padding -->
+	        <LinearLayout 
+	            android:layout_width="0dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            android:orientation="vertical" ></LinearLayout>
+	        
+	    </LinearLayout>
+	    <!--  For padding  vertical under buttons-->
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:orientation="horizontal"></LinearLayout>
+	    
+	    
+	    
+	</LinearLayout>
+    
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SpeciesAttributeView">
+        <attr name="intelligence" format="integer"/>
+        <attr name="agility" format="integer"/>
+        <attr name="strength" format="integer"/>
+        <attr name="social" format="integer"/>
+        <attr name="recreation" format="integer"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <!--  linear layout hold the columns -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="horizontal">
+     >
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        >
+   		<View 
+   		    android:id="@+id/intelligence_species_attribute_view"
+   		    android:layout_height="1dp"
+        	android:layout_width="fill_parent"
+       		android:background="@drawable/attribute_intelligence"
+       		android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+	<RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        >
+   		<View 
+   		    android:id="@+id/agility_species_attribute_view"
+   		    android:layout_height="1dp"
+        	android:layout_width="fill_parent"
+       		android:background="@drawable/attribute_agility"
+       		android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        >
+   		<View 
+   		    android:id="@+id/strength_species_attribute_view"
+   		    android:layout_height="1dp"
+        	android:layout_width="fill_parent"
+       		android:background="@drawable/attribute_strength"
+       		android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        >
+   		<View 
+   		    android:id="@+id/social_species_attribute_view"
+   		    android:layout_height="1dp"
+        	android:layout_width="fill_parent"
+       		android:background="@drawable/attribute_social"
+       		android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/recreation_relative_layout_species_attribute_view"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        >
+   		<View 
+   		    android:id="@+id/recreation_species_attribute_view"
+   		    android:layout_height="1sp"
+        	android:layout_width="fill_parent"
+       		android:background="@drawable/attribute_recreation"
+       		android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
+    
+    </LinearLayout>
+    <!-- Linear Layout holds pictures for attributes -->
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+    <!-- each layout holds one ImageView -->
+    	<LinearLayout
+    	    android:layout_width="0dp"
+    	    android:layout_height="fill_parent"
+    	    android:layout_weight="1"
+    	    android:padding="2dp"
+    	    android:orientation="horizontal" >
+        
+   		</LinearLayout>
+   		<LinearLayout
+    	    android:layout_width="0dp"
+    	    android:layout_height="fill_parent"
+    	    android:layout_weight="1"
+    	    android:padding="2dp"
+    	    android:orientation="horizontal" >
+        
+   		</LinearLayout>
+   		<LinearLayout
+    	    android:layout_width="0dp"
+    	    android:layout_height="fill_parent"
+    	    android:layout_weight="1"
+    	    android:padding="2dp"
+    	    android:orientation="horizontal" >
+        
+   		</LinearLayout>
+   		<LinearLayout
+    	    android:layout_width="0dp"
+    	    android:layout_height="fill_parent"
+    	    android:layout_weight="1"
+    	    android:padding="2dp"
+    	    android:orientation="horizontal" >
+        
+   		</LinearLayout>
+   		<LinearLayout
+    	    android:layout_width="0dp"
+    	    android:layout_height="fill_parent"
+    	    android:layout_weight="1"
+    	    android:padding="2dp"
+    	    android:orientation="horizontal" >
+        
+   		</LinearLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>
