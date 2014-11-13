@@ -48,7 +48,7 @@ public class SimpleMapLogic implements IMapLogic {
 		//TODO: primitive algorithm to test
 		int[] newMigration = new int[species.length];
 		for (int i = 0; i < species.length; i++) {
-			if(Math.random()>species[i].getMovementChance())
+			if(Math.random() < species[i].getMovementChance())
 				newMigration[i] = (int) (source.getPopulation()[i]*0.1);
 		}
 		target.setMigrations(newMigration);
@@ -94,22 +94,31 @@ public class SimpleMapLogic implements IMapLogic {
 	
 	//help method to simulate the resource-handling
 	private int[] simulateResourceHandling(Field field, LandType landType) {
-		int[] dying = new int[species.length];
-		//TODO: implement this algorithm
-		return dying;
+		int[] groth = new int[species.length];
+		for (int i = 0; i < groth.length; i++) {
+			int demand = species[i].getResourceDemand();
+			int efficiency = species[i].getIntelligence();
+			int resources = landType.getResources();
+			int population = field.getPopulation()[i];
+			if(resources*efficiency > population * demand)
+				groth[i]=(int) (population*=0.1);
+			else
+				groth[i]=(int) (population*=(-0.1));
+		}
+		return groth;
 	}
 	
 	//help method to simulate the procreation
 	private int[] simulateProcreation(Field field) {
-		int[] dying = new int[species.length];
+		int[] groth = new int[species.length];
 		//TODO: implement this algorithm
-		return dying;
+		return groth;
 	}
 	
 	//help method to simulate the collision
 	public int[] simulateCollision(Field field){
-		int[] dying = new int[species.length];
+		int[] groth = new int[species.length];
 		//TODO: implement this algorithm
-		return dying;
+		return groth;
 	}
 }
