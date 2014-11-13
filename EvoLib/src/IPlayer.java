@@ -8,5 +8,6 @@ public interface IPlayer {
 	void changeWorldPopulation(long[] population);
 	void changeAreaLandType(int area, LandType landType);
 	void changePointsAndTime(int[] points, Date time);
+	void updateSpecies(SpeciesUpdate speciesUpdate);
 	boolean getPlayerNumber(int number);
 }
