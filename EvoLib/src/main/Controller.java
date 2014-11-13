@@ -1,5 +1,4 @@
 package main;
-import java.text.DateFormat.Field;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -62,11 +61,21 @@ public class Controller implements Runnable, Skillable{
 			
 			//simulate map-event
 			MapEvent event = circumstancesGenerator.generateMapEvent();
-			changes.addAll(map.updateCircumstances(event));
+			
+			try {
+				changes.addAll(map.updateCircumstances(event));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
 			
 			for(Change c : changes){
-				for(IPlayer p : player)
-					c.doChange(p);
+				//IF NOT DEBUG
+				//for(IPlayer p : player)
+				//	c.doChange(p);
+				//if DEBUG
+				c.doChange(player[0]);
 			}
 		}
 	}
@@ -78,23 +87,28 @@ public class Controller implements Runnable, Skillable{
 		qLock.unlock();
 	}
 	
-	public static void main(String[] args){
+	public static void main(String[] args){		
 		Species [] species = new Species[4];
 		for (int i = 0; i < species.length; i++) {
 			species[i] = new Species(5, 5, 5, 5, 2, -2, 200, 2, 0, 1, false);
 		} 
 		
 		HashMap<FieldType, Double> pct = new HashMap<>();
-		pct.put(FieldType.WATER, 0.5);
-		pct.put(FieldType.LAND, 0.5);
+		pct.put(FieldType.WATER, 0.25);
+		pct.put(FieldType.LAND, 0.25);
+		pct.put(FieldType.ICE, 0.25);
+		pct.put(FieldType.JUNGLE, 0.25);
 		
 		Map map = Map.fromRandom(200, 100, species, pct);
+		System.out.println(map.toString());
+		
 		IPlayer[] player = new consoleTestPlayer[4];
 		for (int i = 0; i < player.length; i++) {
 			player[i] =  new consoleTestPlayer();
 		}
 		
 		Controller c =  new Controller(map, species, player);
+		new Thread(c).start();
 		
 	}
 

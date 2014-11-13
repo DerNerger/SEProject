@@ -81,7 +81,6 @@ public class Field {
 		//alte population speichern
 		for (int i=0; i<=3;i++){
 				population[i]*=percentage;
-				
 		}
 		return new FieldChange(x,y,population);
 	}

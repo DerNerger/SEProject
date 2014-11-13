@@ -95,31 +95,31 @@ public class SimpleMapLogic implements IMapLogic {
 	
 	//help method to simulate the resource-handling
 	private int[] simulateResourceHandling(Field field, LandType landType) {
-		int[] groth = new int[species.length];
-		for (int i = 0; i < groth.length; i++) {
+		int[] growth = new int[species.length];
+		for (int i = 0; i < growth.length; i++) {
 			int demand = species[i].getResourceDemand();
 			int efficiency = species[i].getIntelligence();
 			int resources = landType.getResources();
 			int population = field.getPopulation()[i];
 			if(resources*efficiency > population * demand)
-				groth[i]=(int) (population*=0.1);
+				growth[i]=(int) (population*=0.1);
 			else
-				groth[i]=(int) (population*=(-0.1));
+				growth[i]=(int) (population*=(-0.1));
 		}
-		return groth;
+		return growth;
 	}
 	
 	//help method to simulate the procreation
 	private int[] simulateProcreation(Field field) {
-		int[] groth = new int[species.length];
+		int[] growth = new int[species.length];
 		//TODO: implement this algorithm
-		return groth;
+		return growth;
 	}
 	
 	//help method to simulate the collision
 	public int[] simulateCollision(Field field){
-		int[] groth = new int[species.length];
+		int[] growth = new int[species.length];
 		//TODO: implement this algorithm
-		return groth;
+		return growth;
 	}
 }

@@ -73,4 +73,7 @@ private int number;
 		return populations;
 	}
 
+	public String toString(){
+		return number+"";
+	}
 }

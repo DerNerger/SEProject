@@ -65,14 +65,29 @@ public class Map {
 			}
 		}
 		
-		/***************** TODO: DELETE*****************************
+		//***************** TODO: DELETE*****************************
 		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if (fieldtypes[i][j] == FieldType.WATER)
+				switch (fieldtypes[i][j]) {
+				case WATER:
 					image.setRGB(i, j, new Color(255, 0, 0).getRGB());
-				else
+					break;
+				case DESERT:
 					image.setRGB(i, j, new Color(0, 255, 0).getRGB());
+					break;
+				case ICE:
+					image.setRGB(i, j, new Color(0, 0, 255).getRGB());
+					break;
+				case JUNGLE:
+					image.setRGB(i, j, new Color(0, 0, 0).getRGB());
+					break;
+				case LAND:
+					image.setRGB(i, j, new Color(255, 255, 255).getRGB());
+					break;
+				default:
+					break;
+				}				
 			}
 		}
 		
@@ -92,7 +107,7 @@ public class Map {
 		        frame.setVisible(true);
 		    }
 		} );
-		//***********************************************************/
+		//***********************************************************
 		
 		LinkedList<Area> areas = new LinkedList<Area>();
 		int numberArea = 0;
@@ -104,7 +119,11 @@ public class Map {
 					continue;
 				fieldsInArea = getFieldsInArea(i, j, fieldtypes, fields, done);
 				LandType landType = new LandType(0, 0, fieldtypes[i][j], 0, 0);
-				areas.push(new Area(numberArea++, landType, fieldsInArea));
+				Area area = new Area(numberArea++, landType, fieldsInArea);
+				areas.push(area);
+				for (Field f : fieldsInArea) {
+					f.setArea(area);
+				}
 			}
 		}
 		
@@ -116,7 +135,7 @@ public class Map {
 			areaArray[i] = areas.get(i);
 		}
 		res.areas = areaArray;
-		
+				
 		return res;
 	}
 	
@@ -175,5 +194,18 @@ public class Map {
 		LinkedList<Change> changeList = new LinkedList<>();
 		//TODO: implement this algorithm here or in map-logic????
 		return changeList;
+	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Areas="+areas.length+"\n");
+		sb.append(fields.length+" x "+fields[0].length+"\n");
+		for (int i = 0; i < fields[0].length; i++) {
+			for (int j = 0; j < fields.length; j++) {
+				sb.append(fields[j][i].getArea());
+			}
+			sb.append("\n");
+		}
+		return sb.toString();
 	}
 }
