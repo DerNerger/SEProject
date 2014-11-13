@@ -1,5 +1,7 @@
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.Queue;
 
 public class Map {
 
@@ -33,7 +35,8 @@ public class Map {
 		double persistance = .2;
 		
 		double[][] noise = RandomNoise.getNoise(width, height, octaveCount, persistance);
-		FieldType[][] fields = new FieldType[width][height];
+		FieldType[][] fieldtypes = new FieldType[width][height];
+		Field[][] fields = new Field[width][height];
 		
 		/* Wenn pct die Verteilungsdichte ist, ist accPct die Verteilungsfunktion.*/
 		LinkedList<Tuple<FieldType, Double>> accPct = new LinkedList<Tuple<FieldType,Double>>();
@@ -47,16 +50,60 @@ public class Map {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				for (Tuple<FieldType, Double> t : accPct) {
-					if (fields[i][j] != null) break;
-					if (noise[i][j] < t.t2) fields[i][j] = t.t1;
+					if (fieldtypes[i][j] != null) break;
+					if (noise[i][j] < t.t2) fieldtypes[i][j] = t.t1;
+				}
+				fields[i][j] = new Field(i, j);
+			}
+		}
+		
+		LinkedList<Area> areas = new LinkedList<Area>();
+		int numberArea = 0;
+		Field[] fieldsInArea;
+		HashSet<Field> done = new HashSet<Field>();
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if (done.contains(fields[i][j]))
+					continue;
+				fieldsInArea = getFieldsInArea(i, j, fieldtypes, fields, done);
+				LandType landType = new LandType(0, 0, fieldtypes[i][j], 0, 0);
+				areas.push(new Area(numberArea++, landType, fieldsInArea));
+			}
+		}
+		
+		res.fields = fields;
+		res.areas = (Area[])areas.toArray();
+		
+		return res;
+	}
+	
+	private static Field[] getFieldsInArea(int x, int y, FieldType[][] fieldtypes,
+			Field[][] fields, HashSet<Field> done) {
+		
+		LinkedList<Field> fieldsInArea = new LinkedList<Field>();
+		FieldType type = fieldtypes[x][y];
+		int width = fields.length;
+		int height = fields[0].length;
+		
+		LinkedList<Field> queue = new LinkedList<Field>();
+		queue.push(fields[x][y]);
+		
+		while (!queue.isEmpty()) {
+			Field f = queue.pop();
+			done.add(f);
+			fieldsInArea.push(f);
+			for (int i = -1; i <= 1; i++) {
+				for (int j = -1; j <= 1; j++) {
+					if (Math.abs(i + j) != 1 || f.x + i < 0 || f.x + i >= width
+							|| f.y + j < 0 || f.y + j >= height) continue;
+					if (fieldtypes[f.x + i][f.y + j] == type
+							&& !done.contains(fields[f.x + i][f.y + j]))
+						queue.push(fields[f.x + i][f.y + j]);
 				}
 			}
 		}
 		
-		/* TODO:
-		 * Aus dem fields[][] array die Areas extrahieren, daraus Fields erzeugen
-		 */
-		return res;
+		return (Field[])fieldsInArea.toArray();
 	}
 	
 	public LinkedList<Change> refreshMap(){

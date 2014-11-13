@@ -12,7 +12,11 @@ public class Tuple<T1, T2> {
 		this.t2 = t2;
 	}
 	
-	public boolean equals(Tuple<T1, T2> t) {
+	public boolean equals(Object o) {
+		if (o == null) return false;
+		if (!(o instanceof Tuple<?, ?>)) return false;
+		
+		Tuple<T1, T2> t = (Tuple<T1, T2>) o;
 		return this.t1 == t.t1 && this.t2 == t.t2;
 	}
 }
