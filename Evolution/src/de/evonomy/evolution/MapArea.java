@@ -3,14 +3,14 @@ package de.evonomy.evolution;
 import android.graphics.Paint;
 
 public class MapArea {
-	private Paint landType;
-	public MapArea(Paint landType){
-		this.landType=landType;
+	private Paint FieldType;
+	public MapArea(Paint FieldType){
+		this.FieldType=FieldType;
 	}
-	public void changeLandType(Paint newLandType){
-		this.landType=newLandType;
+	public void changeFieldType(Paint newFieldType){
+		this.FieldType=newFieldType;
 	}
-	public Paint getLandType(){
-		return landType;
+	public Paint getFieldType(){
+		return FieldType;
 	}
 }

@@ -25,7 +25,7 @@ public class MapEventMeteorite extends MapEvent {
 		LandType newLandType= new LandType(area.getLandType().getMinTemp()+DELTAT, area.getLandType().getMaxTemp()+DELTAT,FieldType.DESERT,NATURALENEMIES,RESSOURCES);
 		toReturn.addFirst(area.setLandType(newLandType));
 		
-		return null;
+		return toReturn;
 	}
 
 }
