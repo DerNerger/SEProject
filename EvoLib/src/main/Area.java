@@ -17,6 +17,7 @@ private Field[] fields;
 private LandType landType;
 private int[] population; //TODO wenn nicht gebraucht rausnehmen
 private int number;
+
 	public Area(int numberArea,LandType landType, Field[] fields){
 		this.population = new int[4];
 		this.number=numberArea;
@@ -71,6 +72,10 @@ private int number;
 			}
 		}
 		return populations;
+	}
+
+	public int getNumber() {
+		return number;
 	}
 
 	public String toString(){

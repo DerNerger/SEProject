@@ -11,5 +11,5 @@ public interface IPlayer {
 	void changePointsAndTime(int[] points, Date time);
 	void updateSpecies(SpeciesUpdate speciesUpdate);
 	boolean getPlayerNumber(int number);
-	void setMap(Map map);
+	void setMap(VisualMap map);
 }

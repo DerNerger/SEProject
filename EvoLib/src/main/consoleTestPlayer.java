@@ -47,4 +47,15 @@ public class consoleTestPlayer implements IPlayer{
 		return false;
 	}
 
+	@Override
+	public void setMap(VisualMap map) {
+		System.out.println("Es wurde eine neue  visual map gesetzt");
+		for (int i = 0; i < map.getAreaNumberOfFields()[0].length; i++) {
+			for (int j = 0; j < map.getAreaNumberOfFields().length; j++) {
+				System.out.print(map.getAreaNumberOfFields()[j][i]);
+			}
+			System.out.println();
+		}
+	}
+
 }

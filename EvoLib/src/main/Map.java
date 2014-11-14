@@ -66,7 +66,7 @@ public class Map {
 		}
 		
 		//***************** TODO: DELETE*****************************
-		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		/*final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				switch (fieldtypes[i][j]) {
@@ -92,7 +92,7 @@ public class Map {
 		}
 		
 		final JFrame frame = new JFrame();
-    	frame.setSize(width, height);
+    	frame.setSize(width+30, height+30);
     	
 		JPanel pane = new JPanel() {
 			@Override
@@ -107,7 +107,7 @@ public class Map {
 		        frame.setVisible(true);
 		    }
 		} );
-		//***********************************************************
+		//************************************************************/
 		
 		LinkedList<Area> areas = new LinkedList<Area>();
 		int numberArea = 0;

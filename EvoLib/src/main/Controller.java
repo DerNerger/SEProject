@@ -32,6 +32,13 @@ public class Controller implements Runnable, Skillable{
 
 	@Override
 	public void run() {
+		//broadcast the map
+		VisualMap m = map.getVisuarRepresentation();
+		/*for(IPlayer p : player)
+			p.setMap(m);
+		*/
+		player[0].setMap(m);
+		
 		while(!Thread.interrupted()){
 			//wait
 			try {
@@ -61,12 +68,8 @@ public class Controller implements Runnable, Skillable{
 			
 			//simulate map-event
 			MapEvent event = circumstancesGenerator.generateMapEvent();
-			
-			try {
-				changes.addAll(map.updateCircumstances(event));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			LinkedList<Change> circumstancesChanges = map.updateCircumstances(event);
+			changes.addAll(circumstancesChanges);
 			
 			
 			
@@ -100,7 +103,7 @@ public class Controller implements Runnable, Skillable{
 		pct.put(FieldType.JUNGLE, 0.25);
 		
 		Map map = Map.fromRandom(200, 100, species, pct);
-		System.out.println(map.toString());
+		//System.out.println(map.toString());
 		
 		IPlayer[] player = new consoleTestPlayer[4];
 		for (int i = 0; i < player.length; i++) {
