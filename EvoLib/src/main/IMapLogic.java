@@ -31,4 +31,12 @@ public interface IMapLogic {
 	 * @param field Das Field fuer welches das Wachstum simuliert werden soll
 	 * */
 	void simulateGrowth(Field field);
+	
+	/**
+	 * Spawnt die Spezies zufaellig auf einer Area der Map.
+	 * Wenn dort bereits eine andere Spezies gespawn ist wird eine andere Area
+	 * gewaehlt. Die gesamte Area wird fur den jeweiligen Spieler sichtbar sein.
+	 * */
+	void spawnSpecies(Area [] areas);
+	void spawnSpecies(Field [] fields, int playerNumber);
 }

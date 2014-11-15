@@ -215,6 +215,10 @@ public class Map {
 		return new VisualMap(areaNumberOfFields, types);
 	}
 	
+	public void spawnSpecies(){
+		logic.spawnSpecies(areas);
+	}
+	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Areas="+areas.length+"\n");

@@ -38,6 +38,7 @@ public class Controller implements Runnable, Skillable{
 			p.setMap(m);
 		*/
 		player[0].setMap(m);
+		map.spawnSpecies();
 		
 		while(!Thread.interrupted()){
 			//wait

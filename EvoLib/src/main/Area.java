@@ -81,4 +81,9 @@ private int number;
 	public String toString(){
 		return number+"";
 	}
+	
+	//this method: Felix Kibellus
+	public void spawnSpecies(int playerNumber, IMapLogic logic){
+		logic.spawnSpecies(fields, playerNumber);
+	}
 }

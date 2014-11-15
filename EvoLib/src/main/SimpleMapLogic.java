@@ -1,5 +1,11 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+
+import javax.management.RuntimeErrorException;
+
 /**
  * @author Felix Kibellus
  * Einfache Klasse zum Testen der Populationsveraenderung
@@ -9,6 +15,8 @@ package main;
  * eine komplexere Klasse mit den richtigen Algorithmen ersetzt.
  * */
 public class SimpleMapLogic implements IMapLogic {
+	
+	private static final int startPopulation = 100;
 	
 	private Species[] species;
 
@@ -121,5 +129,42 @@ public class SimpleMapLogic implements IMapLogic {
 		int[] growth = new int[species.length];
 		//TODO: implement this algorithm
 		return growth;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * */
+	@Override
+	public void spawnSpecies(Area[] areas) {
+		if(areas.length < species.length)
+			throw new RuntimeException("More species than areas");
+		
+		//get spawnPoints
+		ArrayList<Integer> rands = new ArrayList<>();	
+		Random rand = new Random();
+		while(rands.size()<4){
+			int nextRand = rand.nextInt(areas.length-1);
+			if(!rands.contains(nextRand))
+				rands.add(nextRand);
+		}
+		
+		//spawn the species
+		for (int i = 0; i < species.length; i++) {
+			Area spawnHere = areas[rands.get(i)];
+			spawnHere.spawnSpecies(i, this);
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * */
+	@Override
+	public void spawnSpecies(Field[] fields, int playerNumber){
+		Random rand = new Random();
+		int randInt = rand.nextInt(fields.length);
+		int[] population = new int[species.length];
+		population[playerNumber] = startPopulation;
+		fields[randInt].setPopulation(population);
+		System.out.println("Spawned species");
 	}
 }
