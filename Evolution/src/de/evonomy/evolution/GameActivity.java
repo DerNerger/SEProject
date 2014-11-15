@@ -15,8 +15,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,6 +24,7 @@ import main.FieldType;
 public class GameActivity extends Activity implements IPlayer{
 	MapHolder holder;
 	LinearLayout mapLinearLayout;
+	 Thread actualizeThread;
 	private static final int WIDTH=200;
 	private static final int HEIGHT=100;
 	protected void onCreate(Bundle savedInstanceState){
@@ -36,6 +35,7 @@ public class GameActivity extends Activity implements IPlayer{
 		    //Remove notification bar
 		    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	        super.onCreate(savedInstanceState);
+	        
 	        setContentView(R.layout.simulation_layout);
 	        Species david=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
 	        Species kibi=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
@@ -93,7 +93,28 @@ public class GameActivity extends Activity implements IPlayer{
 //				}
 //			});
 	    	
+	        Button specieso=(Button) findViewById(R.id.speciesoverview_button_simulation_layout);
+	        specieso.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					long before=System.currentTimeMillis();
+					 int populations[]={1,2,3,4};
+					for(int i =0;i<200;i++){
+			        	for(int j=0;j<100;j++){
+			        		holder.changeFieldPopulation(i, j, populations);
+			        		
+			        	}
+			        }
+					redrawMap();
+					Log.e("Zeit: ", (System.currentTimeMillis()-before)+"");
+				}
+			});
+	        actualizeThread= new Thread(actualize);
+	        actualizeThread.start();
 	}
+	
 	public void changeFieldPopulation(int x, int y, int[] population){}
 	public void changeVisibility(int x, int y){
 		holder.getMapFields()[x][y].setVisible(true);
@@ -112,6 +133,7 @@ public class GameActivity extends Activity implements IPlayer{
 	public boolean getPlayerNumber(int number){
 		return false;
 	}	
+	@SuppressWarnings("deprecation")
 	public void setMap(VisualMap map){
 		/* Bitmap to draw the map on !*/
 		final Bitmap bg =Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888);
@@ -130,4 +152,36 @@ public class GameActivity extends Activity implements IPlayer{
 	private void redrawMap(){
 		mapLinearLayout.invalidate();
 	}
+	Runnable actualize=new Runnable(){
+		private boolean running;
+		@Override
+		public void run() {
+			running=true;
+			while(running){
+				GameActivity.this.runOnUiThread(new Runnable() {
+				
+					@Override
+					public void run() {
+						redrawMap();
+						
+					}
+				});
+			
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(Thread.currentThread().isInterrupted()){
+					break;
+				}
+			}
+		}
+	};
+	protected void onDestroy(){
+		super.onDestroy();
+		actualizeThread.interrupt();
+	}
 }
+

@@ -9,8 +9,14 @@ import main.FieldType;
 import main.LandType;
 
 public class MapHolder {
+	private static final String SPEZIESONE = "#FF0A0A";
+	private static final String SPEZIESTWO = "#060606";
+	private static final String SPEZIESTHREE = "#F205DE";
+	private static final String SPEZIESFOUR = "#9A7B2C";
 	private FieldRect[][] mapFields;
 	private MapArea[] areas;
+	public static final int MAXCIRCLES=2;
+	private static final int LENGTHOFCIRCLE=2;
 	private HashMap<FieldType,Paint> FieldTypes;
 	private final Paint black=new Paint();
 	private Canvas canvas;
@@ -18,6 +24,7 @@ public class MapHolder {
 	private int widthPerBlock;
 	public final int NUMBEROFBLOCKSHEIGHT=100;
 	public final int NuMBEROFBLOCKSWIDTH=200;
+	private Paint[] speciesColors;
 	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType){
 		this.canvas=canvas;
         initColors();
@@ -62,6 +69,15 @@ public class MapHolder {
         Paint jungle=new Paint();
         jungle.setColor(Color.parseColor("#1CA205"));
         FieldTypes.put(FieldType.JUNGLE,jungle);
+        speciesColors= new Paint[4];
+        speciesColors[0]=new Paint();
+        speciesColors[0].setColor(Color.parseColor(SPEZIESONE));
+        speciesColors[1]=new Paint();
+        speciesColors[1].setColor(Color.parseColor(SPEZIESTWO));
+        speciesColors[2]=new Paint();
+        speciesColors[2].setColor(Color.parseColor(SPEZIESTHREE));
+        speciesColors[3]=new Paint();
+        speciesColors[3].setColor(Color.parseColor(SPEZIESFOUR));
 		
 	}
 	public MapArea[] getAreas() {
@@ -74,9 +90,19 @@ public class MapHolder {
 	public void changeFieldPopulation(int x,int y, int[] populations){
 		//punkte neue ausrechnen die auf einem feld angezeigt werden sollen
 		//daraus ein Array von Rects machen
+		mapFields[x][y].calculateSpeciesCircle(populations);
 		if(mapFields[x][y].isVisible()){
 			canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
 			//TODO draw circles
+			int[] circles=mapFields[x][y].getSpeciesCircle();
+			for(int i=0;i<circles.length;i++){
+				//if no color to draw next
+				if(circles[i]<0) break;
+				//draw a random 1x1 
+				int xC=((int) (Math.random()*(widthPerBlock-1)))+x*widthPerBlock;
+				int yC=((int) (Math.random()*(heightPerBlock-1)))+y*heightPerBlock;
+				canvas.drawRect(xC, yC, xC+LENGTHOFCIRCLE, yC+LENGTHOFCIRCLE, speciesColors[circles[i]]);
+			}
 		}else{
 			canvas.drawRect(mapFields[x][y].getRect(), black);
 		}

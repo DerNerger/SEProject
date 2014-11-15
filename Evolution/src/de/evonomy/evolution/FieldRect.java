@@ -6,7 +6,7 @@ public class FieldRect {
 	private boolean visible;
 	private int area;
 	//hold 6 values, if value 0 to 3 this species gets a circle, if not one circle less, maximum 6
-	private int[] speciesCircle= new int[6];
+	private int[] speciesCircle= new int[MapHolder.MAXCIRCLES];
 	private Rect rect;
 	public FieldRect(int x, int y,int fieldHeight,int fieldWidth, int area){
 		this.visible=false;
@@ -25,7 +25,43 @@ public class FieldRect {
 	public Rect getRect() {
 		return rect;
 	}
-	public void setSpeciesCircle(int[] speciesCircle) {
-		this.speciesCircle = speciesCircle;
+	public void calculateSpeciesCircle(int[] population) {
+		int summe=0;
+		for(int i =0;i<population.length;i++){
+			summe+=population[i];
+		}
+		
+		//set all Circles on no Color (value -1)
+		for(int i=0;i<speciesCircle.length;i++){
+			speciesCircle[i]=-1;
+		}
+		if (summe==0) return;
+		double [] populationPct=new double[population.length];
+		int circleCounter=0;
+		int max=0;
+		for(int i =0;i<population.length;i++){
+			populationPct[i]=(double)population[i]/(double)summe;
+			//calculate number of Circles
+//			int noc=(int) (MapHolder.MAXCIRCLES*populationPct[i]);
+//			//max is 3!!
+//			
+//			for(int j =0;j<noc;j++){
+//				//add number to circleArray
+//				speciesCircle[circleCounter]=i;
+//				circleCounter++;
+//			}
+			//find max
+			if(populationPct[i]>populationPct[max]) max=i;
+		}
+		//draw alle points in this color
+		for(int i=0;i<MapHolder.MAXCIRCLES;i++){
+			speciesCircle[i]=max;
+		}
+		
+		
+		
+	}
+	public int[] getSpeciesCircle() {
+		return speciesCircle;
 	}
 }
