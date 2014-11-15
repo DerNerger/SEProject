@@ -196,6 +196,25 @@ public class Map {
 		return changeList;
 	}
 	
+	public VisualMap getVisuarRepresentation(){
+		//build the landtypes
+		LandType[] types = new LandType[areas.length] ;
+		for (int i = 0; i < types.length; i++) {
+			types[i] = areas[i].getLandType();
+		}
+
+		//build the fields
+		int[][] areaNumberOfFields = new int[fields.length][fields[0].length];
+		for (int i = 0; i < areaNumberOfFields.length; i++) {
+			for (int j = 0; j < areaNumberOfFields[i].length; j++) {
+				areaNumberOfFields[i][j]= fields[i][j].getArea().getNumber();
+			}
+		}
+		
+		//return the new visual-representation
+		return new VisualMap(areaNumberOfFields, types);
+	}
+	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Areas="+areas.length+"\n");
