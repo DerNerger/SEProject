@@ -38,8 +38,8 @@ public class Map {
 		Map res = new Map(width, height, species);
 		
 		/* parameters of the noise algorithm, change at will */
-		int octaveCount = 8;
-		double persistance = .2;
+		int octaveCount = 6;
+		double persistance = .025;
 		
 		double[][] noise = RandomNoise.getNoise(width, height, octaveCount, persistance);
 		FieldType[][] fieldtypes = new FieldType[width][height];

@@ -41,17 +41,17 @@ public class GameActivity extends Activity implements IPlayer{
 	        super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.simulation_layout);
-	        Species davidDerZigeuner=new Species(1, 1, 1, 1, 1, 0, 30, 20, 3, 1, true);
-	        Species kibi=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
-	        Species niklas=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
-	        Species thorsten=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
+	        Species davidDerZigeuner=new Species(40, 40, 40, 40, 40, -20, 90, 5, 50, 1, true);
+	        Species kibi=new Species(40, 40, 40, 40, 40, -20, 90, 5, 50, 1, true);
+	        Species niklas=new Species(40, 40, 40, 40, 40, -20, 90, 5, 50, 1, true);
+	        Species thorsten=new Species(40, 40, 40, 40, 40, -20, 90, 5, 50, 1, true);
 	        Species[] species={davidDerZigeuner,kibi,niklas,thorsten};
 	        HashMap<FieldType,Double> pct=new HashMap<FieldType,Double>();
-	        pct.put(FieldType.DESERT, 0.1);
+	        pct.put(FieldType.DESERT, 0.05);
 	        pct.put(FieldType.ICE, 0.05);
-	        pct.put(FieldType.JUNGLE, 0.05);
-	        pct.put(FieldType.LAND, 0.4);
-	        pct.put(FieldType.WATER, 0.4);
+	        pct.put(FieldType.JUNGLE, 0.1);
+	        pct.put(FieldType.LAND, 0.3);
+	        pct.put(FieldType.WATER, 0.5);
 	    	
 	        IPlayer[] player = new IPlayer[4];
 			for (int i = 1; i < player.length; i++) {
@@ -87,7 +87,9 @@ public class GameActivity extends Activity implements IPlayer{
 	        
 	}
 	
-	public void changeFieldPopulation(int x, int y, int[] population){}
+	public void changeFieldPopulation(int x, int y, int[] population){
+		holder.changeFieldPopulation(x, y, population);
+	}
 	public void changeVisibility(int x, int y){
 		holder.getMapFields()[x][y].setVisible(true);
 	}

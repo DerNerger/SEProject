@@ -6,8 +6,9 @@ public class consoleTestPlayer implements IPlayer{
 
 	@Override
 	public void changeFieldPopulation(int x, int y, int[] population) {
+		
 		//System.out.println("changeFieldPopulation ("+x+","+y+")=");
-		//for(int a : population)
+//		for(int a : population)
 		//	System.out.println(a);
 	}
 
