@@ -121,7 +121,7 @@ public class GameActivity extends Activity implements IPlayer{
         int [][] areaNumberOfFields=map.getAreaNumberOfFields().clone();
         LandType [] areasLandType= map.getTypes();
         /*create mapholder with data from map*/
-        holder=new MapHolder(canvas, HEIGHT, WIDTH, areaNumberOfFields, areasLandType);
+        holder=new MapHolder(canvas, 400, 800, areaNumberOfFields, areasLandType);
         mapLinearLayout = (LinearLayout) findViewById(R.id.map_holder_ll_simulation_layout);
         mapLinearLayout.setBackgroundDrawable(new BitmapDrawable(bg));
         redrawMap();
