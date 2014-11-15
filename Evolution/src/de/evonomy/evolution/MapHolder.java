@@ -6,12 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import main.FieldType;
+import main.LandType;
 
 public class MapHolder {
 	private FieldRect[][] mapFields;
 	private MapArea[] areas;
-	//TODO Hashmap speicher
-	//TODO enum HasMap to get from library evolib!
 	private HashMap<FieldType,Paint> FieldTypes;
 	private final Paint black=new Paint();
 	private Canvas canvas;
@@ -19,24 +18,31 @@ public class MapHolder {
 	private int widthPerBlock;
 	public final int NUMBEROFBLOCKSHEIGHT=100;
 	public final int NuMBEROFBLOCKSWIDTH=200;
-	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,FieldType[] areasFieldType){
+	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType){
 		this.canvas=canvas;
         initColors();
         mapFields=new FieldRect[NuMBEROFBLOCKSWIDTH][NUMBEROFBLOCKSHEIGHT];
         heightPerBlock=height/NUMBEROFBLOCKSHEIGHT;
         widthPerBlock=width/NuMBEROFBLOCKSWIDTH;
+        FieldType[] areasFieldType= new FieldType[areasLandType.length];
+        int i =0;
+        for(LandType currentArea:areasLandType){
+        	areasFieldType[i]=currentArea.getFieldType();
+        	i++;
+        }
         int numberOfAreas=areasFieldType.length;
         areas=new MapArea[numberOfAreas];
-        for(int i =0;i<numberOfAreas;i++){
-        	areas[i]=new MapArea(FieldTypes.get(areasFieldType[i]));
+        for(i =0;i<numberOfAreas;i++){
+        	areas[i]=new MapArea(FieldTypes.get(areasFieldType[i]),areasLandType[i]);
         }
         
         for(int x=0;x<NuMBEROFBLOCKSWIDTH;x++){
         	for(int y=0;y<NUMBEROFBLOCKSHEIGHT;y++){
         		mapFields[x][y]=new FieldRect(x,y,heightPerBlock,widthPerBlock,areasOfFields[x][y]);
-        		//mapFields[x][y].setVisible(true);
+        		mapFields[x][y].setVisible(true);
         	}
         }
+        firstDraw();
 	}
 	private void initColors() {
 		black.setColor(Color.parseColor("#FFFFFF"));
@@ -84,5 +90,13 @@ public class MapHolder {
 	}
 	public Canvas getCanvas(){
 		return canvas;
+	}
+	//TODO firstdraw shouldnot show the whole map
+	private void firstDraw(){
+		for(int x=0;x<NuMBEROFBLOCKSWIDTH;x++){
+			for(int y=0;y<NUMBEROFBLOCKSHEIGHT;y++){
+				canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
+			}
+		}
 	}
 }

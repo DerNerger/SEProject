@@ -2,6 +2,7 @@ package de.evonomy.evolution;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 
 public class StartMenuActivity extends Activity {
 	MapHolder holder;
+	Button startSimulation;
     @SuppressWarnings("deprecation")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,16 @@ public class StartMenuActivity extends Activity {
 	    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_menu);
+        startSimulation=(Button) findViewById(R.id.start_simulation_button_startmenu);
+        startSimulation.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(),GameActivity.class);
+				startActivity(intent);
+				
+			}
+		});
 //        saview=(SpeciesAttributeView) findViewById(R.id.species_attribute_view_create_species);
 //        final Bitmap bg =Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888);
 //        final Canvas canvas = new Canvas(bg);

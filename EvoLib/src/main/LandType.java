@@ -51,4 +51,7 @@ public class LandType {
 	public void setResources(int resources) {
 		this.resources = resources;
 	}
+	public FieldType getFieldType(){
+		return this.type;
+	}
 }
