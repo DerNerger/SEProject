@@ -3,12 +3,14 @@ package de.evonomy.evolution;
 import java.util.Date;
 import java.util.HashMap;
 
+import main.Controller;
 import main.IPlayer;
 import main.LandType;
 import main.Map;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
+import main.consoleTestPlayer;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -25,8 +27,10 @@ public class GameActivity extends Activity implements IPlayer{
 	MapHolder holder;
 	LinearLayout mapLinearLayout;
 	 Thread actualizeThread;
+	 Thread controllerThread;
 	private static final int WIDTH=200;
 	private static final int HEIGHT=100;
+	private boolean mapHasBeenSet=false;
 	protected void onCreate(Bundle savedInstanceState){
 	
 	    	//Remove title bar
@@ -37,62 +41,31 @@ public class GameActivity extends Activity implements IPlayer{
 	        super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.simulation_layout);
-	        Species david=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
+	        Species davidDerZigeuner=new Species(1, 1, 1, 1, 1, 0, 30, 20, 3, 1, true);
 	        Species kibi=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
 	        Species niklas=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
 	        Species thorsten=new Species(1, 1, 1, 1, 1, 0, 30, 20, 1, 1, true);
-	        Species[] species={david,kibi,niklas,thorsten};
+	        Species[] species={davidDerZigeuner,kibi,niklas,thorsten};
 	        HashMap<FieldType,Double> pct=new HashMap<FieldType,Double>();
 	        pct.put(FieldType.DESERT, 0.1);
 	        pct.put(FieldType.ICE, 0.05);
 	        pct.put(FieldType.JUNGLE, 0.05);
 	        pct.put(FieldType.LAND, 0.4);
 	        pct.put(FieldType.WATER, 0.4);
-	        Map simulationMap=Map.fromRandom(WIDTH, HEIGHT, species, pct);
-	        VisualMap visualMapRepresentation=simulationMap.getVisuarRepresentation();
-	        setMap(visualMapRepresentation);
-//	        final Bitmap bg =Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888);
-//	        final Canvas canvas = new Canvas(bg);
-//	        int [][] areaOfFields=new int[200][100];
-//	        for(int i =0;i<200;i++){
-//	        	for(int j=0;j<100;j++){
-//	        		if(Math.random()<0.3)
-//	        			areaOfFields[i][j]=1;
-//	        		else areaOfFields[i][j]=0;
-//	        		
-//	        	}
-//	        }
-//	        FieldType[] areasLandType={FieldType.LAND,FieldType.WATER};
-//	    //    holder=new MapHolder(canvas, 400, 800, areaOfFields, areasLandType);
-//	        mapLinearLayout = (LinearLayout) findViewById(R.id.map_holder_ll_simulation_layout);
-//	        mapLinearLayout.setBackgroundDrawable(new BitmapDrawable(bg));
-//	        mapLinearLayout.invalidate();
-//	        int populations[]={1,2,3,4};
-//	        for(int i =0;i<200;i++){
-//	        	for(int j=0;j<100;j++){
-//	        		holder.changeFieldPopulation(i, j, populations);
-//	        		
-//	        	}
-//	        }
-//	        Button specieso=(Button) findViewById(R.id.speciesoverview_button_simulation_layout);
-//	        specieso.setOnClickListener(new View.OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View v) {
-//					long before=System.currentTimeMillis();
-//					holder.changeAreaFieldType(1,FieldType.LAND);
-//					 int populations[]={1,2,3,4};
-//					for(int i =0;i<200;i++){
-//			        	for(int j=0;j<100;j++){
-//			        		holder.changeFieldPopulation(i, j, populations);
-//			        		
-//			        	}
-//			        }
-//					mapLinearLayout.invalidate();
-//					Log.e("Zeit: ", (System.currentTimeMillis()-before)+"");
-//				}
-//			});
 	    	
+	        IPlayer[] player = new IPlayer[4];
+			for (int i = 1; i < player.length; i++) {
+				player[i] =  new consoleTestPlayer();
+			}
+			player[0]=this;
+	        //Create controller
+	        Controller controller = new Controller(Map.fromRandom(WIDTH, HEIGHT, species, pct), species, player);
+	        controllerThread=new Thread(controller);
+	        controllerThread.start();
+	        actualizeThread= new Thread(actualize);
+	        actualizeThread.start();
+	        
+	        
 	        Button specieso=(Button) findViewById(R.id.speciesoverview_button_simulation_layout);
 	        specieso.setOnClickListener(new View.OnClickListener() {
 				
@@ -111,8 +84,7 @@ public class GameActivity extends Activity implements IPlayer{
 					Log.e("Zeit: ", (System.currentTimeMillis()-before)+"");
 				}
 			});
-	        actualizeThread= new Thread(actualize);
-	        actualizeThread.start();
+	        
 	}
 	
 	public void changeFieldPopulation(int x, int y, int[] population){}
@@ -145,23 +117,38 @@ public class GameActivity extends Activity implements IPlayer{
         /*create mapholder with data from map*/
         holder=new MapHolder(canvas, 400, 800, areaNumberOfFields, areasLandType);
         mapLinearLayout = (LinearLayout) findViewById(R.id.map_holder_ll_simulation_layout);
-        mapLinearLayout.setBackgroundDrawable(new BitmapDrawable(bg));
+        runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				mapLinearLayout.setBackgroundDrawable(new BitmapDrawable(bg));
+				
+			}
+		});
+        
         redrawMap();
+        mapHasBeenSet=true;
 	}
 	
 	private void redrawMap(){
-		mapLinearLayout.invalidate();
+runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				mapLinearLayout.invalidate();
+			}
+		});
+		
 	}
 	Runnable actualize=new Runnable(){
-		private boolean running;
 		@Override
 		public void run() {
-			running=true;
-			while(running){
+			while(!Thread.currentThread().isInterrupted()){
 				GameActivity.this.runOnUiThread(new Runnable() {
 				
 					@Override
 					public void run() {
+						if(mapHasBeenSet)
 						redrawMap();
 						
 					}
@@ -173,9 +160,7 @@ public class GameActivity extends Activity implements IPlayer{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if(Thread.currentThread().isInterrupted()){
-					break;
-				}
+				
 			}
 		}
 	};
