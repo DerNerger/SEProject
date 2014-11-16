@@ -219,6 +219,10 @@ public class Map {
 		logic.spawnSpecies(areas);
 	}
 	
+	public int getNumberOfAreas(){
+		return areas.length;
+	}
+	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Areas="+areas.length+"\n");

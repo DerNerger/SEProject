@@ -68,7 +68,7 @@ public class Controller implements Runnable, Skillable{
 			changes.addAll(map.refreshMap());
 			
 			//simulate map-event
-			MapEvent event = circumstancesGenerator.generateMapEvent();
+			MapEvent event = circumstancesGenerator.generateMapEvent(map.getNumberOfAreas());
 			LinkedList<Change> circumstancesChanges = map.updateCircumstances(event);
 			changes.addAll(circumstancesChanges);
 			
