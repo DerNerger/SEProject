@@ -48,7 +48,6 @@ public class SimpleMapLogic implements IMapLogic {
 					migrate(fields[i][j], fields[i-1][j]);
 				}
 			}
-			int x = 0;
 		}
 	}
 	
@@ -79,7 +78,7 @@ public class SimpleMapLogic implements IMapLogic {
 		
 		for (int i = 0; i < species.length; i++) {
 			newPolulation[i] = field.getPopulation()[i];
-			newPolulation[i] -= dying[i];
+			//newPolulation[i] -= dying[i];
 			newPolulation[i] += resources[i];
 			newPolulation[i] += procreations[i];
 			newPolulation[i] += collisions[i];
@@ -132,14 +131,16 @@ public class SimpleMapLogic implements IMapLogic {
 	private int[] simulateCollision(Field field){
 		int[] growth = new int[species.length];
 		int[] speciesPop = field.getPopulation();
+		if(speciesPop[1]!=0)
+			System.out.println("blaa");
 		int max = 0;
-		for (int i = 0; i < speciesPop.length; i++) {
+		for (int i = 1; i < speciesPop.length; i++) {
 			if(speciesPop[i] > speciesPop[max])
 				max = i;
 		}
 		for (int i = 0; i < speciesPop.length; i++) {
 			if(i==max) continue;
-			//growth[i]=-speciesPop[i];TODO: Here is a bug
+			growth[i]=-speciesPop[i];
 		}
 		
 		return growth;
