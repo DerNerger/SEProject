@@ -8,8 +8,9 @@ public class consoleTestPlayer implements IPlayer{
 	public void changeFieldPopulation(int x, int y, int[] population) {
 		
 		//System.out.println("changeFieldPopulation ("+x+","+y+")=");
-//		for(int a : population)
-		//	System.out.println(a);
+		//for(int a : population)
+		//	if(a!=0)
+		//		System.out.println(a);
 	}
 
 	@Override
