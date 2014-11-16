@@ -26,37 +26,58 @@ public class FieldRect {
 		return rect;
 	}
 	public void calculateSpeciesCircle(int[] population) {
-		int summe=0;
+		int maxIndex=0;
 		for(int i =0;i<population.length;i++){
-			summe+=population[i];
+			if(population[maxIndex]<population[i]){
+				maxIndex=i;
+			}
+		}
+		if(population[maxIndex]==0){
+			for(int i=0;i<speciesCircle.length;i++){
+				//set no color
+				speciesCircle[i]=-1;
+			}
+			return;
+		}
+		//set the index for circles, specifying which species is the best, so which color should be drawn
+		for(int i=0;i<speciesCircle.length;i++){
+			speciesCircle[i]=maxIndex;
 		}
 		
-		//set all Circles on no Color (value -1)
-		for(int i=0;i<speciesCircle.length;i++){
-			speciesCircle[i]=-1;
-		}
-		if (summe==0) return;
-		double [] populationPct=new double[population.length];
-		int circleCounter=0;
-		int max=0;
-		for(int i =0;i<population.length;i++){
-			populationPct[i]=(double)population[i]/(double)summe;
-			//calculate number of Circles
-//			int noc=(int) (MapHolder.MAXCIRCLES*populationPct[i]);
-//			//max is 3!!
-//			
-//			for(int j =0;j<noc;j++){
-//				//add number to circleArray
-//				speciesCircle[circleCounter]=i;
-//				circleCounter++;
+		
+//		int summe=0;
+//		for(int i =0;i<population.length;i++){
+//			summe+=population[i];
+//		}
+//		
+//		//set all Circles on no Color (value -1)
+//		for(int i=0;i<speciesCircle.length;i++){
+//			speciesCircle[i]=-1;
+//		}
+//		if (summe==0) return;
+//	//	double [] populationPct=new double[population.length];
+//		//int circleCounter=0;
+//		int max=0;
+//		for(int i =0;i<population.length;i++){
+//			//populationPct[i]=(double)population[i]/(double)summe;
+//			//calculate number of Circles
+////			int noc=(int) (MapHolder.MAXCIRCLES*populationPct[i]);
+////			//max is 3!!
+////			
+////			for(int j =0;j<noc;j++){
+////				//add number to circleArray
+////				speciesCircle[circleCounter]=i;
+////				circleCounter++;
+////			}
+//			//find max
+//			if(population[i]>population[max]){
+//				max=i;
 //			}
-			//find max
-			if(populationPct[i]>populationPct[max]) max=i;
-		}
-		//draw alle points in this color
-		for(int i=0;i<MapHolder.MAXCIRCLES;i++){
-			speciesCircle[i]=max;
-		}
+//		}
+//		//draw all points in this color
+//		for(int i=0;i<speciesCircle.length;i++){
+//			speciesCircle[i]=max;
+//		}
 		
 		
 		
