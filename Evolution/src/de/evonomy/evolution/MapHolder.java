@@ -95,9 +95,10 @@ public class MapHolder {
 			canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
 			//TODO draw circles
 			int[] circles=mapFields[x][y].getSpeciesCircle();
+			outerloop:
 			for(int i=0;i<circles.length;i++){
 				//if no color to draw next
-				if(circles[i]<0) break;
+				if(circles[i]<0) break outerloop;
 				//draw a random 1x1 
 				int xC=((int) (Math.random()*(widthPerBlock-1)))+x*widthPerBlock;
 				int yC=((int) (Math.random()*(heightPerBlock-1)))+y*heightPerBlock;

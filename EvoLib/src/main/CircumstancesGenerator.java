@@ -7,10 +7,10 @@ public class CircumstancesGenerator {
 	private double pLandType=0.985;
 	private double pRadioactive=0.995;
 	private double pMeteorite=1.0;
-	MapEvent generateMapEvent(){
+	MapEvent generateMapEvent(int numberOfAreas){
 		double eventNumber=Math.random();
 		MapEvent event;
-		int areaNumber= (int) Math.random()*10; //TODO nummer der Areas bekommen
+		int areaNumber= (int) (Math.random()*numberOfAreas); //TODO nummer der Areas bekommen
 		if(eventNumber<=pNot){
 			event=new MapEventNot(areaNumber);
 		}else if(eventNumber<=pClimate){
