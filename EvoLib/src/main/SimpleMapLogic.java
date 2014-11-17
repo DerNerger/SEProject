@@ -66,13 +66,13 @@ public class SimpleMapLogic implements IMapLogic {
 	 * */
 	@Override
 	public void simulateGrowth(Field field) {
-		if(field.getPopulation()[0]!=0)
-			System.out.println("blaaa");
+		//if(field.getPopulation()[0]!=0)
+		//	System.out.println("blaaa");
 		LandType landType = field.getArea().getLandType();
 		simulateNewMigration(field);
-		simulateDying(field, landType);
 		simulateProcreation(field);
 		simulateResourceHandling(field, landType);
+		simulateDying(field, landType);
 		simulateCollision(field);
 	}
 	
@@ -85,20 +85,6 @@ public class SimpleMapLogic implements IMapLogic {
 			int mig = migration[i];
 			population[i]+=mig;
 			migration[i]=0;
-		}
-	}
-	
-	//help method to simulate the dying
-	private void simulateDying(Field field, LandType landType) {
-		int[] population = field.getPopulation();
-		int enemies = landType.getNaturalEnemies();
-		for (int i = 0; i < population.length; i++) {
-			if(population[i]==0)continue;
-			if(enemies > species[i].getStrength()*population[i]){ //the species not is stronger?
-				//DIE!
-				//population[i] /= 20;
-				population[i] = 0;
-			}
 		}
 	}
 	
@@ -121,6 +107,22 @@ public class SimpleMapLogic implements IMapLogic {
 			//population[i] = (population[i]*resources)/demand;
 			//if(demand > resources)
 			//	population[i]=demand/population[i];
+		}
+	}
+	
+	//help method to simulate the dying
+	private void simulateDying(Field field, LandType landType) {
+		int[] population = field.getPopulation();
+		int enemies = landType.getNaturalEnemies();
+		for (int i = 0; i < population.length; i++) {
+			if(population[i]==0)continue;
+			if(enemies > species[i].getStrength()*population[i]){ //the species not is stronger?
+				//DIE!
+				//population[i] /= 20;
+				population[i] = 0;
+			}
+			if(population[i]>5000)
+				population[i]=4999;
 		}
 	}
 	
@@ -200,31 +202,31 @@ public class SimpleMapLogic implements IMapLogic {
 		case LAND:
 			minTemp=minTemp * minTempStdDeviation + 10;
 			maxTemp=maxTemp * maxTempStdDeviation + 20;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 10; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case WATER:	
 			minTemp=minTemp * minTempStdDeviation + 0;
 			maxTemp=maxTemp * maxTempStdDeviation + 30;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 10; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case DESERT:		
 			minTemp=minTemp * minTempStdDeviation + 40;
 			maxTemp=maxTemp * maxTempStdDeviation + 70;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 10; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case JUNGLE:		
 			minTemp=minTemp * minTempStdDeviation + 20;
 			maxTemp=maxTemp * maxTempStdDeviation + 40;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 10; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case ICE:	
 			minTemp=minTemp * minTempStdDeviation - 20;
 			maxTemp=maxTemp * maxTempStdDeviation + 5;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 10; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		default:
