@@ -33,7 +33,9 @@ private int number;
 		//einzelne Felder der Area refreshen
 		for(Field currentField:fields){
 			//Changes in LinkedList packen
-			toReturn.addLast(currentField.refreshField(logic));
+			Change toList=currentField.refreshField(logic);
+			if(toList!=null)
+				toReturn.addLast(toList);
 		}
 		//Changes der Population in der Area anhängnen und zurückgeben
 		toReturn.addLast(new AreaPopulationChange(number,calculatePopulation()));

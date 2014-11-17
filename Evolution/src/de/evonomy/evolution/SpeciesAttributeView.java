@@ -1,9 +1,11 @@
 package de.evonomy.evolution;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -58,7 +60,7 @@ public class SpeciesAttributeView extends LinearLayout {
 	public int getIntelligence() {
 		return intelligence;
 	}
-	public void setIntelligence(int intelligence) {
+	private void setIntelligence(int intelligence) {
 //		int oldIntelligence=this.intelligence;
 		this.intelligence = intelligence;
 //		float factor=(float)intelligence/(float)oldIntelligence;
@@ -68,13 +70,13 @@ public class SpeciesAttributeView extends LinearLayout {
 		params.height=(int)(intelligence*onePercentFactor);
 		intelligenceView.setLayoutParams(params);
 		invalidate();
-		requestLayout();
+		//requestLayout();
 
 	}
 	public int getAgility() {
 		return agility;
 	}
-	public void setAgility(int agility) {
+	private void setAgility(int agility) {
 //		int oldAgility=this.agility;
 		this.agility = agility;
 //		float factor=(float)agility/(float)oldAgility;
@@ -84,13 +86,13 @@ public class SpeciesAttributeView extends LinearLayout {
 		params.height=(int)(agility*onePercentFactor);
 		agilityView.setLayoutParams(params);
 		invalidate();
-		requestLayout();
+		//requestLayout();
 
 	}
 	public int getStrength() {
 		return strength;
 	}
-	public void setStrength(int strength) {
+	private void setStrength(int strength) {
 //		int oldStrength=this.strength;
 		this.strength = strength;
 //		float factor=(float)strength/(float)oldStrength;
@@ -99,13 +101,13 @@ public class SpeciesAttributeView extends LinearLayout {
 		params.height=(int)(strength*onePercentFactor);
 		strengthView.setLayoutParams(params);
 		invalidate();
-		requestLayout();
+		//requestLayout();
 
 	}
 	public int getSocial() {
 		return social;
 	}
-	public void setSocial(int social) {
+	private void setSocial(int social) {
 //		int oldSocial=this.social;
 		this.social = social;
 //		float factor=(float)social/(float)oldSocial;
@@ -114,13 +116,13 @@ public class SpeciesAttributeView extends LinearLayout {
 		params.height=(int)(social*onePercentFactor);
 		socialView.setLayoutParams(params);
 		invalidate();
-		requestLayout();
+		//requestLayout();
 
 	}
 	public int getRecreation() {
 		return recreation;
 	}
-	public void setRecreation(int recreation) {
+	private void setRecreation(int recreation) {
 //		int oldRecreation=this.recreation;
 		this.recreation = recreation;
 //		float factor= (float)recreation/(float)oldRecreation;
@@ -129,7 +131,7 @@ public class SpeciesAttributeView extends LinearLayout {
 		params.height=(int)(recreation*onePercentFactor);
 		recreationView.setLayoutParams(params);
 		invalidate();
-		requestLayout();
+		//requestLayout();
 
 	}
 	private void init(){
@@ -160,12 +162,57 @@ public class SpeciesAttributeView extends LinearLayout {
 		mHeight=rl.getHeight();
 		//resize the blocks from 1dp to 1%of maximum height for easy resize
 		onePercentFactor=(1f/100f*mHeight);
-		setIntelligence(intelligence);
-		setAgility(agility);
-		setStrength(strength);
-		setSocial(social);
-		setRecreation(recreation);
+		ObjectAnimator anim=ObjectAnimator.ofInt(this, "intelligence",1, intelligence);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+		anim=ObjectAnimator.ofInt(this, "agility",1, agility);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+		anim=ObjectAnimator.ofInt(this, "agility",1, agility);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+		anim=ObjectAnimator.ofInt(this, "social",1, social);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+		anim=ObjectAnimator.ofInt(this, "recreation",1, recreation);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
 		
+	}
+	public void changeIntelligence(int intelligence){
+		ObjectAnimator anim=ObjectAnimator.ofInt(this, "intelligence", intelligence);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+	}
+	public void changeAgility(int agility){
+		ObjectAnimator anim=ObjectAnimator.ofInt(this, "agility", agility);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+	}
+	public void changeStrength(int strength){
+		ObjectAnimator anim=ObjectAnimator.ofInt(this, "strength", strength);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+	}
+	public void changeSocial(int social){
+		ObjectAnimator anim=ObjectAnimator.ofInt(this, "social", social);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+	}
+	public void changeRecreation(int recreation){
+		ObjectAnimator anim=ObjectAnimator.ofInt(this, "recreation", recreation);
+		anim.setDuration(2000);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
 	}
 	
 

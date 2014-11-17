@@ -71,10 +71,16 @@ public class Field {
 	}
 	
 	public Change refreshField(IMapLogic logic){
+		int [] oldPop= population.clone();
 		//entwicklung simulieren
 		logic.simulateGrowth(this);
 		//neue Population ausrechnen
-		return new FieldChange(x,y,population);
+		
+		for(int i =0;i<4;i++){
+			oldPop[i]-=population[i];
+			if(oldPop[i]!=0) return new FieldChange(x,y,population);
+		}
+		return null;
 	}
 	
 	public Change changePopulationByPercentage(float percentage){

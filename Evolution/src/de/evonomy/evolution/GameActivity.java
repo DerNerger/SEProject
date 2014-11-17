@@ -42,10 +42,10 @@ public class GameActivity extends Activity implements IPlayer{
 	        super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.simulation_layout);
-	        Species davidDerZigeuner=new Species(90, 20, 20, 30, 30, -5, 30, 3, 1000, 1, true);
-	        Species kibi=new Species(30, 25, 90, 1, 30, -5, 10, 5, 50, 1, true);
-	        Species niklas=new Species(30, 90, 30, 10, 5, -20, 90, 3, 50, 1, true);
-	        Species thorsten=new Species(5, 40, 40, 80, 100, -20, 20, 6, 50, 1, true);
+	        Species davidDerZigeuner=new Species(5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
+	        Species kibi=new Species(5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
+	        Species niklas=new Species(5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
+	        Species thorsten=new Species(5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
 	        Species[] species={davidDerZigeuner,kibi,niklas,thorsten};
 	        HashMap<FieldType,Double> pct=new HashMap<FieldType,Double>();
 	        pct.put(FieldType.DESERT, 0.05);
