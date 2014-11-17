@@ -27,7 +27,7 @@ public class Species {
 	
 	private int resourceDemand; //benoetigte Resourcen
 	
-	private float movementChance;//element [0,1)
+	private double movementChance;//element [0,1)
 	//abwanderung in benachbarte Fields 
 	
 	private int visibillity;//sichtweite der Spezies
@@ -40,7 +40,7 @@ public class Species {
 	 * */
 	public Species(int intelligence, int agility, int strength, int social,
 			int procreation, int minTemp, int maxTemp, int resourceDemand,
-			int movementChance, int visibillity, boolean water) {
+			double movementChance, int visibillity, boolean water) {
 		
 		this.intelligence = intelligence;
 		this.agility = agility;
@@ -119,11 +119,11 @@ public class Species {
 		this.resourceDemand = resourceDemand;
 	}
 
-	public float getMovementChance() {
+	public double getMovementChance() {
 		return movementChance;
 	}
 
-	public void setMovementChance(float movementChance) {
+	public void setMovementChance(double movementChance) {
 		this.movementChance = movementChance;
 	}
 
