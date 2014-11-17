@@ -38,5 +38,10 @@ public interface IMapLogic {
 	 * gewaehlt. Die gesamte Area wird fur den jeweiligen Spieler sichtbar sein.
 	 * */
 	void spawnSpecies(Area [] areas);
+	
+	/**
+	 * Wählt zufällig ein feld von fields aus und spawnd dort eine gewisse 
+	 * Startpopulation für den Spieler playerNumber
+	 * */
 	void spawnSpecies(Field [] fields, int playerNumber);
 }

@@ -195,4 +195,61 @@ public class SimpleMapLogic implements IMapLogic {
 		fields[randInt].setPopulation(population);
 		System.out.println("Spawned species");
 	}
+	
+	/**
+	 * generiert einen Landtype abhaengig vom uebergebenen FieldType
+	 * Die Parameter sind zwar zufaellig, jedoch wird die Verteilung vom
+	 * FieldType beeinflusst. 
+	 * */
+	public static LandType randomLandType(FieldType type){
+		Random r = new Random();
+		//FieldType parameters
+		double minTemp=r.nextGaussian();
+		double maxTemp=r.nextGaussian();
+		double naturalEnemies=r.nextGaussian();
+		double resources=r.nextGaussian();
+		
+		double minTempStdDeviation=4;
+		double maxTempStdDeviation=4;
+		double naturalEnemiesStdDeviation=2;
+		double resourcesStdDeviation=2;
+		
+		
+		//transform the random variable here(linear transformation)
+		switch (type) {
+		case LAND:
+			minTemp=minTemp * minTempStdDeviation + 10;
+			maxTemp=maxTemp * maxTempStdDeviation + 20;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			resources = resources * resourcesStdDeviation + 10;
+			break;
+		case WATER:	
+			minTemp=minTemp * minTempStdDeviation + 0;
+			maxTemp=maxTemp * maxTempStdDeviation + 30;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			resources = resources * resourcesStdDeviation + 10;
+			break;
+		case DESERT:		
+			minTemp=minTemp * minTempStdDeviation + 40;
+			maxTemp=maxTemp * maxTempStdDeviation + 70;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			resources = resources * resourcesStdDeviation + 10;
+			break;
+		case JUNGLE:		
+			minTemp=minTemp * minTempStdDeviation + 20;
+			maxTemp=maxTemp * maxTempStdDeviation + 40;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			resources = resources * resourcesStdDeviation + 10;
+			break;
+		case ICE:	
+			minTemp=minTemp * minTempStdDeviation - 20;
+			maxTemp=maxTemp * maxTempStdDeviation + 5;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			resources = resources * resourcesStdDeviation + 10;
+			break;
+		default:
+			throw new RuntimeException("FieldType nicht gueltig");
+		}
+		return new LandType((int)minTemp, (int)maxTemp, type, (int)naturalEnemies, (int)resources);
+	}
 }

@@ -118,7 +118,7 @@ public class Map {
 				if (done.contains(fields[i][j]))
 					continue;
 				fieldsInArea = getFieldsInArea(i, j, fieldtypes, fields, done);
-				LandType landType = new LandType(-10, 30, fieldtypes[i][j], 0, 0);
+				LandType landType = SimpleMapLogic.randomLandType(fieldtypes[i][j]);
 				Area area = new Area(numberArea++, landType, fieldsInArea);
 				areas.push(area);
 				for (Field f : fieldsInArea) {
