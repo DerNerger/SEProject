@@ -170,6 +170,7 @@ runOnUiThread(new Runnable() {
 	protected void onDestroy(){
 		super.onDestroy();
 		actualizeThread.interrupt();
+		controllerThread.interrupt();
 	}
 }
 
