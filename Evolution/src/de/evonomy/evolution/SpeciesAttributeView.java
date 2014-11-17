@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
  * use this methods to change the view directly
  */
 public class SpeciesAttributeView extends LinearLayout {
+	private static int ANIMTIME=800;
 	private int intelligence;
 	private int agility;
 	private int strength;
@@ -163,54 +164,54 @@ public class SpeciesAttributeView extends LinearLayout {
 		//resize the blocks from 1dp to 1%of maximum height for easy resize
 		onePercentFactor=(1f/100f*mHeight);
 		ObjectAnimator anim=ObjectAnimator.ofInt(this, "intelligence",1, intelligence);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 		anim=ObjectAnimator.ofInt(this, "agility",1, agility);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
-		anim=ObjectAnimator.ofInt(this, "agility",1, agility);
-		anim.setDuration(2000);
+		anim=ObjectAnimator.ofInt(this, "strength",1, strength);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 		anim=ObjectAnimator.ofInt(this, "social",1, social);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 		anim=ObjectAnimator.ofInt(this, "recreation",1, recreation);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 		
 	}
 	public void changeIntelligence(int intelligence){
 		ObjectAnimator anim=ObjectAnimator.ofInt(this, "intelligence", intelligence);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 	}
 	public void changeAgility(int agility){
 		ObjectAnimator anim=ObjectAnimator.ofInt(this, "agility", agility);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 	}
 	public void changeStrength(int strength){
 		ObjectAnimator anim=ObjectAnimator.ofInt(this, "strength", strength);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 	}
 	public void changeSocial(int social){
 		ObjectAnimator anim=ObjectAnimator.ofInt(this, "social", social);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 	}
 	public void changeRecreation(int recreation){
 		ObjectAnimator anim=ObjectAnimator.ofInt(this, "recreation", recreation);
-		anim.setDuration(2000);
+		anim.setDuration(ANIMTIME);
 		anim.setInterpolator(new DecelerateInterpolator());
 		anim.start();
 	}

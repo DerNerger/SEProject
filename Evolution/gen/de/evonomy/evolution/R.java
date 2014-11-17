@@ -94,8 +94,8 @@ containing a value of this type.
         public static final int explanations_button_startmenu=0x7f080005;
         public static final int intelligence_species_attribute_view=0x7f08000d;
         public static final int left_container_ll_startmenu=0x7f080000;
-        public static final int load_simulation_button_startmenu=0x7f080003;
         public static final int map_holder_ll_simulation_layout=0x7f08000b;
+        public static final int multiplayer_simulation_button_startmenu=0x7f080003;
         public static final int planet1_button_selcet_world=0x7f080007;
         public static final int planet2_button_selcet_world=0x7f080009;
         public static final int planet3_button_selcet_world=0x7f080008;
@@ -121,7 +121,9 @@ containing a value of this type.
         public static final int action_settings=0x7f060002;
         public static final int app_name=0x7f060000;
         public static final int hello_world=0x7f060001;
+        public static final int multiplayer_start_menu=0x7f060005;
         public static final int random_generate_world=0x7f060003;
+        public static final int singleplayer_start_menu=0x7f060006;
         public static final int title_activity_game=0x7f060004;
     }
     public static final class style {
