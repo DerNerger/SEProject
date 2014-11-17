@@ -94,7 +94,8 @@ public class Controller implements Runnable, Skillable{
 	public static void main(String[] args){		
 		Species [] species = new Species[4];
 		for (int i = 0; i < species.length; i++) {
-			species[i] = new Species(5, 5, 5, 5, 2, -2, 200, 2, 0, 1, false);
+			species[i] = new Species(5, 5, 5, 5, 2, -2, 200, 2, 2, 1, false);
+			//new Species(intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water)
 		} 
 		
 		HashMap<FieldType, Double> pct = new HashMap<>();

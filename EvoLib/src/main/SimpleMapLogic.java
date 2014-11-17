@@ -1,10 +1,8 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
-import javax.management.RuntimeErrorException;
 
 /**
  * @author Felix Kibellus
@@ -69,67 +67,60 @@ public class SimpleMapLogic implements IMapLogic {
 	@Override
 	public void simulateGrowth(Field field) {
 		LandType landType = field.getArea().getLandType();
-		int[] newPolulation = new int[species.length];
-		int[] dying = simulateDying(field, landType);
-		int[] resources = simulateResourceHandling(field, landType);
-		int[] procreations =  simulateProcreation(field);
-		int[] collisions = simulateCollision(field);
-		int[] migrations = simulateNewMigration(field);
-		
-		for (int i = 0; i < species.length; i++) {
-			newPolulation[i] = field.getPopulation()[i];
-			//newPolulation[i] -= dying[i];
-			newPolulation[i] += resources[i];
-			newPolulation[i] += procreations[i];
-			newPolulation[i] += collisions[i];
-			newPolulation[i] += migrations[i];
-		}
-		field.setPopulation(newPolulation);
+		simulateNewMigration(field);
+		simulateDying(field, landType);
+		simulateResourceHandling(field, landType);
+		simulateProcreation(field);
+		simulateCollision(field);
 	}
 	
 	//help methods----------------------------------------------------------------
-	//help method to simulate the dying
-	private int[] simulateDying(Field field, LandType landType) {
-		int[] dying = new int[species.length];
-		int enemies = landType.getNaturalEnemies();
-		
-		for (int i = 0; i < dying.length; i++) {
-			int strengthDifference = species[i].getStrength() - enemies;
-			if(strengthDifference < 0)//the species is not stronger?//DIE!
-				dying[i] = (int) (field.getPopulation()[i] * -strengthDifference/100.0);
-			
-			if( field.getPopulation()[i] > dying[i])
-				dying[i] = field.getPopulation()[i];
+	//help method to simulate the migration into this field
+	private void simulateNewMigration(Field field) {
+		int[] population = field.getPopulation();
+		int[] migration = field.getMigrations();
+		for (int i = 0; i < population.length; i++) {
+			int mig = migration[i];
+			population[i]+=mig;
+			migration[i]=0;
 		}
-		return dying;
+	}
+	
+	//help method to simulate the dying
+	private void simulateDying(Field field, LandType landType) {
+		int[] population = field.getPopulation();
+		int enemies = landType.getNaturalEnemies();
+		for (int i = 0; i < population.length; i++) {
+			if(population[i]==0)continue;
+			if(enemies > species[i].getStrength()*population[i]){ //the species not is stronger?
+				//DIE!
+				population[i] /= 20;
+			}
+		}
 	}
 	
 	//help method to simulate the resource-handling
-	private int[] simulateResourceHandling(Field field, LandType landType) {
-		int[] growth = new int[species.length];
-		for (int i = 0; i < growth.length; i++) {
-			int demand = species[i].getResourceDemand();
-			int efficiency = species[i].getIntelligence();
-			int resources = landType.getResources();
-			int population = field.getPopulation()[i];
-			if(resources*efficiency > population * demand)
-				growth[i]=(int) (population*=0.1);
-			else
-				growth[i]=(int) (population*=(-0.1));
+	private void simulateResourceHandling(Field field, LandType landType) {
+		int[] population = field.getPopulation();
+		for (int i = 0; i < population.length; i++) {
+			if(population[i]==0)continue;
+			int resources = landType.getResources()*species[i].getIntelligence();
+			int demand = species[i].getResourceDemand()*population[i];
+			population[i] = (population[i]*resources)/demand;
 		}
-		return growth;
 	}
 	
 	//help method to simulate the procreation
-	private int[] simulateProcreation(Field field) {
-		int[] growth = new int[species.length];
-		//TODO: implement this algorithm
-		return growth;
+	private void simulateProcreation(Field field) {
+		int[] population = field.getPopulation();
+		for (int i = 0; i < population.length; i++) {
+			if(population[i]==0)continue;
+			population[i] *= species[i].getProcreation();
+		}
 	}
 	
 	//help method to simulate the collision
-	private int[] simulateCollision(Field field){
-		int[] growth = new int[species.length];
+	private void simulateCollision(Field field){
 		int[] speciesPop = field.getPopulation();
 		int max = 0;
 		for (int i = 1; i < speciesPop.length; i++) {
@@ -138,22 +129,8 @@ public class SimpleMapLogic implements IMapLogic {
 		}
 		for (int i = 0; i < speciesPop.length; i++) {
 			if(i==max) continue;
-			growth[i]=-speciesPop[i];
+			speciesPop[i]=-speciesPop[i];
 		}
-		
-		return growth;
-	}
-	
-	private int[] simulateNewMigration(Field field) {
-		int[] migrations = new int[species.length];
-		for (int i = 0; i < migrations.length; i++) {
-			int mig = field.getMigrations()[i];
-			if(mig!=0){
-				migrations[i]+=mig;
-			}
-		}
-		field.setMigrations(new int[species.length]);
-		return migrations;
 	}
 	//end help methods--------------------------------------------------------
 	
@@ -218,31 +195,31 @@ public class SimpleMapLogic implements IMapLogic {
 		case LAND:
 			minTemp=minTemp * minTempStdDeviation + 10;
 			maxTemp=maxTemp * maxTempStdDeviation + 20;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 500; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case WATER:	
 			minTemp=minTemp * minTempStdDeviation + 0;
 			maxTemp=maxTemp * maxTempStdDeviation + 30;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 600; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case DESERT:		
 			minTemp=minTemp * minTempStdDeviation + 40;
 			maxTemp=maxTemp * maxTempStdDeviation + 70;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 600; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case JUNGLE:		
 			minTemp=minTemp * minTempStdDeviation + 20;
 			maxTemp=maxTemp * maxTempStdDeviation + 40;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 600; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		case ICE:	
 			minTemp=minTemp * minTempStdDeviation - 20;
 			maxTemp=maxTemp * maxTempStdDeviation + 5;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 5; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 600; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
 		default:
