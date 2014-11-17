@@ -70,9 +70,9 @@ public class SimpleMapLogic implements IMapLogic {
 		//	System.out.println("blaaa");
 		LandType landType = field.getArea().getLandType();
 		simulateNewMigration(field);
-		simulateProcreation(field);
-		simulateResourceHandling(field, landType);
-		simulateDying(field, landType);
+		//simulateProcreation(field);
+		//simulateResourceHandling(field, landType);
+		//simulateDying(field, landType);
 		simulateCollision(field);
 	}
 	
