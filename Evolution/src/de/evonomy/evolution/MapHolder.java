@@ -12,10 +12,10 @@ public class MapHolder {
 	private static final String SPEZIESONE = "#FF0A0A";
 	private static final String SPEZIESTWO = "#060606";
 	private static final String SPEZIESTHREE = "#F205DE";
-	private static final String SPEZIESFOUR = "#9A7B2C";
+	private static final String SPEZIESFOUR = "#FF8400";
 	private FieldRect[][] mapFields;
 	private MapArea[] areas;
-	public static final int MAXCIRCLES=2;
+	public static final int MAXCIRCLES=3;
 	private static final int LENGTHOFCIRCLE=2;
 	private HashMap<FieldType,Paint> FieldTypes;
 	private final Paint black=new Paint();
@@ -61,7 +61,7 @@ public class MapHolder {
         green.setColor(Color.parseColor("#25EA25"));
         FieldTypes.put(FieldType.LAND, green);
         Paint desert=new Paint();
-        desert.setColor(Color.parseColor("#EBE460"));
+        desert.setColor(Color.parseColor("#FFFF87"));
         FieldTypes.put(FieldType.DESERT,desert);
         Paint ice=new Paint();
         ice.setColor(Color.parseColor("#D7FFFC"));
@@ -90,7 +90,7 @@ public class MapHolder {
 	public void changeFieldPopulation(int x,int y, int[] populations){
 		//punkte neue ausrechnen die auf einem feld angezeigt werden sollen
 		//daraus ein Array von Rects machen
-		mapFields[x][y].calculateSpeciesCircle(populations);
+		double alpha=mapFields[x][y].calculateSpeciesCircle(populations);
 		if(mapFields[x][y].isVisible()){
 			canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
 			//TODO draw circles
@@ -102,7 +102,9 @@ public class MapHolder {
 				//draw a random 1x1 
 				int xC=((int) (Math.random()*(widthPerBlock-1)))+x*widthPerBlock;
 				int yC=((int) (Math.random()*(heightPerBlock-1)))+y*heightPerBlock;
-				canvas.drawRect(xC, yC, xC+LENGTHOFCIRCLE, yC+LENGTHOFCIRCLE, speciesColors[circles[i]]);
+				Paint color=speciesColors[circles[i]];
+				color.setAlpha((int)/*percentage * */(alpha*255));
+				canvas.drawRect(xC, yC, xC+LENGTHOFCIRCLE, yC+LENGTHOFCIRCLE, color);
 			}
 		}else{
 			canvas.drawRect(mapFields[x][y].getRect(), black);

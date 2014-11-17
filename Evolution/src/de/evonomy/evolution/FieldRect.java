@@ -12,6 +12,7 @@ public class FieldRect {
 		this.visible=false;
 		rect= new Rect(x*fieldWidth,y*fieldHeight,x*fieldWidth+fieldWidth,y*fieldHeight+fieldHeight);
 		this.area=area;
+		
 	}
 	public boolean isVisible() {
 		return visible;
@@ -25,7 +26,11 @@ public class FieldRect {
 	public Rect getRect() {
 		return rect;
 	}
-	public void calculateSpeciesCircle(int[] population) {
+	/*
+	 * 
+	 * return the alpha percentage 
+	 */
+	public double calculateSpeciesCircle(int[] population) {
 		int maxIndex=0;
 		for(int i =0;i<population.length;i++){
 			if(population[maxIndex]<population[i]){
@@ -37,13 +42,17 @@ public class FieldRect {
 				//set no color
 				speciesCircle[i]=-1;
 			}
-			return;
+			return 0;
 		}
 		//set the index for circles, specifying which species is the best, so which color should be drawn
 		for(int i=0;i<speciesCircle.length;i++){
 			speciesCircle[i]=maxIndex;
 		}
-		
+		if(population[maxIndex]>5000) return 1;
+		else if(population[maxIndex]>3000) return 0.9;
+		else if(population[maxIndex]>1000) return 0.75;
+		else if(population[maxIndex]>300) return 0.6;
+		else return 0.4;
 		
 //		int summe=0;
 //		for(int i =0;i<population.length;i++){
