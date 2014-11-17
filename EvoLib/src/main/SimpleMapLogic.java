@@ -131,8 +131,6 @@ public class SimpleMapLogic implements IMapLogic {
 	private int[] simulateCollision(Field field){
 		int[] growth = new int[species.length];
 		int[] speciesPop = field.getPopulation();
-		if(speciesPop[1]!=0)
-			System.out.println("blaa");
 		int max = 0;
 		for (int i = 1; i < speciesPop.length; i++) {
 			if(speciesPop[i] > speciesPop[max])
