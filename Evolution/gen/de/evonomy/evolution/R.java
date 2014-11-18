@@ -94,7 +94,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Button_register_now=0x7f0a001e;
-        public static final int agility_species_attribute_view=0x7f0a002e;
+        public static final int agility_species_attribute_view=0x7f0a0030;
         public static final int buttonChat=0x7f0a001b;
         public static final int buttonInvitePlayer=0x7f0a000d;
         public static final int buttonStartGameWithFriends=0x7f0a000f;
@@ -114,27 +114,29 @@ containing a value of this type.
         public static final int editText_register_passWd=0x7f0a001d;
         public static final int editText_register_username=0x7f0a001c;
         public static final int explanations_button_startmenu=0x7f0a0024;
-        public static final int intelligence_species_attribute_view=0x7f0a002d;
+        public static final int intelligence_species_attribute_view=0x7f0a002f;
         public static final int left_container_ll_startmenu=0x7f0a001f;
-        public static final int map_holder_ll_simulation_layout=0x7f0a002b;
+        public static final int map_holder_ll_simulation_layout=0x7f0a002d;
         public static final int multiplayer_simulation_button_startmenu=0x7f0a0022;
-        public static final int planet1_button_selcet_world=0x7f0a0027;
-        public static final int planet2_button_selcet_world=0x7f0a0029;
-        public static final int planet3_button_selcet_world=0x7f0a0028;
-        public static final int planet4_button_selcet_world=0x7f0a002a;
+        public static final int pager_overview=0x7f0a0027;
+        public static final int pager_title_strip_overview=0x7f0a0028;
+        public static final int planet1_button_selcet_world=0x7f0a0029;
+        public static final int planet2_button_selcet_world=0x7f0a002b;
+        public static final int planet3_button_selcet_world=0x7f0a002a;
+        public static final int planet4_button_selcet_world=0x7f0a002c;
         public static final int progressBar1=0x7f0a0025;
-        public static final int recreation_relative_layout_species_attribute_view=0x7f0a0031;
-        public static final int recreation_species_attribute_view=0x7f0a0032;
+        public static final int recreation_relative_layout_species_attribute_view=0x7f0a0033;
+        public static final int recreation_species_attribute_view=0x7f0a0034;
         public static final int right_container_ll_startmenu=0x7f0a0020;
-        public static final int social_species_attribute_view=0x7f0a0030;
+        public static final int social_species_attribute_view=0x7f0a0032;
         public static final int species_attribute_view_create_species=0x7f0a0026;
-        public static final int speciesoverview_button_simulation_layout=0x7f0a002c;
+        public static final int speciesoverview_button_simulation_layout=0x7f0a002e;
         public static final int spinnerPlayer2=0x7f0a0010;
         public static final int spinnerPlayer3=0x7f0a0013;
         public static final int spinnerPlayer4=0x7f0a0016;
         public static final int start_simulation_button_startmenu=0x7f0a0021;
         public static final int statistics_button_startmenu=0x7f0a0023;
-        public static final int strength_species_attribute_view=0x7f0a002f;
+        public static final int strength_species_attribute_view=0x7f0a0031;
         public static final int textViewChat=0x7f0a0019;
         public static final int textViewLoginName=0x7f0a0000;
         public static final int textViewPassWord=0x7f0a0002;
@@ -159,9 +161,10 @@ containing a value of this type.
         public static final int activity_start_menu=0x7f030005;
         public static final int activity_wait=0x7f030006;
         public static final int create_species=0x7f030007;
-        public static final int select_world=0x7f030008;
-        public static final int simulation_layout=0x7f030009;
-        public static final int species_attribute_view=0x7f03000a;
+        public static final int fragment_species_overview=0x7f030008;
+        public static final int select_world=0x7f030009;
+        public static final int simulation_layout=0x7f03000a;
+        public static final int species_attribute_view=0x7f03000b;
     }
     public static final class string {
         public static final int action_settings=0x7f070003;

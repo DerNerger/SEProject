@@ -7,6 +7,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EvoNetLib"/>
-	<classpathentry kind="lib" path="/home/felilein/Dokumente/SE/SEProject/EvoLib/EvoLib.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
