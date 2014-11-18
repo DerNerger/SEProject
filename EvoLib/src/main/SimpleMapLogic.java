@@ -96,7 +96,7 @@ public class SimpleMapLogic implements IMapLogic {
 		for (int i = 0; i < population.length; i++) {
 			if(population[i]==0)continue;
 			//population[i] *= species[i].getProcreation();
-			population[i]+=2;
+			population[i]+=1;
 		}
 	}
 	

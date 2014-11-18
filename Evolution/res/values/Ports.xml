@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item format="integer" type="integer" name="RegisterPort">4001</item>
-    <item format="integer" type="integer" name="LoginPort">5001</item>
-    <item format="integer" type="integer" name="OnlinePort">6001</item>
+    <item format="integer" type="integer" name="RegisterPort">4000</item>
+    <item format="integer" type="integer" name="LoginPort">5000</item>
+    <item format="integer" type="integer" name="OnlinePort">6000</item>
     
 </resources>
