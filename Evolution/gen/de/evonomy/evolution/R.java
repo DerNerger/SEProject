@@ -130,6 +130,7 @@ containing a value of this type.
         public static final int right_container_ll_startmenu=0x7f0a0020;
         public static final int social_species_attribute_view=0x7f0a0032;
         public static final int species_attribute_view_create_species=0x7f0a0026;
+        public static final int species_attribute_view_overview=0x7f0a0035;
         public static final int speciesoverview_button_simulation_layout=0x7f0a002e;
         public static final int spinnerPlayer2=0x7f0a0010;
         public static final int spinnerPlayer3=0x7f0a0013;
@@ -165,6 +166,7 @@ containing a value of this type.
         public static final int select_world=0x7f030009;
         public static final int simulation_layout=0x7f03000a;
         public static final int species_attribute_view=0x7f03000b;
+        public static final int tab_element_overview=0x7f03000c;
     }
     public static final class string {
         public static final int action_settings=0x7f070003;

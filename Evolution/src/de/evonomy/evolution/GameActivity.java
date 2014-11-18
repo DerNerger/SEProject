@@ -12,10 +12,14 @@ import main.SpeciesUpdate;
 import main.VisualMap;
 import main.consoleTestPlayer;
 import android.app.Activity;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,15 +27,18 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import main.FieldType;
-public class GameActivity extends Activity implements IPlayer{
+public class GameActivity extends FragmentActivity implements IPlayer{
 	MapHolder holder;
 	LinearLayout mapLinearLayout;
-	 Thread actualizeThread;
-	 Thread controllerThread;
+	Thread actualizeThread;
+	Thread controllerThread;
+	private Button speziesOverviewButton;
 	private static final int WIDTH=200;
 	private static final int HEIGHT=100;
 	private boolean mapHasBeenSet=false;
-	private static int ACTUALICATIONTIME=1000;
+	private static int ACTUALICATIONTIME=2000;
+	
+	
 	protected void onCreate(Bundle savedInstanceState){
 	
 	    	//Remove title bar
@@ -66,6 +73,20 @@ public class GameActivity extends Activity implements IPlayer{
 	        actualizeThread= new Thread(actualize);
 	        actualizeThread.start();
 	        
+	        
+	        speziesOverviewButton=(Button) findViewById(R.id.speciesoverview_button_simulation_layout);
+	        speziesOverviewButton.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					SpeciesOverviewFragment frag= new SpeciesOverviewFragment();
+					
+					FragmentManager fm=getSupportFragmentManager();
+					frag.show(fm, "fragment_overview");
+				}
+			});
+	        
 	}
 	
 	public void changeFieldPopulation(int x, int y, int[] population){
@@ -82,6 +103,7 @@ public class GameActivity extends Activity implements IPlayer{
 	}
 	public void changeAreaLandType(int area, LandType landType){
 		holder.changeAreaLandType(area,landType);
+		redrawMap();
 	}
 	public void changePointsAndTime(int[] points, Date time){}
 	public void updateSpecies(SpeciesUpdate speciesUpdate){}
@@ -137,12 +159,12 @@ runOnUiThread(new Runnable() {
 					}
 				});
 			
-//				try {
-//					Thread.sleep(ACTUALICATIONTIME);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				try {
+					Thread.sleep(ACTUALICATIONTIME);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		}
@@ -152,5 +174,6 @@ runOnUiThread(new Runnable() {
 		actualizeThread.interrupt();
 		controllerThread.interrupt();
 	}
+	
 }
 

@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
  * use this methods to change the view directly
  */
 public class SpeciesAttributeView extends LinearLayout {
-	private static int ANIMTIME=800;
+	private static int ANIMTIME=500;
 	private int intelligence;
 	private int agility;
 	private int strength;
@@ -46,11 +46,11 @@ public class SpeciesAttributeView extends LinearLayout {
 		super(context, attrs);
 		TypedArray a= context.getTheme().obtainStyledAttributes(attrs, R.styleable.SpeciesAttributeView, 0, 0);
 		try{
-			intelligence=a.getInteger(R.styleable.SpeciesAttributeView_intelligence, 0);
-			agility=a.getInteger(R.styleable.SpeciesAttributeView_agility, 0);
-			strength=a.getInteger(R.styleable.SpeciesAttributeView_strength, 0);
-			social=a.getInteger(R.styleable.SpeciesAttributeView_social, 0);		
-			recreation=a.getInteger(R.styleable.SpeciesAttributeView_recreation, 0);
+			intelligence=a.getInteger(R.styleable.SpeciesAttributeView_intelligence, 1);
+			agility=a.getInteger(R.styleable.SpeciesAttributeView_agility, 1);
+			strength=a.getInteger(R.styleable.SpeciesAttributeView_strength, 1);
+			social=a.getInteger(R.styleable.SpeciesAttributeView_social, 1);		
+			recreation=a.getInteger(R.styleable.SpeciesAttributeView_recreation, 1);
 	
 		} finally{
 			a.recycle();

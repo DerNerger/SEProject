@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.Log;
 import main.FieldType;
 import main.LandType;
+import main.Species;
 
 public class MapHolder {
 	private static final String SPEZIESONE = "#FF0A0A";
@@ -25,6 +26,7 @@ public class MapHolder {
 	public final int NUMBEROFBLOCKSHEIGHT=100;
 	public final int NuMBEROFBLOCKSWIDTH=200;
 	private Paint[] speciesColors;
+
 	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType){
 		this.canvas=canvas;
         initColors();
@@ -58,7 +60,7 @@ public class MapHolder {
         water.setColor(Color.parseColor("#256DEA"));
         FieldTypes.put(FieldType.WATER, water);
         Paint green =new Paint();
-        green.setColor(Color.parseColor("#25EA25"));
+        green.setColor(Color.parseColor("#1FE909"));
         FieldTypes.put(FieldType.LAND, green);
         Paint desert=new Paint();
         desert.setColor(Color.parseColor("#FFFF87"));
@@ -153,4 +155,5 @@ public class MapHolder {
 			}
 		}
 	}
+	
 }
