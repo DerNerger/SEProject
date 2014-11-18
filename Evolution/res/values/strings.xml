@@ -8,5 +8,11 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="multiplayer_start_menu">Multiplayer starten</string>
     <string name="singleplayer_start_menu">Simulation starten</string>
+    
+    <string-array name="PlayerType">
+        <item>Computergegner</item>
+        <item>Spieler</item>
+        <item>Unbesetzt</item>
+    </string-array>
 
 </resources>

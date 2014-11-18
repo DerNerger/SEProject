@@ -1,6 +1,7 @@
 package de.evonomy.evolution;
 
 
+import de.evonomy.network.LoginActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 
 public class StartMenuActivity extends Activity {
 	Button startSimulation;
+	Button multiplayer_simulation_button_startmenu;
 	
     @SuppressWarnings("deprecation")
 	@Override
@@ -31,6 +33,7 @@ public class StartMenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_menu);
         startSimulation=(Button) findViewById(R.id.start_simulation_button_startmenu);
+        multiplayer_simulation_button_startmenu = (Button) findViewById(R.id.multiplayer_simulation_button_startmenu);
         startSimulation.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -41,7 +44,14 @@ public class StartMenuActivity extends Activity {
 			}
 		});
         
-
+        multiplayer_simulation_button_startmenu.setOnClickListener(new View.OnClickListener() {
+        	//start the online-activity
+			@Override
+			public void onClick(View v) {
+				Intent intent_login = new Intent(getApplicationContext(), LoginActivity.class);
+				startActivity(intent_login);
+			}
+		});
     	
     }
     @Override

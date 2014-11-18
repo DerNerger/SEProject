@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textViewUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logged in as ..."
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button_play_online"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Spiel suchen" />
+
+    <Button
+        android:id="@+id/button_create_Onlinegame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Spiel erstellen..." />
+
+    <TextView
+        android:id="@+id/textView_search_opponent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gegner wird gesucht..."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+</LinearLayout>

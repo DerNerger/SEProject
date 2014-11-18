@@ -29,6 +29,26 @@
             android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
+        
+      <!--  Online Activitys -->
+      <activity
+            android:name="de.evonomy.network.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+      </activity>
+      
+      <activity
+            android:name="de.evonomy.network.RegisterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+      </activity>
+      
+      <activity
+            android:name="de.evonomy.network.OnlineActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+      </activity>
+    <!-- end Online Activitys -->
     </application>
 
 </manifest>
