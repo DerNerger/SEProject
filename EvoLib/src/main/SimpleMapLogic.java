@@ -52,11 +52,13 @@ public class SimpleMapLogic implements IMapLogic {
 	//help method to simulate the migration from source to target
 	private void migrate(Field source, Field target){
 		//simulate migration for all species
-		//TODO: primitive algorithm to test
 		int[] newMigration = target.getMigrations();
+		int[] population = source.getPopulation();
 		for (int i = 0; i < species.length; i++) {
-			if(Math.random() < species[i].getMovementChance())
+			if(Math.random() < species[i].getMovementChance()){
 				newMigration[i] += (int) (source.getPopulation()[i]*0.1);
+				population[i] -= (int) (source.getPopulation()[i]*0.1);
+			}
 		}
 		target.setMigrations(newMigration);
 	}
@@ -70,7 +72,7 @@ public class SimpleMapLogic implements IMapLogic {
 		//	System.out.println("blaaa");
 		LandType landType = field.getArea().getLandType();
 		simulateNewMigration(field);
-		//simulateProcreation(field);
+		simulateProcreation(field);
 		//simulateResourceHandling(field, landType);
 		//simulateDying(field, landType);
 		simulateCollision(field);
@@ -93,7 +95,8 @@ public class SimpleMapLogic implements IMapLogic {
 		int[] population = field.getPopulation();
 		for (int i = 0; i < population.length; i++) {
 			if(population[i]==0)continue;
-			population[i] *= species[i].getProcreation();
+			//population[i] *= species[i].getProcreation();
+			population[i]+=2;
 		}
 	}
 	
