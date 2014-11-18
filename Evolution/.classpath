@@ -7,6 +7,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="lib" path="/EvoLib/EvoLib.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/NetworkLib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EvoNetLib"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
