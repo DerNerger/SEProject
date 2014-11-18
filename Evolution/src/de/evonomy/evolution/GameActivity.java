@@ -31,7 +31,7 @@ public class GameActivity extends Activity implements IPlayer{
 	private static final int WIDTH=200;
 	private static final int HEIGHT=100;
 	private boolean mapHasBeenSet=false;
-	private static int ACTUALICATIONTIME=2000;
+	private static int ACTUALICATIONTIME=1000;
 	protected void onCreate(Bundle savedInstanceState){
 	
 	    	//Remove title bar
@@ -66,26 +66,6 @@ public class GameActivity extends Activity implements IPlayer{
 	        actualizeThread= new Thread(actualize);
 	        actualizeThread.start();
 	        
-	        
-	        Button specieso=(Button) findViewById(R.id.speciesoverview_button_simulation_layout);
-	        specieso.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					long before=System.currentTimeMillis();
-					 int populations[]={1,2,3,4};
-					for(int i =0;i<200;i++){
-			        	for(int j=0;j<100;j++){
-			        		holder.changeFieldPopulation(i, j, populations);
-			        		
-			        	}
-			        }
-					redrawMap();
-					Log.e("Zeit: ", (System.currentTimeMillis()-before)+"");
-				}
-			});
-	        
 	}
 	
 	public void changeFieldPopulation(int x, int y, int[] population){
@@ -101,7 +81,7 @@ public class GameActivity extends Activity implements IPlayer{
 		
 	}
 	public void changeAreaLandType(int area, LandType landType){
-		holder.changeAreaFieldType(area,landType.getType());
+		holder.changeAreaLandType(area,landType);
 	}
 	public void changePointsAndTime(int[] points, Date time){}
 	public void updateSpecies(SpeciesUpdate speciesUpdate){}
@@ -157,12 +137,12 @@ runOnUiThread(new Runnable() {
 					}
 				});
 			
-				try {
-					Thread.sleep(ACTUALICATIONTIME);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(ACTUALICATIONTIME);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 			}
 		}

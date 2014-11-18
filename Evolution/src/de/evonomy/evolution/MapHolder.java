@@ -64,7 +64,7 @@ public class MapHolder {
         desert.setColor(Color.parseColor("#FFFF87"));
         FieldTypes.put(FieldType.DESERT,desert);
         Paint ice=new Paint();
-        ice.setColor(Color.parseColor("#D7FFFC"));
+        ice.setColor(Color.parseColor("#EBFFFF"));
         FieldTypes.put(FieldType.ICE,ice);
         Paint jungle=new Paint();
         jungle.setColor(Color.parseColor("#1CA205"));
@@ -83,8 +83,33 @@ public class MapHolder {
 	public MapArea[] getAreas() {
 		return areas;
 	}
-	public void changeAreaFieldType(int area,FieldType FieldType){
-		areas[area].changeFieldType(FieldTypes.get(FieldType));
+	public void changeAreaLandType(int area,LandType landType){
+		
+		areas[area].changeLandType(landType,FieldTypes.get(landType.getFieldType()));
+		//draw complete Map new
+		for(int x=0;x<NuMBEROFBLOCKSWIDTH;x++){
+			for( int y=0;y<NUMBEROFBLOCKSHEIGHT;y++){
+				if(mapFields[x][y].isVisible()){
+					double alpha=mapFields[x][y].getAlpha();
+					canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
+					//TODO draw circles
+					int[] circles=mapFields[x][y].getSpeciesCircle();
+					outerloop:
+					for(int i=0;i<circles.length;i++){
+						//if no color to draw next
+						if(circles[i]<0) break outerloop;
+						//draw a random 1x1 
+						int xC=((int) (Math.random()*(widthPerBlock-1)))+x*widthPerBlock;
+						int yC=((int) (Math.random()*(heightPerBlock-1)))+y*heightPerBlock;
+						Paint color=speciesColors[circles[i]];
+						color.setAlpha((int)/*percentage * */(alpha*255));
+						canvas.drawRect(xC, yC, xC+LENGTHOFCIRCLE, yC+LENGTHOFCIRCLE, color);
+					}
+				}else{
+					canvas.drawRect(mapFields[x][y].getRect(), black);
+				}
+			}
+		}
 	}
 	//
 	public void changeFieldPopulation(int x,int y, int[] populations){

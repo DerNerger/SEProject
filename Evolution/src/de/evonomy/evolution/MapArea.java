@@ -10,13 +10,14 @@ public class MapArea {
 		this.FieldType=FieldType;
 		this.landType=landType;
 	}
-	public void changeFieldType(Paint newFieldType){
+	public void changeLandType(LandType landType,Paint newFieldType){
+		this.setLandType(landType);
 		this.FieldType=newFieldType;
 	}
 	public Paint getFieldType(){
 		return FieldType;
 	}
-	public void setLandType(LandType landType){
+	private void setLandType(LandType landType){
 		this.landType=landType;
 	}
 	public LandType getLandType(){

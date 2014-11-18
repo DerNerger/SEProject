@@ -29,7 +29,8 @@ public class CircumstancesGenerator {
 			for(int i =0;i<FieldType.values().length;i++){
 				pF.put( (i+1)*p,FieldType.values()[i]);
 			}
-			LandType newLandType= SimpleMapLogic.randomLandType(pF.get(Math.random()));
+			//Zufllswert auf den nächsthöheren Wert der Verteilungsfunktion 
+			LandType newLandType= SimpleMapLogic.randomLandType(pF.get(((int)(Math.random()*(FieldType.values().length)+1))*p));
 			event=new MapEventToLandType(areaNumber, newLandType);
 		}else if(eventNumber<=pRadioactive){
 			event= new MapEventRadioactive(areaNumber);
@@ -39,5 +40,19 @@ public class CircumstancesGenerator {
 		
 		
 		return event;
+	}
+	public static void main(String args[]){
+		//Verteilungsfunktion auf Basis von Dichtefunktion mit gleichen Werten erstellen
+		double p=1./(double)FieldType.values().length;
+		HashMap<Double,FieldType> pF=new HashMap<Double,FieldType>();
+		for(int i =0;i<FieldType.values().length;i++){
+			pF.put( (i+1)*p,FieldType.values()[i]);
+		}
+		while(true){
+		System.out.println(((int)(Math.random()*(FieldType.values().length)+1))*p);
+		System.out.println(pF.toString());
+		}
+		//LandType newLandType= SimpleMapLogic.randomLandType(pF.get(((int)(Math.random()*FieldType.values().length))*p));
+		
 	}
 }
