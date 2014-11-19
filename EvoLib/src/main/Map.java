@@ -219,6 +219,13 @@ public class Map {
 		for(Area area : areas){
 			changeList.addAll(area.refreshArea(logic));
 		}
+		//calculate the population
+		long[] pop = new long[species.length];
+		for (int i = 0; i < pop.length; i++) {
+			for(Area r : areas)
+				pop[i] += r.getPopulation()[i];
+		}
+		changeList.add(new PopulationChange(pop));
 		return changeList;
 	}
 	

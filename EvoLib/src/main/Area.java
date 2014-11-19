@@ -84,6 +84,10 @@ private int number;
 		return fields;
 	}
 	
+	public int[] getPopulation(){
+		return population;
+	}
+	
 	public String toString(){
 		return number+"";
 	}
