@@ -17,7 +17,7 @@ public class TabAdapterOverview extends FragmentPagerAdapter {
 		super(fragmentManager);
 		this.species=species;
 		this.population=population;
-		Log.e("Population", "adapter at"+0+ " as "+population[0]);
+	
 	}
 
 	@Override

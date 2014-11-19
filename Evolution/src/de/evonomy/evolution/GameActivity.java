@@ -84,7 +84,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					SpeciesOverviewFragment frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
-					Log.e("Population", "population press "+'0'+ " as "+holder.getPopulation()[0]);
+					
 					
 					FragmentManager fm=getSupportFragmentManager();
 					frag.show(fm, "fragment_overview");
@@ -103,7 +103,6 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		
 	}
 	public void changeWorldPopulation(long[] population){
-		Log.e("Population", "Population changed"+population[0]);
 		holder.changePopulation(population);
 	}
 	public void changeAreaLandType(int area, LandType landType){

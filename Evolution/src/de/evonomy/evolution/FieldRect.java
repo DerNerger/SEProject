@@ -49,11 +49,10 @@ public class FieldRect {
 		for(int i=0;i<speciesCircle.length;i++){
 			speciesCircle[i]=maxIndex;
 		}
-		if(population[maxIndex]>5000) return alpha=1;
-		else if(population[maxIndex]>3000) return alpha=0.9;
-		else if(population[maxIndex]>1000) return alpha=0.75;
-		else if(population[maxIndex]>300) return alpha=0.6;
-		else return alpha=0.4;
+		alpha =(0.2+(((double)population[maxIndex])/200.)*0.8);
+		if(alpha>=1) alpha=1;
+		return alpha;
+		
 		
 //		int summe=0;
 //		for(int i =0;i<population.length;i++){

@@ -187,7 +187,7 @@ public class MapHolder {
 	public void changePopulation(long[] population){
 		//TODO change interface?
 		for(int i =0;i<4;i++){
-			Log.e("Population", "population set at"+i+ " as "+population[i]);
+			
 			this.population[i]=population[i];
 		}
 		

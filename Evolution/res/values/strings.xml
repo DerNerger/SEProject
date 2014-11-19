@@ -14,5 +14,6 @@
         <item>Spieler</item>
         <item>Unbesetzt</item>
     </string-array>
+    <string name="delimiterint">.</string>
 
 </resources>

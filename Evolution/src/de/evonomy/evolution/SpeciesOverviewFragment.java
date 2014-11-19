@@ -22,7 +22,7 @@ public class SpeciesOverviewFragment extends DialogFragment {
 		super();
 		this.species=species;
 		this.population=population;
-		Log.e("Population", "overviewfrag at"+0+ " as "+population[0]);
+		
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
