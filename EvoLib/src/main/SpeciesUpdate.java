@@ -12,23 +12,20 @@ public class SpeciesUpdate extends Change {
 	private int movementChange;
 	private boolean water;
 	private int vision;
-	public SpeciesUpdate(int playerNumber, int intelligence, int agility,
-			int strength, int social, int procreation, int minTemp,
-			int maxTemp, int resourceDemand, int movementChange, boolean water,
-			int vision) {
-		super();
+	
+	public SpeciesUpdate(Species s, int playerNumber) {
 		this.playerNumber = playerNumber;
-		this.intelligence = intelligence;
-		this.agility = agility;
-		this.strength = strength;
-		this.social = social;
-		this.procreation = procreation;
-		this.minTemp = minTemp;
-		this.maxTemp = maxTemp;
-		this.resourceDemand = resourceDemand;
-		this.movementChange = movementChange;
-		this.water = water;
-		this.vision = vision;
+		this.intelligence = s.getIntelligence();
+		this.agility = getAgility();
+		this.strength = getStrength();
+		this.social = getSocial();
+		this.procreation = getProcreation();
+		this.minTemp = getMinTemp();
+		this.maxTemp = getMaxTemp();
+		this.resourceDemand = getResourceDemand();
+		this.movementChange = getMovementChange();
+		this.water = isWater();
+		this.vision = getVision();
 	}
 	public int getPlayerNumber() {
 		return playerNumber;

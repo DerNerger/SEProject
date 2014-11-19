@@ -32,13 +32,23 @@ public class Controller implements Runnable, Skillable{
 
 	@Override
 	public void run() {
+		//init the changes list
+		LinkedList<Change> changes = new LinkedList<Change>();
+		
+		//to pre-game thit
+		
 		//broadcast the map
 		VisualMap m = map.getVisualRepresentation();
-		/*for(IPlayer p : player)
+		for(IPlayer p : player)
 			p.setMap(m);
-		*/
-		player[0].setMap(m);
+		
 		map.spawnSpecies();
+		
+		//bradcast the species
+		for (int i = 0; i < species.length; i++) {
+			SpeciesUpdate sp = new SpeciesUpdate(species[i], i);
+			changes.add(sp);
+		}
 		
 		while(!Thread.interrupted()){
 			//wait
@@ -47,8 +57,7 @@ public class Controller implements Runnable, Skillable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//init the changes list
-			LinkedList<Change> changes = new LinkedList<Change>();
+			
 			
 			//process the skills
 			qLock.lock();
@@ -81,6 +90,7 @@ public class Controller implements Runnable, Skillable{
 				//if DEBUG
 				c.doChange(player[0]);
 			}
+			changes.clear();
 		}
 	}
 
