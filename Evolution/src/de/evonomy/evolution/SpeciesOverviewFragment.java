@@ -2,10 +2,12 @@ package de.evonomy.evolution;
 
 
 
+import main.Species;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,14 @@ import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 
 public class SpeciesOverviewFragment extends DialogFragment {
-	//holds the tabs
-//	private FragmentTabHost tabHost;
+	private Species[] species;
+	private long[] population;
+	public SpeciesOverviewFragment(Species[] species,long[]population){
+		super();
+		this.species=species;
+		this.population=population;
+		Log.e("Population", "overviewfrag at"+0+ " as "+population[0]);
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		
@@ -34,7 +42,7 @@ public class SpeciesOverviewFragment extends DialogFragment {
 		//für die Tabs
 		TabAdapterOverview adapterOverview;
 		ViewPager viewPager;
-		adapterOverview= new TabAdapterOverview(getChildFragmentManager());
+		adapterOverview= new TabAdapterOverview(getChildFragmentManager(),species,population);
 		viewPager=(ViewPager) root.findViewById(R.id.pager_overview);
 		viewPager.setAdapter(adapterOverview);
 		

@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -45,8 +46,10 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		    //Remove notification bar
+		  
 		    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	        super.onCreate(savedInstanceState);
+		   
+		    super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.simulation_layout);
 	        Species davidDerZigeuner=new Species(5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
@@ -80,7 +83,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					SpeciesOverviewFragment frag= new SpeciesOverviewFragment();
+					SpeciesOverviewFragment frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
+					Log.e("Population", "population press "+'0'+ " as "+holder.getPopulation()[0]);
 					
 					FragmentManager fm=getSupportFragmentManager();
 					frag.show(fm, "fragment_overview");
@@ -99,18 +103,21 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		
 	}
 	public void changeWorldPopulation(long[] population){
-		
+		Log.e("Population", "Population changed"+population[0]);
+		holder.changePopulation(population);
 	}
 	public void changeAreaLandType(int area, LandType landType){
 		holder.changeAreaLandType(area,landType);
 		redrawMap();
 	}
 	public void changePointsAndTime(int[] points, Date time){}
-	public void updateSpecies(SpeciesUpdate speciesUpdate){}
+	public void updateSpecies(SpeciesUpdate speciesUpdate){
+		holder.updateSpecies(speciesUpdate);
+	}
 	public boolean getPlayerNumber(int number){
 		return false;
 	}	
-	@SuppressWarnings("deprecation")
+	
 	public void setMap(VisualMap map){
 		/* Bitmap to draw the map on !*/
 		final Bitmap bg =Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888);
@@ -126,7 +133,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			
 			@Override
 			public void run() {
-				mapLinearLayout.setBackgroundDrawable(new BitmapDrawable(bg));
+				mapLinearLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bg));
 				
 			}
 		});

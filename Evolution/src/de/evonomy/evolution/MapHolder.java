@@ -8,6 +8,7 @@ import android.util.Log;
 import main.FieldType;
 import main.LandType;
 import main.Species;
+import main.SpeciesUpdate;
 
 public class MapHolder {
 	private static final String SPEZIESONE = "#FF0A0A";
@@ -26,10 +27,13 @@ public class MapHolder {
 	public final int NUMBEROFBLOCKSHEIGHT=100;
 	public final int NuMBEROFBLOCKSWIDTH=200;
 	private Paint[] speciesColors;
+	private Species[] species;
+	private long population[];
 
 	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType){
 		this.canvas=canvas;
         initColors();
+        initSpecies();
         mapFields=new FieldRect[NuMBEROFBLOCKSWIDTH][NUMBEROFBLOCKSHEIGHT];
         heightPerBlock=height/NUMBEROFBLOCKSHEIGHT;
         widthPerBlock=width/NuMBEROFBLOCKSWIDTH;
@@ -154,6 +158,42 @@ public class MapHolder {
 				canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
 			}
 		}
+	}
+	private void initSpecies(){
+		species=new Species[4];
+		population=new long[4];
+		for(int i=0;i<4;i++){
+			species[i]=new Species(5, 10,45, 6, 3, 30, 3, 4, 3, 3, false);
+			population[i]=0;
+		}
+	}
+	public void updateSpecies(SpeciesUpdate update){
+		Species cu=species[update.getPlayerNumber()];
+		cu.setIntelligence(update.getIntelligence());
+		cu.setAgility(update.getAgility());
+		cu.setStrength(update.getStrength());
+		cu.setSocial(update.getSocial());
+		cu.setProcreation(update.getProcreation());
+		cu.setMaxTemp(update.getMaxTemp());
+		cu.setMinTemp(update.getMinTemp());
+		cu.setMovementChance(update.getMovementChange());
+		cu.setResourceDemand(update.getResourceDemand());
+		cu.setVisibillity(cu.getVisibillity());
+		cu.setWater(cu.isWater());
+	}
+	public Species[] getSpecies(){
+		return this.species;
+	}
+	public void changePopulation(long[] population){
+		//TODO change interface?
+		for(int i =0;i<4;i++){
+			Log.e("Population", "population set at"+i+ " as "+population[i]);
+			this.population[i]=population[i];
+		}
+		
+	}
+	public long[] getPopulation(){
+		return this.population;
 	}
 	
 }

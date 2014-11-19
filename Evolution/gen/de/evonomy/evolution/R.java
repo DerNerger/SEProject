@@ -130,7 +130,7 @@ containing a value of this type.
         public static final int right_container_ll_startmenu=0x7f0a0020;
         public static final int social_species_attribute_view=0x7f0a0032;
         public static final int species_attribute_view_create_species=0x7f0a0026;
-        public static final int species_attribute_view_overview=0x7f0a0035;
+        public static final int species_attribute_view_overview=0x7f0a0036;
         public static final int speciesoverview_button_simulation_layout=0x7f0a002e;
         public static final int spinnerPlayer2=0x7f0a0010;
         public static final int spinnerPlayer3=0x7f0a0013;
@@ -147,6 +147,7 @@ containing a value of this type.
         public static final int textViewPlayer4=0x7f0a0017;
         public static final int textViewUsername=0x7f0a0007;
         public static final int textView_search_opponent=0x7f0a000a;
+        public static final int textview_tab_element_overview_population=0x7f0a0035;
     }
     public static final class integer {
         public static final int LoginPort=0x7f040001;

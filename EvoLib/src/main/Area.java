@@ -38,7 +38,8 @@ private int number;
 				toReturn.addLast(toList);
 		}
 		//Changes der Population in der Area anhängnen und zurückgeben
-		toReturn.addLast(new AreaPopulationChange(number,calculatePopulation()));
+		calculatePopulation();
+		toReturn.addLast(new AreaPopulationChange(number,population.clone()));
 		//Linked List zurückgeben
 		return toReturn;
 	
@@ -59,21 +60,20 @@ private int number;
 			toReturn.addLast(currentField.changePopulationByPercentage(percentage));
 		}
 		calculatePopulation();
-		toReturn.addLast(new AreaPopulationChange(number,calculatePopulation()));
+		toReturn.addLast(new AreaPopulationChange(number,population.clone()));
 		return toReturn;
 	
 	}
-	private int[] calculatePopulation(){
-		int[] populations=new int [4];
+	private void calculatePopulation(){
 		for(int i =0;i<4;i++){
-			populations[i]=0;
+			population[i]=0;
 		}
 		for(Field field : fields){
 			for(int i =0;i<4;i++){
-				populations[i]+=field.getPopulation()[i];
+				population[i]+=field.getPopulation()[i];
 			}
 		}
-		return populations;
+		
 	}
 
 	public int getNumber() {
@@ -85,6 +85,7 @@ private int number;
 	}
 	
 	public int[] getPopulation(){
+		calculatePopulation();
 		return population;
 	}
 	
@@ -95,5 +96,8 @@ private int number;
 	//this method: Felix Kibellus
 	public void spawnSpecies(int playerNumber, IMapLogic logic){
 		logic.spawnSpecies(fields, playerNumber);
+	}
+	public void setNumber(int number){
+		this.number=number;
 	}
 }

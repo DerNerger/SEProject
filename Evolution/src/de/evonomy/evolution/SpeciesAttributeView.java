@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
  * use this methods to change the view directly
  */
 public class SpeciesAttributeView extends LinearLayout {
-	private static int ANIMTIME=500;
+	private static int ANIMTIME=300;
 	private int intelligence;
 	private int agility;
 	private int strength;

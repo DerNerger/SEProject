@@ -21,8 +21,6 @@ import android.widget.LinearLayout;
 public class StartMenuActivity extends Activity {
 	Button startSimulation;
 	Button multiplayer_simulation_button_startmenu;
-	
-    @SuppressWarnings("deprecation")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	//Remove title bar
