@@ -97,5 +97,4 @@ public class Field {
 		Field f = (Field) other;
 		return this.x == f.x && this.y == f.y;
 	}
-	
 }

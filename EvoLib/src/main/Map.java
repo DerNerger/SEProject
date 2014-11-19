@@ -111,6 +111,7 @@ public class Map {
 		
 		LinkedList<Area> areas = new LinkedList<Area>();
 		int numberArea = 0;
+		Field[] tmp = null;
 		Field[] fieldsInArea;
 		HashSet<Field> done = new HashSet<Field>();
 		for (int i = 0; i < width; i++) {
@@ -118,6 +119,7 @@ public class Map {
 				if (done.contains(fields[i][j]))
 					continue;
 				fieldsInArea = getFieldsInArea(i, j, fieldtypes, fields, done);
+				
 				LandType landType = SimpleMapLogic.randomLandType(fieldtypes[i][j]);
 				Area area = new Area(numberArea++, landType, fieldsInArea);
 				areas.push(area);
@@ -128,6 +130,43 @@ public class Map {
 		}
 		
 		res.fields = fields;
+
+		if (areas.size() < 4) {
+			res = Map.fromRandom(width, height, species, pct);
+		}
+		
+		HashSet<Area> toDelete = new HashSet<>();
+		
+		for (Area area : areas) {
+			if (area.getFields().length < 10) {
+				toDelete.add(area);
+				Field f = area.getFields()[0];
+				int x = f.x;
+				int y = f.y;
+				Field fromBiggerArea = null;
+				
+				boolean chX = false, pos = true;
+				while (fromBiggerArea == null) {
+					if (chX) pos = !pos;
+					chX = !chX;
+					x = f.x;
+					y = f.y;
+					while (0 <= x && x < width && 0 <= y && y < height) {
+						if (chX) x += pos ? 1 : -1;
+						else y += pos ? 1 : -1;
+						if ((0 <= x && x < width && 0 <= y && y < height) && !toDelete.contains(fields[x][y].getArea())) {
+							fromBiggerArea = fields[x][y];
+							break;
+						}
+					}
+				}
+				for (Field fd : area.getFields()) {
+					fd.setArea(fields[x][y].getArea());
+				}
+			}
+		}
+		
+		areas.removeAll(toDelete);
 		
 		Area[] areaArray = new Area[areas.size()];
 		
@@ -135,7 +174,8 @@ public class Map {
 			areaArray[i] = areas.get(i);
 		}
 		res.areas = areaArray;
-				
+	
+		
 		return res;
 	}
 	
@@ -164,7 +204,7 @@ public class Map {
 				}
 			}
 		}
-		
+
 		Field[] result = new Field[fieldsInArea.size()];
 		
 		for (int i = 0; i < fieldsInArea.size(); i++) {
@@ -196,7 +236,7 @@ public class Map {
 		return changeList;
 	}
 	
-	public VisualMap getVisuarRepresentation(){
+	public VisualMap getVisualRepresentation(){
 		//build the landtypes
 		LandType[] types = new LandType[areas.length] ;
 		for (int i = 0; i < types.length; i++) {

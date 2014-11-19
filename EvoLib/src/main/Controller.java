@@ -33,7 +33,7 @@ public class Controller implements Runnable, Skillable{
 	@Override
 	public void run() {
 		//broadcast the map
-		VisualMap m = map.getVisuarRepresentation();
+		VisualMap m = map.getVisualRepresentation();
 		/*for(IPlayer p : player)
 			p.setMap(m);
 		*/

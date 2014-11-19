@@ -79,7 +79,11 @@ private int number;
 	public int getNumber() {
 		return number;
 	}
-
+	
+	public Field[] getFields() {
+		return fields;
+	}
+	
 	public String toString(){
 		return number+"";
 	}
