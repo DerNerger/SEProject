@@ -9,23 +9,23 @@ public class SpeciesUpdate extends Change {
 	private int minTemp;
 	private int maxTemp;
 	private int resourceDemand;
-	private int movementChange;
+	private double movementChange;
 	private boolean water;
 	private int vision;
 	
 	public SpeciesUpdate(Species s, int playerNumber) {
 		this.playerNumber = playerNumber;
 		this.intelligence = s.getIntelligence();
-		this.agility = getAgility();
-		this.strength = getStrength();
-		this.social = getSocial();
-		this.procreation = getProcreation();
-		this.minTemp = getMinTemp();
-		this.maxTemp = getMaxTemp();
-		this.resourceDemand = getResourceDemand();
-		this.movementChange = getMovementChange();
-		this.water = isWater();
-		this.vision = getVision();
+		this.agility = s.getAgility();
+		this.strength = s.getStrength();
+		this.social = s.getSocial();
+		this.procreation = s.getProcreation();
+		this.minTemp = s.getMinTemp();
+		this.maxTemp = s.getMaxTemp();
+		this.resourceDemand = s.getResourceDemand();
+		this.movementChange = s.getMovementChance();
+		this.water = s.isWater();
+		this.vision = s.getVisibillity();
 	}
 	public int getPlayerNumber() {
 		return playerNumber;
@@ -81,10 +81,10 @@ public class SpeciesUpdate extends Change {
 	public void setResourceDemand(int resourceDemand) {
 		this.resourceDemand = resourceDemand;
 	}
-	public int getMovementChange() {
+	public double getMovementChange() {
 		return movementChange;
 	}
-	public void setMovementChange(int movementChange) {
+	public void setMovementChange(double movementChange) {
 		this.movementChange = movementChange;
 	}
 	public boolean isWater() {
