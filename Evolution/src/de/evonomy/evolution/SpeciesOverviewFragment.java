@@ -18,6 +18,8 @@ import android.view.ViewGroup.LayoutParams;
 public class SpeciesOverviewFragment extends DialogFragment {
 	private Species[] species;
 	private long[] population;
+	TabAdapterOverview adapterOverview;
+	ViewPager viewPager;
 	public SpeciesOverviewFragment(Species[] species,long[]population){
 		super();
 		this.species=species;
@@ -40,8 +42,7 @@ public class SpeciesOverviewFragment extends DialogFragment {
 		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 	    
 		//für die Tabs
-		TabAdapterOverview adapterOverview;
-		ViewPager viewPager;
+		
 		adapterOverview= new TabAdapterOverview(getChildFragmentManager(),species,population);
 		viewPager=(ViewPager) root.findViewById(R.id.pager_overview);
 		viewPager.setAdapter(adapterOverview);
@@ -63,5 +64,8 @@ public class SpeciesOverviewFragment extends DialogFragment {
 	
 			// ... other stuff you want to do in your onStart() method
 			}
-    
+    public void changePopulation(long[]population){
+    	this.population=population;
+    	adapterOverview.changePopulation(0, population[0]);
+    }
 }

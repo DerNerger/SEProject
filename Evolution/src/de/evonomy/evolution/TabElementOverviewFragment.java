@@ -58,22 +58,14 @@ public class TabElementOverviewFragment extends Fragment {
 		population=args.getLong(POPULATION);
 		saview=(SpeciesAttributeView) root.findViewById(R.id.species_attribute_view_overview);
 		populationView=(TextView)root.findViewById(R.id.textview_tab_element_overview_population);
-		long tmp=population;
-		String popString="";
-		int counter=1;
-		while(tmp>0){
-			popString=tmp%10+popString;
-			if(counter%3==0&&counter!=(population+"").length())popString=getResources().getString(R.string.delimiterint)+popString;
-			tmp/=10;
-			counter++;
-		}
-		populationView.setText(popString);
+		changePopulation(population);
 		return root;
 	}
 	
 	@Override
 	public void onResume(){
 		super.onResume();
+		((GameActivity)getActivity()).registerTabOverview(this, number);
 		getView().post(new Runnable() {
 			
 			@Override
@@ -84,8 +76,27 @@ public class TabElementOverviewFragment extends Fragment {
 				saview.changeStrength(strength);
 				saview.changeSocial(social);
 				saview.changeRecreation(procreation);
+				
 			}
 		});
 		
+	}
+	public void changePopulation(long population){
+		this.population=population;
+		long tmp=population;
+		String popString="";
+		int counter=1;
+		while(tmp>0){
+			popString=tmp%10+popString;
+			if(counter%3==0&&counter!=(population+"").length())popString=getResources().getString(R.string.delimiterint)+popString;
+			tmp/=10;
+			counter++;
+		}
+		
+		populationView.setText(popString);
+	}
+	public void onDestroy(){
+		super.onDestroy();
+		((GameActivity)getActivity()).unregisterTabOverview(number);
 	}
 }

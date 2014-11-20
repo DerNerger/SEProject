@@ -35,6 +35,22 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
+        public static final int max_temp=0x7f010006;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int min_temp=0x7f010005;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
         public static final int recreation=0x7f010004;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -147,6 +163,8 @@ containing a value of this type.
         public static final int textViewPlayer4=0x7f0a0017;
         public static final int textViewUsername=0x7f0a0007;
         public static final int textView_search_opponent=0x7f0a000a;
+        public static final int text_view_max_temp_temperature_view=0x7f0a0038;
+        public static final int text_view_min_temp_temperature_view=0x7f0a0037;
         public static final int textview_tab_element_overview_population=0x7f0a0035;
     }
     public static final class integer {
@@ -168,6 +186,7 @@ containing a value of this type.
         public static final int simulation_layout=0x7f03000a;
         public static final int species_attribute_view=0x7f03000b;
         public static final int tab_element_overview=0x7f03000c;
+        public static final int temperature_view=0x7f03000d;
     }
     public static final class string {
         public static final int action_settings=0x7f070003;
@@ -296,5 +315,48 @@ containing a value of this type.
           @attr name de.evonomy.evolution:strength
         */
         public static final int SpeciesAttributeView_strength = 2;
+        /** Attributes that can be used with a TemperatureView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TemperatureView_max_temp de.evonomy.evolution:max_temp}</code></td><td></td></tr>
+           <tr><td><code>{@link #TemperatureView_min_temp de.evonomy.evolution:min_temp}</code></td><td></td></tr>
+           </table>
+           @see #TemperatureView_max_temp
+           @see #TemperatureView_min_temp
+         */
+        public static final int[] TemperatureView = {
+            0x7f010005, 0x7f010006
+        };
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#max_temp}
+          attribute's value can be found in the {@link #TemperatureView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:max_temp
+        */
+        public static final int TemperatureView_max_temp = 1;
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#min_temp}
+          attribute's value can be found in the {@link #TemperatureView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:min_temp
+        */
+        public static final int TemperatureView_min_temp = 0;
     };
 }

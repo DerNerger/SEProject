@@ -7,4 +7,9 @@
         <attr name="social" format="integer"/>
         <attr name="recreation" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="TemperatureView">
+        <attr name="min_temp" format="integer"/>
+        <attr name="max_temp" format="integer"/>
+        
+    </declare-styleable>
 </resources>

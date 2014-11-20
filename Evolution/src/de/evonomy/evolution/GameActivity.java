@@ -38,7 +38,9 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private static final int HEIGHT=100;
 	private boolean mapHasBeenSet=false;
 	private static int ACTUALICATIONTIME=2000;
-	
+	SpeciesOverviewFragment frag;
+	//registers Overview Tabs to update
+	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
 	protected void onCreate(Bundle savedInstanceState){
 	
@@ -83,7 +85,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					SpeciesOverviewFragment frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
+					frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
 					
 					
 					FragmentManager fm=getSupportFragmentManager();
@@ -104,6 +106,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	public void changeWorldPopulation(long[] population){
 		holder.changePopulation(population);
+		updateTabOverviews();
 	}
 	public void changeAreaLandType(int area, LandType landType){
 		holder.changeAreaLandType(area,landType);
@@ -175,11 +178,35 @@ runOnUiThread(new Runnable() {
 			}
 		}
 	};
+	
+	public void registerTabOverview(TabElementOverviewFragment tabfrag,int number){
+		registeredOverviewTabs[number]=tabfrag;
+	}
+	public void unregisterTabOverview(int number){
+		registeredOverviewTabs[number]=null;
+	}
+	private void updateTabOverviews(){
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				for(int i=0;i<4;i++){
+					if( registeredOverviewTabs[i]!=null){
+						registeredOverviewTabs[i].changePopulation(holder.getPopulation()[i]);
+					}
+				}
+				
+			}
+		});
+		
+	}
+	
 	protected void onDestroy(){
 		super.onDestroy();
 		actualizeThread.interrupt();
 		controllerThread.interrupt();
 	}
+	
 	
 }
 

@@ -54,5 +54,9 @@ public class TabAdapterOverview extends FragmentPagerAdapter {
 	public CharSequence getPageTitle(int position){
 		return "Species "+(position+1);
 	}
+	public void changePopulation(int number,long population){
+		this.population[number]=population;
+		((TabElementOverviewFragment)getItem(number)).changePopulation(population);
+	}
 
 }
