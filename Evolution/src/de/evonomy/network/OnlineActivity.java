@@ -386,6 +386,7 @@ public class OnlineActivity extends Activity implements IClient{
 	@Override
 	public void onBackPressed() {
 		if(gameStatus!=null){
+			//TODO: send left packet
 			setContentView(R.layout.activity_online);
 			initComponents();
 			initListeners();
