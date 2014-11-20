@@ -55,7 +55,8 @@
         <Spinner
             android:id="@+id/spinnerPlayer2"
             android:layout_width="110dp"
-            android:layout_height="46dp" />
+            android:layout_height="46dp" 
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/textViewPlayer2"
@@ -80,7 +81,8 @@
         <Spinner
             android:id="@+id/spinnerPlayer3"
             android:layout_width="110dp"
-            android:layout_height="46dp" />
+            android:layout_height="46dp" 
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/textViewPlayer3"
@@ -105,7 +107,8 @@
         <Spinner
             android:id="@+id/spinnerPlayer4"
             android:layout_width="110dp"
-            android:layout_height="46dp" />
+            android:layout_height="46dp" 
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/textViewPlayer4"
