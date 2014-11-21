@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@drawable/temperatureview" >
     <RelativeLayout 
         android:layout_width="0dp"
         android:layout_height="fill_parent"
@@ -11,7 +12,7 @@
         <TextView 
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/app_name"
+            android:text=""
             android:textSize="20sp"
             android:id="@+id/text_view_min_temp_temperature_view"
             android:layout_centerInParent="true"/>
@@ -24,7 +25,7 @@
         <TextView 
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/app_name"
+            android:text=""
             android:textSize="20sp"
             android:id="@+id/text_view_max_temp_temperature_view"
             android:layout_centerInParent="true"/>
