@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class OnlineActivity extends FragmentActivity implements IClient{
@@ -127,7 +128,7 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					frag.refreshCreateGame();
+					frag.refreshCreateGame(gameStatus);
 				}
 			});
 		}
@@ -146,12 +147,16 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 
 	@Override
 	public void showChatMsg(final String msg) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				frag.showChatMsg(msg);
-			}
-		});
+		if(gameStatus!=null){ //in game lobby?
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					frag.showChatMsg(msg);
+				}
+			});
+		}else{
+			Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
@@ -191,11 +196,10 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 	public void onBackPressed() {
 		if(gameStatus!=null){
 			//TODO: send left packet
-			setContentView(R.layout.activity_online);
-			initComponents();
-			initListeners();
+			frag.getView().setVisibility(View.GONE); //TODO: maybe better solution?!
 		} else {
 		    moveTaskToBack(true);
+		    //logout
 		}
 	}
 	

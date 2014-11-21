@@ -88,7 +88,7 @@ public class CreateGameFragment extends DialogFragment {
 		else
 			checkBoxPlayerIRdy[playerNumber-2].setEnabled(true);
 		
-		refreshCreateGame();
+		refreshCreateGame(gameStatus);
 		return root;
 	}
 	
@@ -103,7 +103,7 @@ public class CreateGameFragment extends DialogFragment {
 		spinnerPlayerI[0] = (Spinner) root.findViewById(R.id.spinnerPlayer2);
 		spinnerPlayerI[1] = (Spinner) root.findViewById(R.id.spinnerPlayer3);
 		spinnerPlayerI[2] = (Spinner) root.findViewById(R.id.spinnerPlayer4);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.PlayerType, android.R.layout.simple_spinner_item);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.PlayerType, android.R.layout.simple_spinner_dropdown_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerPlayerI[0].setEnabled(false);
 		spinnerPlayerI[1].setEnabled(false);
@@ -221,7 +221,8 @@ public class CreateGameFragment extends DialogFragment {
 	}
 	
 	//needs to call on UI thread!!!!!
-	public void refreshCreateGame(){
+	public void refreshCreateGame(CreateStatusPacket p){
+		gameStatus = p;
 		//get values
 		String names[] = gameStatus.getNames();
 		boolean[] rdy = gameStatus.getReady();
@@ -254,12 +255,9 @@ public class CreateGameFragment extends DialogFragment {
 	}	
 	
 	public void showChatMsg(final String msg){
-		if(gameStatus!=null){ //in game lobby?
-			String oldText = textViewChat.getText().toString();
-			textViewChat.setText(oldText+"\n"+msg);
-		}else{
-			Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-		}
+		if(textViewChat==null)  return; //is not init fast enough
+		String oldText = textViewChat.getText().toString();
+		textViewChat.setText(oldText+"\n"+msg);
 	}
 		
 	public void onStart() {
