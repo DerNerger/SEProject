@@ -16,7 +16,6 @@ import java.util.Random;
 public class SimpleMapLogic implements IMapLogic {
 	
 	private static final int startPopulation = 100;
-	private static HashMap<PossibleUpdates, Integer> skillValues;
 	
 	private Species[] species;
 
@@ -241,20 +240,61 @@ public class SimpleMapLogic implements IMapLogic {
 		return new LandType((int)minTemp, (int)maxTemp, type, (int)naturalEnemies, (int)resources);
 	}
 	
-	public static double getSkillValue(PossibleUpdates update){
-		if(skillValues==null){
-			skillValues = new HashMap<>();
-			skillValues.put(PossibleUpdates.LANDSPECIES, 0); //THIS IS SHIT
-			skillValues.put(PossibleUpdates.WATESPECIES, 1);
-			skillValues.put(PossibleUpdates.CARNIVORE, 42);
-			skillValues.put(PossibleUpdates.HERBIVORE, 42);
-			skillValues.put(PossibleUpdates.ENDOSKELETON, 42);
-			skillValues.put(PossibleUpdates.EXOSKELETON, 42);
-			skillValues.put(PossibleUpdates.RSTRATEGIST, 42);
-			skillValues.put(PossibleUpdates.KSTRATEGIST, 42);
-			skillValues.put(PossibleUpdates.THINFUR, 42);
-			skillValues.put(PossibleUpdates.THICKFUR, 42);
+	public static void changeSpecies(Species s, PossibleUpdates update){
+		switch (update) {
+		case LANDSPECIES:
+			s.setWater(false);
+			s.setSocial(s.getSocial()+3);
+		case WATESPECIES:
+			s.setWater(false);
+			s.setSocial(s.getSocial()-3);
+		case CARNIVORE:
+			s.setStrength(s.getStrength()+5);
+			s.setResourceDemand(s.getResourceDemand()+5);
+		case HERBIVORE:
+			s.setStrength(s.getStrength()-5);
+			s.setResourceDemand(s.getResourceDemand()-5);
+		case ENDOSKELETON:
+			s.setStrength(s.getStrength()-5);
+			s.setAgility(s.getAgility()+3);
+			s.setMovementChance(s.getMovementChance()+0.05);
+		case EXOSKELETON:
+			s.setStrength(s.getStrength()+5);
+			s.setAgility(s.getAgility()-3);
+			s.setMovementChance(s.getMovementChance()-0.05);
+		case RSTRATEGIST:
+			s.setProcreation(s.getProcreation()+5);
+			s.setStrength(s.getStrength()-5);
+		case KSTRATEGIST:
+			s.setProcreation(s.getProcreation()-5);
+			s.setStrength(s.getStrength()+5);
+		case THINFUR:
+			s.setMinTemp(s.getMinTemp()+20);
+			s.setMaxTemp(s.getMaxTemp()+20);
+		case THICKFUR:
+			s.setMinTemp(s.getMinTemp()-20);
+			s.setMaxTemp(s.getMaxTemp()-20);
+		default:
+			throw new RuntimeException("Type is not valid");
 		}
-		return skillValues.get(update);
+	}
+	
+	/**
+	 * Erstellt eine Spezies mit vorgegebener standartkonfiguration.
+	 * */
+	public static Species getStandartSpecies(String name){
+		int intelligence = 25;
+		int agility = 25;
+		int strength = 25;
+		int social = 25;
+		int procreation = 25;
+		int minTemp = 10;
+		int maxTemp = 20;
+		int resourceDemand = 15;
+		double movementChance = 0.1;
+		int visibillity = 3;
+		boolean water = false;
+		return new Species(name, intelligence, agility, strength, social, 
+				procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water);
 	}
 }
