@@ -274,6 +274,7 @@ public class SimpleMapLogic implements IMapLogic {
 		case THICKFUR:
 			s.setMinTemp(s.getMinTemp()-20);
 			s.setMaxTemp(s.getMaxTemp()-20);
+			break;
 		default:
 			throw new RuntimeException("Type is not valid");
 		}

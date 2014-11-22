@@ -5,10 +5,6 @@ package main;
  * Repraesentiert eine Spezies anhand der Attribute.
  * */
 public class Species {
-	
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	private String name;
 	
@@ -154,5 +150,7 @@ public class Species {
 		this.water = water;
 	}
 	
-	
+	public void setName(String name) {
+		this.name = name;
+	}
 }
