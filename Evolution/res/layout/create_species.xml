@@ -44,6 +44,7 @@
             		android:orientation="vertical"
             		android:background="@drawable/no_rounded_corner_black_white">
             		<de.evonomy.evolution.TemperatureView
+            		    android:id="@+id/temperature_view_create_species"
             		    android:layout_width="match_parent"
             		    android:layout_height="match_parent" />
             
@@ -86,13 +87,14 @@
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/plusblue"
+            		                android:background="@drawable/plusblue"
+            		                
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/minusblue"
+            		                android:background="@drawable/minusblue"
             		                />
             		            
             		        </LinearLayout>
@@ -107,13 +109,13 @@
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/plusred"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/minusred"
             		                />
             		            
             		        </LinearLayout>
@@ -128,13 +130,13 @@
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/plusyellow"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/minusyellow"
             		                />
             		            
             		        </LinearLayout>
@@ -149,13 +151,13 @@
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/pluslightblue"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/minuslightblue"
             		                />
             		            
             		        </LinearLayout>
@@ -170,13 +172,13 @@
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/plusgreen"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
-            		                android:src="@drawable/ic_launcher"
+            		                android:background="@drawable/minusgreen"
             		                />
             		            
             		        </LinearLayout>
@@ -184,7 +186,7 @@
             		        <LinearLayout
             		            android:layout_width="0dp"
             		            android:layout_height="wrap_content"
-            		            android:layout_weight="1"
+            		            android:layout_weight="2"
             		            android:paddingTop="15dp"
             		            android:orientation="vertical" >
             		            <RelativeLayout
@@ -194,7 +196,7 @@
 	            		            <TextView 
 	            		                android:layout_height="wrap_content"
 	            		                android:layout_width="wrap_content"
-	            		                android:textSize="10sp"
+	            		                android:textSize="12sp"
 	            		                android:text="Points left:"
 	            		                android:layout_centerInParent="true"
 	            		                />
@@ -206,7 +208,7 @@
 	            		            <TextView 
 	            		                android:layout_height="wrap_content"
 	            		                android:layout_width="wrap_content"
-	            		                android:textSize="18sp"
+	            		                android:textSize="20sp"
 	            		                android:text="5"
 	            		                android:layout_centerInParent="true"
 	            		                />
@@ -233,13 +235,15 @@
             		                android:layout_height="wrap_content"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_land"
-            		                
+            		                android:checked="true"
+            		                android:onClick="changedSelection"
             		                android:text="Land"/>
             		            <RadioButton 
             		                android:layout_width="0dp"
             		                android:layout_height="50dp"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_water"
+            		                android:onClick="changedSelection"
             		                android:text="Water"/>
             		            
             		        </RadioGroup>
@@ -268,12 +272,15 @@
             		                android:layout_height="wrap_content"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_carnivore"
+            		                android:checked="true"
+            		                android:onClick="changedSelection"
             		                android:text="Carnivore"/>
             		            <RadioButton 
             		                android:layout_width="0dp"
             		                android:layout_height="50dp"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_herbivore"
+            		                android:onClick="changedSelection"
             		                android:text="Herbivore"/>
             		            
             		        </RadioGroup>
@@ -302,12 +309,15 @@
             		                android:layout_height="wrap_content"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_endoskeleton"
+            		                android:onClick="changedSelection"
+            		                android:checked="true"
             		                android:text="Endoskeleton"/>
             		            <RadioButton 
             		                android:layout_width="0dp"
             		                android:layout_height="50dp"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_exoskeleton"
+            		                android:onClick="changedSelection"
             		                android:text="Exoskeleton"/>
             		            
             		        </RadioGroup>
@@ -336,11 +346,14 @@
             		                android:layout_height="wrap_content"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_rstrategist"
+            		                android:checked="true"
+            		                android:onClick="changedSelection"
             		                android:text="r strategist"/>
             		            <RadioButton 
             		                android:layout_width="0dp"
             		                android:layout_height="50dp"
             		                android:layout_weight="1"
+            		                android:onClick="changedSelection"
             		                android:id="@+id/radio_button_create_species_kstrategist"
             		                android:text="K strategist"/>
             		            
@@ -370,11 +383,14 @@
             		                android:layout_height="wrap_content"
             		                android:layout_weight="1"
             		                android:id="@+id/radio_button_create_species_thin_fur"
+            		                android:checked="true"
+            		                android:onClick="changedSelection"
             		                android:text="Thin fur"/>
             		            <RadioButton 
             		                android:layout_width="0dp"
             		                android:layout_height="50dp"
             		                android:layout_weight="1"
+            		                android:onClick="changedSelection"
             		                android:id="@+id/radio_button_create_species_thick_fur"
             		                android:text="Thick fur"/>
             		            
