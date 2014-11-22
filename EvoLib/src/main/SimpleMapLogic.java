@@ -245,41 +245,32 @@ public class SimpleMapLogic implements IMapLogic {
 		case LANDSPECIES:
 			s.setWater(false);
 			s.setSocial(s.getSocial()+3);
-			break;
 		case WATESPECIES:
 			s.setWater(true);
 			s.setSocial(s.getSocial()-3);
-			break;
 		case CARNIVORE:
 			s.setStrength(s.getStrength()+5);
 			s.setResourceDemand(s.getResourceDemand()+5);
-			break;
 		case HERBIVORE:
 			s.setStrength(s.getStrength()-5);
 			s.setResourceDemand(s.getResourceDemand()-5);
-			break;
 		case ENDOSKELETON:
 			s.setStrength(s.getStrength()-5);
 			s.setAgility(s.getAgility()+3);
 			s.setMovementChance(s.getMovementChance()+0.05);
-			break;
 		case EXOSKELETON:
 			s.setStrength(s.getStrength()+5);
 			s.setAgility(s.getAgility()-3);
 			s.setMovementChance(s.getMovementChance()-0.05);
-			break;
 		case RSTRATEGIST:
 			s.setProcreation(s.getProcreation()+5);
 			s.setStrength(s.getStrength()-5);
-			break;
 		case KSTRATEGIST:
 			s.setProcreation(s.getProcreation()-5);
 			s.setStrength(s.getStrength()+5);
-			break;
 		case THINFUR:
 			s.setMinTemp(s.getMinTemp()+20);
 			s.setMaxTemp(s.getMaxTemp()+20);
-			break;
 		case THICKFUR:
 			s.setMinTemp(s.getMinTemp()-20);
 			s.setMaxTemp(s.getMaxTemp()-20);

@@ -5,6 +5,7 @@ import onlineProtocol.ChatMessageToServer;
 import onlineProtocol.CreateStatusPacket;
 import onlineProtocol.ImReadyPacket;
 import onlineProtocol.InvitePacketToServer;
+import onlineProtocol.LeaveGamePacket;
 import onlineProtocol.SlotTypeChange;
 import onlineProtocol.CreateStatusPacket.OpponentType;
 import de.evonomy.evolution.GameActivity;
@@ -57,6 +58,7 @@ public class CreateGameFragment extends DialogFragment {
 	//network
 	private OnlineClient onlineClient;
 	private SessionInformation sessionInformation;
+	boolean willBeKicked = false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
@@ -276,6 +278,10 @@ public class CreateGameFragment extends DialogFragment {
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
-		getActivity().onBackPressed();
+		if(!willBeKicked){
+			LeaveGamePacket lgp = new LeaveGamePacket(sessionInformation.getSessionId(), "server", gameStatus.getHostname());
+			onlineClient.sendPacket(lgp);
+		}
+		activity.onBackPressed();
 	}
 }

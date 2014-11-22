@@ -7,6 +7,7 @@ import onlineProtocol.CreateGamePacket;
 import onlineProtocol.CreateStatusPacket;
 import onlineProtocol.InviteResult;
 import onlineProtocol.IClient;
+import onlineProtocol.LeaveGamePacket;
 
 
 
@@ -198,7 +199,6 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 	public void onBackPressed() {
 		
 		if(gameStatus!=null){
-			//TODO: send left packet
 			frag = null;
 			gameStatus = null;
 		} else {
@@ -222,6 +222,7 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 
 	@Override
 	public void kickPlayer() {
+		frag.willBeKicked = true;
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
