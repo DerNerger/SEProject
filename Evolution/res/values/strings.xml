@@ -8,12 +8,24 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="multiplayer_start_menu">Multiplayer starten</string>
     <string name="singleplayer_start_menu">Simulation starten</string>
-    
+
     <string-array name="PlayerType">
         <item>Computergegner</item>
         <item>Spieler</item>
         <item>Unbesetzt</item>
     </string-array>
+
     <string name="delimiterint">.</string>
+    <string name="title_activity_create_species">CreateSpeciesActivity</string>
+    <string name="create_species_water">Wasserlebewesen</string>
+    <string name="create_species_land">Landlebewesen</string>
+    <string name="create_species_carnivore">Fleischfresser</string>
+    <string name="create_species_non_carnivore">Pflanzenfresser</string>
+    <string name="create_species_endo_skeleton">Endoskelett</string>
+    <string name="create_species_exo_sceleton">Exoskelett</string>
+    <string name="create_species_k_strategist">K-Stratege</string>
+    <string name="create_species_r_strategist">r-Stratege</string>
+    <string name="create_species_thin_fur">Dünnes Fell</string>
+    <string name="create_species_thick_fur">Dickes Fell</string>
 
 </resources>

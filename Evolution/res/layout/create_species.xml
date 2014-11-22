@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp"
+    android:background="@drawable/pangaea"
+    android:alpha="0.8" >
     <!-- relative layout for species name -->
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -15,7 +17,7 @@
             android:layout_width="wrap_content"
             android:hint="@string/app_name"
             android:layout_centerInParent="true"
-            android:background="@drawable/rounded_corner_black_white"
+            android:background="@drawable/no_rounded_corner_black_white"
             />
         
     </RelativeLayout>
@@ -31,27 +33,215 @@
             	android:layout_height="fill_parent"
             	android:layout_weight="23"
             	android:paddingTop="4dp"
-            	android:paddingBottom="15dp"
-            	android:paddingRight="20dp"
+            	android:paddingBottom="4dp"
+            	android:paddingRight="5dp"
             	android:orientation="vertical" >
             	<LinearLayout 
             		android:layout_width="fill_parent"
             		android:layout_height="0dp"
             		android:layout_weight="1"
-            		android:padding="5dp"
-            		android:orientation="vertical">
+            		
+            		android:orientation="vertical"
+            		android:background="@drawable/no_rounded_corner_black_white">
             		<de.evonomy.evolution.TemperatureView
             		    android:layout_width="match_parent"
             		    android:layout_height="match_parent" />
             
         		</LinearLayout>
-        		<LinearLayout 
+        		<!-- Choosing options Container and ScrollView -->
+        		<!-- for padding -->
+        		<LinearLayout android:layout_width="fill_parent"
+        		    android:layout_height="0dp"
+            		android:layout_weight="3"
+            		android:paddingTop="5dp"
+            		android:orientation="vertical"
+        		    >
+        		<ScrollView
             		android:layout_width="fill_parent"
-            		android:layout_height="0dp"
-            		android:layout_weight="4"
-            		android:background="@drawable/rounded_corner_black_white"
-            		android:orientation="vertical">
+            		android:layout_height="fill_parent"
+            		android:orientation="vertical"
+            		 android:background="@drawable/no_rounded_corner_black_white">
+            		<!-- single child of scrollview -->
+            		<LinearLayout 
+            		    android:layout_width="match_parent"
+            		    android:layout_height="wrap_content"
+            		    android:orientation="vertical">
+            		    <!-- All the choosing options -->
+            		    <!-- One choosing option contains two TextViews and one ToggleButton and a questionmark -->
+            		    <!-- Land water -->
+            		    <LinearLayout 
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:orientation="horizontal"
+            		        android:padding="4dp">
+            		        <RadioGroup
+            		            android:layout_width="0dp"
+            		            android:layout_weight="1"
+            		            android:layout_height="50dp"
+            		            
+            		            android:orientation="horizontal" >
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="wrap_content"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_land"
+            		                
+            		                android:text="Land"/>
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="50dp"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_water"
+            		                android:text="Water"/>
+            		            
+            		        </RadioGroup>
+            		        <ImageButton 
+            		            android:background="@drawable/question_mark"
+            		            android:layout_height="15dp"
+            		            android:layout_width="15dp"
+            		            android:id="@+id/image_button_create_species_question_mark_landwater"
+            		            />
+            		        
+            		    </LinearLayout>
+            		    <!--  carnivore -->
+            		    <LinearLayout 
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:orientation="horizontal"
+            		        android:padding="4dp">
+            		        <RadioGroup
+            		            android:layout_width="0dp"
+            		            android:layout_weight="1"
+            		            android:layout_height="50dp"
+            		            
+            		            android:orientation="horizontal" >
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="wrap_content"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_carnivore"
+            		                android:text="Carnivore"/>
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="50dp"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_herbivore"
+            		                android:text="Herbivore"/>
+            		            
+            		        </RadioGroup>
+            		        <ImageButton 
+            		            android:background="@drawable/question_mark"
+            		            android:layout_height="15dp"
+            		            android:layout_width="15dp"
+            		            android:id="@+id/image_button_create_species_question_mark_carnivore"
+            		            />
+            		        
+            		    </LinearLayout>
+            		    <!-- for endo exo sceleton -->
+            		    <LinearLayout 
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:orientation="horizontal"
+            		        android:padding="4dp">
+            		        <RadioGroup
+            		            android:layout_width="0dp"
+            		            android:layout_weight="1"
+            		            android:layout_height="50dp"
+            		            
+            		            android:orientation="horizontal" >
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="wrap_content"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_endoskeleton"
+            		                android:text="Endoskeleton"/>
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="50dp"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_exoskeleton"
+            		                android:text="Exoskeleton"/>
+            		            
+            		        </RadioGroup>
+            		        <ImageButton 
+            		            android:background="@drawable/question_mark"
+            		            android:layout_height="15dp"
+            		            android:layout_width="15dp"
+            		            android:id="@+id/image_button_create_species_question_mark_sceleton"
+            		            />
+            		        
+            		    </LinearLayout>
+            		    <!-- for r k strategist -->
+            		    <LinearLayout 
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:orientation="horizontal"
+            		        android:padding="4dp">
+            		        <RadioGroup
+            		            android:layout_width="0dp"
+            		            android:layout_weight="1"
+            		            android:layout_height="50dp"
+            		            
+            		            android:orientation="horizontal" >
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="wrap_content"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_rstrategist"
+            		                android:text="r strategist"/>
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="50dp"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_kstrategist"
+            		                android:text="K strategist"/>
+            		            
+            		        </RadioGroup>
+            		        <ImageButton 
+            		            android:background="@drawable/question_mark"
+            		            android:layout_height="15dp"
+            		            android:layout_width="15dp"
+            		            android:id="@+id/image_button_create_species_question_mark_rkstrategist"
+            		            />
+            		        
+            		    </LinearLayout>
+            		    <!-- For Fur -->
+            		    <LinearLayout 
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:orientation="horizontal"
+            		        android:padding="4dp">
+            		       <RadioGroup
+            		            android:layout_width="0dp"
+            		            android:layout_weight="1"
+            		            android:layout_height="50dp"
+            		            
+            		            android:orientation="horizontal" >
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="wrap_content"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_thin_fur"
+            		                android:text="Thin fur"/>
+            		            <RadioButton 
+            		                android:layout_width="0dp"
+            		                android:layout_height="50dp"
+            		                android:layout_weight="1"
+            		                android:id="@+id/radio_button_create_species_thick_fur"
+            		                android:text="Thick fur"/>
+            		            
+            		        </RadioGroup>
+            		        <ImageButton 
+            		            android:background="@drawable/question_mark"
+            		            android:layout_height="15dp"
+            		            android:layout_width="15dp"
+            		            android:id="@+id/image_button_create_species_question_mark_fur"
+            		            />
+            		        
+            		    </LinearLayout>
+            		</LinearLayout>
             
+        		</ScrollView>
         		</LinearLayout>
         </LinearLayout>
         <!-- attributs view container -->

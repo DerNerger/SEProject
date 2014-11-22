@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 public class StartMenuActivity extends Activity {
 	Button startSimulation;
 	Button multiplayer_simulation_button_startmenu;
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	//Remove title bar
@@ -48,6 +49,16 @@ public class StartMenuActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent_login = new Intent(getApplicationContext(), LoginActivity.class);
 				startActivity(intent_login);
+			}
+		});
+        Button tmp=(Button) findViewById(R.id.statistics_button_startmenu);
+        tmp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(getApplicationContext(),CreateSpeciesActivity.class);
+				startActivity(intent);
+				
 			}
 		});
     	

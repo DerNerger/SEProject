@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	android:orientation="horizontal"
+	android:background="@drawable/pangaea"
+	android:alpha="0.8"
     tools:context="de.evolution.evolution.StartMenuActivity" >
     <!--  left container which holds the logo of evolution -->
 	<LinearLayout
@@ -117,7 +119,7 @@
 	                android:id="@+id/statistics_button_startmenu"
 	                android:layout_width="fill_parent"
 	                android:layout_height="fill_parent"
-	                android:text="@string/app_name"
+	                android:text="Klick mich"
 	                android:background="@drawable/rounded_corner" />
 	            </LinearLayout>
 	            <LinearLayout 

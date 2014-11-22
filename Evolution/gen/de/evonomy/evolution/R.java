@@ -91,6 +91,11 @@ containing a value of this type.
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
+
+         Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
+    
          */
         public static final int activity_horizontal_margin=0x7f060000;
         public static final int activity_vertical_margin=0x7f060001;
@@ -104,14 +109,16 @@ containing a value of this type.
         public static final int circle_black_white=0x7f020005;
         public static final int ic_launcher=0x7f020006;
         public static final int no_rounded_corner_black_white=0x7f020007;
-        public static final int rounded_corner=0x7f020008;
-        public static final int rounded_corner_black_white=0x7f020009;
-        public static final int rounded_corner_red=0x7f02000a;
-        public static final int temperatureview=0x7f02000b;
+        public static final int pangaea=0x7f020008;
+        public static final int question_mark=0x7f020009;
+        public static final int rounded_corner=0x7f02000a;
+        public static final int rounded_corner_black_white=0x7f02000b;
+        public static final int rounded_corner_red=0x7f02000c;
+        public static final int temperatureview=0x7f02000d;
     }
     public static final class id {
         public static final int Button_register_now=0x7f0a001e;
-        public static final int agility_species_attribute_view=0x7f0a0030;
+        public static final int agility_species_attribute_view=0x7f0a003f;
         public static final int buttonChat=0x7f0a001b;
         public static final int buttonInvitePlayer=0x7f0a000d;
         public static final int buttonStartGameWithFriends=0x7f0a000f;
@@ -131,30 +138,46 @@ containing a value of this type.
         public static final int editText_register_passWd=0x7f0a001d;
         public static final int editText_register_username=0x7f0a001c;
         public static final int explanations_button_startmenu=0x7f0a0024;
-        public static final int intelligence_species_attribute_view=0x7f0a002f;
+        public static final int image_button_create_species_question_mark_carnivore=0x7f0a002b;
+        public static final int image_button_create_species_question_mark_fur=0x7f0a0034;
+        public static final int image_button_create_species_question_mark_landwater=0x7f0a0028;
+        public static final int image_button_create_species_question_mark_rkstrategist=0x7f0a0031;
+        public static final int image_button_create_species_question_mark_sceleton=0x7f0a002e;
+        public static final int intelligence_species_attribute_view=0x7f0a003e;
         public static final int left_container_ll_startmenu=0x7f0a001f;
-        public static final int map_holder_ll_simulation_layout=0x7f0a002d;
+        public static final int map_holder_ll_simulation_layout=0x7f0a003c;
         public static final int multiplayer_simulation_button_startmenu=0x7f0a0022;
-        public static final int pager_overview=0x7f0a0027;
-        public static final int pager_title_strip_overview=0x7f0a0028;
-        public static final int planet1_button_selcet_world=0x7f0a0029;
-        public static final int planet2_button_selcet_world=0x7f0a002b;
-        public static final int planet3_button_selcet_world=0x7f0a002a;
-        public static final int planet4_button_selcet_world=0x7f0a002c;
+        public static final int pager_overview=0x7f0a0036;
+        public static final int pager_title_strip_overview=0x7f0a0037;
+        public static final int planet1_button_selcet_world=0x7f0a0038;
+        public static final int planet2_button_selcet_world=0x7f0a003a;
+        public static final int planet3_button_selcet_world=0x7f0a0039;
+        public static final int planet4_button_selcet_world=0x7f0a003b;
         public static final int progressBar1=0x7f0a0025;
-        public static final int recreation_relative_layout_species_attribute_view=0x7f0a0033;
-        public static final int recreation_species_attribute_view=0x7f0a0034;
+        public static final int radio_button_create_species_carnivore=0x7f0a0029;
+        public static final int radio_button_create_species_endoskeleton=0x7f0a002c;
+        public static final int radio_button_create_species_exoskeleton=0x7f0a002d;
+        public static final int radio_button_create_species_herbivore=0x7f0a002a;
+        public static final int radio_button_create_species_kstrategist=0x7f0a0030;
+        public static final int radio_button_create_species_land=0x7f0a0026;
+        public static final int radio_button_create_species_rstrategist=0x7f0a002f;
+        public static final int radio_button_create_species_thick_fur=0x7f0a0033;
+        public static final int radio_button_create_species_thin_fur=0x7f0a0032;
+        public static final int radio_button_create_species_water=0x7f0a0027;
+        public static final int recreation_relative_layout_species_attribute_view=0x7f0a0042;
+        public static final int recreation_species_attribute_view=0x7f0a0043;
         public static final int right_container_ll_startmenu=0x7f0a0020;
-        public static final int social_species_attribute_view=0x7f0a0032;
-        public static final int species_attribute_view_create_species=0x7f0a0026;
-        public static final int species_attribute_view_overview=0x7f0a0036;
-        public static final int speciesoverview_button_simulation_layout=0x7f0a002e;
+        public static final int social_species_attribute_view=0x7f0a0041;
+        public static final int species_attribute_view_create_species=0x7f0a0035;
+        public static final int species_attribute_view_overview=0x7f0a0046;
+        public static final int speciesoverview_button_simulation_layout=0x7f0a003d;
         public static final int spinnerPlayer2=0x7f0a0010;
         public static final int spinnerPlayer3=0x7f0a0013;
         public static final int spinnerPlayer4=0x7f0a0016;
         public static final int start_simulation_button_startmenu=0x7f0a0021;
         public static final int statistics_button_startmenu=0x7f0a0023;
-        public static final int strength_species_attribute_view=0x7f0a0031;
+        public static final int strength_species_attribute_view=0x7f0a0040;
+        public static final int temperature_view_tab_element_overview=0x7f0a0045;
         public static final int textViewChat=0x7f0a0019;
         public static final int textViewLoginName=0x7f0a0000;
         public static final int textViewPassWord=0x7f0a0002;
@@ -164,9 +187,9 @@ containing a value of this type.
         public static final int textViewPlayer4=0x7f0a0017;
         public static final int textViewUsername=0x7f0a0007;
         public static final int textView_search_opponent=0x7f0a000a;
-        public static final int text_view_max_temp_temperature_view=0x7f0a0038;
-        public static final int text_view_min_temp_temperature_view=0x7f0a0037;
-        public static final int textview_tab_element_overview_population=0x7f0a0035;
+        public static final int text_view_max_temp_temperature_view=0x7f0a0048;
+        public static final int text_view_min_temp_temperature_view=0x7f0a0047;
+        public static final int textview_tab_element_overview_population=0x7f0a0044;
     }
     public static final class integer {
         public static final int LoginPort=0x7f040001;
@@ -192,12 +215,23 @@ containing a value of this type.
     public static final class string {
         public static final int action_settings=0x7f070003;
         public static final int app_name=0x7f070001;
+        public static final int create_species_carnivore=0x7f07000c;
+        public static final int create_species_endo_skeleton=0x7f07000e;
+        public static final int create_species_exo_sceleton=0x7f07000f;
+        public static final int create_species_k_strategist=0x7f070010;
+        public static final int create_species_land=0x7f07000b;
+        public static final int create_species_non_carnivore=0x7f07000d;
+        public static final int create_species_r_strategist=0x7f070011;
+        public static final int create_species_thick_fur=0x7f070013;
+        public static final int create_species_thin_fur=0x7f070012;
+        public static final int create_species_water=0x7f07000a;
         public static final int delimiterint=0x7f070008;
         public static final int hello_world=0x7f070002;
         public static final int host=0x7f070000;
         public static final int multiplayer_start_menu=0x7f070006;
         public static final int random_generate_world=0x7f070004;
         public static final int singleplayer_start_menu=0x7f070007;
+        public static final int title_activity_create_species=0x7f070009;
         public static final int title_activity_game=0x7f070005;
     }
     public static final class style {

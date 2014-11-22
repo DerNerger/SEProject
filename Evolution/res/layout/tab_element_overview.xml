@@ -54,6 +54,7 @@
         	android:background="@drawable/no_rounded_corner_black_white"
         	>
         	<de.evonomy.evolution.TemperatureView
+        	    android:id="@+id/temperature_view_tab_element_overview"
   				android:layout_width="match_parent"
   				android:layout_height="match_parent"/>
         

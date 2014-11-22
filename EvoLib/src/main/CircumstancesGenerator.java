@@ -24,13 +24,12 @@ public class CircumstancesGenerator {
 			event= new MapEventClimate(areaNumber, minTemp, maxTemp);
 		}else if(eventNumber<=pLandType){
 			//Verteilungsfunktion auf Basis von Dichtefunktion mit gleichen Werten erstellen
-			double p=1./(double)FieldType.values().length;
-			HashMap<Double,FieldType> pF=new HashMap<Double,FieldType>();
+			HashMap<Integer,FieldType> pF=new HashMap<Integer,FieldType>();
 			for(int i =0;i<FieldType.values().length;i++){
-				pF.put( (i+1)*p,FieldType.values()[i]);
+				pF.put( (i+1),FieldType.values()[i]);
 			}
 			//Zufllswert auf den nächsthöheren Wert der Verteilungsfunktion 
-			LandType newLandType= SimpleMapLogic.randomLandType(pF.get(((int)(Math.random()*(FieldType.values().length)+1))*p));
+			LandType newLandType= SimpleMapLogic.randomLandType(pF.get(((int)(Math.random()*(FieldType.values().length)+1))));
 			event=new MapEventToLandType(areaNumber, newLandType);
 		}else if(eventNumber<=pRadioactive){
 			event= new MapEventRadioactive(areaNumber);

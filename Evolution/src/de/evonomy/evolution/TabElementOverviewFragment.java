@@ -39,6 +39,7 @@ public class TabElementOverviewFragment extends Fragment {
 	private long population;
 	private int number;
 	private TextView populationView;
+	private TemperatureView tView;
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		super.onCreateView(inflater, container, savedInstanceState);
 		View root=inflater.inflate(R.layout.tab_element_overview, container,false);
@@ -58,13 +59,15 @@ public class TabElementOverviewFragment extends Fragment {
 		population=args.getLong(POPULATION);
 		saview=(SpeciesAttributeView) root.findViewById(R.id.species_attribute_view_overview);
 		populationView=(TextView)root.findViewById(R.id.textview_tab_element_overview_population);
-		changePopulation(population);
+		tView=(TemperatureView)root.findViewById(R.id.temperature_view_tab_element_overview);
+		changePopulation(population);		
 		return root;
 	}
 	
 	@Override
 	public void onResume(){
 		super.onResume();
+		//in onResume to always give a cool animation
 		((GameActivity)getActivity()).registerTabOverview(this, number);
 		getView().post(new Runnable() {
 			
@@ -76,6 +79,8 @@ public class TabElementOverviewFragment extends Fragment {
 				saview.changeStrength(strength);
 				saview.changeSocial(social);
 				saview.changeRecreation(procreation);
+				tView.changeMaxTemp(maxTemp);
+				tView.changeMinTemp(minTemp);
 				
 			}
 		});

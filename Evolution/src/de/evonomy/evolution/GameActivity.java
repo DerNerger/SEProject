@@ -29,10 +29,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import main.FieldType;
 public class GameActivity extends FragmentActivity implements IPlayer{
-	MapHolder holder;
-	LinearLayout mapLinearLayout;
-	Thread actualizeThread;
-	Thread controllerThread;
+	private MapHolder holder;
+	private LinearLayout mapLinearLayout;
+	private Thread actualizeThread;
+	private Thread controllerThread;
+	private  Bitmap bg;
+	private Controller controller;
 	private Button speziesOverviewButton;
 	private static final int WIDTH=200;
 	private static final int HEIGHT=100;
@@ -72,7 +74,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			}
 			player[0]=this;
 	        //Create controller
-	        Controller controller = new Controller(Map.fromRandom(WIDTH, HEIGHT, species, pct), species, player);
+	        controller = new Controller(Map.fromRandom(WIDTH, HEIGHT, species, pct), species, player);
 	        controllerThread=new Thread(controller);
 	        controllerThread.start();
 	        actualizeThread= new Thread(actualize);
@@ -122,7 +124,12 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	
 	public void setMap(VisualMap map){
 		/* Bitmap to draw the map on !*/
-		final Bitmap bg =Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888);
+		if(bg!=null){
+			Log.e("Bitmap", "recycled bitmap ");
+			bg.recycle();
+			bg=null;
+		}
+		bg =Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888);
 		/*Canvas to draw on the Bitmap*/
         final Canvas canvas = new Canvas(bg);
        // mapHolder=new MapHolder(canvas, 100, 200, areasOfFields, areasFieldType);
@@ -205,6 +212,16 @@ runOnUiThread(new Runnable() {
 		super.onDestroy();
 		actualizeThread.interrupt();
 		controllerThread.interrupt();
+		//delete reference to Controller
+		
+		
+		controller=null;
+		System.gc();
+		unregisterTabOverview(0);
+		unregisterTabOverview(1);
+		unregisterTabOverview(2);
+		unregisterTabOverview(3);
+		
 	}
 	
 	
