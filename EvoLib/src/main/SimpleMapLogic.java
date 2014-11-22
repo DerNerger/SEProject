@@ -247,7 +247,7 @@ public class SimpleMapLogic implements IMapLogic {
 			s.setSocial(s.getSocial()+3);
 			break;
 		case WATESPECIES:
-			s.setWater(false);
+			s.setWater(true);
 			s.setSocial(s.getSocial()-3);
 			break;
 		case CARNIVORE:
