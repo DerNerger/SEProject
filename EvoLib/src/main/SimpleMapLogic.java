@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -15,8 +16,10 @@ import java.util.Random;
 public class SimpleMapLogic implements IMapLogic {
 	
 	private static final int startPopulation = 100;
+	private static HashMap<PossibleUpdates, Integer> skillValues;
 	
 	private Species[] species;
+
 
 	public SimpleMapLogic(Species[] species){
 		this.species = species;
@@ -236,5 +239,22 @@ public class SimpleMapLogic implements IMapLogic {
 			throw new RuntimeException("FieldType nicht gueltig");
 		}
 		return new LandType((int)minTemp, (int)maxTemp, type, (int)naturalEnemies, (int)resources);
+	}
+	
+	public static double getSkillValue(PossibleUpdates update){
+		if(skillValues==null){
+			skillValues = new HashMap<>();
+			skillValues.put(PossibleUpdates.LANDSPECIES, 0); //THIS IS SHIT
+			skillValues.put(PossibleUpdates.WATESPECIES, 1);
+			skillValues.put(PossibleUpdates.CARNIVORE, 42);
+			skillValues.put(PossibleUpdates.HERBIVORE, 42);
+			skillValues.put(PossibleUpdates.ENDOSKELETON, 42);
+			skillValues.put(PossibleUpdates.EXOSKELETON, 42);
+			skillValues.put(PossibleUpdates.RSTRATEGIST, 42);
+			skillValues.put(PossibleUpdates.KSTRATEGIST, 42);
+			skillValues.put(PossibleUpdates.THINFUR, 42);
+			skillValues.put(PossibleUpdates.THICKFUR, 42);
+		}
+		return skillValues.get(update);
 	}
 }
