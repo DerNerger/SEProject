@@ -104,7 +104,7 @@ public class Controller implements Runnable, Skillable{
 	public static void main(String[] args){		
 		Species [] species = new Species[4];
 		for (int i = 0; i < species.length; i++) {
-			species[i] = new Species(5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
+			species[i] = new Species("Peter", 5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
 			//new Species(intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water)
 		} 
 		

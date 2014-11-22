@@ -163,7 +163,7 @@ public class MapHolder {
 		species=new Species[4];
 		population=new long[4];
 		for(int i=0;i<4;i++){
-			species[i]=new Species(5, 10,45, 6, 3, 30, 3, 4, 3, 3, false);
+			species[i]=new Species("Spezies "+i, 5, 10,45, 6, 3, 30, 3, 4, 3, 3, false);
 			population[i]=0;
 		}
 	}

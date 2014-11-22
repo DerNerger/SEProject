@@ -6,6 +6,8 @@ package main;
  * */
 public class Species {
 	
+	private String name;
+	
 	//#########################################################################
 	//#                           Attribute                                   #
 	//#      beeinflussen unterschiedliche Aspekte der Simulation             #
@@ -38,10 +40,11 @@ public class Species {
 	 * Erstellt ein Objekt der Klasse Species und initialisiert alle Attribute
 	 * mit den uebergebenen Parametern.
 	 * */
-	public Species(int intelligence, int agility, int strength, int social,
+	public Species(String name, int intelligence, int agility, int strength, int social,
 			int procreation, int minTemp, int maxTemp, int resourceDemand,
 			double movementChance, int visibillity, boolean water) {
 		
+		this.name = name;
 		this.intelligence = intelligence;
 		this.agility = agility;
 		this.strength = strength;
@@ -53,6 +56,10 @@ public class Species {
 		this.movementChance = movementChance;
 		this.visibillity = visibillity;
 		this.water = water;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public int getIntelligence() {

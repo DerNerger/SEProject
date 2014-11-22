@@ -1,6 +1,8 @@
 package main;
 
 public class SpeciesUpdate extends Change {
+	
+	private String name;
 	private int intelligence;
 	private int agility;
 	private int strength;
@@ -14,6 +16,7 @@ public class SpeciesUpdate extends Change {
 	private int vision;
 	
 	public SpeciesUpdate(Species s, int playerNumber) {
+		this.name = s.getName();
 		this.playerNumber = playerNumber;
 		this.intelligence = s.getIntelligence();
 		this.agility = s.getAgility();
