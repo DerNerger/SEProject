@@ -35,6 +35,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Thread controllerThread;
 	private  Bitmap bg;
 	private Controller controller;
+	private Species[] species;
 	private Button speziesOverviewButton;
 	private static final int WIDTH=200;
 	private static final int HEIGHT=100;
@@ -60,7 +61,11 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        Species kibi=new Species("kibi", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        Species niklas=new Species("niklas", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        Species thorsten=new Species("thorsten", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
-	        Species[] species={davidDerZigeuner,kibi,niklas,thorsten};
+	        species=new Species[4];
+	        species[0]=davidDerZigeuner;
+	        species[1]=kibi;
+	        species[2]=niklas;
+	        species[3]=thorsten;
 	        HashMap<FieldType,Double> pct=new HashMap<FieldType,Double>();
 	        pct.put(FieldType.DESERT, 0.05);
 	        pct.put(FieldType.ICE, 0.05);
@@ -136,7 +141,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
         int [][] areaNumberOfFields=map.getAreaNumberOfFields().clone();
         LandType [] areasLandType= map.getTypes();
         /*create mapholder with data from map*/
-        holder=new MapHolder(canvas, 400, 800, areaNumberOfFields, areasLandType);
+        holder=new MapHolder(canvas, 400, 800, areaNumberOfFields, areasLandType,species);
         mapLinearLayout = (LinearLayout) findViewById(R.id.map_holder_ll_simulation_layout);
         runOnUiThread(new Runnable() {
 			

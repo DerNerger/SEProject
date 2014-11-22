@@ -68,6 +68,154 @@
             		    android:orientation="vertical">
             		    <!-- All the choosing options -->
             		    <!-- One choosing option contains two TextViews and one ToggleButton and a questionmark -->
+            		    <!-- plus minus for attributes -->
+            		    <LinearLayout 
+            		        android:layout_width="fill_parent"
+            		        android:layout_height="80dp"
+            		        android:orientation="horizontal"
+            		        
+            		        >
+            		        <!-- Intelligence plus minus -->
+            		        <LinearLayout
+            		            android:layout_width="0dp"
+            		            android:layout_height="wrap_content"
+            		            android:layout_weight="1"
+            		            android:orientation="vertical"
+            		            >
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/plusblue"
+            		                />
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/minusblue"
+            		                />
+            		            
+            		        </LinearLayout>
+            		        <!-- Agility plus minus -->
+            		        <LinearLayout
+            		            android:layout_width="0dp"
+            		            android:layout_height="wrap_content"
+            		            android:layout_weight="1"
+            		            android:orientation="vertical"
+            		             >
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            
+            		        </LinearLayout>
+            		        <!-- Strength plus minus -->
+            		        <LinearLayout
+            		            android:layout_width="0dp"
+            		            android:layout_height="wrap_content"
+            		            android:layout_weight="1"
+            		            android:orientation="vertical"
+            		             >
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            
+            		        </LinearLayout>
+            		        <!-- Socail plus minus -->
+            		        <LinearLayout
+            		            android:layout_width="0dp"
+            		            android:layout_height="wrap_content"
+            		            android:layout_weight="1"
+            		            android:orientation="vertical"
+            		            >
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            
+            		        </LinearLayout>
+            		        <!-- Procreation plus minus -->
+            		        <LinearLayout
+            		            android:layout_width="0dp"
+            		            android:layout_height="wrap_content"
+            		            android:layout_weight="1"
+            		            android:orientation="vertical"
+            		             >
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            <ImageButton 
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent"
+            		                android:src="@drawable/ic_launcher"
+            		                />
+            		            
+            		        </LinearLayout>
+            		        <!-- Left points  -->
+            		        <LinearLayout
+            		            android:layout_width="0dp"
+            		            android:layout_height="wrap_content"
+            		            android:layout_weight="1"
+            		            android:paddingTop="15dp"
+            		            android:orientation="vertical" >
+            		            <RelativeLayout
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent" >
+	            		            <TextView 
+	            		                android:layout_height="wrap_content"
+	            		                android:layout_width="wrap_content"
+	            		                android:textSize="10sp"
+	            		                android:text="Points left:"
+	            		                android:layout_centerInParent="true"
+	            		                />
+            		            </RelativeLayout>
+            		            <RelativeLayout
+            		                android:layout_height="0dp"
+            		                android:layout_weight="1"
+            		                android:layout_width="fill_parent" >
+	            		            <TextView 
+	            		                android:layout_height="wrap_content"
+	            		                android:layout_width="wrap_content"
+	            		                android:textSize="18sp"
+	            		                android:text="5"
+	            		                android:layout_centerInParent="true"
+	            		                />
+            		            </RelativeLayout>
+            		            
+            		        </LinearLayout>
+            		        
+            		        
+            		    </LinearLayout>
             		    <!-- Land water -->
             		    <LinearLayout 
             		        android:layout_width="match_parent"

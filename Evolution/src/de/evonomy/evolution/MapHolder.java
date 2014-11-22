@@ -30,10 +30,10 @@ public class MapHolder {
 	private Species[] species;
 	private long population[];
 
-	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType){
+	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType,Species species[]){
 		this.canvas=canvas;
         initColors();
-        initSpecies();
+        initSpecies(species);
         mapFields=new FieldRect[NuMBEROFBLOCKSWIDTH][NUMBEROFBLOCKSHEIGHT];
         heightPerBlock=height/NUMBEROFBLOCKSHEIGHT;
         widthPerBlock=width/NuMBEROFBLOCKSWIDTH;
@@ -159,11 +159,10 @@ public class MapHolder {
 			}
 		}
 	}
-	private void initSpecies(){
-		species=new Species[4];
+	private void initSpecies(Species[] species){
+		this.species=species;
 		population=new long[4];
 		for(int i=0;i<4;i++){
-			species[i]=new Species("Spezies "+i, 5, 10,45, 6, 3, 30, 3, 4, 3, 3, false);
 			population[i]=0;
 		}
 	}

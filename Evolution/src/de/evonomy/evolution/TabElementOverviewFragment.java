@@ -25,6 +25,7 @@ public class TabElementOverviewFragment extends Fragment {
 	public static final String VISIBILITY="visi";
 	public static final String WATER="wate";
 	public static final String POPULATION="popu";
+	public static final String SPECIESNAME="name";
 	private int intelligence;
 	private int agility;
 	private int strength;

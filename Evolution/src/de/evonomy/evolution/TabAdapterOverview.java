@@ -40,6 +40,7 @@ public class TabAdapterOverview extends FragmentPagerAdapter {
 		args.putInt(TabElementOverviewFragment.VISIBILITY, cu.getVisibillity());
 		args.putBoolean(TabElementOverviewFragment.WATER, cu.isWater());
 		args.putLong(TabElementOverviewFragment.POPULATION, population[number]);
+		args.putString(TabElementOverviewFragment.SPECIESNAME, cu.getName());
 		
 		fragment.setArguments(args);
 		return fragment;
@@ -52,7 +53,7 @@ public class TabAdapterOverview extends FragmentPagerAdapter {
 	}
 	@Override
 	public CharSequence getPageTitle(int position){
-		return "Species "+(position+1);
+		return species[position].getName();
 	}
 	@Deprecated
 	/*
