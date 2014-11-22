@@ -12,10 +12,12 @@ import onlineProtocol.IClient;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -194,12 +196,15 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 	
 	@Override
 	public void onBackPressed() {
+		
 		if(gameStatus!=null){
 			//TODO: send left packet
-			frag.getView().setVisibility(View.GONE); //TODO: maybe better solution?!
+			frag = null;
+			gameStatus = null;
 		} else {
-		    moveTaskToBack(true);
 		    //logout
+			finish();
+		    //moveTaskToBack(true);//or finish ...
 		}
 	}
 	
@@ -213,6 +218,18 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 	
 	public CreateStatusPacket getGameStatusPacket(){
 		return gameStatus;
+	}
+
+	@Override
+	public void kickPlayer() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				getSupportFragmentManager().beginTransaction().remove(frag).commit();
+				String msg = gameStatus.getHostname()+" hat sie aus dem Spiel geworfen.";
+				Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 		
 }

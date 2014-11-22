@@ -7,11 +7,13 @@ import onlineProtocol.ImReadyPacket;
 import onlineProtocol.InvitePacketToServer;
 import onlineProtocol.SlotTypeChange;
 import onlineProtocol.CreateStatusPacket.OpponentType;
+import de.evonomy.evolution.GameActivity;
 import de.evonomy.evolution.R;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -269,5 +271,11 @@ public class CreateGameFragment extends DialogFragment {
 		}
 
 		getDialog().getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		getActivity().onBackPressed();
 	}
 }
