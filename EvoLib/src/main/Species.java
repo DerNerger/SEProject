@@ -6,6 +6,10 @@ package main;
  * */
 public class Species {
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private String name;
 	
 	//#########################################################################
