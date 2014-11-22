@@ -8,6 +8,7 @@ import onlineProtocol.InvitePacketToServer;
 import onlineProtocol.SlotTypeChange;
 import onlineProtocol.CreateStatusPacket.OpponentType;
 import de.evonomy.evolution.R;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -103,14 +104,10 @@ public class CreateGameFragment extends DialogFragment {
 		spinnerPlayerI[0] = (Spinner) root.findViewById(R.id.spinnerPlayer2);
 		spinnerPlayerI[1] = (Spinner) root.findViewById(R.id.spinnerPlayer3);
 		spinnerPlayerI[2] = (Spinner) root.findViewById(R.id.spinnerPlayer4);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.PlayerType, android.R.layout.simple_spinner_dropdown_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerPlayerI[0].setEnabled(false);
 		spinnerPlayerI[1].setEnabled(false);
 		spinnerPlayerI[2].setEnabled(false);
-		spinnerPlayerI[0].setAdapter(adapter);
-		spinnerPlayerI[1].setAdapter(adapter);
-		spinnerPlayerI[2].setAdapter(adapter);
+	
 		
 		//init textviews
 		textViewPlayerI[0] = (TextView) root.findViewById(R.id.textViewPlayer1);
@@ -171,8 +168,9 @@ public class CreateGameFragment extends DialogFragment {
 			//init spinner listener
 			spinnerPlayerI[0].setOnItemSelectedListener(new OnItemSelectedListener() {
 				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
+				public void onItemSelected(AdapterView<?> parent, View arg1,
 						int arg2, long arg3) {
+					((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 					SlotTypeChange s = new SlotTypeChange(sessionInformation.getSessionId(), "server");
 					int selectedIndex = spinnerPlayerI[0].getSelectedItemPosition();
 					s.setInformations(0, OpponentType.values()[selectedIndex]);
@@ -183,8 +181,9 @@ public class CreateGameFragment extends DialogFragment {
 			});
 			spinnerPlayerI[1].setOnItemSelectedListener(new OnItemSelectedListener() {
 				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
+				public void onItemSelected(AdapterView<?> parent, View arg1,
 						int arg2, long arg3) {
+					((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 					SlotTypeChange s = new SlotTypeChange(sessionInformation.getSessionId(), "server");
 					int selectedIndex = spinnerPlayerI[1].getSelectedItemPosition();
 					s.setInformations(1, OpponentType.values()[selectedIndex]);
@@ -196,8 +195,9 @@ public class CreateGameFragment extends DialogFragment {
 			
 			spinnerPlayerI[2].setOnItemSelectedListener(new OnItemSelectedListener() {
 				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
+				public void onItemSelected(AdapterView<?> parent, View arg1,
 						int arg2, long arg3) {
+					((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 					SlotTypeChange s = new SlotTypeChange(sessionInformation.getSessionId(), "server");
 					int selectedIndex = spinnerPlayerI[2].getSelectedItemPosition();
 					s.setInformations(2, OpponentType.values()[selectedIndex]);
