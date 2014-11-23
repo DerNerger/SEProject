@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.font.ImageGraphicAttribute;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -22,6 +23,9 @@ public class MapLoader {
 		this.adress = adress;
 	}
 	
+	/**
+	 * Speichert eine Map mitsamt Spezies und Logik
+	 * */
 	public void saveMap(Map map) throws IOException{
 		byte[] serialMap = serialize(map);
 		//write it to file
@@ -30,10 +34,30 @@ public class MapLoader {
 		fos.close();
 	}
 	
+	/**
+	 * Läd eine Map mitsamt Spezies und Logik
+	 * */
 	public Map loadMap() throws ClassNotFoundException, IOException{
 		Path p = Paths.get(adress);
 		byte[] serialMap = Files.readAllBytes(p);
 		Map map = deserialize(serialMap);
+		return map;
+	}
+	
+	/**
+	 * Speichert nur die Map keine Spielinformationen
+	 * */
+	public void savePureMap(Map map) throws IOException{
+		map.removeGameInformation();
+		saveMap(map);
+	}
+	
+	/**
+	 * Läd nur die Map ohne Spielinformationen
+	 * */
+	public Map loadPureMap(Species[] sp, IMapLogic logic) throws ClassNotFoundException, IOException{
+		Map map = loadMap();
+		map.setGameInformation(logic, sp);
 		return map;
 	}
 	

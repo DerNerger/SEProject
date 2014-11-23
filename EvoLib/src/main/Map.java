@@ -286,4 +286,14 @@ public class Map implements Serializable{
 		}
 		return sb.toString();
 	}
+	
+	public void removeGameInformation(){
+		species=null;
+		logic = null;
+	}
+	
+	public void setGameInformation(IMapLogic logic, Species[] species){
+		this.species=species;
+		this.logic = logic;
+	}
 }
