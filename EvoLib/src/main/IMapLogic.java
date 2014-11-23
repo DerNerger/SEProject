@@ -1,4 +1,7 @@
 package main;
+
+import java.io.Serializable;
+
 /**
  * @author Felix Kibellus
  * Definiert die Schnittstelle zur MapLogic
@@ -8,7 +11,7 @@ package main;
  * abstaenden aufgerufen werden damit ein stetiger Wandel in den Populationen
  * simuliert werden kann.
  * */
-public interface IMapLogic {
+public interface IMapLogic extends Serializable{
 	
 	
 	/**

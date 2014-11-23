@@ -1,6 +1,7 @@
 package main;
 //Fertig implementiert
 
+import java.io.Serializable;
 /**
  
 * @author Niklas Adams
@@ -12,7 +13,7 @@ package main;
 */
 import java.util.LinkedList;
 
-public class Area {
+public class Area implements Serializable{
 private Field[] fields;
 private LandType landType;
 private int[] population; //TODO wenn nicht gebraucht rausnehmen

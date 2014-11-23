@@ -9,9 +9,12 @@ import javax.swing.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Map {
-
+public class Map implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	//attributes
 	private Field[][] fields;
 	private Species[] species;

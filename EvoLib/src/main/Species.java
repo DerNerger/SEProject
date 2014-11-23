@@ -1,10 +1,12 @@
 package main;
 
+import java.io.Serializable;
+
 /**
  * @author Felix Kibellus
  * Repraesentiert eine Spezies anhand der Attribute.
  * */
-public class Species {
+public class Species implements Serializable{
 
 	private String name;
 	

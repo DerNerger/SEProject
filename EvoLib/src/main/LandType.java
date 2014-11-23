@@ -1,4 +1,7 @@
 package main;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author Niklas Adams
@@ -6,7 +9,7 @@ package main;
  *auch der Felder, aus der eine Area besteht. Diese Informationen wie Temperatur
  *Ressources usw bestimmen die Überlebensfähigkeit der Spezies auf diesem LandType
  */
-public class LandType {
+public class LandType implements Serializable{
 	public LandType(int minTemp, int maxTemp, FieldType type,
 				int naturalEnemies, int resources) {
 			super();

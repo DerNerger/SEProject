@@ -89,7 +89,7 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 		button_logout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				finish();
+				logout();
 			}
 		});
 		
@@ -202,9 +202,7 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 			frag = null;
 			gameStatus = null;
 		} else {
-		    //logout
-			finish();
-		    //moveTaskToBack(true);//or finish ...
+			logout();
 		}
 	}
 	
@@ -233,4 +231,9 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 		});
 	}
 		
+	private void logout(){
+		if(onlineClient!=null)
+			onlineClient.setRunning(false);
+		finish();
+	}
 }

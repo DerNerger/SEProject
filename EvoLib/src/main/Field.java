@@ -1,4 +1,7 @@
 package main;
+
+import java.io.Serializable;
+
 //sollte fertig implementiert sein
 
 /**
@@ -9,7 +12,7 @@ package main;
 * die migrationen, aus anderen Feldern kommend, die in dieser Runde hinzugerechnet
 * müssen und die Area zu der dieses Feld gehört
 */
-public class Field {
+public class Field implements Serializable{
 	private Area area;
 	private int[] population;
 	private boolean[] isVisible;
