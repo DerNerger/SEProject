@@ -61,7 +61,7 @@ public class MapLoader {
 		return map;
 	}
 	
-	private byte[] serialize(Map cont) throws IOException
+	public byte[] serialize(Map cont) throws IOException
 	{
 		try(ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
 				ObjectOutput out = new ObjectOutputStream(bos)) {		
@@ -71,7 +71,7 @@ public class MapLoader {
 		}
 	}
 	
-	private Map deserialize(byte[] bytes) throws ClassNotFoundException, IOException
+	public Map deserialize(byte[] bytes) throws ClassNotFoundException, IOException
 	{
 		try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 				ObjectInput in = new ObjectInputStream(bis)){

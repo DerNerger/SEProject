@@ -2,13 +2,7 @@ package main;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.HashMap;
-import java.util.Queue;
-
-import java.awt.Color;
-import javax.swing.*;
-
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.io.Serializable;
 
 public class Map implements Serializable{
@@ -29,9 +23,8 @@ public class Map implements Serializable{
 	/**
 	 * Factory Method to load a map from a file
 	 */
-	public static Map fromFile() {
-		//TODO
-		return new Map(0,0, new Species[0]);
+	public static Map fromFile(Species[] species, InputStream stream) {
+		throw new RuntimeException("not implemented");
 	}
 	
 	/**
