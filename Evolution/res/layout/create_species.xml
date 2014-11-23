@@ -8,19 +8,42 @@
     android:background="@drawable/pangaea"
     android:alpha="0.8" >
     <!-- relative layout for species name -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
-        <EditText 
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:hint="@string/app_name"
-            android:layout_centerInParent="true"
-            android:background="@drawable/no_rounded_corner_black_white"
-            />
-        
-    </RelativeLayout>
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+	    <RelativeLayout
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="23" >
+	        <EditText 
+	            android:id="@+id/edit_text_create_species_name"
+	            android:layout_height="wrap_content"
+	            android:layout_width="wrap_content"
+	            android:hint="@string/app_name"
+	            android:layout_centerHorizontal="true"
+	            android:background="@drawable/no_rounded_corner_black_white"
+	            />
+	        
+	    </RelativeLayout>
+	    <RelativeLayout 
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="13"
+	        android:paddingBottom="4dp">
+	        <Button 
+	            android:id="@+id/button_create_species_start_game"
+	            android:layout_height="fill_parent"
+	            android:layout_width="wrap_content"
+	            android:background="@drawable/rounded_corner"
+	            android:textSize="18sp"
+	            android:text="@string/create_species_button_play"
+	            android:layout_centerHorizontal="true"/>
+	        
+	        
+	    </RelativeLayout>
+    </LinearLayout>
     <!-- Linear layout which contians all choosing options and the attribut views -->
     <LinearLayout 
         android:layout_width="fill_parent"
@@ -88,6 +111,7 @@
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/plusblue"
+            		                android:id="@+id/image_button_create_species_plus_intelligence"
             		                
             		                />
             		            <ImageButton 
@@ -95,6 +119,7 @@
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/minusblue"
+            		                android:id="@+id/image_button_create_species_minus_intelligence"
             		                />
             		            
             		        </LinearLayout>
@@ -110,12 +135,14 @@
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/plusred"
+            		                android:id="@+id/image_button_create_species_plus_agility"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/minusred"
+            		                android:id="@+id/image_button_create_species_minus_agility"
             		                />
             		            
             		        </LinearLayout>
@@ -131,12 +158,14 @@
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/plusyellow"
+            		                android:id="@+id/image_button_create_species_plus_strength"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/minusyellow"
+            		                android:id="@+id/image_button_create_species_minus_strength"
             		                />
             		            
             		        </LinearLayout>
@@ -152,12 +181,14 @@
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/pluslightblue"
+            		                android:id="@+id/image_button_create_species_plus_social"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/minuslightblue"
+            		                android:id="@+id/image_button_create_species_minus_social"
             		                />
             		            
             		        </LinearLayout>
@@ -173,12 +204,14 @@
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/plusgreen"
+            		                android:id="@+id/image_button_create_species_plus_procreation"
             		                />
             		            <ImageButton 
             		                android:layout_height="0dp"
             		                android:layout_weight="1"
             		                android:layout_width="fill_parent"
             		                android:background="@drawable/minusgreen"
+            		                android:id="@+id/image_button_create_species_minus_procreation"
             		                />
             		            
             		        </LinearLayout>
@@ -197,7 +230,8 @@
 	            		                android:layout_height="wrap_content"
 	            		                android:layout_width="wrap_content"
 	            		                android:textSize="12sp"
-	            		                android:text="Points left:"
+	            		                android:text="@string/create_species_points_left"
+	            		                android:id="@+id/text_view_create_species_points_left_text"
 	            		                android:layout_centerInParent="true"
 	            		                />
             		            </RelativeLayout>
@@ -209,7 +243,8 @@
 	            		                android:layout_height="wrap_content"
 	            		                android:layout_width="wrap_content"
 	            		                android:textSize="20sp"
-	            		                android:text="5"
+	            		                android:text=""
+	            		                android:id="@+id/text_view_create_species_points_left_number"
 	            		                android:layout_centerInParent="true"
 	            		                />
             		            </RelativeLayout>

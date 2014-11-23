@@ -53,7 +53,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		    //Remove notification bar
 		  
 		    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		   
+		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 		    super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.simulation_layout);
@@ -62,7 +62,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        Species niklas=new Species("niklas", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        Species thorsten=new Species("thorsten", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        species=new Species[4];
-	        species[0]=davidDerZigeuner;
+	        species[0]=(Species)getIntent().getExtras().get(CreateSpeciesActivity.SPECIESBUNDLE);
 	        species[1]=kibi;
 	        species[2]=niklas;
 	        species[3]=thorsten;

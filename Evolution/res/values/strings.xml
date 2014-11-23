@@ -27,5 +27,7 @@
     <string name="create_species_r_strategist">r-Stratege</string>
     <string name="create_species_thin_fur">Dünnes Fell</string>
     <string name="create_species_thick_fur">Dickes Fell</string>
+    <string name="create_species_button_play">Spiel starten!</string>
+    <string name="create_species_points_left">übrige Punkte:</string>
 
 </resources>

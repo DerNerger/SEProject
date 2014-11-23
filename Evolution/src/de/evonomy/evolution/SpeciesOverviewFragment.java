@@ -28,18 +28,17 @@ public class SpeciesOverviewFragment extends DialogFragment {
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-		
+		//Remove status bar
+				
+		getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				
+				
+		//remove title
+		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		//inflate the layout for fragment
 		View root=inflater.inflate(R.layout.fragment_species_overview, container,false);
 
-		//Remove status bar
-		if(Build.VERSION.SDK_INT<16){
-			getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		}
-		else
-			root.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-		 //remove title
-		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		
 	    
 		//für die Tabs
 		

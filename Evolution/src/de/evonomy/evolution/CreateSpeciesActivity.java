@@ -4,17 +4,24 @@ import main.PossibleUpdates;
 import main.SimpleMapLogic;
 import main.Species;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class CreateSpeciesActivity extends Activity {
+	public static final String SPECIESBUNDLE="spbun";
 	private Species species;
 	private TemperatureView tempView;
 	private SpeciesAttributeView saview;
+	private static final int POINTSTOSPEND=22;
 	private boolean isLand;
 	private boolean carnivore;
 	private boolean isThinFur;
@@ -30,6 +37,20 @@ public class CreateSpeciesActivity extends Activity {
 	private RadioButton kStratButton;
 	private RadioButton thinFurButton;
 	private RadioButton thickFurButton;
+	private ImageButton plusIntelligence;
+	private ImageButton minusIntelligence;
+	private ImageButton plusAgility;
+	private ImageButton minusAgility;
+	private ImageButton plusStrength;
+	private ImageButton minusStrength;
+	private ImageButton plusSocial;
+	private ImageButton minusSocial;
+	private ImageButton plusProcreation;
+	private ImageButton minusProcreation;
+	private int currentPoints;
+	private TextView pointsView;
+	private Button startGame;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		//Remove title bar
@@ -43,6 +64,25 @@ public class CreateSpeciesActivity extends Activity {
         tempView=(TemperatureView) findViewById(R.id.temperature_view_create_species);
         saview=(SpeciesAttributeView) findViewById(R.id.species_attribute_view_create_species);
         getInitialRadioButtons();
+        initImageButtons();
+        initPointsAndPointView();
+        setOnClickListeners();
+        startGame=(Button) findViewById(R.id.button_create_species_start_game);
+        startGame.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String name=((EditText) findViewById(R.id.edit_text_create_species_name)).getText().toString();
+				Log.e("name", name);
+				species.setName(name.length()<1?"Evolu":name);
+				Intent intent=new Intent(getApplicationContext(),GameActivity.class);
+				intent.putExtra(SPECIESBUNDLE, species);
+				startActivity(intent);
+				finish();
+				
+			}
+		});
+        
 	}
 	@Override
 	public void onWindowFocusChanged(boolean isFocused){
@@ -59,6 +99,7 @@ public class CreateSpeciesActivity extends Activity {
 				isLand=true;
 				Log.e("Button clicked", "Id: "+((RadioButton)view).getId());
 				SimpleMapLogic.changeSpecies(species, PossibleUpdates.LANDSPECIES);
+
 			}
 		}
 		if(tmpButton.getId()==waterButton.getId()){
@@ -172,5 +213,154 @@ public class CreateSpeciesActivity extends Activity {
 		SimpleMapLogic.changeSpecies(species, isRStrategist? PossibleUpdates.RSTRATEGIST :PossibleUpdates.KSTRATEGIST);
 		SimpleMapLogic.changeSpecies(species, isThinFur? PossibleUpdates.THINFUR :PossibleUpdates.THICKFUR);
 	}
+	private void initImageButtons(){
+		plusIntelligence=(ImageButton) findViewById(R.id.image_button_create_species_plus_intelligence);
+		minusIntelligence=(ImageButton) findViewById(R.id.image_button_create_species_minus_intelligence);
+		plusAgility=(ImageButton) findViewById(R.id.image_button_create_species_plus_agility);
+		minusAgility=(ImageButton) findViewById(R.id.image_button_create_species_minus_agility);
+		plusStrength=(ImageButton) findViewById(R.id.image_button_create_species_plus_strength);
+		minusStrength=(ImageButton) findViewById(R.id.image_button_create_species_minus_strength);
+		plusSocial=(ImageButton) findViewById(R.id.image_button_create_species_plus_social);
+		minusSocial=(ImageButton) findViewById(R.id.image_button_create_species_minus_social);
+		plusProcreation=(ImageButton) findViewById(R.id.image_button_create_species_plus_procreation);
+		minusProcreation=(ImageButton) findViewById(R.id.image_button_create_species_minus_procreation);
+	}
+	private void initPointsAndPointView(){
+		currentPoints=POINTSTOSPEND;
+		pointsView=(TextView) findViewById(R.id.text_view_create_species_points_left_number);
+		actualizePointsView();
+	}
+	private void actualizePointsView(){
+		pointsView.setText(currentPoints+"");
+	}
+	private boolean checkAndSetPointsDown(){
+		if(currentPoints<=0) return false;
+		else{
+			currentPoints-=1;
+			actualizePointsView();
+			return true;
+		}
+	}
+	private boolean checkAndSetPointsUp(){
+		if(currentPoints>=POINTSTOSPEND)return false;
+		else{
+			currentPoints+=1;
+			actualizePointsView();
+			return true;
+		}
+	}
+	private void setOnClickListeners(){
+		plusIntelligence.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsDown()){
+					species.setIntelligence(species.getIntelligence()+1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		minusIntelligence.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsUp()){
+					species.setIntelligence(species.getIntelligence()-1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		plusAgility.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsDown()){
+					species.setAgility(species.getAgility()+1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		minusAgility.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsUp()){
+					species.setAgility(species.getAgility()-1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		plusStrength.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsDown()){
+					species.setStrength(species.getStrength()+1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		minusStrength.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsUp()){
+					species.setStrength(species.getStrength()-1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		plusSocial.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsDown()){
+					species.setSocial(species.getSocial()+1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		minusSocial.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsUp()){
+					species.setSocial(species.getSocial()-1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		plusProcreation.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsDown()){
+					species.setProcreation(species.getProcreation()+1);
+					actualizeViews();
+				}
+				
+			}
+		});
+		minusProcreation.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(checkAndSetPointsUp()){
+					species.setProcreation(species.getProcreation()-1);
+					actualizeViews();
+				}
+				
+			}
+		});
+	}
+	
 
 }

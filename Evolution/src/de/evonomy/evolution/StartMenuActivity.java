@@ -37,7 +37,7 @@ public class StartMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(),GameActivity.class);
+				Intent intent = new Intent(getApplicationContext(),CreateSpeciesActivity.class);
 				startActivity(intent);
 				
 			}
@@ -62,10 +62,6 @@ public class StartMenuActivity extends Activity {
 			}
 		});
     	
-    }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {   	
-        super.onWindowFocusChanged(hasFocus);
     }
 
 

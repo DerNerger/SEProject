@@ -71,9 +71,14 @@ public class MapHolder {
         FieldTypes.put(FieldType.DESERT,desert);
         Paint ice=new Paint();
         ice.setColor(Color.parseColor("#EBFFFF"));
+//        ice.setAlpha(160);
         FieldTypes.put(FieldType.ICE,ice);
         Paint jungle=new Paint();
         jungle.setColor(Color.parseColor("#1CA205"));
+//        jungle.setAlpha(160);
+//        desert.setAlpha(160);
+//        water.setAlpha(160);
+//        green.setAlpha(160);
         FieldTypes.put(FieldType.JUNGLE,jungle);
         speciesColors= new Paint[4];
         speciesColors[0]=new Paint();
