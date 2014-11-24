@@ -453,7 +453,7 @@
         	<LinearLayout 
             	android:layout_width="fill_parent"
             	android:layout_height="fill_parent"
-            	android:background="@drawable/rounded_corner_black_white"
+            	android:background="@drawable/no_rounded_corner_black_white"
             	android:orientation="vertical">
             	<de.evonomy.evolution.SpeciesAttributeView
             	    android:id="@+id/species_attribute_view_create_species"
