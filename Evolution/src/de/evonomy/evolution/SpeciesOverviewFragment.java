@@ -3,6 +3,8 @@ package de.evonomy.evolution;
 
 
 import main.Species;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -35,6 +37,7 @@ public class SpeciesOverviewFragment extends DialogFragment {
 				
 		//remove title
 		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		//inflate the layout for fragment
 		View root=inflater.inflate(R.layout.fragment_species_overview, container,false);
 

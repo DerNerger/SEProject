@@ -37,11 +37,13 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Controller controller;
 	private Species[] species;
 	private Button speziesOverviewButton;
-	private static final int WIDTH=200;
-	private static final int HEIGHT=100;
+	private Button speziesSkillButton;
+	private final int WIDTH=200;
+	private final int HEIGHT=100;
 	private boolean mapHasBeenSet=false;
-	private static int ACTUALICATIONTIME=0;
+	private int ACTUALICATIONTIME=0;
 	SpeciesOverviewFragment frag;
+	private SkillSpeciesFragment frag2;
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
@@ -98,6 +100,16 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 					
 					FragmentManager fm=getSupportFragmentManager();
 					frag.show(fm, "fragment_overview");
+				}
+			});
+	        speziesSkillButton=(Button) findViewById(R.id.button_game_activity_species_skill);
+	        speziesSkillButton.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					frag2=new SkillSpeciesFragment();
+					FragmentManager fm=getSupportFragmentManager();
+					frag2.show(fm, "fragment_skill");
 				}
 			});
 	        
