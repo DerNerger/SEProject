@@ -236,4 +236,16 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 			onlineClient.setRunning(false);
 		finish();
 	}
+
+	@Override
+	public void connectionLost() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				String msg = "Verbindung zum Server verloren.";
+				Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+				finish();
+			}
+		});
+	}
 }
