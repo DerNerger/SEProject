@@ -2,6 +2,7 @@ package main;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.HashMap;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -23,8 +24,15 @@ public class Map implements Serializable{
 	/**
 	 * Factory Method to load a map from a file
 	 */
-	public static Map fromFile(Species[] species, InputStream stream) {
-		throw new RuntimeException("not implemented");
+	public static Map fromFile(Species[] species, byte[] serializedMap) {
+		MapLoader loader = new MapLoader();
+		IMapLogic logic = new SimpleMapLogic(species);
+		try {
+			return loader.loadPureMap(species, logic, serializedMap);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Fehler beim laden der map");
+		}
 	}
 	
 	/**

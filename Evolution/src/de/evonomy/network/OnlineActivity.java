@@ -1,6 +1,7 @@
 package de.evonomy.network;
 
 
+import de.evonomy.evolution.CreateSpeciesActivity;
 import de.evonomy.evolution.R;
 import onlineProtocol.AuthenticationPacket;
 import onlineProtocol.CreateGamePacket;
@@ -13,6 +14,7 @@ import onlineProtocol.LeaveGamePacket;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.Bundle;
 
@@ -258,6 +260,8 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 				frag.willBeKicked = true;
 				getSupportFragmentManager().beginTransaction().remove(frag).commit();
 				//start the create species activity
+				Intent intent=new Intent(getApplicationContext(),CreateSpeciesActivity.class);
+				startActivity(intent);
 			}
 		});
 	}

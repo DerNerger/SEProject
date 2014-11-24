@@ -17,29 +17,19 @@ import java.util.HashMap;
 
 public class MapLoader {
 	
-	private String adress;
-	
-	public MapLoader(String adress){
-		this.adress = adress;
-	}
 	
 	/**
 	 * Speichert eine Map mitsamt Spezies und Logik
 	 * */
-	public void saveMap(Map map) throws IOException{
+	public byte[] saveMap(Map map) throws IOException{
 		byte[] serialMap = serialize(map);
-		//write it to file
-		FileOutputStream fos = new FileOutputStream(adress);
-		fos.write(serialMap);
-		fos.close();
+		return serialMap;
 	}
 	
 	/**
 	 * Läd eine Map mitsamt Spezies und Logik
 	 * */
-	public Map loadMap() throws ClassNotFoundException, IOException{
-		Path p = Paths.get(adress);
-		byte[] serialMap = Files.readAllBytes(p);
+	public Map loadMap(byte[] serialMap) throws ClassNotFoundException, IOException{
 		Map map = deserialize(serialMap);
 		return map;
 	}
@@ -55,13 +45,13 @@ public class MapLoader {
 	/**
 	 * Läd nur die Map ohne Spielinformationen
 	 * */
-	public Map loadPureMap(Species[] sp, IMapLogic logic) throws ClassNotFoundException, IOException{
-		Map map = loadMap();
+	public Map loadPureMap(Species[] sp, IMapLogic logic, byte[] serialMap) throws ClassNotFoundException, IOException{
+		Map map = loadMap(serialMap);
 		map.setGameInformation(logic, sp);
 		return map;
 	}
 	
-	public byte[] serialize(Map cont) throws IOException
+	private byte[] serialize(Map cont) throws IOException
 	{
 		try(ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
 				ObjectOutput out = new ObjectOutputStream(bos)) {		
@@ -71,7 +61,7 @@ public class MapLoader {
 		}
 	}
 	
-	public Map deserialize(byte[] bytes) throws ClassNotFoundException, IOException
+	private Map deserialize(byte[] bytes) throws ClassNotFoundException, IOException
 	{
 		try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 				ObjectInput in = new ObjectInputStream(bis)){
@@ -81,6 +71,7 @@ public class MapLoader {
 		}
 	}
 	
+	/*
 	public static void main(String[] args) throws IOException, ClassNotFoundException{
 		//save a map
 		MapLoader loader = new MapLoader("/home/felilein/newFile");
@@ -102,5 +93,5 @@ public class MapLoader {
 		//load a map
 		Map map2 = loader.loadMap();
 		System.out.println(map2.toString());
-	}
+	}*/
 }
