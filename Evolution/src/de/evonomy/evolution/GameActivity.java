@@ -40,7 +40,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private static final int WIDTH=200;
 	private static final int HEIGHT=100;
 	private boolean mapHasBeenSet=false;
-	private static int ACTUALICATIONTIME=2000;
+	private static int ACTUALICATIONTIME=0;
 	SpeciesOverviewFragment frag;
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
@@ -54,6 +54,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		  
 		    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		    super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.simulation_layout);

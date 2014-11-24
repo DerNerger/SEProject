@@ -50,6 +50,11 @@ public class CreateSpeciesActivity extends Activity {
 	private int currentPoints;
 	private TextView pointsView;
 	private Button startGame;
+	private int inIntelligence;
+	private int inAgility;
+	private int inStrength;
+	private int inSocial;
+	private int inProcreation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -224,6 +229,11 @@ public class CreateSpeciesActivity extends Activity {
 		minusSocial=(ImageButton) findViewById(R.id.image_button_create_species_minus_social);
 		plusProcreation=(ImageButton) findViewById(R.id.image_button_create_species_plus_procreation);
 		minusProcreation=(ImageButton) findViewById(R.id.image_button_create_species_minus_procreation);
+		inIntelligence=0;
+		inAgility=0;
+		inStrength=0;
+		inSocial=0;
+		inProcreation=0;
 	}
 	private void initPointsAndPointView(){
 		currentPoints=POINTSTOSPEND;
@@ -254,7 +264,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				
 				if(checkAndSetPointsDown()){
+					inIntelligence++;
 					species.setIntelligence(species.getIntelligence()+1);
 					actualizeViews();
 				}
@@ -265,7 +277,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				if(inIntelligence<=0)return;
 				if(checkAndSetPointsUp()){
+					inIntelligence--;
 					species.setIntelligence(species.getIntelligence()-1);
 					actualizeViews();
 				}
@@ -276,7 +290,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				
 				if(checkAndSetPointsDown()){
+					inAgility++;
 					species.setAgility(species.getAgility()+1);
 					actualizeViews();
 				}
@@ -287,7 +303,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				if(inAgility<=0)return;
 				if(checkAndSetPointsUp()){
+					inAgility--;
 					species.setAgility(species.getAgility()-1);
 					actualizeViews();
 				}
@@ -298,7 +316,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				
 				if(checkAndSetPointsDown()){
+					inStrength++;
 					species.setStrength(species.getStrength()+1);
 					actualizeViews();
 				}
@@ -309,7 +329,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				if(inStrength<=0)return;
 				if(checkAndSetPointsUp()){
+					inStrength--;
 					species.setStrength(species.getStrength()-1);
 					actualizeViews();
 				}
@@ -320,7 +342,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				
 				if(checkAndSetPointsDown()){
+					inSocial++;
 					species.setSocial(species.getSocial()+1);
 					actualizeViews();
 				}
@@ -331,7 +355,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				if(inSocial<=0)return;
 				if(checkAndSetPointsUp()){
+					inSocial--;
 					species.setSocial(species.getSocial()-1);
 					actualizeViews();
 				}
@@ -342,9 +368,12 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				
 				if(checkAndSetPointsDown()){
+					inProcreation++;
 					species.setProcreation(species.getProcreation()+1);
 					actualizeViews();
+					
 				}
 				
 			}
@@ -353,7 +382,9 @@ public class CreateSpeciesActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				if(inProcreation<=0)return;
 				if(checkAndSetPointsUp()){
+					inProcreation--;
 					species.setProcreation(species.getProcreation()-1);
 					actualizeViews();
 				}
