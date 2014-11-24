@@ -8,6 +8,7 @@ import onlineProtocol.InvitePacketToServer;
 import onlineProtocol.LeaveGamePacket;
 import onlineProtocol.SlotTypeChange;
 import onlineProtocol.CreateStatusPacket.OpponentType;
+import onlineProtocol.StartGamePacket;
 import de.evonomy.evolution.GameActivity;
 import de.evonomy.evolution.R;
 import android.graphics.Color;
@@ -222,6 +223,14 @@ public class CreateGameFragment extends DialogFragment {
 				}
 			});
 		}
+		
+		buttonStartGameWithFriends.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				StartGamePacket packet = new StartGamePacket(sessionInformation.getSessionId(), "server");
+				onlineClient.sendPacket(packet);
+			}
+		});
 	}
 	
 	//needs to call on UI thread!!!!!

@@ -244,7 +244,20 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 			public void run() {
 				String msg = "Verbindung zum Server verloren.";
 				Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-				finish();
+				logout(); //stop network thread and finish
+			}
+		});
+	}
+
+	@Override
+	public void startTheGame() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				//end the start game popup
+				frag.willBeKicked = true;
+				getSupportFragmentManager().beginTransaction().remove(frag).commit();
+				//start the create species activity
 			}
 		});
 	}
