@@ -7,6 +7,7 @@ import main.Controller;
 import main.IPlayer;
 import main.LandType;
 import main.Map;
+import main.SimpleMapLogic;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
@@ -37,11 +38,13 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Controller controller;
 	private Species[] species;
 	private Button speziesOverviewButton;
-	private static final int WIDTH=200;
-	private static final int HEIGHT=100;
+	private Button speziesSkillButton;
+	private final int WIDTH=200;
+	private final int HEIGHT=100;
 	private boolean mapHasBeenSet=false;
-	private static int ACTUALICATIONTIME=0;
+	private int ACTUALICATIONTIME=0;
 	SpeciesOverviewFragment frag;
+	private SkillSpeciesFragment frag2;
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
@@ -56,8 +59,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		    super.onCreate(savedInstanceState);
-	        
-	        setContentView(R.layout.simulation_layout);
+		    setContentView(R.layout.simulation_layout);
+		    Map map =(Map)getIntent().getSerializableExtra(MapActivity.MAP);
 	        Species davidDerZigeuner=new Species("davidDerZigeuner", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        Species kibi=new Species("kibi", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        Species niklas=new Species("niklas", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
@@ -67,20 +70,15 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        species[1]=kibi;
 	        species[2]=niklas;
 	        species[3]=thorsten;
-	        HashMap<FieldType,Double> pct=new HashMap<FieldType,Double>();
-	        pct.put(FieldType.DESERT, 0.05);
-	        pct.put(FieldType.ICE, 0.05);
-	        pct.put(FieldType.JUNGLE, 0.1);
-	        pct.put(FieldType.LAND, 0.3);
-	        pct.put(FieldType.WATER, 0.5);
-	    	
+	        
+	    	map.setGameInformation(new SimpleMapLogic(species), species);
 	        IPlayer[] player = new IPlayer[4];
 			for (int i = 1; i < player.length; i++) {
 				player[i] =  new consoleTestPlayer();
 			}
 			player[0]=this;
 	        //Create controller
-	        controller = new Controller(Map.fromRandom(WIDTH, HEIGHT, species, pct), species, player);
+	        controller = new Controller(map, species, player);
 	        controllerThread=new Thread(controller);
 	        controllerThread.start();
 	        actualizeThread= new Thread(actualize);
@@ -98,6 +96,16 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 					
 					FragmentManager fm=getSupportFragmentManager();
 					frag.show(fm, "fragment_overview");
+				}
+			});
+	        speziesSkillButton=(Button) findViewById(R.id.button_game_activity_species_skill);
+	        speziesSkillButton.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					frag2=new SkillSpeciesFragment();
+					FragmentManager fm=getSupportFragmentManager();
+					frag2.show(fm, "fragment_skill");
 				}
 			});
 	        
