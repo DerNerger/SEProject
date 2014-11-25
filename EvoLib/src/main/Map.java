@@ -25,10 +25,9 @@ public class Map implements Serializable{
 	 * Factory Method to load a map from a file
 	 */
 	public static Map fromFile(Species[] species, byte[] serializedMap) {
-		MapLoader loader = new MapLoader();
 		IMapLogic logic = new SimpleMapLogic(species);
 		try {
-			return loader.loadPureMap(species, logic, serializedMap);
+			return MapLoader.loadPureMap(species, logic, serializedMap);
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Fehler beim laden der map");
