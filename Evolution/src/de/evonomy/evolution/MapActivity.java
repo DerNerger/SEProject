@@ -3,8 +3,10 @@ package de.evonomy.evolution;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,10 +14,13 @@ import android.widget.Button;
 
 import main.Map;
 import main.FieldType;
+import main.MapLoader;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class MapActivity extends Activity{
 	
@@ -24,9 +29,10 @@ public class MapActivity extends Activity{
 	
 	public static int WIDTH = 200;
 	public static int HEIGHT = 200;
-	public static final String MAP = "map";
+	public static final String MAPPATH = "map";
 	
 	protected void onCreate(Bundle savedInstanceState) {
+		
     	//Remove title bar
 	    this.requestWindowFeature(Window.FEATURE_NO_TITLE);	    
 	    
@@ -48,6 +54,7 @@ public class MapActivity extends Activity{
         btn.setOnClickListener(getButtonListener(basePath + "4"));
         
         btn = (Button)findViewById(R.id.button_select_world_random_generate);
+        
         btn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -59,9 +66,20 @@ public class MapActivity extends Activity{
 		        pct.put(FieldType.LAND, 0.3);
 		        pct.put(FieldType.WATER, 0.5);
 		        
-				startSpeciesSelect(Map.fromRandom(WIDTH, HEIGHT, null, pct));
+		        String path = getFilesDir().getPath() + "/randmap.tmp";
+		        
+		        try {
+		        	byte[] map = MapLoader.saveMap(Map.fromRandom(WIDTH, HEIGHT, null, pct));
+		        	writeToFile(map, path);
+		        } catch (IOException e) {
+		        	// TODO Should probably actually deal with that
+					e.printStackTrace();
+		        }
+		        startSpeciesSelect(path);
 			}
 		});
+        
+        Log.i("zigeuner", "onCreate done");
 	}
 	
 	private View.OnClickListener getButtonListener(final String path) {
@@ -70,7 +88,8 @@ public class MapActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				try {
-					startSpeciesSelect(Map.fromFile(null, readFile(path)));
+					copy(path, path + ".tmp");
+					startSpeciesSelect(path + ".tmp");
 				} catch (Exception e) {
 					// TODO Should probably actually deal with that
 					e.printStackTrace();
@@ -79,23 +98,31 @@ public class MapActivity extends Activity{
 		};
 	}
 	
-	private void startSpeciesSelect(Map m) {
+	private void startSpeciesSelect(String pathToMap) {
 		Intent intent = new Intent(getApplicationContext(), CreateSpeciesActivity.class);
-		intent.putExtra(MAP, m);
+		intent.putExtra(MAPPATH, pathToMap);
 		startActivity(intent);
 		finish();
 	}
 	
-	private byte[] readFile(String path) throws IOException {
-		RandomAccessFile f = new RandomAccessFile(new File(path), "r");
+	private void writeToFile(byte[] data, String path) throws IOException {
+		FileOutputStream fos = new FileOutputStream(path);
+		fos.write(data);
+		fos.close();
+	}
+	
+	private void copy(String srcPath, String dstPath) throws IOException {
+		File src = new File(srcPath);
+		File dst = new File(dstPath);
+		FileInputStream in = new FileInputStream(src);
+		FileOutputStream out = new FileOutputStream(dst);
 		
-		try {
-			int length = (int) f.length();
-			byte[] data = new byte[length];
-			f.readFully(data);
-			return data;
-		} finally {
-			f.close();
+		byte[] buf = new byte[1024];
+		int len;
+		while ((len = in.read(buf)) > 0) {
+			out.write(buf, 0, len);
 		}
+		in.close();
+		out.close();
 	}
 }

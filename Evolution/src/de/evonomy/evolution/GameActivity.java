@@ -1,5 +1,8 @@
 package de.evonomy.evolution;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -7,6 +10,7 @@ import main.Controller;
 import main.IPlayer;
 import main.LandType;
 import main.Map;
+import main.MapLoader;
 import main.SimpleMapLogic;
 import main.Species;
 import main.SpeciesUpdate;
@@ -60,7 +64,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		    super.onCreate(savedInstanceState);
 		    setContentView(R.layout.simulation_layout);
-		    Map map =(Map)getIntent().getSerializableExtra(MapActivity.MAP);
+		    
 	        Species davidDerZigeuner=new Species("davidDerZigeuner", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        Species kibi=new Species("kibi", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
 	        Species niklas=new Species("niklas", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
@@ -71,7 +75,14 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        species[2]=niklas;
 	        species[3]=thorsten;
 	        
-	    	map.setGameInformation(new SimpleMapLogic(species), species);
+	        Map map = null;
+	        String mapPath = (String)getIntent().getSerializableExtra(MapActivity.MAPPATH);
+		    try {
+		    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), readFile(mapPath));
+		    	new File(mapPath).delete();
+		    } catch (Exception e) {
+		    	//TODO do something	
+		    }
 	        IPlayer[] player = new IPlayer[4];
 			for (int i = 1; i < player.length; i++) {
 				player[i] =  new consoleTestPlayer();
@@ -238,6 +249,18 @@ runOnUiThread(new Runnable() {
 		
 	}
 	
+	private byte[] readFile(String path) throws IOException {
+		RandomAccessFile f = new RandomAccessFile(new File(path), "r");
+		
+		try {
+			int length = (int) f.length();
+			byte[] data = new byte[length];
+			f.readFully(data);
+			return data;
+		} finally {
+			f.close();
+		}
+	}
 	
 }
 
