@@ -26,6 +26,8 @@ public class SkillTreeFragment extends DialogFragment{
 	private int treeHeight;
 	private int treeWidth;
 	private View root;
+	private int[]widthsOfDepth;
+	private int zahler=0;
 	public static SkillTreeFragment newInstance(FragmentSkillBody.Slots slot){
 		SkillTreeFragment frag=new SkillTreeFragment();
 		Bundle args=new Bundle();
@@ -68,7 +70,7 @@ public class SkillTreeFragment extends DialogFragment{
 			public void run() {
 				height=root.getWidth();
 				width=root.getHeight();
-				
+				findHeightAndMaxWidthOfTreeAndSetRootViews();
 			}
 		});
 		
@@ -83,7 +85,9 @@ public class SkillTreeFragment extends DialogFragment{
 			int tmp=maxHeight(sk);
 			if(tmp>treeHeight) treeHeight=tmp;
 		}
-		//TODO find height
+		widthsOfDepth=new int[treeHeight];
+		treeWidth=0;
+		maxWidth(rootSkills);
 		
 		
 	}
@@ -98,4 +102,18 @@ public class SkillTreeFragment extends DialogFragment{
 			return max+1;
 		}
 	}
+	void maxWidth(LinkedList<SkillElement> current){
+		if(current.size()==0) return ;
+		else{
+			if(current.size()>treeWidth) treeWidth=current.size();
+			widthsOfDepth[zahler]=current.size();
+			LinkedList<SkillElement> next=new LinkedList<SkillElement>();
+			for(SkillElement cu:current){
+				next.addAll(cu.getChilds());
+			}
+			zahler++;
+			maxWidth(next);
+		}
+	}
+	
 }
