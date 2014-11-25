@@ -155,4 +155,40 @@ public class Species implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(name+";");
+		sb.append(intelligence+";");
+		sb.append(agility+";");
+		sb.append(strength+";");
+		sb.append(social+";");
+		sb.append(procreation+";");
+		sb.append(minTemp+";");
+		sb.append(maxTemp+";");
+		sb.append(resourceDemand+";");
+		sb.append(movementChance+";");
+		sb.append(visibillity+";");
+		sb.append(water);
+		return sb.toString();
+	}
+	
+	public static Species ParseSpecies(String s){
+		String[] parts = s.split(";");
+		String name = parts[0];
+		int intelligence = Integer.parseInt(parts[1]);
+		int agility = Integer.parseInt(parts[2]);
+		int strength = Integer.parseInt(parts[3]);
+		int social = Integer.parseInt(parts[4]);
+		int procreation = Integer.parseInt(parts[5]);
+		int minTemp = Integer.parseInt(parts[6]);
+		int maxTemp = Integer.parseInt(parts[7]);
+		int resourceDemand = Integer.parseInt(parts[8]);
+		int movementChance = Integer.parseInt(parts[9]);
+		int visibillity = Integer.parseInt(parts[10]);
+		boolean water = Boolean.parseBoolean(parts[11]);
+		return new Species(name, intelligence, agility, strength, social, 
+				procreation, minTemp, maxTemp, resourceDemand,
+				movementChance, visibillity, water);
+	}
 }
