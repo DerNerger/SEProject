@@ -21,7 +21,7 @@ public class MapLoader {
 	/**
 	 * Speichert eine Map mitsamt Spezies und Logik
 	 * */
-	public byte[] saveMap(Map map) throws IOException{
+	public static byte[] saveMap(Map map) throws IOException{
 		byte[] serialMap = serialize(map);
 		return serialMap;
 	}
@@ -29,7 +29,7 @@ public class MapLoader {
 	/**
 	 * Läd eine Map mitsamt Spezies und Logik
 	 * */
-	public Map loadMap(byte[] serialMap) throws ClassNotFoundException, IOException{
+	public static Map loadMap(byte[] serialMap) throws ClassNotFoundException, IOException{
 		Map map = deserialize(serialMap);
 		return map;
 	}
@@ -37,7 +37,7 @@ public class MapLoader {
 	/**
 	 * Speichert nur die Map keine Spielinformationen
 	 * */
-	public void savePureMap(Map map) throws IOException{
+	public static void savePureMap(Map map) throws IOException{
 		map.removeGameInformation();
 		saveMap(map);
 	}
@@ -45,13 +45,13 @@ public class MapLoader {
 	/**
 	 * Läd nur die Map ohne Spielinformationen
 	 * */
-	public Map loadPureMap(Species[] sp, IMapLogic logic, byte[] serialMap) throws ClassNotFoundException, IOException{
+	public static Map loadPureMap(Species[] sp, IMapLogic logic, byte[] serialMap) throws ClassNotFoundException, IOException{
 		Map map = loadMap(serialMap);
 		map.setGameInformation(logic, sp);
 		return map;
 	}
 	
-	private byte[] serialize(Map cont) throws IOException
+	private static byte[] serialize(Map cont) throws IOException
 	{
 		try(ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
 				ObjectOutput out = new ObjectOutputStream(bos)) {		
@@ -61,7 +61,7 @@ public class MapLoader {
 		}
 	}
 	
-	private Map deserialize(byte[] bytes) throws ClassNotFoundException, IOException
+	private static Map deserialize(byte[] bytes) throws ClassNotFoundException, IOException
 	{
 		try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 				ObjectInput in = new ObjectInputStream(bis)){
