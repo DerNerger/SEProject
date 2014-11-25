@@ -27,9 +27,13 @@ public class MapActivity extends Activity{
 	//TODO
 	private String basePath = "pathtothestandardmaps";
 	
-	public static int WIDTH = 200;
-	public static int HEIGHT = 200;
-	public static final String MAPPATH = "map";
+	public static final String MAPTYPE = "maptype";
+	public static int RANDOM = 0;
+	public static int MAP1 = 1;
+	public static int MAP2 = 2;
+	public static int MAP3 = 3;
+	public static int MAP4 = 4;
+	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -42,16 +46,16 @@ public class MapActivity extends Activity{
         setContentView(R.layout.select_world);
         
         Button btn = (Button)findViewById(R.id.button_select_world_planet1);
-        btn.setOnClickListener(getButtonListener(basePath + "1"));
+        btn.setOnClickListener(getButtonListener(MAP1));
         
         btn = (Button)findViewById(R.id.button_select_world_planet2);
-        btn.setOnClickListener(getButtonListener(basePath + "2"));
+        btn.setOnClickListener(getButtonListener(MAP2));
         
         btn = (Button)findViewById(R.id.button_select_world_planet3);
-        btn.setOnClickListener(getButtonListener(basePath + "3"));
+        btn.setOnClickListener(getButtonListener(MAP3));
 
         btn = (Button)findViewById(R.id.button_select_world_planet4);
-        btn.setOnClickListener(getButtonListener(basePath + "4"));
+        btn.setOnClickListener(getButtonListener(MAP4));
         
         btn = (Button)findViewById(R.id.button_select_world_random_generate);
         
@@ -59,70 +63,25 @@ public class MapActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				HashMap<FieldType, Double> pct = new HashMap<FieldType, Double>();
-		        pct.put(FieldType.DESERT, 0.05);
-		        pct.put(FieldType.ICE, 0.05);
-		        pct.put(FieldType.JUNGLE, 0.1);
-		        pct.put(FieldType.LAND, 0.3);
-		        pct.put(FieldType.WATER, 0.5);
-		        
-		        String path = getFilesDir().getPath() + "/randmap.tmp";
-		        
-		        try {
-		        	byte[] map = MapLoader.saveMap(Map.fromRandom(WIDTH, HEIGHT, null, pct));
-		        	writeToFile(map, path);
-		        } catch (IOException e) {
-		        	// TODO Should probably actually deal with that
-					e.printStackTrace();
-		        }
-		        startSpeciesSelect(path);
+		        startSpeciesSelect(RANDOM);
 			}
 		});
-        
-        Log.i("zigeuner", "onCreate done");
 	}
 	
-	private View.OnClickListener getButtonListener(final String path) {
+	private View.OnClickListener getButtonListener(final int mapNumber) {
 		return new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				try {
-					copy(path, path + ".tmp");
-					startSpeciesSelect(path + ".tmp");
-				} catch (Exception e) {
-					// TODO Should probably actually deal with that
-					e.printStackTrace();
-				}
+				startSpeciesSelect(mapNumber);
 			}
 		};
 	}
 	
-	private void startSpeciesSelect(String pathToMap) {
+	private void startSpeciesSelect(int mapNumber) {
 		Intent intent = new Intent(getApplicationContext(), CreateSpeciesActivity.class);
-		intent.putExtra(MAPPATH, pathToMap);
+		intent.putExtra(MAPTYPE, mapNumber);
 		startActivity(intent);
 		finish();
-	}
-	
-	private void writeToFile(byte[] data, String path) throws IOException {
-		FileOutputStream fos = new FileOutputStream(path);
-		fos.write(data);
-		fos.close();
-	}
-	
-	private void copy(String srcPath, String dstPath) throws IOException {
-		File src = new File(srcPath);
-		File dst = new File(dstPath);
-		FileInputStream in = new FileInputStream(src);
-		FileOutputStream out = new FileOutputStream(dst);
-		
-		byte[] buf = new byte[1024];
-		int len;
-		while ((len = in.read(buf)) > 0) {
-			out.write(buf, 0, len);
-		}
-		in.close();
-		out.close();
 	}
 }

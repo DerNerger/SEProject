@@ -43,8 +43,12 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Species[] species;
 	private Button speziesOverviewButton;
 	private Button speziesSkillButton;
-	private final int WIDTH=200;
-	private final int HEIGHT=100;
+	
+	public final int WIDTH=200;
+	public final int HEIGHT=100;
+	
+	//TODO
+	private final String basepath = "basepathtopregeneratedmaps";
 	private boolean mapHasBeenSet=false;
 	private int ACTUALICATIONTIME=0;
 	SpeciesOverviewFragment frag;
@@ -75,14 +79,26 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        species[2]=niklas;
 	        species[3]=thorsten;
 	        
+			HashMap<FieldType, Double> pct = new HashMap<FieldType, Double>();
+	        pct.put(FieldType.DESERT, 0.05);
+	        pct.put(FieldType.ICE, 0.05);
+	        pct.put(FieldType.JUNGLE, 0.1);
+	        pct.put(FieldType.LAND, 0.3);
+	        pct.put(FieldType.WATER, 0.5);
+	        
 	        Map map = null;
-	        String mapPath = (String)getIntent().getSerializableExtra(MapActivity.MAPPATH);
-		    try {
-		    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), readFile(mapPath));
-		    	new File(mapPath).delete();
-		    } catch (Exception e) {
-		    	//TODO do something	
-		    }
+	        int mapType = getIntent().getIntExtra(MapActivity.MAPTYPE, 0);
+	        if (mapType == MapActivity.RANDOM) {
+	        	map = Map.fromRandom(WIDTH, HEIGHT, species, pct);
+	        }
+	        else {
+		        String path = basepath + "/map" + mapType + ".em"; //file ending em = evolution map
+			    try {
+			    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), readFile(path));
+			    } catch (Exception e) {
+			    	//TODO do something	
+			    }
+	        }
 	        IPlayer[] player = new IPlayer[4];
 			for (int i = 1; i < player.length; i++) {
 				player[i] =  new consoleTestPlayer();
