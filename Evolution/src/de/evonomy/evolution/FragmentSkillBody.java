@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 
 public class FragmentSkillBody extends Fragment {
+	public enum Slots {BODY};
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		super.onCreateView(inflater, container, savedInstanceState);
 		View root=inflater.inflate(R.layout.fragment_skill_body, container,false);
