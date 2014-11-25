@@ -82,7 +82,7 @@ public class CreateSpeciesActivity extends Activity {
 				species.setName(name.length()<1?"Evolu":name);
 				Intent intent=new Intent(getApplicationContext(),GameActivity.class);
 				intent.putExtra(SPECIESBUNDLE, species);
-				intent.putExtra(MapActivity.MAP, getIntent().getSerializableExtra(MapActivity.MAP));
+				intent.putExtra(MapActivity.MAPPATH, getIntent().getSerializableExtra(MapActivity.MAPPATH));
 				startActivity(intent);
 				finish();
 				
