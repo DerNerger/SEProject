@@ -37,9 +37,9 @@ public class MapLoader {
 	/**
 	 * Speichert nur die Map keine Spielinformationen
 	 * */
-	public void savePureMap(Map map) throws IOException{
+	public byte[] savePureMap(Map map) throws IOException{
 		map.removeGameInformation();
-		saveMap(map);
+		return saveMap(map);
 	}
 	
 	/**
