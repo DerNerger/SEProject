@@ -37,7 +37,7 @@ public class StartMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(),CreateSpeciesActivity.class);
+				Intent intent = new Intent(getApplicationContext(),MapActivity.class);
 				startActivity(intent);
 				
 			}
