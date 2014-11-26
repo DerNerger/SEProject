@@ -233,6 +233,7 @@ containing a value of this type.
         public static final int textview_tab_element_overview_population=0x7f0a0062;
     }
     public static final class integer {
+        public static final int GamePort=0x7f040003;
         public static final int LoginPort=0x7f040001;
         public static final int OnlinePort=0x7f040002;
         public static final int RegisterPort=0x7f040000;

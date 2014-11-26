@@ -3,5 +3,5 @@
     <item format="integer" type="integer" name="RegisterPort">4000</item>
     <item format="integer" type="integer" name="LoginPort">5000</item>
     <item format="integer" type="integer" name="OnlinePort">6000</item>
-    
+     <item format="integer" type="integer" name="GamePort">7000</item>
 </resources>

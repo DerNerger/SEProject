@@ -83,8 +83,10 @@ public class CreateSpeciesActivity extends Activity {
 				Intent intent=new Intent(getApplicationContext(),GameActivity.class);
 				intent.putExtra(SPECIESBUNDLE, species);
 				String oname = getIntent().getExtras().getString("oname", null);
-				if(oname==null)
+				if(oname==null) //no online modus
 					intent.putExtra(MapActivity.MAPTYPE, getIntent().getSerializableExtra(MapActivity.MAPTYPE));
+				else
+					intent.putExtra("oname", oname);
 				startActivity(intent);
 				finish();
 				

@@ -184,7 +184,7 @@ public class Species implements Serializable{
 		int minTemp = Integer.parseInt(parts[6]);
 		int maxTemp = Integer.parseInt(parts[7]);
 		int resourceDemand = Integer.parseInt(parts[8]);
-		int movementChance = Integer.parseInt(parts[9]);
+		double movementChance = Double.parseDouble(parts[9]);
 		int visibillity = Integer.parseInt(parts[10]);
 		boolean water = Boolean.parseBoolean(parts[11]);
 		return new Species(name, intelligence, agility, strength, social, 

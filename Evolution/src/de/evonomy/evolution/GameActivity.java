@@ -1,10 +1,15 @@
 package de.evonomy.evolution;
 
+import gameProtocol.NamePacket;
+import gameProtocol.SpeciesPacket;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.HashMap;
+
+import de.evonomy.network.GameClient;
 
 import main.Controller;
 import main.IPlayer;
@@ -136,7 +141,16 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 				}
 			});
 	        
-	}
+	        //network
+	        String oname = getIntent().getExtras().getString("oname", null);
+	        if(oname!=null){
+		        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host));
+		        new Thread(client).start();
+		        client.sendPacket(new NamePacket("this", "client", oname));
+		        SpeciesPacket sp = new SpeciesPacket("this", "server", species[0]);
+		        client.sendPacket(sp);
+	        }
+	}//end on create
 	
 	public void changeFieldPopulation(int x, int y, int[] population){
 		holder.changeFieldPopulation(x, y, population);
