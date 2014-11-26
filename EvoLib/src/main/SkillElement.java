@@ -23,7 +23,9 @@ public class SkillElement {
 		skill.setParent(this);
 	}
 	private void setParent(SkillElement skill){
-		if(parent!=null) throw new RuntimeException("A SkillElement can only hava one direct Parent!! Try indirect parents, if implemented yet");
+		if(parent!=null) throw new RuntimeException("A SkillElement can only" +
+				" have one direct Parent!!" +
+				" Try indirect parents, if implemented yet");
 		parent=skill;
 		isRoot=false;
 	}

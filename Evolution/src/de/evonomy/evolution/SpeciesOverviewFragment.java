@@ -53,7 +53,7 @@ public class SpeciesOverviewFragment extends DialogFragment {
 		return root;
 	}
 		public void onStart() {
-			  super.onStart();
+			super.onStart();
 	
 			// safety check
 			if (getDialog() == null) {
@@ -65,7 +65,7 @@ public class SpeciesOverviewFragment extends DialogFragment {
 			getDialog().getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 	
 			// ... other stuff you want to do in your onStart() method
-			}
+		}
     public void changePopulation(long[]population){
     	this.population=population;
     	adapterOverview.changePopulation(0, population[0]);
