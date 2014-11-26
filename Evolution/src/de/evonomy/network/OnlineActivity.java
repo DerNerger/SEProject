@@ -261,6 +261,7 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 				getSupportFragmentManager().beginTransaction().remove(frag).commit();
 				//start the create species activity
 				Intent intent=new Intent(getApplicationContext(),CreateSpeciesActivity.class);
+				intent.putExtra("oname", sessionInformation.getUsername());
 				startActivity(intent);
 			}
 		});
