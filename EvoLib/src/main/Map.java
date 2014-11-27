@@ -296,4 +296,14 @@ public class Map implements Serializable{
 		this.species=species;
 		this.logic = logic;
 	}
+	
+	public static HashMap<FieldType, Double> getRandomFieldTypes(){
+		HashMap<FieldType, Double> pct = new HashMap<FieldType, Double>();
+        pct.put(FieldType.DESERT, 0.05);
+        pct.put(FieldType.ICE, 0.05);
+        pct.put(FieldType.JUNGLE, 0.1);
+        pct.put(FieldType.LAND, 0.3);
+        pct.put(FieldType.WATER, 0.5);
+        return pct;
+	}
 }

@@ -1,6 +1,7 @@
 package de.evonomy.network;
 
 
+import gameProtocol.PlayerInformation;
 import de.evonomy.evolution.CreateSpeciesActivity;
 import de.evonomy.evolution.R;
 import onlineProtocol.AuthenticationPacket;
@@ -261,7 +262,8 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 				getSupportFragmentManager().beginTransaction().remove(frag).commit();
 				//start the create species activity
 				Intent intent=new Intent(getApplicationContext(),CreateSpeciesActivity.class);
-				intent.putExtra("oname", sessionInformation.getUsername());
+				PlayerInformation info = gameStatus.getPlayerInformation(sessionInformation.getUsername());
+				intent.putExtra("info", info);
 				startActivity(intent);
 			}
 		});

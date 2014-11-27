@@ -1,6 +1,7 @@
 package de.evonomy.evolution;
 
 import gameProtocol.NamePacket;
+import gameProtocol.PlayerInformation;
 import gameProtocol.SpeciesPacket;
 
 import java.io.File;
@@ -9,7 +10,9 @@ import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.HashMap;
 
+import de.evonomy.network.CreateGameFragment;
 import de.evonomy.network.GameClient;
+import de.evonomy.network.WaitForSpeciesFragment;
 
 import main.Ai;
 import main.Controller;
@@ -42,7 +45,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private LinearLayout mapLinearLayout;
 	private Thread actualizeThread;
 	private Thread controllerThread;
-	private  Bitmap bg;
+	private Bitmap bg;
 	private Controller controller;
 	private Species[] species;
 	private Button speziesOverviewButton;
@@ -60,6 +63,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
+	
+	
 	protected void onCreate(Bundle savedInstanceState){
 	
 	    	//Remove title bar
@@ -72,84 +77,35 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		    super.onCreate(savedInstanceState);
 		    setContentView(R.layout.simulation_layout);
-		    
-	        Species davidDerZigeuner=new Species("davidDerZigeuner", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
-	        Species kibi=new Species("kibi", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
-	        Species niklas=new Species("niklas", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
-	        Species thorsten=new Species("thorsten", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
-	        species=new Species[4];
-	        species[0]=(Species)getIntent().getExtras().get(CreateSpeciesActivity.SPECIESBUNDLE);
-	        species[1]=kibi;
-	        species[2]=niklas;
-	        species[3]=thorsten;
-	        
-			HashMap<FieldType, Double> pct = new HashMap<FieldType, Double>();
-	        pct.put(FieldType.DESERT, 0.05);
-	        pct.put(FieldType.ICE, 0.05);
-	        pct.put(FieldType.JUNGLE, 0.1);
-	        pct.put(FieldType.LAND, 0.3);
-	        pct.put(FieldType.WATER, 0.5);
-	        
-	        Map map = null;
-	        int mapType = getIntent().getIntExtra(MapActivity.MAPTYPE, 0);
-	        if (mapType == MapActivity.RANDOM) {
-	        	map = Map.fromRandom(WIDTH, HEIGHT, species, pct);
-	        }
-	        else {
-		        String path = basepath + "/map" + mapType + ".em"; //file ending em = evolution map
-			    try {
-			    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), readFile(path));
-			    } catch (Exception e) {
-			    	//TODO do something	
-			    }
-	        }
-	        IPlayer[] player = new IPlayer[4];
-			for (int i = 1; i < player.length; i++) {
-				player[i] =  new Ai();
-			}
-			player[0]=this;
-	        //Create controller
-	        controller = new Controller(map, species, player);
-	        controllerThread=new Thread(controller);
-	        controllerThread.start();
+	        initListeners();
 	        actualizeThread= new Thread(actualize);
 	        actualizeThread.start();
-	        
-	        
-	        speziesOverviewButton=(Button) findViewById(R.id.speciesoverview_button_simulation_layout);
-	        speziesOverviewButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
-					
-					
-					FragmentManager fm=getSupportFragmentManager();
-					frag.show(fm, "fragment_overview");
-				}
-			});
-	        speziesSkillButton=(Button) findViewById(R.id.button_game_activity_species_skill);
-	        speziesSkillButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					frag2=new SkillSpeciesFragment();
-					FragmentManager fm=getSupportFragmentManager();
-					frag2.show(fm, "fragment_skill");
-				}
-			});
+		    
+	        //get the playerspecies
+	        Species playerSpecies = (Species)getIntent().getExtras().get(CreateSpeciesActivity.SPECIESBUNDLE);
 	        
 	        //network
-	        String oname = getIntent().getExtras().getString("oname", null);
-	        if(oname!=null){
+	        PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");
+	        if(info!=null){
+		        String oname = info.getMyPlayerName();
 		        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host));
 		        new Thread(client).start();
 		        client.sendPacket(new NamePacket("this", "client", oname));
-		        SpeciesPacket sp = new SpeciesPacket("this", "server", species[0]);
+		        SpeciesPacket sp = new SpeciesPacket("this", "server", playerSpecies);
 		        client.sendPacket(sp);
+		        
+				WaitForSpeciesFragment frag2 = new WaitForSpeciesFragment();
+				FragmentManager fm = getSupportFragmentManager();
+				frag2.setNames(info.getPlayers());
+				frag2.setReady(info.isReady());
+				frag2.show(fm, "WaitForSpecies");
+	        } else {
+			    species = Species.getAiSpecies(playerSpecies);
+		        startController();
 	        }
 	}//end on create
+	
+	
 	
 	public void changeFieldPopulation(int x, int y, int[] population){
 		holder.changeFieldPopulation(x, y, population);
@@ -291,5 +247,56 @@ runOnUiThread(new Runnable() {
 		}
 	}
 	
+	private void initListeners(){
+		speziesOverviewButton=(Button) findViewById(R.id.speciesoverview_button_simulation_layout);
+        speziesOverviewButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
+				
+				
+				FragmentManager fm=getSupportFragmentManager();
+				frag.show(fm, "fragment_overview");
+			}
+		});
+        speziesSkillButton=(Button) findViewById(R.id.button_game_activity_species_skill);
+        speziesSkillButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				frag2=new SkillSpeciesFragment();
+				FragmentManager fm=getSupportFragmentManager();
+				frag2.show(fm, "fragment_skill");
+			}
+		});
+	}
+	
+	//only for singleplayerr
+	private void startController(){
+		Map map = null;
+        int mapType = getIntent().getIntExtra(MapActivity.MAPTYPE, 0);
+        if (mapType == MapActivity.RANDOM) {
+        	map = Map.fromRandom(WIDTH, HEIGHT, species, Map.getRandomFieldTypes());
+        }
+        else {
+	        String path = basepath + "/map" + mapType + ".em"; //file ending em = evolution map
+		    try {
+		    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), readFile(path));
+		    } catch (Exception e) {
+		    	//TODO do something	
+		    }
+        }
+        IPlayer[] player = new IPlayer[4];
+		for (int i = 1; i < player.length; i++) {
+			player[i] =  new Ai();
+		}
+		player[0]=this;
+        //Create controller
+        controller = new Controller(map, species, player);
+        controllerThread = new Thread(controller);
+        controllerThread.start();
+	}
 }
 

@@ -1,5 +1,6 @@
 package de.evonomy.evolution;
 
+import gameProtocol.PlayerInformation;
 import main.PossibleUpdates;
 import main.SimpleMapLogic;
 import main.Species;
@@ -82,11 +83,11 @@ public class CreateSpeciesActivity extends Activity {
 				species.setName(name.length()<1?"Evolu":name);
 				Intent intent=new Intent(getApplicationContext(),GameActivity.class);
 				intent.putExtra(SPECIESBUNDLE, species);
-				String oname = getIntent().getExtras().getString("oname", null);
-				if(oname==null) //no online modus
+				PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");
+				if(info==null) //no online modus
 					intent.putExtra(MapActivity.MAPTYPE, getIntent().getSerializableExtra(MapActivity.MAPTYPE));
 				else
-					intent.putExtra("oname", oname);
+					intent.putExtra("info", info);
 				startActivity(intent);
 				finish();
 				
