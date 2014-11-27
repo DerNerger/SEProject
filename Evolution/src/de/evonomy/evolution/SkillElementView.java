@@ -50,5 +50,17 @@ public class SkillElementView extends LinearLayout {
 	public LinkedList<SkillElementView> getChilds(){
 		return childs;
 	}
+	public float getAnchorX(){
+		return getX()+(1/2)*getResources()
+				.getDimension(R.dimen.skill_element_hw);
+	}
+	public float getAnchorBottomY(){
+		return getY()+getResources()
+				.getDimension(R.dimen.skill_element_hw);
+	}
+	public float getAnchorTopY(){
+		return getY();
+		
+	}
 
 }

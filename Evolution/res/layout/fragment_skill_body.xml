@@ -124,10 +124,18 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="7"
-        android:orientation="vertical"
-        
+        android:orientation="horizontal"
+        android:padding="10dp"
         android:background="@drawable/no_rounded_corner_black_white" >
     	<!-- linear for holding the information field -->
+    	<LinearLayout
+    	    android:id="@+id/ll_fragment_skill_body_fragment_container"
+    	    android:layout_width="fill_parent"
+    	    android:layout_height="fill_parent"
+    	    android:orientation="vertical"
+    	     >
+    	    
+    	</LinearLayout>
     	
         
     </LinearLayout>

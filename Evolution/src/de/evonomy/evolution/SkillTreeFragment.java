@@ -6,10 +6,12 @@ import main.SkillElement;
 import main.SpeciesSkillInformation;
 
 import de.evonomy.evolution.FragmentSkillBody.Slots;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class SkillTreeFragment extends DialogFragment{
+public class SkillTreeFragment extends Fragment{
 	private static final String SLOT="slot";
 	private FragmentSkillBody.Slots slot;
 	private RelativeLayout ll;
@@ -36,6 +38,7 @@ public class SkillTreeFragment extends DialogFragment{
 	private int[] currentCounterOfDepth;
 	private LinkedList<SkillElementView> skillViews;
 	private LinkedList<SkillElementView> rootSkillViews;
+	private boolean isReadyToDrawLines=false;
 	
 	public static SkillTreeFragment newInstance(FragmentSkillBody.Slots slot
 			,int width,int height){
@@ -52,12 +55,12 @@ public class SkillTreeFragment extends DialogFragment{
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		//Remove status bar
 				
-		getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-				
-				
-		//remove title
-		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//		getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//				
+//				
+//		//remove title
+//		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//		getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		//inflate the layout for fragment
 		//get the slot
 		slot=(Slots) getArguments().getSerializable(SLOT);
@@ -153,44 +156,50 @@ public class SkillTreeFragment extends DialogFragment{
 	}
 	
 	//for sizing on exact the param
-	public void onStart() {
-		super.onStart();
-
-		// safety check
-		if (getDialog() == null) {
-		 return;
-		}
-
-		
-
-		getDialog().getWindow().setLayout(width, height);
-
-	}
+//	public void onStart() {
+//		super.onStart();
+//
+//		// safety check
+//		if (getDialog() == null) {
+//		 return;
+//		}
+//
+//		
+//
+//		getDialog().getWindow().setLayout(width, height);
+//
+//	}
 	//zum malen steigt man immer rekursiv in dem baum ab, gibt die aktuelle
 	//höhe mit und lässt die position für diese ebene hochzählen
 	//anschleißend fügt man an dieser stelle die entsprechende view hinzu
 	private void drawTree(SkillElementView root,int depth){
+		/*Never change a running system!!!!!*/
 		RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(
 			getActivity().getResources()
 			.getDimensionPixelSize(R.dimen.skill_element_hw), getActivity()
 			.getResources().getDimensionPixelSize(R.dimen.skill_element_hw));
+
 		params.setMargins(
 				//left=position in der aufgeteilten ebene-
 				//hälfte einer aufteilung(für zentriertere sicht)
 				(width/widthsOfDepth[depth]) 
-				*currentCounterOfDepth[depth]-width/widthsOfDepth[depth]/2,
+				*currentCounterOfDepth[depth]-(width/widthsOfDepth[depth])/2
+				-(getActivity().getResources()
+				.getDimensionPixelSize(R.dimen.skill_element_hw)/2)
+				,
+				
 				//top =wie bottom, nur - die höhe des bildes
-				height-depth*(height/treeHeight)
+				height-(depth)*(height/treeHeight)
 				-getActivity().getResources()
 				.getDimensionPixelSize(R.dimen.skill_element_hw),
 				//right=wie left,nur plus breite
 				(width/widthsOfDepth[depth]) 
 				*currentCounterOfDepth[depth]-width/widthsOfDepth[depth]/2
-				+getActivity().getResources()
-				.getDimensionPixelSize(R.dimen.skill_element_hw),
+				+(getActivity().getResources()
+				.getDimensionPixelSize(R.dimen.skill_element_hw)),
 				//von ganz unten anfangen
 				//bottom=pro ebene aufwärts ein Baumhöhtel der höhe abziehen
-				height-depth*(height/treeHeight));
+				height-(depth)*(height/treeHeight));
 		Log.e("SkillViewParams", "top"+params.topMargin+" bottom"
 				+params.bottomMargin+" left"+params.leftMargin+ 
 				" right"+params.rightMargin);
@@ -218,11 +227,17 @@ public class SkillTreeFragment extends DialogFragment{
 //				ll.setOrientation(LinearLayout.VERTICAL);
 				for(SkillElementView root:rootSkillViews){
 					drawTree(root, 0);
-					ll.invalidate();
+			
 				}
-				
+				isReadyToDrawLines=true;
+				drawLines();
+				ll.invalidate();
 			}
 		});
 		
 	}
+	private void drawLines(){
+		
+	}
+	
 }
