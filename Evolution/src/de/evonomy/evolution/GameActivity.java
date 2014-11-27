@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import de.evonomy.network.GameClient;
 
+import main.Ai;
 import main.Controller;
 import main.IPlayer;
 import main.LandType;
@@ -20,8 +21,6 @@ import main.SimpleMapLogic;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
-import main.consoleTestPlayer;
-import android.app.Activity;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -55,7 +54,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	//TODO
 	private final String basepath = "basepathtopregeneratedmaps";
 	private boolean mapHasBeenSet=false;
-	private int ACTUALICATIONTIME=0;
+	private int ACTUALICATIONTIME=2000;
 	SpeciesOverviewFragment frag;
 	private SkillSpeciesFragment frag2;
 	//registers Overview Tabs to update
@@ -106,7 +105,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        }
 	        IPlayer[] player = new IPlayer[4];
 			for (int i = 1; i < player.length; i++) {
-				player[i] =  new consoleTestPlayer();
+				player[i] =  new Ai();
 			}
 			player[0]=this;
 	        //Create controller

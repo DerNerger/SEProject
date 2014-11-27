@@ -117,9 +117,9 @@ public class Controller implements Runnable, Skillable{
 		Map map = Map.fromRandom(200, 100, species, pct);
 		//System.out.println(map.toString());
 		
-		IPlayer[] player = new consoleTestPlayer[4];
+		IPlayer[] player = new Ai[4];
 		for (int i = 0; i < player.length; i++) {
-			player[i] =  new consoleTestPlayer();
+			player[i] =  new Ai();
 		}
 		
 		Controller c =  new Controller(map, species, player);
