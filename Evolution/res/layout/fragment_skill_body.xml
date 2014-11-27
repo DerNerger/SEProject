@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="7"
+        android:layout_weight="4"
         android:background="@drawable/no_rounded_corner_black_white"
         android:orientation="vertical"
          >
@@ -23,7 +23,8 @@
 		        android:id="@+id/linear_layout_skill_left_head"
 		        android:layout_height="fill_parent"
 		        android:layout_weight="3"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
 	    	<LinearLayout
@@ -31,7 +32,8 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="2"
 		        android:id="@+id/linear_layout_skill_head"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
 	    	<LinearLayout
@@ -39,7 +41,8 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="3"
 		        android:id="@+id/linear_layout_skill_right_head"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
         
@@ -55,7 +58,8 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="2"
 		        android:id="@+id/linear_layout_skill_left_body"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
 	    	<LinearLayout
@@ -63,7 +67,8 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="3"
 		        android:id="@+id/linear_layout_skill_body"
-		        android:orientation="vertical" >
+		        android:orientation="vertical" 
+		        android:background="@drawable/no_rounded_corner_black_white">
 	        
 	    	</LinearLayout>
 	    	<LinearLayout
@@ -71,7 +76,8 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="2"
 		        android:id="@+id/linear_layout_skill_right_body"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
         
@@ -87,7 +93,8 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="3"
 		        android:id="@+id/linear_layout_skill_left_legs"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
 	    	<LinearLayout
@@ -95,7 +102,8 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="2"
 		        android:id="@+id/linear_layout_skill_legs"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
 	    	<LinearLayout
@@ -103,34 +111,32 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="3"
 		        android:id="@+id/linear_layout_skill_right_legs"
-		        android:orientation="vertical" >
+		        android:orientation="vertical"
+		        android:background="@drawable/no_rounded_corner_black_white" >
 	        
 	    	</LinearLayout>
         
     	</LinearLayout>
         
     </LinearLayout>
+    <!-- For skill tree -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="4"
-        android:orientation="vertical"
+        android:layout_weight="7"
+        android:orientation="horizontal"
+        android:padding="10dp"
         android:background="@drawable/no_rounded_corner_black_white" >
     	<!-- linear for holding the information field -->
-    	<LinearLayout 
+    	<LinearLayout
+    	    android:id="@+id/ll_fragment_skill_body_fragment_container"
     	    android:layout_width="fill_parent"
-    	    android:layout_height="0dp"
-    	    android:layout_weight="2"
-    	    android:orientation="horizontal">
+    	    android:layout_height="fill_parent"
+    	    android:orientation="vertical"
+    	     >
     	    
     	</LinearLayout>
-    	<LinearLayout 
-    	    android:layout_width="fill_parent"
-    	    android:layout_height="0dp"
-    	    android:layout_weight="1"
-    	    android:orientation="horizontal">
-	    	
-    	</LinearLayout>
+    	
         
     </LinearLayout>
     
