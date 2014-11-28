@@ -25,7 +25,8 @@ import android.widget.RelativeLayout;
 public class SkillTreeFragment extends Fragment{
 	private static final String SLOT="slot";
 	private FragmentSkillBody.Slots slot;
-	private RelativeLayout ll;
+	private RelativeLayout rlcontainer;
+	private RelativeLayout rl;
 	private LinkedList<SkillElement> skills;
 	private LinkedList<SkillElement> rootSkills;
 	private int height;
@@ -38,7 +39,6 @@ public class SkillTreeFragment extends Fragment{
 	private int[] currentCounterOfDepth;
 	private LinkedList<SkillElementView> skillViews;
 	private LinkedList<SkillElementView> rootSkillViews;
-	private boolean isReadyToDrawLines=false;
 	
 	public static SkillTreeFragment newInstance(FragmentSkillBody.Slots slot
 			,int width,int height){
@@ -53,25 +53,39 @@ public class SkillTreeFragment extends Fragment{
 	}
 	
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-		//Remove status bar
-				
-//		getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//				
-//				
-//		//remove title
-//		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-//		getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		//inflate the layout for fragment
 		//get the slot
 		slot=(Slots) getArguments().getSerializable(SLOT);
 		width=getArguments().getInt("width");
 		height=getArguments().getInt("height");
+		//initiate the skilllists
 		skills=new LinkedList<SkillElement>();
 		rootSkills=new LinkedList<SkillElement>();
 		root=inflater.inflate(R.layout.fragment_skill_tree, container,false);
-		ll=(RelativeLayout) root.findViewById(R.id.linear_layout_fragment_skill_tree);
-//		ll.setOrientation(LinearLayout.VERTICAL);
-		skills=SpeciesSkillInformation.getLegSkills();
+		//getall the views
+		rlcontainer=(RelativeLayout) 
+			root.findViewById(R.id.linear_layout_fragment_skill_tree_container);
+		rl=new SkillTreeRelativeLayout(getActivity().getApplicationContext());
+		rlcontainer.addView(rl);
+		
+		//get Skills by slot
+		switch(slot){
+		case ARMS: skills=SpeciesSkillInformation.getArmSkills();
+			break;
+		case BODY:skills=SpeciesSkillInformation.getBodySkills();
+			break;
+		case HEAD:skills=SpeciesSkillInformation.getHeadSkills();
+			break;
+		case LEGS:skills=SpeciesSkillInformation.getLegSkills();
+			break;
+		case NEXTTOHEAD: skills=SpeciesSkillInformation.getNextToHeadSkills();
+			break;
+		case NEXTTOLEGS: skills=SpeciesSkillInformation.getNextToLegSkills();
+			break;
+		default: throw new RuntimeException("Bist du behindert?Warum gibst du"+
+				" nen slot mit an den baum aufbauer den es nicht gibt?????");
+		}
+		
 		
 		
 		findHeightAndMaxWidthOfTreeAndSetRootViews();
@@ -80,7 +94,6 @@ public class SkillTreeFragment extends Fragment{
 				+treeHeight+" #skillelem"+skills.size());
 		//now create a skill view tree(for drawing) from the old tree
 		createSkillViewTreeFromElementTree();
-		//TODO set Skill views in right position!!
 		
 		return root;
 	}
@@ -155,20 +168,7 @@ public class SkillTreeFragment extends Fragment{
 		}
 	}
 	
-	//for sizing on exact the param
-//	public void onStart() {
-//		super.onStart();
-//
-//		// safety check
-//		if (getDialog() == null) {
-//		 return;
-//		}
-//
-//		
-//
-//		getDialog().getWindow().setLayout(width, height);
-//
-//	}
+
 	//zum malen steigt man immer rekursiv in dem baum ab, gibt die aktuelle
 	//höhe mit und lässt die position für diese ebene hochzählen
 	//anschleißend fügt man an dieser stelle die entsprechende view hinzu
@@ -204,7 +204,7 @@ public class SkillTreeFragment extends Fragment{
 				+params.bottomMargin+" left"+params.leftMargin+ 
 				" right"+params.rightMargin);
 		Log.e("rrot id:", root.getSkillElement().getUpdate().name());
-		ll.addView(root, params);
+		rl.addView(root, params);
 		Log.e("draw", "should have drawn"+root.getSkillElement().getUpdate().name());
 		//count position for the depth one up
 		currentCounterOfDepth[depth]++;
@@ -229,14 +229,9 @@ public class SkillTreeFragment extends Fragment{
 					drawTree(root, 0);
 			
 				}
-				isReadyToDrawLines=true;
-				drawLines();
-				ll.invalidate();
+				rl.invalidate();
 			}
 		});
-		
-	}
-	private void drawLines(){
 		
 	}
 	

@@ -4,42 +4,31 @@ import java.util.LinkedList;
 
 import main.SkillElement;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class SkillElementView extends LinearLayout {
 	private Button button;
-	private boolean isClicked=false;
 	private SkillElement element;
 	private LinkedList<SkillElementView> childs;
 	public SkillElementView(Context context,SkillElement element) { 
 		super(context);
 		this.element=element;
-//		((LayoutInflater)context.getSystemService(
-//				Context.LAYOUT_INFLATER_SERVICE))
-//				.inflate(R.layout.skill_element_view, null);
 		inflate(context,R.layout.skill_element_view, this);
 
 		childs=new LinkedList<SkillElementView>();
 		button=(Button) findViewById(R.id.button_skill_element_view);
-		button.setText(element.getUpdate().name());
+//		button.setText(element.getUpdate().name());
+		setImage();
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				if(!isClicked){
-					isClicked=true;
-					//setText
-				}
+				//TODO start the Dialog to display all the information
 				
 			}
 		});
-	}
-	public void setBack(){
-		isClicked=false;
-		//set texts back
 	}
 	public SkillElement getSkillElement(){
 		return element;
@@ -51,7 +40,7 @@ public class SkillElementView extends LinearLayout {
 		return childs;
 	}
 	public float getAnchorX(){
-		return getX()+(1/2)*getResources()
+		return getX()+(1f/2f)*getResources()
 				.getDimension(R.dimen.skill_element_hw);
 	}
 	public float getAnchorBottomY(){
@@ -61,6 +50,15 @@ public class SkillElementView extends LinearLayout {
 	public float getAnchorTopY(){
 		return getY();
 		
+	}
+	@SuppressWarnings("deprecation")
+	private void setImage(){
+		//switch by possibleupdate typ for getting da right picta
+		//TODO irgendeiner muss hier noch die bimbo arbeit machen
+		switch(element.getUpdate()){
+		default:button.setBackgroundDrawable(getResources()
+				.getDrawable(R.drawable.ic_launcher));
+		}
 	}
 
 }

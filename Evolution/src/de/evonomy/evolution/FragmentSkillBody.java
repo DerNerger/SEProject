@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 
 public class FragmentSkillBody extends Fragment {
-	public enum Slots {LEGS};
+	public enum Slots {LEGS,ARMS,HEAD,BODY,NEXTTOHEAD,NEXTTOLEGS};
 	private LinearLayout fragmentContainer;
 	
 	
