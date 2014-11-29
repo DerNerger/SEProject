@@ -4,6 +4,7 @@ import de.evonomy.evolution.R;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,10 +88,19 @@ public class WaitForSpeciesFragment extends DialogFragment{
 		});
 	}
 	
-	public void setOtherPlayerReady(boolean[] rdy){
-		b1.setChecked(rdy[0]);
-		b2.setChecked(rdy[1]);
-		b3.setChecked(rdy[2]);
-		b4.setChecked(rdy[3]);
+	public void setOtherPlayerReady(final boolean[] rdy){
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if(rdy[0]==false) b1.setChecked(rdy[0]);
+				Log.e("rdy", rdy[0]+"");
+				if(rdy[1]==false) b2.setChecked(rdy[1]);
+				Log.e("rdy", rdy[1]+"");
+				if(rdy[2]==false) b3.setChecked(rdy[2]);
+				Log.e("rdy", rdy[2]+"");
+				if(rdy[3]==false) b4.setChecked(rdy[3]);
+				Log.e("rdy", rdy[3]+"");
+			}
+		});
 	}
 }
