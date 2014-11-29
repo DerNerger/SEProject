@@ -63,6 +63,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
+	//network shit
+	private WaitForSpeciesFragment waitFrag;
 	
 	
 	protected void onCreate(Bundle savedInstanceState){
@@ -87,18 +89,20 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        //network
 	        PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");
 	        if(info!=null){
+	        	waitFrag = new WaitForSpeciesFragment();
+	        	
 		        String oname = info.getMyPlayerName();
-		        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host));
+		        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host), waitFrag);
 		        new Thread(client).start();
 		        client.sendPacket(new NamePacket("this", "client", oname));
 		        SpeciesPacket sp = new SpeciesPacket("this", "server", playerSpecies);
 		        client.sendPacket(sp);
 		        
-				WaitForSpeciesFragment frag2 = new WaitForSpeciesFragment();
+		        
 				FragmentManager fm = getSupportFragmentManager();
-				frag2.setNames(info.getPlayers());
-				frag2.setReady(info.isReady());
-				frag2.show(fm, "WaitForSpecies");
+				waitFrag.setNames(info.getPlayers());
+				waitFrag.setReady(info.isReady());
+				waitFrag.show(fm, "WaitForSpecies");
 	        } else {
 			    species = Species.getAiSpecies(playerSpecies);
 		        startController();
@@ -297,6 +301,11 @@ runOnUiThread(new Runnable() {
         controller = new Controller(map, species, player);
         controllerThread = new Thread(controller);
         controllerThread.start();
+	}
+	
+	//only used in network
+	public void setOtherPlayerReady(boolean[] rdy){
+		
 	}
 }
 

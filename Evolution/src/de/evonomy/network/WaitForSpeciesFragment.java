@@ -86,4 +86,11 @@ public class WaitForSpeciesFragment extends DialogFragment{
 			}
 		});
 	}
+	
+	public void setOtherPlayerReady(boolean[] rdy){
+		b1.setChecked(rdy[0]);
+		b2.setChecked(rdy[1]);
+		b3.setChecked(rdy[2]);
+		b4.setChecked(rdy[3]);
+	}
 }
