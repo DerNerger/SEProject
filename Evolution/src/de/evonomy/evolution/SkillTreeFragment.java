@@ -65,7 +65,7 @@ public class SkillTreeFragment extends Fragment{
 		//getall the views
 		rlcontainer=(RelativeLayout) 
 			root.findViewById(R.id.linear_layout_fragment_skill_tree_container);
-		rl=new SkillTreeRelativeLayout(getActivity().getApplicationContext());
+		rl=new SkillTreeRelativeLayout(getActivity());
 		rlcontainer.addView(rl);
 		
 		//get Skills by slot

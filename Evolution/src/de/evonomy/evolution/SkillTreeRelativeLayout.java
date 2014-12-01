@@ -10,11 +10,17 @@ import android.widget.RelativeLayout;
 public class SkillTreeRelativeLayout extends RelativeLayout {
 	private static float widthOfLine=12;
 	private Paint paint;
+	private Paint greyPaint;
+	private Context context;
 	public SkillTreeRelativeLayout(Context context) {
 		super(context);
+		this.context=context;
 		paint=new Paint();
 		paint.setColor(Color.parseColor("#000000"));
 		paint.setStrokeWidth(widthOfLine);
+		greyPaint=new Paint();
+		greyPaint.setColor(Color.parseColor("#BCBCBC"));
+		greyPaint.setStrokeWidth(widthOfLine);
 		setWillNotDraw(false);
 	}
 	@Override
@@ -29,6 +35,10 @@ public class SkillTreeRelativeLayout extends RelativeLayout {
 		
 	}
 	private void drawToChildren(Canvas canvas,SkillElementView root){
+		Paint toPaint;
+		toPaint=greyPaint;
+		if(((GameActivity)context).isSkilled(root
+				.getSkillElement().getUpdate())) toPaint=paint;
 		float anchorXRoot=root.getAnchorX();
 		float anchorYRoot=root.getAnchorTopY();
 		for (SkillElementView child:root.getChilds()){
@@ -37,16 +47,16 @@ public class SkillTreeRelativeLayout extends RelativeLayout {
 			//vertically up from root to half of height
 			canvas.drawLine(anchorXRoot, anchorYRoot, anchorXRoot
 					,anchorYRoot-(anchorYRoot-anchorYChild)/2 -(widthOfLine/2)
-					, paint);
+					, toPaint);
 			//horizontal from root to child
 			canvas.drawLine(anchorXRoot
 					,anchorYRoot-(anchorYRoot-anchorYChild)/2 ,
 					anchorXChild, anchorYRoot-(anchorYRoot-anchorYChild)/2
-					, paint);
+					, toPaint);
 			//vertical to child
 			canvas.drawLine(anchorXChild,
 					anchorYRoot-(anchorYRoot-anchorYChild)/2+(widthOfLine/2),
-					anchorXChild, anchorYChild, paint);
+					anchorXChild, anchorYChild, toPaint);
 		}
 		
 	}

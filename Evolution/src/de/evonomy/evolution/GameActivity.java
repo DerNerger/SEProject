@@ -20,6 +20,7 @@ import main.IPlayer;
 import main.LandType;
 import main.Map;
 import main.MapLoader;
+import main.PossibleUpdates;
 import main.SimpleMapLogic;
 import main.Species;
 import main.SpeciesUpdate;
@@ -242,7 +243,14 @@ runOnUiThread(new Runnable() {
 		unregisterTabOverview(3);
 		
 	}
-	
+	public boolean isSkilled(PossibleUpdates up){
+		return holder.isSkilled(up);
+	}
+	@Override
+	public void onBackPressed(){
+		super.onBackPressed();
+		finish();
+	}
 	private byte[] readFile(String path) throws IOException {
 		RandomAccessFile f = new RandomAccessFile(new File(path), "r");
 		
