@@ -15,17 +15,27 @@ public class GameClient extends SessionClient{
 	}
 
 	@Override
-	protected void processPacket(Packet p) {
-		if(p==null)
+	protected void processPacket(Packet packet) {
+		if(packet==null)
 			return;
-		switch(p.getType()){
+		switch(packet.getType()){
 		case ReadyInformation:
-			ReadyInformation info = (ReadyInformation)p;
-			activity.setOtherPlayerReady(info.getReady());
+			processReadyInformation((ReadyInformation)packet);
+			break;
+		case GoPacket:
+			startOnlineGame();
 			break;
 		default:
-			throw new RuntimeException(p.getType()+" nicht implemeniert");
+			throw new RuntimeException(packet.getType()+" nicht implemeniert");
 		}
+	}
+	
+	private void startOnlineGame() {
+		activity.startOnlineGame(this);
+	}
+
+	private void processReadyInformation(ReadyInformation info){
+		activity.setOtherPlayerReady(info.getReady());
 	}
 
 	public void sendPacket(Packet pack){

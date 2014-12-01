@@ -63,7 +63,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
-	//network shit
+	//only used in network
 	private WaitForSpeciesFragment waitFrag;
 	
 	
@@ -89,19 +89,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        //network
 	        PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");
 	        if(info!=null){
-	        	waitFrag = new WaitForSpeciesFragment();
-	        	
-		        String oname = info.getMyPlayerName();
-		        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host), this);
-		        new Thread(client).start();
-		        client.sendPacket(new NamePacket("this", "client", oname));
-		        SpeciesPacket sp = new SpeciesPacket("this", "server", playerSpecies);
-		        client.sendPacket(sp);
-		        
-		        
-				FragmentManager fm = getSupportFragmentManager();
-				waitFrag.setNames(info.getPlayers());
-				waitFrag.show(fm, "WaitForSpecies");
+		        doNetworkShit(info, playerSpecies);
 	        } else {
 			    species = Species.getAiSpecies(playerSpecies);
 		        startController();
@@ -110,6 +98,24 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	
 	
 	
+	private void doNetworkShit(PlayerInformation info, Species playerSpecies) {
+    	waitFrag = new WaitForSpeciesFragment();
+    	
+        String oname = info.getMyPlayerName();
+        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host), this);
+        new Thread(client).start();
+        client.sendPacket(new NamePacket("this", "client", oname));
+        SpeciesPacket sp = new SpeciesPacket("this", "server", playerSpecies);
+        client.sendPacket(sp);
+        
+        
+		FragmentManager fm = getSupportFragmentManager();
+		waitFrag.setNames(info.getPlayers());
+		waitFrag.show(fm, "WaitForSpecies");
+	}
+
+
+
 	public void changeFieldPopulation(int x, int y, int[] population){
 		holder.changeFieldPopulation(x, y, population);
 	}
@@ -308,6 +314,15 @@ runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				waitFrag.setOtherPlayerReady(rdy);
+			}
+		});
+	}
+	
+	public void startOnlineGame(GameClient client){
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				getSupportFragmentManager().beginTransaction().remove(waitFrag).commit();
 			}
 		});
 	}
