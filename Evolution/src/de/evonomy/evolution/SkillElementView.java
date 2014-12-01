@@ -69,6 +69,7 @@ public class SkillElementView extends LinearLayout {
 	private void setImage(){
 		//switch by possibleupdate typ for getting da right picta
 		//TODO irgendeiner muss hier noch die bimbo arbeit machen
+		//Also die bilder setzen
 		switch(element.getUpdate()){
 		default:button.setBackgroundDrawable(getResources()
 				.getDrawable(R.drawable.ic_launcher));

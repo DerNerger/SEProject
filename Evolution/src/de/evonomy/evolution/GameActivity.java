@@ -58,6 +58,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	//TODO
 	private final String basepath = "basepathtopregeneratedmaps";
 	private boolean mapHasBeenSet=false;
+	private boolean firstSpeciesUpdate=false;
 	private int ACTUALICATIONTIME=2000;
 	SpeciesOverviewFragment frag;
 	private SkillSpeciesFragment frag2;
@@ -137,6 +138,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	public void changePointsAndTime(int[] points, Date time){}
 	public void updateSpecies(SpeciesUpdate speciesUpdate){
 		holder.updateSpecies(speciesUpdate);
+		firstSpeciesUpdate=true;
 	}
 	public boolean getPlayerNumber(int number){
 		return false;
@@ -270,7 +272,7 @@ runOnUiThread(new Runnable() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				if(!firstSpeciesUpdate) return;
 				frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
 				
 				
@@ -283,6 +285,7 @@ runOnUiThread(new Runnable() {
 			
 			@Override
 			public void onClick(View v) {
+				if(!firstSpeciesUpdate) return;
 				frag2=new SkillSpeciesFragment();
 				FragmentManager fm=getSupportFragmentManager();
 				frag2.show(fm, "fragment_skill");

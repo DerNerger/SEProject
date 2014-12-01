@@ -224,7 +224,7 @@ public class SkillTreeFragment extends Fragment{
 			
 			@Override
 			public void run() {
-//				ll.setOrientation(LinearLayout.VERTICAL);
+				rl.removeAllViews();
 				for(SkillElementView root:rootSkillViews){
 					drawTree(root, 0);
 			
@@ -234,5 +234,6 @@ public class SkillTreeFragment extends Fragment{
 		});
 		
 	}
+
 	
 }
