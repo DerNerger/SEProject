@@ -57,4 +57,14 @@ public class LandType implements Serializable{
 	public FieldType getFieldType(){
 		return this.type;
 	}
+	
+	//network-----------------------------------------------------------------
+	public static LandType parseLandType(String str){
+		FieldType type = FieldType.valueOf(str);
+		return new LandType(5, 5, type, 5, 5);
+	}
+	
+	public String getNetwork(){
+		return type.toString();
+	}
 }
