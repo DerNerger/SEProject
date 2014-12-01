@@ -22,11 +22,13 @@ public class VisualMap {
 	/**
 	 * Gibt die dimensionen (breite, hoehe) der map als dimension-objekt zurueck
 	 * */
-	public Dimension getDimension(){
-		Dimension dim = new Dimension(areaNumberOfFields.length, areaNumberOfFields[0].length);
-		return dim;
+	public int getHeight(){
+		return areaNumberOfFields.length;
 	}
 
+	public int getWidth(){
+		return areaNumberOfFields[0].length;
+	}
 	
 	public int[][] getAreaNumberOfFields() {
 		return areaNumberOfFields;
@@ -69,9 +71,9 @@ public class VisualMap {
 		return sb.toString();
 	}
 	
-	public static VisualMap parseVisualMap(String str, Dimension dim){
+	public static VisualMap parseVisualMap(String str, int width, int height){
 		String[] parts = str.split("<");
-		int[][] areaNumberOfFields = parseAreaNumberOfFields(parts[0], dim);
+		int[][] areaNumberOfFields = parseAreaNumberOfFields(parts[0], width, height);
 		LandType[] types = parseLandType(parts[1]);
 		return new VisualMap(areaNumberOfFields, types);
 	}
@@ -85,8 +87,8 @@ public class VisualMap {
 		return types;
 	}
 
-	private static int[][] parseAreaNumberOfFields(String string, Dimension dim){
-		int[][] areaNumberOfFields = new int[dim.height][dim.width];
+	private static int[][] parseAreaNumberOfFields(String string, int width, int height){
+		int[][] areaNumberOfFields = new int[height][width];
 		String[] parts = string.split("#");
 		for (int i = 0; i < parts.length; i++) {
 			String[] parts2 = parts[i].split(",");
@@ -113,6 +115,6 @@ public class VisualMap {
 		Map map = Map.fromRandom(100, 200, species, pct);
 		VisualMap visMap = map.getVisualRepresentation();
 		String a = visMap.getNetwork();
-		VisualMap visMap2 = VisualMap.parseVisualMap(a, new Dimension(200,100));
+		VisualMap visMap2 = VisualMap.parseVisualMap(a, 200, 100);
 	}
 }
