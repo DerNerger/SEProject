@@ -97,7 +97,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}//end on create
 	
 	
-	
+	//only network
 	private void doNetworkShit(PlayerInformation info, Species playerSpecies) {
     	waitFrag = new WaitForSpeciesFragment();
     	
