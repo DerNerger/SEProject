@@ -92,7 +92,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        	waitFrag = new WaitForSpeciesFragment();
 	        	
 		        String oname = info.getMyPlayerName();
-		        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host), waitFrag);
+		        GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host), this);
 		        new Thread(client).start();
 		        client.sendPacket(new NamePacket("this", "client", oname));
 		        SpeciesPacket sp = new SpeciesPacket("this", "server", playerSpecies);
@@ -101,7 +101,6 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		        
 				FragmentManager fm = getSupportFragmentManager();
 				waitFrag.setNames(info.getPlayers());
-				waitFrag.setReady(info.isReady());
 				waitFrag.show(fm, "WaitForSpecies");
 	        } else {
 			    species = Species.getAiSpecies(playerSpecies);
@@ -304,8 +303,13 @@ runOnUiThread(new Runnable() {
 	}
 	
 	//only used in network
-	public void setOtherPlayerReady(boolean[] rdy){
-		
+	public void setOtherPlayerReady(final boolean[] rdy){
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				waitFrag.setOtherPlayerReady(rdy);
+			}
+		});
 	}
 }
 

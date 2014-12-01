@@ -20,14 +20,8 @@ public class WaitForSpeciesFragment extends DialogFragment{
 	private String[] names;
 	private boolean[] rdy;
 	
-	private TextView v1;
-	private TextView v2;
-	private TextView v3;
-	private TextView v4;
-	private CheckBox b1;
-	private CheckBox b2;
-	private CheckBox b3;
-	private CheckBox b4;
+	private TextView[] views;
+	private CheckBox[] boxes;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
@@ -40,18 +34,21 @@ public class WaitForSpeciesFragment extends DialogFragment{
 		//inflate the layout for fragment
 		root=inflater.inflate(R.layout.fragment_wait_species, container,false);
 		initConponents();
+		rdy=new boolean[4];
 		return root;
 	}
 	
 	private void initConponents() {
-		 v1 = (TextView) root.findViewById(R.id.textSp1W8);
-		 v2 = (TextView) root.findViewById(R.id.textSp2W8);
-		 v3 = (TextView) root.findViewById(R.id.textSp3W8);
-		 v4 = (TextView) root.findViewById(R.id.textSp4W8);
-		 b1 = (CheckBox) root.findViewById(R.id.checkBox1rdy);
-		 b2 = (CheckBox) root.findViewById(R.id.checkBox2rdy);
-		 b3 = (CheckBox) root.findViewById(R.id.checkBox3rdy);
-		 b4 = (CheckBox) root.findViewById(R.id.checkBox4rdy);
+		views = new TextView[4];
+		views[0] = (TextView) root.findViewById(R.id.textSp1W8);
+		views[1] = (TextView) root.findViewById(R.id.textSp2W8);
+		views[2] = (TextView) root.findViewById(R.id.textSp3W8);
+		views[3] = (TextView) root.findViewById(R.id.textSp4W8);
+		boxes = new CheckBox[4];
+		boxes[0] = (CheckBox) root.findViewById(R.id.checkBox1rdy);
+		boxes[1] = (CheckBox) root.findViewById(R.id.checkBox2rdy);
+		boxes[2] = (CheckBox) root.findViewById(R.id.checkBox3rdy);
+		boxes[3] = (CheckBox) root.findViewById(R.id.checkBox4rdy);
 	}
 
 	public void onStart() {
@@ -76,31 +73,22 @@ public class WaitForSpeciesFragment extends DialogFragment{
 		getView().post(new Runnable() {
 			@Override
 			public void run() {
-				v1.setText(names[0]);
-				v2.setText(names[1]);
-				v3.setText(names[2]);
-				v4.setText(names[3]);
-				b1.setChecked(rdy[0]);
-				b2.setChecked(rdy[1]);
-				b3.setChecked(rdy[2]);
-				b4.setChecked(rdy[3]);
+				for (int i = 0; i < names.length; i++) {
+					views[i].setText(names[i]);
+				}
+				for (int i = 0; i < rdy.length; i++) {
+					boxes[i].setChecked(rdy[i]);
+				}
+				for (int j = names.length; j < views.length; j++) {
+					boxes[j].setVisibility(View.INVISIBLE);
+					views[j].setVisibility(View.INVISIBLE);
+				}
 			}
 		});
 	}
 	
-	public void setOtherPlayerReady(final boolean[] rdy){
-		getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				if(rdy[0]==false) b1.setChecked(rdy[0]);
-				Log.e("rdy", rdy[0]+"");
-				if(rdy[1]==false) b2.setChecked(rdy[1]);
-				Log.e("rdy", rdy[1]+"");
-				if(rdy[2]==false) b3.setChecked(rdy[2]);
-				Log.e("rdy", rdy[2]+"");
-				if(rdy[3]==false) b4.setChecked(rdy[3]);
-				Log.e("rdy", rdy[3]+"");
-			}
-		});
+	public void setOtherPlayerReady(boolean[] rdy){
+		this.rdy = rdy;
+		onResume();
 	}
 }

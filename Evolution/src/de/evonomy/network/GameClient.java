@@ -7,11 +7,11 @@ import simpleNet.Packet;
 
 public class GameClient extends SessionClient{
 	
-	private WaitForSpeciesFragment frag;
+	private GameActivity activity;
 
-	public GameClient(int port, String host, WaitForSpeciesFragment frag) {
+	public GameClient(int port, String host, GameActivity activity) {
 		super(port, host, new GameProtocol());
-		this.frag = frag;
+		this.activity = activity;
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class GameClient extends SessionClient{
 		switch(p.getType()){
 		case ReadyInformation:
 			ReadyInformation info = (ReadyInformation)p;
-			frag.setOtherPlayerReady(info.getReady());
+			activity.setOtherPlayerReady(info.getReady());
 			break;
 		default:
 			throw new RuntimeException(p.getType()+" nicht implemeniert");
