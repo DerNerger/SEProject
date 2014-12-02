@@ -3,7 +3,9 @@ package de.evonomy.evolution;
 import java.util.LinkedList;
 
 import main.SkillElement;
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -14,17 +16,19 @@ public class SkillElementView extends LinearLayout {
 	private SkillElement element;
 	private LinkedList<SkillElementView> childs;
 	private boolean clickable=true;
-	public SkillElementView(Context context,SkillElement element) { 
+	private Context context;
+	public SkillElementView(final Context context,final SkillElement element) { 
 		super(context);
 		this.element=element;
+		this.context=context;
 		inflate(context,R.layout.skill_element_view, this);
 		
 		childs=new LinkedList<SkillElementView>();
 		button=(Button) findViewById(R.id.button_skill_element_view);
 		if(!((GameActivity)context).isSkilled(element.getUpdate())
-				&&element.getParent()!=null){
+				){
 					this.setAlpha(0.5f);
-					if(!((GameActivity)context)
+					if(element.getParent()!=null&&!((GameActivity)context)
 					.isSkilled(element.getParent().getUpdate()))
 						clickable=false;
 					
@@ -36,9 +40,14 @@ public class SkillElementView extends LinearLayout {
 			public void onClick(View v) {
 				if(clickable){
 					//TODO start the Dialog to display all the information
+					SkillDialogFragment frag=
+							SkillDialogFragment
+							.newInstance(element.getUpdate(),((GameActivity) context).getSpecies());
 					
-					//please delete
-					Toast.makeText(getContext(), "hi", Toast.LENGTH_SHORT).show();
+					
+					FragmentManager fm=((GameActivity) context).getSupportFragmentManager();
+					frag.show(fm, "fragment_skill_dialog");
+					
 				}
 				
 			}

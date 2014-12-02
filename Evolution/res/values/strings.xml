@@ -31,5 +31,11 @@
     <string name="create_species_points_left">übrige Punkte:</string>
     <string name="tab_title_skill_body">körperliche Merkmale</string>
     <string name="tab_title_skill_abilities">Fähigkeiten</string>
+    <string name="res_dem_stat_1_str">sehr wenig</string>
+    <string name="res_dem_stat_2_str">wenig</string>
+    <string name="res_dem_stat_3_str">mäßig</string>
+    <string name="res_dem_stat_4_str">übermäßig</string>
+    <string name="res_dem_stat_5_str">viel</string>
+    <string name="res_dem_stat_6_str">extrem viel</string>
 
 </resources>

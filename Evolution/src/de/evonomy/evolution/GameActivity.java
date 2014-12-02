@@ -22,6 +22,7 @@ import main.Map;
 import main.MapLoader;
 import main.PossibleUpdates;
 import main.SimpleMapLogic;
+import main.Skill;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
@@ -54,7 +55,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	
 	public final int WIDTH=200;
 	public final int HEIGHT=100;
-	
+	//TODO setPlayer number!!!!!!!!!!!!!
+	private int playernumber=0;
 	//TODO
 	private final String basepath = "basepathtopregeneratedmaps";
 	private boolean mapHasBeenSet=false;
@@ -135,7 +137,9 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		holder.changeAreaLandType(area,landType);
 		redrawMap();
 	}
-	public void changePointsAndTime(int[] points, Date time){}
+	public void changePointsAndTime(int[] points, Date time){
+		holder.addPoints(points[playernumber]);
+	}
 	public void updateSpecies(SpeciesUpdate speciesUpdate){
 		holder.updateSpecies(speciesUpdate);
 		firstSpeciesUpdate=true;
@@ -336,6 +340,21 @@ runOnUiThread(new Runnable() {
 				getSupportFragmentManager().beginTransaction().remove(waitFrag).commit();
 			}
 		});
+	}
+	public Species getSpecies(){
+		return holder.getSpecies()[playernumber];
+	}
+	public void sendSkillUpdate(PossibleUpdates update){
+		controller.skill(new Skill(update, playernumber));
+	}
+	public boolean subtractPoints(int changeBy){
+		if(holder.getPoints()>=changeBy){
+			holder.addPoints(-changeBy);
+		}
+		return false;
+	}
+	public int getPoints(){
+		return holder.getPoints();
 	}
 }
 

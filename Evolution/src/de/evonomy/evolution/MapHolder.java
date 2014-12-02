@@ -201,6 +201,7 @@ public class MapHolder {
 		cu.setResourceDemand(update.getResourceDemand());
 		cu.setVisibillity(cu.getVisibillity());
 		cu.setWater(cu.isWater());
+		cu.setName(update.getName());
 	}
 	public Species[] getSpecies(){
 		return this.species;

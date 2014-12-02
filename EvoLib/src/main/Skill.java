@@ -1,13 +1,11 @@
 package main;
 
 public  class Skill {
-	public enum SkillType{
-	}
 	
-	private SkillType type;
+	private PossibleUpdates type;
 	private int playerNumber;
 	
-	public Skill(SkillType type, int playerNumber) {
+	public Skill(PossibleUpdates type, int playerNumber) {
 		super();
 		this.type = type;
 		this.playerNumber = playerNumber;
@@ -18,6 +16,7 @@ public  class Skill {
 	}
 	
 	public SpeciesUpdate skill(Species s){
+		//TODO implement Update
 		switch(type){
 		default:
 			throw new RuntimeException("No valid SkillType");

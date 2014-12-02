@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/de.evonomy.evolution"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_weight="4">
+        <!--  for the texts -->
+        <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:orientation="vertical"
+	        
+	        android:layout_weight="3">
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
+	             >
+	             <TextView 
+	                 android:layout_width="wrap_content"
+	                 android:layout_height="wrap_content"
+	                 android:layout_centerInParent="true"
+	                 android:text="@string/app_name"
+	                 android:textSize="20sp"
+	                 
+	                 android:textColor="@color/black"
+	                 android:id="@+id/text_view_fragment_skill_dialog_name_skill"
+	                 android:background="@drawable/no_rounded_corner_black_white"/>
+	            
+	        </RelativeLayout>
+	        <LinearLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="3"
+	            android:orientation="horizontal"
+	            android:padding="12dp"
+	            android:background="@drawable/no_rounded_corner_black_white" >
+	             <TextView 
+	                 android:layout_width="wrap_content"
+	                 android:layout_height="wrap_content"
+	                 android:text="@string/app_name"
+	                 android:id="@+id/text_view_fragment_skill_dialog_desc"
+	                 android:textSize="14sp"
+	                 android:textColor="@color/black"/>
+	            
+	        </LinearLayout>
+	        
+        
+        
+   		</LinearLayout>
+   		<!-- for temperature and other -->
+   		<LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:orientation="horizontal"
+	        android:paddingTop="5dp"
+
+	        android:layout_weight="1">
+	        <LinearLayout
+	            android:layout_width="0dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="3"
+	            android:paddingTop="14dp"
+	            android:orientation="vertical"
+	            android:background="@drawable/no_rounded_corner_black_white"
+	             >
+	            <de.evonomy.evolution.TemperatureView 
+	                android:layout_width="fill_parent"
+	                android:layout_height="fill_parent"
+	                android:id="@+id/temperature_view_fragment_skill_dialog"
+	                />
+	            
+	        </LinearLayout>
+	        <LinearLayout
+	            android:layout_width="0dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            android:paddingLeft="4dp"
+	            android:orientation="vertical" >
+	            <LinearLayout 
+	                android:layout_width="fill_parent"
+	                android:layout_height="0dp"
+	                android:layout_weight="1"
+	                android:background="@drawable/no_rounded_corner_black_white"
+	                
+	                >
+	                <de.evonomy.evolution.ResourceDemandView 
+	                    android:id="@+id/resource_demand_view_fragment_skill_dialog"
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="fill_parent"
+	                    />
+	            </LinearLayout>
+	            <LinearLayout 
+	                android:layout_width="fill_parent"
+	                android:layout_height="0dp"
+	                android:layout_weight="1"
+	                android:paddingTop="2dp"
+	                >
+	                
+	            </LinearLayout>
+	            
+	        </LinearLayout>
+	        
+        
+        
+   		</LinearLayout>
+        
+        
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_weight="2">
+        <!-- for AttributeView -->
+        <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:orientation="vertical"
+	        android:background="@drawable/no_rounded_corner_black_white"
+	        android:layout_weight="3">
+	        <de.evonomy.evolution.SpeciesAttributeView
+            	    android:id="@+id/species_attribute_view_fragment_skill_dialog"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="fill_parent"
+            	    custom:intelligence="99"
+            	    custom:agility="50"
+            	    custom:strength="25"
+            	    custom:social="12"
+            	    custom:recreation="25"/>
+        
+        
+   		</LinearLayout>
+   		<LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+	        android:orientation="vertical"
+	        android:padding="5dp"
+	        android:layout_weight="1">
+	        <Button 
+	            android:id="@+id/button_fragment_skill_dialog_skill"
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
+	            android:text="@string/app_name"
+	            android:textSize="20sp"
+	            android:background="@drawable/rounded_corner"/>
+        
+        
+   		</LinearLayout>
+        
+        
+    </LinearLayout>
+    
+
+</LinearLayout>

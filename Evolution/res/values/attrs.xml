@@ -12,4 +12,8 @@
         <attr name="max_temp" format="integer"/>
         
     </declare-styleable>
+    <declare-styleable name="ResourceDemandView">
+        <attr name="demand" format="integer"/>
+        
+    </declare-styleable>
 </resources>
