@@ -8,4 +8,8 @@ package main;
 * */
 public abstract class Change {
 	public abstract void doChange(IPlayer player);
+	
+	public String getNetwork(){
+		return "";
+	}
 }

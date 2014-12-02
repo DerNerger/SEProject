@@ -14,6 +14,7 @@ public class SpeciesUpdate extends Change {
 	private double movementChange;
 	private boolean water;
 	private int vision;
+	private int playerNumber;
 	
 	public SpeciesUpdate(Species s, int playerNumber) {
 		this.name = s.getName();
@@ -102,12 +103,57 @@ public class SpeciesUpdate extends Change {
 	public void setVision(int vision) {
 		this.vision = vision;
 	}
-	private int playerNumber;
 
-
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public void doChange(IPlayer player) {
 		player.updateSpecies(this);
-		
+	}
+	
+	public String getNetwork(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("SpeciesUpdate;");
+		sb.append(name+";");
+		sb.append(intelligence+";");
+		sb.append(agility+";");
+		sb.append(strength+";");
+		sb.append(social+";");
+		sb.append(procreation+";");
+		sb.append(minTemp+";");
+		sb.append(maxTemp+";");
+		sb.append(resourceDemand+";");
+		sb.append(movementChange+";");
+		sb.append(water+";");
+		sb.append(vision+";");
+		sb.append(playerNumber+";");
+		return sb.toString();
+	}
+	
+	public static SpeciesUpdate parseSpeciesUpdate(String str){
+		String[] parts = str.split(";");
+		if(!parts[0].equals("SpeciesUpdate"))
+			throw new RuntimeException(parts[0]+" kann nicht zu SpeciesUpdate geparset werden");
+		String name = parts[1];
+		int intelligence = Integer.parseInt(parts[2]);
+		int agility = Integer.parseInt(parts[3]);
+		int strength = Integer.parseInt(parts[4]);
+		int social = Integer.parseInt(parts[5]);
+		int procreation = Integer.parseInt(parts[6]);
+		int minTemp = Integer.parseInt(parts[7]);
+		int maxTemp = Integer.parseInt(parts[8]);
+		int resourceDemand = Integer.parseInt(parts[9]);
+		double movementChange = Double.parseDouble(parts[10]);
+		boolean water = Boolean.parseBoolean(parts[11]);
+		int vision = Integer.parseInt(parts[12]);
+		int playerNumber = Integer.parseInt(parts[13]);
+		Species s = new Species(name, intelligence, agility, strength, social,
+								procreation, minTemp, maxTemp, resourceDemand,
+								movementChange, vision, water);
+		return new SpeciesUpdate(s, playerNumber);
 	}
 }
