@@ -26,6 +26,8 @@ public class MapHolder {
 	private Canvas canvas;
 	private int heightPerBlock;
 	private int widthPerBlock;
+	/*Points to skill species!!*/
+	private int points;
 	public final int NUMBEROFBLOCKSHEIGHT=100;
 	public final int NuMBEROFBLOCKSWIDTH=200;
 	private Paint[] speciesColors;
@@ -38,6 +40,7 @@ public class MapHolder {
 		this.canvas=canvas;
         initColors();
         initSpecies(species);
+        points=0;
         mapFields=new FieldRect[NuMBEROFBLOCKSWIDTH][NUMBEROFBLOCKSHEIGHT];
         heightPerBlock=height/NUMBEROFBLOCKSHEIGHT;
         widthPerBlock=width/NuMBEROFBLOCKSWIDTH;
@@ -169,6 +172,13 @@ public class MapHolder {
 		}
 	}
 	private void initSpecies(Species[] species){
+		if(species==null){
+			species=new Species[4];
+			for(int i=0;i<species.length;i++){
+				species[i]=new Species("", 1, 1, 1, 1, 1, 1, 1, 1, 0.1, 1, false);
+			}
+			
+		}
 		this.species=species;
 		population=new long[4];
 		for(int i=0;i<4;i++){
@@ -212,5 +222,13 @@ public class MapHolder {
 	public boolean isSkilled(PossibleUpdates update){
 		return mySkills.contains(update);
 	}
-	
+	public int getPoints(){
+		return points;
+	}
+	public void addPoints(int toAdd){
+		points+=toAdd;
+	}
+	public void setPoints(int points){
+		this.points=points;
+	}
 }
