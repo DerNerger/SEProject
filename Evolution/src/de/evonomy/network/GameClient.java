@@ -34,6 +34,7 @@ public class GameClient extends SessionClient{
 			break;
 		case ChangePacket:
 			processChangePacket((ChangePacket)packet);
+			break;
 		default:
 			throw new RuntimeException(packet.getType()+" nicht implemeniert");
 		}

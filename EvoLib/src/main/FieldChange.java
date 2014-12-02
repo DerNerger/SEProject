@@ -23,6 +23,7 @@ public class FieldChange extends Change {
 
 	public String getNetwork(){
 		StringBuilder sb = new StringBuilder();
+		sb.append("FieldChange;");
 		sb.append(x+";");
 		sb.append(y+";");
 		for (int i = 0; i < newPopulation.length; i++) {
@@ -40,7 +41,7 @@ public class FieldChange extends Change {
 		int x = Integer.parseInt(parts[1]);
 		int y = Integer.parseInt(parts[2]);
 		int[] newPopulation = new int[parts.length-3];
-		for (int i = 3; i < newPopulation.length; i++) {
+		for (int i = 3; i < parts.length; i++) {
 			newPopulation[i-3] = Integer.parseInt(parts[i]);
 		}
 		return new FieldChange(x, y, newPopulation);
