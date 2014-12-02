@@ -7,25 +7,39 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class SkillElementView extends LinearLayout {
 	private Button button;
 	private SkillElement element;
 	private LinkedList<SkillElementView> childs;
+	private boolean clickable=true;
 	public SkillElementView(Context context,SkillElement element) { 
 		super(context);
 		this.element=element;
 		inflate(context,R.layout.skill_element_view, this);
-
+		
 		childs=new LinkedList<SkillElementView>();
 		button=(Button) findViewById(R.id.button_skill_element_view);
-//		button.setText(element.getUpdate().name());
+		if(!((GameActivity)context).isSkilled(element.getUpdate())
+				&&element.getParent()!=null){
+					this.setAlpha(0.5f);
+					if(!((GameActivity)context)
+					.isSkilled(element.getParent().getUpdate()))
+						clickable=false;
+					
+		}
 		setImage();
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				//TODO start the Dialog to display all the information
+				if(clickable){
+					//TODO start the Dialog to display all the information
+					
+					//please delete
+					Toast.makeText(getContext(), "hi", Toast.LENGTH_SHORT).show();
+				}
 				
 			}
 		});
@@ -55,6 +69,7 @@ public class SkillElementView extends LinearLayout {
 	private void setImage(){
 		//switch by possibleupdate typ for getting da right picta
 		//TODO irgendeiner muss hier noch die bimbo arbeit machen
+		//Also die bilder setzen
 		switch(element.getUpdate()){
 		default:button.setBackgroundDrawable(getResources()
 				.getDrawable(R.drawable.ic_launcher));

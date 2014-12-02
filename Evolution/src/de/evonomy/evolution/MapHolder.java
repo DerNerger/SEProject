@@ -1,5 +1,6 @@
 package de.evonomy.evolution;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,6 +8,7 @@ import android.graphics.Paint;
 import android.util.Log;
 import main.FieldType;
 import main.LandType;
+import main.PossibleUpdates;
 import main.Species;
 import main.SpeciesUpdate;
 
@@ -29,6 +31,8 @@ public class MapHolder {
 	private Paint[] speciesColors;
 	private Species[] species;
 	private long population[];
+	//Holds current evolutions of species
+	private ArrayList<PossibleUpdates> mySkills;
 
 	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType,Species species[]){
 		this.canvas=canvas;
@@ -170,6 +174,9 @@ public class MapHolder {
 		for(int i=0;i<4;i++){
 			population[i]=0;
 		}
+		mySkills=new ArrayList<PossibleUpdates>();
+		//muss noch gelöscht werden
+		mySkills.add(PossibleUpdates.AASICLEGS);
 	}
 	public void updateSpecies(SpeciesUpdate update){
 		Species cu=species[update.getPlayerNumber()];
@@ -198,6 +205,12 @@ public class MapHolder {
 	}
 	public long[] getPopulation(){
 		return this.population;
+	}
+	public void addSkill(PossibleUpdates update){
+		mySkills.add(update);
+	}
+	public boolean isSkilled(PossibleUpdates update){
+		return mySkills.contains(update);
 	}
 	
 }
