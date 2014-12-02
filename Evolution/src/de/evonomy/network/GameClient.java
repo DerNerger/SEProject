@@ -1,7 +1,9 @@
 package de.evonomy.network;
 
+import main.Change;
 import main.VisualMap;
 import de.evonomy.evolution.GameActivity;
+import gameProtocol.ChangePacket;
 import gameProtocol.GameProtocol;
 import gameProtocol.ReadyInformation;
 import gameProtocol.VisualMapPacket;
@@ -30,6 +32,8 @@ public class GameClient extends SessionClient{
 		case VisualMapPackt:
 			processVisualMapPacket((VisualMapPacket)packet);
 			break;
+		case ChangePacket:
+			processChangePacket((ChangePacket)packet);
 		default:
 			throw new RuntimeException(packet.getType()+" nicht implemeniert");
 		}
@@ -46,6 +50,11 @@ public class GameClient extends SessionClient{
 	private void processVisualMapPacket(VisualMapPacket packet) {
 		VisualMap map = packet.getVisualMap();
 		activity.setMap(map);
+	}
+	
+	private void processChangePacket(ChangePacket packet) {
+		Change c = packet.getChange();
+		c.doChange(activity);
 	}
 
 	public void sendPacket(Packet pack){
