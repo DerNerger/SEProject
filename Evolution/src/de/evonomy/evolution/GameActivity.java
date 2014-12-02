@@ -136,10 +136,12 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		redrawMap();
 	}
 	public void changePointsAndTime(int[] points, Date time){}
+	
 	public void updateSpecies(SpeciesUpdate speciesUpdate){
 		holder.updateSpecies(speciesUpdate);
 		firstSpeciesUpdate=true;
 	}
+	
 	public boolean getPlayerNumber(int number){
 		return false;
 	}	
