@@ -9,7 +9,7 @@
         android:layout_weight="1" >
         <ImageView 
             android:id="@+id/image_view_resource_demand_view"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/res_dem_state_1"
             android:layout_centerInParent="true"/>

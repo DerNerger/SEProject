@@ -11,15 +11,15 @@ import java.util.LinkedList;
 public class SpeciesSkillInformation {
 	public static LinkedList<SkillElement> getLegSkills(){
 		LinkedList<SkillElement> toReturn=new LinkedList<SkillElement>();
-		SkillElement basicLegs=new SkillElement(PossibleUpdates.BASICLEG);
-		SkillElement advancedLegs=new SkillElement(PossibleUpdates.ADVANCEDLEGS);
-		SkillElement bvancedLegs=new SkillElement(PossibleUpdates.BVANCEDLEGS);
-		SkillElement aasicLegs=new SkillElement(PossibleUpdates.AASICLEGS);
-		SkillElement cvancedLegs=new SkillElement(PossibleUpdates.CVANCEDLEGS);
-		SkillElement superLegs=new SkillElement(PossibleUpdates.SUPERLEGS);
-		SkillElement ultraLegs=new SkillElement(PossibleUpdates.ULTRALEGS);
+		SkillElement basicLegs=new SkillElement(PossibleUpdates.BASICLEG,0);
+		SkillElement advancedLegs=new SkillElement(PossibleUpdates.ADVANCEDLEGS,0);
+		SkillElement bvancedLegs=new SkillElement(PossibleUpdates.BVANCEDLEGS,0);
+		SkillElement aasicLegs=new SkillElement(PossibleUpdates.AASICLEGS,0);
+		SkillElement cvancedLegs=new SkillElement(PossibleUpdates.CVANCEDLEGS,0);
+		SkillElement superLegs=new SkillElement(PossibleUpdates.SUPERLEGS,0);
+		SkillElement ultraLegs=new SkillElement(PossibleUpdates.ULTRALEGS,0);
 		SkillElement ganzCooleLegs=new 
-				SkillElement(PossibleUpdates.GANZCOOLEBEINE);
+				SkillElement(PossibleUpdates.GANZCOOLEBEINE,0);
 		basicLegs.addChild(advancedLegs);
 		basicLegs.addChild(bvancedLegs);
 		aasicLegs.addChild(cvancedLegs);

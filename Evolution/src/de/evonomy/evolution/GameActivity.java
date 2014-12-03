@@ -355,6 +355,7 @@ runOnUiThread(new Runnable() {
 	public boolean subtractPoints(int changeBy){
 		if(holder.getPoints()>=changeBy){
 			holder.addPoints(-changeBy);
+			return true;
 		}
 		return false;
 	}
