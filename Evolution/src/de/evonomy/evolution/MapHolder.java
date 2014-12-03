@@ -175,7 +175,8 @@ public class MapHolder {
 		if(species==null){
 			species=new Species[4];
 			for(int i=0;i<species.length;i++){
-				species[i]=new Species("", 1, 1, 1, 1, 1, 1, 1, 1, 0.1, 1, false);
+				species[i]=new Species("Wenn das bei Name steht hat das update nicht gekappt", 1, 1, 1, 1, 1, 1, 1, 1, 0.1, 1, false);
+				Log.e("Species","createdSpecies" +species[i]);
 			}
 			
 		}
@@ -189,6 +190,7 @@ public class MapHolder {
 		mySkills.add(PossibleUpdates.AASICLEGS);
 	}
 	public void updateSpecies(SpeciesUpdate update){
+		Log.e("Species","Speciesupdate incoming");
 		Species cu=species[update.getPlayerNumber()];
 		cu.setIntelligence(update.getIntelligence());
 		cu.setAgility(update.getAgility());
@@ -199,8 +201,9 @@ public class MapHolder {
 		cu.setMinTemp(update.getMinTemp());
 		cu.setMovementChance(update.getMovementChange());
 		cu.setResourceDemand(update.getResourceDemand());
-		cu.setVisibillity(cu.getVisibillity());
-		cu.setWater(cu.isWater());
+		cu.setVisibillity(update.getVision());
+		cu.setWater(update.isWater());
+		Log.e("Species","new Species name"+update.getName());
 		cu.setName(update.getName());
 	}
 	public Species[] getSpecies(){

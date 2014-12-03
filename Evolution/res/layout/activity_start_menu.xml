@@ -40,7 +40,7 @@
 	            <ImageView 
 	                android:layout_width="fill_parent"
 	                android:layout_height="fill_parent"
-	                android:src="@drawable/ic_launcher"/>
+	                android:src="@drawable/logo"/>
 	        </LinearLayout>
 	        <!-- for pedding right to image -->
 	        <LinearLayout 
