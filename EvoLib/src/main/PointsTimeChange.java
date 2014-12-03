@@ -19,5 +19,17 @@ public class PointsTimeChange extends Change {
 		player.changePointsAndTime(points, time);
 
 	}
+	@Override
+	public String getNetwork() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("PointsTimeChange;");
+		sb.append(time.toString()+";");
+		for (int i = 0; i < points.length; i++) {
+			sb.append(points[i]);
+			if(i!=points.length-1)
+				sb.append(";");
+		}
+		return sb.toString();
+	}
 
 }
