@@ -322,7 +322,8 @@ runOnUiThread(new Runnable() {
 		}
 		player[0]=this;
         //Create controller
-        controller = new Controller(map, species, player);
+        Controller controller = new Controller(map, species, player);
+        this.controller = controller;
         controllerThread = new Thread(controller);
         controllerThread.start();
 	}
