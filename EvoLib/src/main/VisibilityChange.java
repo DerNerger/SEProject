@@ -15,7 +15,23 @@ public class VisibilityChange extends Change {
 	@Override
 	public void doChange(IPlayer player) {
 		player.changeVisibility(x, y);
-
 	}
-
+	
+	@Override
+	public String getNetwork() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("VisibilityChange;");
+		sb.append(x+";");
+		sb.append(y);
+		return sb.toString();
+	}
+	
+	public static VisibilityChange parseVisibilityChange(String str){
+		String[] parts = str.split(";");
+		if(!parts[0].equals("VisibilityChange"))
+			throw new RuntimeException(parts[0]+" kann nicht zu AreaLandTypeChange geparset werden");
+		int x = Integer.parseInt(parts[1]);
+		int y = Integer.parseInt(parts[2]);
+		return new VisibilityChange(x, y);
+	}
 }
