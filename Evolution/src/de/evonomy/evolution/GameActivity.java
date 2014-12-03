@@ -23,6 +23,7 @@ import main.MapLoader;
 import main.PossibleUpdates;
 import main.SimpleMapLogic;
 import main.Skill;
+import main.Skillable;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
@@ -48,7 +49,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Thread actualizeThread;
 	private Thread controllerThread;
 	private Bitmap bg;
-	private Controller controller;
+	private Skillable controller;
 	private Species[] species;
 	private Button speziesOverviewButton;
 	private Button speziesSkillButton;
@@ -62,7 +63,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private boolean mapHasBeenSet=false;
 	private boolean firstSpeciesUpdate=false;
 	private int ACTUALICATIONTIME=2000;
-	SpeciesOverviewFragment frag;
+	private SpeciesOverviewFragment frag;
 	private SkillSpeciesFragment frag2;
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
