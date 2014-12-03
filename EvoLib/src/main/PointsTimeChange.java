@@ -32,4 +32,15 @@ public class PointsTimeChange extends Change {
 		return sb.toString();
 	}
 
+	public static PointsTimeChange parsePointsTimeChange(String str){
+		String[] parts = str.split(";");
+		if(!parts[0].equals("PointsTimeChange"))
+			throw new RuntimeException(parts[0]+" kann nicht zu PointsTimeChange geparset werden.");
+		Date time = new Date(parts[1]);
+		int[] points = new int[parts.length-2];
+		for (int i = 2; i < parts.length; i++) {
+			points[i-2] = Integer.parseInt(parts[i]);
+		}
+		return new PointsTimeChange(points, time);
+	}
 }
