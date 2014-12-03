@@ -56,7 +56,9 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	
 	public final int WIDTH=200;
 	public final int HEIGHT=100;
-	//TODO setPlayer number!!!!!!!!!!!!!
+	/*For player number,
+	 * default is 0 for singleplayer, ist set to another
+	 * if multiplayer*/
 	private int playernumber=0;
 	//TODO
 	private final String basepath = "basepathtopregeneratedmaps";
@@ -105,7 +107,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	//only network
 	private void doNetworkShit(PlayerInformation info, Species playerSpecies) {
     	waitFrag = new WaitForSpeciesFragment();
-    	
+    	playernumber=info.getMySlot();
         String oname = info.getMyPlayerName();
         GameClient client = new GameClient(getResources().getInteger(R.integer.GamePort), getString(R.string.host), this);
         new Thread(client).start();
