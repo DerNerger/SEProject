@@ -59,6 +59,20 @@ public class Species implements Serializable{
 		this.visibillity = visibillity;
 		this.water = water;
 	}
+	public Species(Species copy){
+		this.name = copy.name;
+		this.intelligence = copy.intelligence;
+		this.agility = copy.agility;
+		this.strength = copy.strength;
+		this.social = copy.social;
+		this.procreation = copy.procreation;
+		this.minTemp = copy.minTemp;
+		this.maxTemp = copy.maxTemp;
+		this.resourceDemand = copy.resourceDemand;
+		this.movementChance = copy.movementChance;
+		this.visibillity = copy.visibillity;
+		this.water = copy.water;
+	}
 
 	public String getName() {
 		return name;

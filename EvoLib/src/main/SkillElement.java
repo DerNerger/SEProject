@@ -12,7 +12,8 @@ public class SkillElement {
 	private SkillElement parent;
 	private boolean isRoot=true;
 	private PossibleUpdates update;
-	public SkillElement(PossibleUpdates update){
+	private int price;
+	public SkillElement(PossibleUpdates update,int price){
 		this.update=update;
 		directRequiredFor=new LinkedList<SkillElement>();
 		indirectRequired=new LinkedList<SkillElement>();
@@ -46,5 +47,8 @@ public class SkillElement {
 	}
 	public SkillElement getParent(){
 		return parent;
+	}
+	public int getPrice(){
+		return price;
 	}
 }

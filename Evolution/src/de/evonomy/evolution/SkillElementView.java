@@ -42,7 +42,9 @@ public class SkillElementView extends LinearLayout {
 					//TODO start the Dialog to display all the information
 					SkillDialogFragment frag=
 							SkillDialogFragment
-							.newInstance(element.getUpdate(),((GameActivity) context).getSpecies());
+							.newInstance(element.getUpdate(),
+									((GameActivity) context).getSpecies(),
+									element.getPrice());
 					
 					
 					FragmentManager fm=((GameActivity) context).getSupportFragmentManager();

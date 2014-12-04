@@ -37,5 +37,6 @@
     <string name="res_dem_stat_4_str">übermäßig</string>
     <string name="res_dem_stat_5_str">viel</string>
     <string name="res_dem_stat_6_str">extrem viel</string>
+    <string name="fragment_skill_dialog_change_button">Zeige Änderungen!</string>
 
 </resources>
