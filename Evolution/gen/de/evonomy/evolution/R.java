@@ -145,17 +145,19 @@ containing a value of this type.
         public static final int pluslightblue=0x7f020018;
         public static final int plusred=0x7f020019;
         public static final int plusyellow=0x7f02001a;
-        public static final int question_mark=0x7f02001b;
-        public static final int res_dem_state_1=0x7f02001c;
-        public static final int res_dem_state_2=0x7f02001d;
-        public static final int res_dem_state_3=0x7f02001e;
-        public static final int res_dem_state_4=0x7f02001f;
-        public static final int res_dem_state_5=0x7f020020;
-        public static final int res_dem_state_6=0x7f020021;
-        public static final int rounded_corner=0x7f020022;
-        public static final int rounded_corner_black_white=0x7f020023;
-        public static final int rounded_corner_red=0x7f020024;
-        public static final int temperatureview=0x7f020025;
+        public static final int pressable_button=0x7f02001b;
+        public static final int question_mark=0x7f02001c;
+        public static final int res_dem_state_1=0x7f02001d;
+        public static final int res_dem_state_2=0x7f02001e;
+        public static final int res_dem_state_3=0x7f02001f;
+        public static final int res_dem_state_4=0x7f020020;
+        public static final int res_dem_state_5=0x7f020021;
+        public static final int res_dem_state_6=0x7f020022;
+        public static final int rounded_corner=0x7f020023;
+        public static final int rounded_corner_black_white=0x7f020024;
+        public static final int rounded_corner_press=0x7f020025;
+        public static final int rounded_corner_red=0x7f020026;
+        public static final int temperatureview=0x7f020027;
     }
     public static final class id {
         public static final int Button_register_now=0x7f0a001f;
@@ -316,6 +318,7 @@ containing a value of this type.
     }
     public static final class string {
         public static final int action_settings=0x7f070003;
+        public static final int already_bought_dialog=0x7f07001f;
         public static final int app_name=0x7f070001;
         public static final int create_species_button_play=0x7f070014;
         public static final int create_species_carnivore=0x7f07000c;
@@ -344,8 +347,10 @@ containing a value of this type.
         public static final int singleplayer_start_menu=0x7f070007;
         public static final int tab_title_skill_abilities=0x7f070017;
         public static final int tab_title_skill_body=0x7f070016;
+        public static final int text_progress_dialog_update=0x7f070021;
         public static final int title_activity_create_species=0x7f070009;
         public static final int title_activity_game=0x7f070005;
+        public static final int title_progress_dialog_update=0x7f070020;
     }
     public static final class style {
         /** 
