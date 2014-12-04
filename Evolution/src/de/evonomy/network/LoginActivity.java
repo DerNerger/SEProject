@@ -9,10 +9,12 @@ import de.evonomy.evolution.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ public class LoginActivity extends Activity implements Observer{
 		private EditText editText_PassWd;
 		private Button button_Login;
 		private Button button_register;
+		private CheckBox checkBoxSaveName;
 		
 		//network communication
 		private LoginClient client;
@@ -40,6 +43,17 @@ public class LoginActivity extends Activity implements Observer{
 			editText_PassWd = (EditText) findViewById(R.id.editText_PassWd);
 			button_Login = (Button) findViewById(R.id.button_Login);
 			button_register  = (Button) findViewById(R.id.button_register);
+			checkBoxSaveName = (CheckBox) findViewById(R.id.checkBoxSaveUsername);
+			
+			//readLoginName
+		    SharedPreferences settings = getSharedPreferences("LOGINNAME", 0);
+		    String name = settings.getString("LOGINNAME", null);
+		    String pw = settings.getString("LOGINPW", null);
+		    if(name!=null){
+		    	editText_LoginName.setText(name);
+		    	editText_PassWd.setText(pw);
+		    	checkBoxSaveName.setChecked(true);
+		    }
 		}
 		
 		private void initListeners() {
@@ -51,6 +65,13 @@ public class LoginActivity extends Activity implements Observer{
 					setContentView(R.layout.activity_wait);
 					String name = editText_LoginName.getText().toString();
 					String passWd = editText_PassWd.getText().toString();
+					if(checkBoxSaveName.isChecked()){
+						SharedPreferences settings = getSharedPreferences("LOGINNAME", 0);
+					    SharedPreferences.Editor editor = settings.edit();
+					    editor.putString("LOGINNAME", name);
+					    editor.putString("LOGINPW", passWd);
+					    editor.commit();
+					}
 					client = new LoginClient(getResources().getInteger(R.integer.LoginPort), getString(R.string.host));
 					new Thread(client).start();
 					client.login(name, passWd);

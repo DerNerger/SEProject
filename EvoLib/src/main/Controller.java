@@ -50,6 +50,8 @@ public class Controller implements Runnable, Skillable{
 			changes.add(sp);
 		}
 		
+		sendToAll(changes);
+		
 		while(!Thread.interrupted()){
 			//wait
 			try {
@@ -81,14 +83,16 @@ public class Controller implements Runnable, Skillable{
 			LinkedList<Change> circumstancesChanges = map.updateCircumstances(event);
 			changes.addAll(circumstancesChanges);
 			
-			
-			
-			for(Change c : changes){
-				for(IPlayer p : player)
-					c.doChange(p);
-			}
-			changes.clear();
+			sendToAll(changes);
 		}
+	}
+	
+	private void sendToAll(LinkedList<Change> changes){
+		for(Change c : changes){
+			for(IPlayer p : player)
+				c.doChange(p);
+		}
+		changes.clear();
 	}
 
 	@Override
