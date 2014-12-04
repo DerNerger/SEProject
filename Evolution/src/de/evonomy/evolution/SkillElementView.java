@@ -17,10 +17,13 @@ public class SkillElementView extends LinearLayout {
 	private LinkedList<SkillElementView> childs;
 	private boolean clickable=true;
 	private Context context;
-	public SkillElementView(final Context context,final SkillElement element) { 
+	private SkillTreeFragment frago;
+	public SkillElementView(final Context context,final SkillElement element
+			,final SkillTreeFragment frago) { 
 		super(context);
 		this.element=element;
 		this.context=context;
+		this.frago=frago;
 		inflate(context,R.layout.skill_element_view, this);
 		
 		childs=new LinkedList<SkillElementView>();
@@ -44,7 +47,7 @@ public class SkillElementView extends LinearLayout {
 							SkillDialogFragment
 							.newInstance(element.getUpdate(),
 									((GameActivity) context).getSpecies(),
-									element.getPrice());
+									element.getPrice(),frago);
 					
 					
 					FragmentManager fm=((GameActivity) context).getSupportFragmentManager();

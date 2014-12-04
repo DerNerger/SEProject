@@ -11,7 +11,7 @@ public class SkillElement {
 	private LinkedList<SkillElement> indirectRequired;
 	private SkillElement parent;
 	private boolean isRoot=true;
-	private PossibleUpdates update;
+	private PossibleUpdates update; 
 	private int price;
 	public SkillElement(PossibleUpdates update,int price){
 		this.update=update;

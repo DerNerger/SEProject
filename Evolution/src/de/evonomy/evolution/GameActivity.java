@@ -324,7 +324,12 @@ runOnUiThread(new Runnable() {
 		}
 		player[0]=this;
         //Create controller
-        Controller controller = new Controller(map, species, player);
+		//Clone species to work on copies
+		Species[] copy=new Species[species.length];
+		for(int i=0;i<species.length;i++){
+			copy[i]=new Species(species[i]);
+		}
+        Controller controller = new Controller(map, copy, player);
         this.controller = controller;
         controllerThread = new Thread(controller);
         controllerThread.start();
@@ -352,6 +357,8 @@ runOnUiThread(new Runnable() {
 		return holder.getSpecies()[playernumber];
 	}
 	public void sendSkillUpdate(PossibleUpdates update){
+		holder.addSkill(update);
+		SimpleMapLogic.changeSpecies(getSpecies(), update);
 		controller.skill(new Skill(update, playernumber));
 	}
 	public boolean subtractPoints(int changeBy){

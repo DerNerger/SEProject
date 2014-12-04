@@ -1,16 +1,19 @@
 package de.evonomy.evolution;
+import java.io.Serializable;
+
 import de.evonomy.evolution.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
-public class FragmentSkillBody extends Fragment {
+public class FragmentSkillBody extends Fragment implements SlotSkillable {
 	public enum Slots {LEGS,ARMS,HEAD,BODY,NEXTTOHEAD,NEXTTOLEGS};
 	private LinearLayout fragmentContainer;
 	private LinearLayout lllegs;
@@ -22,6 +25,7 @@ public class FragmentSkillBody extends Fragment {
 	private LinearLayout llntlegsr;
 	private LinearLayout llbody;
 	private LinearLayout llhead;
+	private SlotSkillable toOvergive;
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container,Bundle savedInstanceState){
 		super.onCreateView(inflater, container, savedInstanceState);
@@ -37,7 +41,7 @@ public class FragmentSkillBody extends Fragment {
 		llntlegsr=(LinearLayout) root.findViewById(R.id.linear_layout_skill_right_legs);
 		llntheadl=(LinearLayout) root.findViewById(R.id.linear_layout_skill_left_head);
 		llntheadr=(LinearLayout) root.findViewById(R.id.linear_layout_skill_right_head);
-		
+		toOvergive=this;
 		return root;
 	}
 	@Override
@@ -71,6 +75,7 @@ public class FragmentSkillBody extends Fragment {
 				
 			}
 		});
+		Log.e("Fragment skill body", "onResume aufger");
 		
 	}
 	
@@ -87,13 +92,23 @@ public class FragmentSkillBody extends Fragment {
 		@Override
 		public void onClick(View v) {
 			SkillTreeFragment frag=SkillTreeFragment
-					.newInstance(s, w,h);
+					.newInstance(s, w,h,toOvergive);
 			FragmentManager fm=getChildFragmentManager();
 			FragmentTransaction trans=fm.beginTransaction();
-			trans.replace(fragmentContainer.getId(), frag);
+			trans.replace(fragmentContainer.getId(), frag,"tree_fragment");
 //			frag.show(fm, "fragment_skill_legs");
 			trans.commit();
 		}
 		
+	}
+	public void notifiyToDrawNew(Slots slot){
+		SkillTreeFragment frag=SkillTreeFragment
+				.newInstance(slot, fragmentContainer.getMeasuredWidth()
+						,fragmentContainer.getMeasuredHeight(),toOvergive);
+		FragmentManager fm=getChildFragmentManager();
+		FragmentTransaction trans=fm.beginTransaction();
+		trans.replace(fragmentContainer.getId(), frag,"tree_fragment");
+//		frag.show(fm, "fragment_skill_legs");
+		trans.commit();
 	}
 }

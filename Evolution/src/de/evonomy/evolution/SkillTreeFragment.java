@@ -1,29 +1,24 @@
 package de.evonomy.evolution;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import main.SkillElement;
 import main.SpeciesSkillInformation;
-
-import de.evonomy.evolution.FragmentSkillBody.Slots;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import de.evonomy.evolution.FragmentSkillBody.Slots;
 
-public class SkillTreeFragment extends Fragment{
+public class SkillTreeFragment extends Fragment implements Serializable{
 	private static final String SLOT="slot";
+	private static final String PARENT="kdkdkdkdkdkk";
+	private SlotSkillable parent;
 	private FragmentSkillBody.Slots slot;
 	private RelativeLayout rlcontainer;
 	private RelativeLayout rl;
@@ -41,13 +36,14 @@ public class SkillTreeFragment extends Fragment{
 	private LinkedList<SkillElementView> rootSkillViews;
 	
 	public static SkillTreeFragment newInstance(FragmentSkillBody.Slots slot
-			,int width,int height){
+			,int width,int height,SlotSkillable parent){
 		SkillTreeFragment frag=new SkillTreeFragment();
 		Bundle args=new Bundle();
 		
 		args.putSerializable(SLOT, slot);
 		args.putInt("width", width);
 		args.putInt("height", height);
+		args.putSerializable(PARENT, parent);
 		frag.setArguments(args);
 		return frag;
 	}
@@ -58,6 +54,7 @@ public class SkillTreeFragment extends Fragment{
 		slot=(Slots) getArguments().getSerializable(SLOT);
 		width=getArguments().getInt("width");
 		height=getArguments().getInt("height");
+		parent=(SlotSkillable)getArguments().getSerializable(PARENT);
 		//initiate the skilllists
 		skills=new LinkedList<SkillElement>();
 		rootSkills=new LinkedList<SkillElement>();
@@ -145,7 +142,7 @@ public class SkillTreeFragment extends Fragment{
 		skillViews=new LinkedList <SkillElementView>();
 		rootSkillViews=new LinkedList <SkillElementView>();
 		for(SkillElement sk:skills){
-			skillViews.add(new SkillElementView(getActivity(), sk));
+			skillViews.add(new SkillElementView(getActivity(), sk,this));
 		}
 		for(SkillElementView sk:skillViews){
 			if(sk.getSkillElement().isRoot()){
@@ -232,6 +229,27 @@ public class SkillTreeFragment extends Fragment{
 				rl.invalidate();
 			}
 		});
+		
+		
+	}
+	public void redraw(){
+		parent.notifiyToDrawNew(slot);
+		final ProgressDialog dial=ProgressDialog.
+				show(getActivity(), getResources()
+						.getString(R.string.title_progress_dialog_update), 
+						getResources()
+						.getString(R.string.text_progress_dialog_update),true);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(2000);
+				} catch (Exception e) {
+
+				}
+				dial.dismiss();
+			}
+		}).start();
 		
 	}
 

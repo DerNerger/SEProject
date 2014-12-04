@@ -7,23 +7,23 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SkillDialogFragment extends DialogFragment {
 	private static String UPDATE="uppe";
 	private static String SPECIES="specki";
 	private static String PRICE="priccceeeeee";
+	private static String FRAGMENT="kibi stinkt voll";
 	private PossibleUpdates update;
+	private SkillTreeFragment frago;
 	private Species species;
 	private int price;
 	private boolean transformed=false;
@@ -36,14 +36,16 @@ public class SkillDialogFragment extends DialogFragment {
 	private TextView desc;
 	private ResourceDemandView demView;
 	private MovementView movView;
-	public static SkillDialogFragment newInstance(PossibleUpdates update,Species species,int price){
+	public static SkillDialogFragment newInstance(PossibleUpdates update,Species species,int price,SkillTreeFragment frago){
 		SkillDialogFragment frag=new SkillDialogFragment();
 		Bundle args=new Bundle();
+		args.putSerializable(FRAGMENT, frago);
 		args.putSerializable(UPDATE, update);
 		args.putSerializable(SPECIES, species);
 		args.putInt(PRICE, price);
 		frag.setArguments(args);
 		return frag;
+		
 	}
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		//Remove status bar
@@ -61,6 +63,7 @@ public class SkillDialogFragment extends DialogFragment {
 		this.species=new Species(
 				((Species)getArguments().getSerializable(SPECIES)));
 		this.price=(int)getArguments().getInt(PRICE);
+		this.frago=(SkillTreeFragment)getArguments().getSerializable(FRAGMENT);
 		//TODO change
 
 		setViews(root);
@@ -101,10 +104,12 @@ public class SkillDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				Log.e("bla", "Pressed to update");
-				if(((GameActivity)getActivity()).subtractPoints(price)){
-					Log.e("bla", "in update");
-					((GameActivity)getActivity()).sendSkillUpdate(update);					
+				if(((GameActivity)getActivity()).subtractPoints(price)&&
+						!((GameActivity)getActivity()).isSkilled(update)){
+					((GameActivity)getActivity()).sendSkillUpdate(update);
+					frago.redraw();
 					dismiss();
+					
 				}
 				
 				
@@ -126,7 +131,15 @@ public class SkillDialogFragment extends DialogFragment {
 		
 	}
 	private void setTexts(){
-		skillButton.setText(price+" P");
+		if(!((GameActivity)getActivity()).isSkilled(update))
+			skillButton.setText(price+" P");
+		else{
+			skillButton.setText(getResources().getString(R.string.already_bought_dialog));
+			showChanges.setText(R.string.already_bought_dialog);
+			showChanges.setClickable(false);
+			showChanges.setFocusable(false);
+			showChanges.setEnabled(false);
+		}
 		if(price>((GameActivity)getActivity()).getPoints())
 			skillButton.setTextColor(getResources().getColor(R.color.red));
 		//TODO switchen und Exception

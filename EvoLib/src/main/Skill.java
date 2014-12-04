@@ -17,9 +17,8 @@ public  class Skill {
 	
 	public SpeciesUpdate skill(Species s){
 		//TODO implement Update
-		switch(type){
-		default:
-			throw new RuntimeException("No valid SkillType");
-		}
+		
+		SimpleMapLogic.changeSpecies(s, type);
+		return new SpeciesUpdate(s,playerNumber);
 	}
 }
