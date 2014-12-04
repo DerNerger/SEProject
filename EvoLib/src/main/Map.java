@@ -39,7 +39,6 @@ public class Map implements Serializable{
 	 */
 	public static Map fromRandom(int width, int height, Species[] species, HashMap<FieldType, Double> pct) {
 		Map res = new Map(width, height, species);
-		
 		/* parameters of the noise algorithm, change at will */
 		int octaveCount = 6;
 		double persistance = .025;

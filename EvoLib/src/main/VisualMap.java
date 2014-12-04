@@ -88,7 +88,7 @@ public class VisualMap {
 	}
 
 	private static int[][] parseAreaNumberOfFields(String string, int width, int height){
-		int[][] areaNumberOfFields = new int[height][width];
+		int[][] areaNumberOfFields = new int[width][height];
 		String[] parts = string.split("#");
 		for (int i = 0; i < parts.length; i++) {
 			String[] parts2 = parts[i].split(",");
@@ -111,8 +111,7 @@ public class VisualMap {
 		pct.put(FieldType.LAND, 0.25);
 		pct.put(FieldType.ICE, 0.25);
 		pct.put(FieldType.JUNGLE, 0.25);
-		
-		Map map = Map.fromRandom(100, 200, species, pct);
+		Map map = Map.fromRandom(200, 100, species, pct);
 		VisualMap visMap = map.getVisualRepresentation();
 		String a = visMap.getNetwork();
 		VisualMap visMap2 = VisualMap.parseVisualMap(a, 200, 100);

@@ -228,7 +228,7 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 			@Override
 			public void run() {
 				getSupportFragmentManager().beginTransaction().remove(frag).commit();
-				String msg = gameStatus.getHostname()+" hat sie aus dem Spiel geworfen.";
+				String msg = gameStatus.getHostname()+" hat Sie aus dem Spiel geworfen.";
 				Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 			}
 		});
