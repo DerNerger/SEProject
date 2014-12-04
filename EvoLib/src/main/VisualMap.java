@@ -23,11 +23,11 @@ public class VisualMap {
 	 * Gibt die dimensionen (breite, hoehe) der map als dimension-objekt zurueck
 	 * */
 	public int getHeight(){
-		return areaNumberOfFields.length;
+		return areaNumberOfFields[0].length;
 	}
 
 	public int getWidth(){
-		return areaNumberOfFields[0].length;
+		return areaNumberOfFields.length;
 	}
 	
 	public int[][] getAreaNumberOfFields() {
