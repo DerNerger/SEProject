@@ -1,5 +1,6 @@
 package de.evonomy.network;
 
+import android.util.Log;
 import main.Change;
 import main.VisualMap;
 import de.evonomy.evolution.GameActivity;

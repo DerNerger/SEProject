@@ -281,6 +281,7 @@ runOnUiThread(new Runnable() {
 			
 			@Override
 			public void onClick(View v) {
+				
 				if(!firstSpeciesUpdate) return;
 				frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
 				

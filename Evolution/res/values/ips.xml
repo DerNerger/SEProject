@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="host">192.168.0.16</string>
+    <string name="host">172.18.25.183</string>
 </resources>

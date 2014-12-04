@@ -84,11 +84,8 @@ public class Controller implements Runnable, Skillable{
 			
 			
 			for(Change c : changes){
-				//IF NOT DEBUG
-				//for(IPlayer p : player)
-				//	c.doChange(p);
-				//if DEBUG
-				c.doChange(player[0]);
+				for(IPlayer p : player)
+					c.doChange(p);
 			}
 			changes.clear();
 		}
