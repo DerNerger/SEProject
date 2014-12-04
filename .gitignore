@@ -1,4 +1,6 @@
 bin
 *.class
 gen
-libs
+EvoLib.jar
+SimpleNet.jar
+R.java
