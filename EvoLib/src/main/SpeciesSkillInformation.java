@@ -9,52 +9,70 @@ import java.util.LinkedList;
  * 
  */
 public class SpeciesSkillInformation {
+	private static LinkedList<SkillElement> nextToHead;
+	private static LinkedList<SkillElement> nextToLegs;
+	private static LinkedList<SkillElement> head;
+	private static LinkedList<SkillElement> body;
+	private static LinkedList<SkillElement> legs;
+	private static LinkedList<SkillElement> arms;
+	
+	static{
+		setNextToHead();
+		setArms();
+		setBody();
+		setHead();
+		setNextToLegs();
+		setLegs();
+	}
 	public static LinkedList<SkillElement> getLegSkills(){
-		LinkedList<SkillElement> toReturn=new LinkedList<SkillElement>();
-		SkillElement basicLegs=new SkillElement(PossibleUpdates.BASICLEG,0);
-		SkillElement advancedLegs=new SkillElement(PossibleUpdates.ADVANCEDLEGS,0);
-		SkillElement bvancedLegs=new SkillElement(PossibleUpdates.BVANCEDLEGS,0);
-		SkillElement aasicLegs=new SkillElement(PossibleUpdates.AASICLEGS,0);
-		SkillElement cvancedLegs=new SkillElement(PossibleUpdates.CVANCEDLEGS,0);
-		SkillElement superLegs=new SkillElement(PossibleUpdates.SUPERLEGS,0);
-		SkillElement ultraLegs=new SkillElement(PossibleUpdates.ULTRALEGS,0);
-		SkillElement ganzCooleLegs=new 
-				SkillElement(PossibleUpdates.GANZCOOLEBEINE,0);
-		basicLegs.addChild(advancedLegs);
-		basicLegs.addChild(bvancedLegs);
-		aasicLegs.addChild(cvancedLegs);
-		bvancedLegs.addChild(superLegs);
-		superLegs.addChild(ultraLegs);
-		advancedLegs.addChild(ganzCooleLegs);
-		toReturn.add(aasicLegs);
-		toReturn.add(cvancedLegs);
-		toReturn.add(basicLegs);
-		toReturn.add(advancedLegs);
-		toReturn.add(bvancedLegs);
-		toReturn.add(superLegs);
-		toReturn.add(ultraLegs);
-		toReturn.add(ganzCooleLegs);
-		return toReturn;
+		return legs;
 	}
 	public static LinkedList<SkillElement> getBodySkills(){
-		LinkedList<SkillElement> toReturn=new LinkedList<SkillElement>();
-		return toReturn;
+		return body;
 	}
 	public static LinkedList<SkillElement> getArmSkills(){
-		LinkedList<SkillElement> toReturn=new LinkedList<SkillElement>();
-		return toReturn;
+		return arms;
 	}
 	public static LinkedList<SkillElement> getHeadSkills(){
-		LinkedList<SkillElement> toReturn=new LinkedList<SkillElement>();
-		return toReturn;
+		return head;
 	}
 	public static LinkedList<SkillElement> getNextToLegSkills(){
-		LinkedList<SkillElement> toReturn=new LinkedList<SkillElement>();
-		return toReturn;
+		return nextToLegs;
 	}
-	public static LinkedList<SkillElement> getNextToHeadSkills(){
-		LinkedList<SkillElement> toReturn=new LinkedList<SkillElement>();
+	public static LinkedList<SkillElement> getNextToHeadSkills(){		
+		return nextToHead;
+	}
+	private static void setNextToHead(){
+		nextToHead=new LinkedList<SkillElement>();
+		SkillElement wings=new SkillElement(PossibleUpdates.WINGS,0);
+		SkillElement flywings=new SkillElement(PossibleUpdates.FLYWINGS, 0);
+		wings.addChild(flywings);
+		SkillElement battlewings=
+				new SkillElement(PossibleUpdates.BATTLEWINGS,0);
+		wings.addChild(battlewings);
+		
+		nextToHead.add(wings);
+		nextToHead.add(flywings);
+		nextToHead.add(battlewings);
+	}
+	private static void setNextToLegs(){
+		nextToLegs=new LinkedList<SkillElement>();
 
-		return toReturn;
+	}
+	private static void setLegs(){
+		legs=new LinkedList<SkillElement>();
+		
+	}
+	private static void setBody(){
+		body=new LinkedList<SkillElement>();
+		
+	}
+	private static void setHead(){
+		head=new LinkedList<SkillElement>();
+		
+	}
+	private static void setArms(){
+		arms=new LinkedList<SkillElement>();
+		
 	}
 }

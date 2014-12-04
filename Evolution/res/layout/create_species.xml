@@ -36,7 +36,7 @@
 	            android:id="@+id/button_create_species_start_game"
 	            android:layout_height="fill_parent"
 	            android:layout_width="wrap_content"
-	            android:background="@drawable/rounded_corner"
+	            android:background="@drawable/pressable_button"
 	            android:textSize="18sp"
 	            android:text="@string/create_species_button_play"
 	            android:layout_centerHorizontal="true"/>

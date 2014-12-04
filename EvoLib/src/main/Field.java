@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Field implements Serializable{
 	private Area area;
 	private int[] population;
-	private boolean[] isVisible;
+	private boolean[] isVisible; 
 	private int[] migrations;
 	public final int x, y;
 	

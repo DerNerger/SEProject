@@ -94,7 +94,7 @@
 	                android:id="@+id/start_simulation_button_startmenu"
 	                android:layout_width="fill_parent"
 	                android:layout_height="fill_parent"	                
-	                android:background="@drawable/rounded_corner"
+	                android:background="@drawable/pressable_button"
 	                android:text="@string/singleplayer_start_menu" />
 	            </LinearLayout>
 	            <LinearLayout 
@@ -107,7 +107,7 @@
 	                
 	                android:layout_width="fill_parent"
 	                android:layout_height="fill_parent"
-	                android:background="@drawable/rounded_corner" 
+	                android:background="@drawable/pressable_button" 
 	                android:text="@string/multiplayer_start_menu"/>
 	            </LinearLayout>
 	            <LinearLayout 
@@ -120,7 +120,7 @@
 	                android:layout_width="fill_parent"
 	                android:layout_height="fill_parent"
 	                android:text="Klick mich"
-	                android:background="@drawable/rounded_corner" />
+	                android:background="@drawable/pressable_button" />
 	            </LinearLayout>
 	            <LinearLayout 
 	                android:layout_width="fill_parent"
@@ -132,7 +132,7 @@
 	                android:layout_width="fill_parent"
 	                android:layout_height="fill_parent"
 	                android:text="@string/app_name"
-	                android:background="@drawable/rounded_corner" />
+	                android:background="@drawable/pressable_button" />
 	            </LinearLayout>
 	            
 	        </LinearLayout>

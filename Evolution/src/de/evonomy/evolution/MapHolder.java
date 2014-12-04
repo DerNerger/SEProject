@@ -186,8 +186,6 @@ public class MapHolder {
 			population[i]=0;
 		}
 		mySkills=new ArrayList<PossibleUpdates>();
-		//muss noch gelöscht werden
-		mySkills.add(PossibleUpdates.AASICLEGS);
 	}
 	public void updateSpecies(SpeciesUpdate update){
 		Log.e("Species","Speciesupdate incoming");

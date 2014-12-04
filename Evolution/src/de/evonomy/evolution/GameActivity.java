@@ -82,7 +82,6 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		    //Remove notification bar
 		  
 		    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 		    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		    super.onCreate(savedInstanceState);
 		    setContentView(R.layout.simulation_layout);

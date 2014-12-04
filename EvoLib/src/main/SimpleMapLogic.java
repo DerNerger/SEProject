@@ -284,6 +284,16 @@ public class SimpleMapLogic implements IMapLogic {
 			s.setMinTemp(s.getMinTemp()-20);
 			s.setMaxTemp(s.getMaxTemp()-20);
 			break;
+		case BATTLEWINGS:
+			s.setStrength(s.getStrength()+12);
+			break;
+		case WINGS:
+			s.setAgility(s.getAgility()+8);
+			break;
+		case FLYWINGS:
+			s.setAgility(s.getAgility()+4);
+			s.setMovementChance(s.getMovementChance()+0.3);
+			break;
 		default:
 			throw new RuntimeException("Type is not valid");
 		}
