@@ -41,5 +41,6 @@
     <string name="already_bought_dialog">Schon gekauft!</string>
     <string name="title_progress_dialog_update">Spezies wird weiterentwickelt</string>
     <string name="text_progress_dialog_update">Erbgut wird neu strukturiert...</string>
+    <string name="population_string">Population</string>
 
 </resources>

@@ -37,11 +37,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import main.FieldType;
 public class GameActivity extends FragmentActivity implements IPlayer{
 	private MapHolder holder;
@@ -53,7 +55,9 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Species[] species;
 	private Button speziesOverviewButton;
 	private Button speziesSkillButton;
-	
+	private TextView populationTextView;
+	//currently selected area
+	private int currentSelectedArea=-1;
 	public final int WIDTH=200;
 	public final int HEIGHT=100;
 	/*For player number,
@@ -64,7 +68,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private final String basepath = "basepathtopregeneratedmaps";
 	private boolean mapHasBeenSet=false;
 	private boolean firstSpeciesUpdate=false;
-	private int ACTUALICATIONTIME=2000;
+	private boolean isDrawing=false;
+	private int ACTUALICATIONTIME=250;
 	private SpeciesOverviewFragment frag;
 	private SkillSpeciesFragment frag2;
 	//registers Overview Tabs to update
@@ -87,7 +92,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		    setContentView(R.layout.simulation_layout);
 	        initListeners();
 	        actualizeThread= new Thread(actualize);
-	        actualizeThread.start();
+	        
 		    
 	        //get the playerspecies
 	        Species playerSpecies = (Species)getIntent().getExtras().get(CreateSpeciesActivity.SPECIESBUNDLE);
@@ -100,6 +105,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			    species = Species.getAiSpecies(playerSpecies);
 		        startController();
 	        }
+	        actualizeThread.start();
 	}//end on create
 	
 	
@@ -129,11 +135,13 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		holder.getMapFields()[x][y].setVisible(true);
 	}
 	public void changeAreaPopulation(int area,int[] population){
-		
+		holder.setAreaPopulation(area, population);
+		setAreaPopulation();
 	}
 	public void changeWorldPopulation(long[] population){
 		holder.changePopulation(population);
 		updateTabOverviews();
+		setWorldPopulation();
 	}
 	public void changeAreaLandType(int area, LandType landType){
 		holder.changeAreaLandType(area,landType);
@@ -179,15 +187,34 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		});
         
         redrawMap();
+        setOnTouchListeners();
         mapHasBeenSet=true;
 	}
 	
 	private void redrawMap(){
-runOnUiThread(new Runnable() {
+//		synchronized (actualize) {
+//			try {
+//				actualize.wait();
+//				Log.e("Thread", "waited");
+//			} catch (InterruptedException e) {
+//				synchronized (actualize) {
+//					actualize.notifyAll();
+//				}
+//				e.printStackTrace();
+//			}
+//		}
+		runOnUiThread(new Runnable() {
 			
 			@Override
 			public void run() {
+				
 				mapLinearLayout.invalidate();
+//				synchronized (actualize) {
+//					Log.e("Thread", "notified");
+//					actualize.notifyAll();
+//				}
+				
+
 			}
 		});
 		
@@ -195,27 +222,32 @@ runOnUiThread(new Runnable() {
 	Runnable actualize=new Runnable(){
 		@Override
 		public void run() {
+			outerloop:
 			while(!Thread.currentThread().isInterrupted()){
-				GameActivity.this.runOnUiThread(new Runnable() {
+
+				if (mapHasBeenSet) {
+					if(isDrawing) continue outerloop;
+					boolean draw = holder.drawMap();
+					 if(draw){
+						 redrawMap();
+						 
+					 }
+				}
 				
-					@Override
-					public void run() {
-						if(mapHasBeenSet)
-						redrawMap();
-						
-					}
-				});
 			
 				try {
 					Thread.sleep(ACTUALICATIONTIME);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
+					break outerloop;
 				}
 				
 			}
 		}
 	};
+	
 	
 	public void registerTabOverview(TabElementOverviewFragment tabfrag,int number){
 		registeredOverviewTabs[number]=tabfrag;
@@ -301,6 +333,8 @@ runOnUiThread(new Runnable() {
 				frag2.show(fm, "fragment_skill");
 			}
 		});
+        populationTextView=(TextView)
+        		findViewById(R.id.text_view_simulation_layout_current_pop);
 	}
 	
 	//only for singleplayerr
@@ -371,5 +405,72 @@ runOnUiThread(new Runnable() {
 	public int getPoints(){
 		return holder.getPoints();
 	}
+	private void setWorldPopulation(){
+		//only if no area isSelected
+		if(currentSelectedArea==-1){
+			setPopulationTextView(holder.getPopulation()[playernumber]);
+		}
+		
+	}
+	private void setPopulationTextView(final long population){
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				populationTextView.setText(
+						getResources().getString(R.string.population_string)+": "
+						+population);
+				
+			}
+		});
+		
+	}
+	private void setAreaPopulation(){
+		//only actualize if an area is selected
+		if(currentSelectedArea!=-1){
+			setPopulationTextView(holder.getAreaPopulation(
+					currentSelectedArea, playernumber));
+			//draw area lighter then others
+		}
+		
+	}
+	private void setOnTouchListeners(){
+		mapLinearLayout.setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction()==MotionEvent.ACTION_DOWN){
+					
+						isDrawing=true;
+						//get x and y and calculate Area from this
+						Log.e("Simulation", "Tap down");
+						float xEvent=event.getX();
+						float yEvent=event.getY();
+						//umrechnen in 
+						Log.e("Simulation", "dim x: "+mapLinearLayout.getWidth()+" y: "+mapLinearLayout.getHeight());
+						int x=(int)(xEvent*(200/(float)mapLinearLayout.getWidth()));
+						int y=(int)(yEvent*(100/(float)mapLinearLayout.getHeight()));
+						Log.e("Simulation", "Tap x: "+x+" y: "+y);
+						int newSelectedArea=holder.getArea(x, y);
+						if(newSelectedArea==currentSelectedArea){
+							currentSelectedArea=-1;
+							holder.unregisterAreaBuffer(newSelectedArea);
+						}
+						else{
+							holder.unregisterAreaBuffer(currentSelectedArea==-1? 0:currentSelectedArea);
+							currentSelectedArea=newSelectedArea;
+							holder.registerAreaBuffer(newSelectedArea);
+						}
+						//holder.redraw(currentSelectedArea);
+						setWorldPopulation();
+						setAreaPopulation();
+					
+						isDrawing=false;
+				}
+				return false;
+			}
+		});
+	}
+	
 }
 

@@ -23,13 +23,19 @@ public class MapHolder {
 	private static final int LENGTHOFCIRCLE=2;
 	private HashMap<FieldType,Paint> FieldTypes;
 	private final Paint black=new Paint();
+	private Paint color;
+	private Paint fieldColor;
+	private Paint white;
 	private Canvas canvas;
 	private int heightPerBlock;
 	private int widthPerBlock;
+	private int areaBuffer=-1;
+	private int areaUnbuffer=-1;
 	/*Points to skill species!!*/
 	private int points;
 	public final int NUMBEROFBLOCKSHEIGHT=100;
 	public final int NuMBEROFBLOCKSWIDTH=200;
+	private boolean isReadyToDraw=false;
 	private Paint[] speciesColors;
 	private Species[] species;
 	private long population[];
@@ -65,7 +71,9 @@ public class MapHolder {
         firstDraw();
 	}
 	private void initColors() {
-		black.setColor(Color.parseColor("#FFFFFF"));
+		black.setColor(Color.parseColor("#000000"));
+		white=new Paint();
+		white.setColor(Color.parseColor("#FFFFFF"));
         FieldTypes=new HashMap<FieldType,Paint>();
         Paint water =new Paint();
         water.setColor(Color.parseColor("#256DEA"));
@@ -105,11 +113,30 @@ public class MapHolder {
 		
 		areas[area].changeLandType(landType,FieldTypes.get(landType.getFieldType()));
 		//draw complete Map new
+	}
+	public boolean drawMap(){
+		//check for areas in buffer to be drawn lighter
+		if(areaUnbuffer!=-1){
+			//Unregister all areas
+			for(MapArea a:areas){
+				a.unregisterClicked();
+			}
+		}
+		if(areaBuffer!=-1&&areaBuffer!=areaUnbuffer){
+			registerArea(areaBuffer);
+		}
+		areaBuffer=-1;
+		areaUnbuffer=-1;
+		if(!isReadyToDraw) return false;
+		isReadyToDraw=false;
 		for(int x=0;x<NuMBEROFBLOCKSWIDTH;x++){
 			for( int y=0;y<NUMBEROFBLOCKSHEIGHT;y++){
 				if(mapFields[x][y].isVisible()){
 					double alpha=mapFields[x][y].getAlpha();
-					canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
+					canvas.drawRect(mapFields[x][y].getRect(), white);
+					Paint fieldColor=areas[mapFields[x][y].getArea()].getFieldType();
+					fieldColor.setAlpha(areas[mapFields[x][y].getArea()].getAlpha());
+					canvas.drawRect(mapFields[x][y].getRect(), fieldColor);
 					//TODO draw circles
 					int[] circles=mapFields[x][y].getSpeciesCircle();
 					outerloop:
@@ -119,7 +146,7 @@ public class MapHolder {
 						//draw a random 1x1 
 						int xC=((int) (Math.random()*(widthPerBlock-1)))+x*widthPerBlock;
 						int yC=((int) (Math.random()*(heightPerBlock-1)))+y*heightPerBlock;
-						Paint color=speciesColors[circles[i]];
+						color=speciesColors[circles[i]];
 						color.setAlpha((int)/*percentage * */(alpha*255));
 						canvas.drawRect(xC, yC, xC+LENGTHOFCIRCLE, yC+LENGTHOFCIRCLE, color);
 					}
@@ -128,30 +155,21 @@ public class MapHolder {
 				}
 			}
 		}
+		isReadyToDraw=true;
+		
+		return true;
 	}
 	//
 	public void changeFieldPopulation(int x,int y, int[] populations){
 		//punkte neue ausrechnen die auf einem feld angezeigt werden sollen
 		//daraus ein Array von Rects machen
-		double alpha=mapFields[x][y].calculateSpeciesCircle(populations);
-		if(mapFields[x][y].isVisible()){
-			canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
-			//TODO draw circles
-			int[] circles=mapFields[x][y].getSpeciesCircle();
-			outerloop:
-			for(int i=0;i<circles.length;i++){
-				//if no color to draw next
-				if(circles[i]<0) break outerloop;
-				//draw a random 1x1 
-				int xC=((int) (Math.random()*(widthPerBlock-1)))+x*widthPerBlock;
-				int yC=((int) (Math.random()*(heightPerBlock-1)))+y*heightPerBlock;
-				Paint color=speciesColors[circles[i]];
-				color.setAlpha((int)/*percentage * */(alpha*255));
-				canvas.drawRect(xC, yC, xC+LENGTHOFCIRCLE, yC+LENGTHOFCIRCLE, color);
-			}
-		}else{
-			canvas.drawRect(mapFields[x][y].getRect(), black);
-		}
+		mapFields[x][y].calculateSpeciesCircle(populations);
+		
+	}
+	/**
+	 * Diese Methode soll shcon beim eingehen der pakete 
+	 */
+	private void drawRectOnfield(){
 		
 	}
 	public FieldRect[][] getMapFields() {
@@ -170,6 +188,7 @@ public class MapHolder {
 				canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
 			}
 		}
+		isReadyToDraw=true;
 	}
 	private void initSpecies(Species[] species){
 		if(species==null){
@@ -232,5 +251,38 @@ public class MapHolder {
 	}
 	public void setPoints(int points){
 		this.points=points;
+	}
+	public void setAreaPopulation(int area,int[] newPopulation){
+		areas[area].setPopualtion(newPopulation);
+	}
+	public int getAreaPopulation(int area,int playernumber){
+		return areas[area].getPopulaiton(playernumber);
+	}
+	public int getArea(int x,int y){
+		return mapFields[x][y].getArea();
+	}
+	private void unregisterArea(int area){
+		areas[area].unregisterClicked();
+	}
+	private void registerArea(int area){
+		areas[area].registerClicked();
+	}
+	public void registerAreaBuffer(int area){
+		areaBuffer= area;
+	}
+	public void unregisterAreaBuffer(int area){
+		areaUnbuffer=area;
+	}
+	public void redraw(int area){
+
+			if(area!=-1)
+				changeAreaLandType(area, areas[area].getLandType());
+			else
+				changeAreaLandType(0, areas[0].getLandType());
+		
+	}
+
+	public boolean isReadyToDraw(){
+		return isReadyToDraw;
 	}
 }
