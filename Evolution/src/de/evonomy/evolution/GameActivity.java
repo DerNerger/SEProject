@@ -113,7 +113,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
         client.sendPacket(new NamePacket("this", "client", oname));
         SpeciesPacket sp = new SpeciesPacket("this", "server", playerSpecies);
         client.sendPacket(sp);
-        
+        controller = client;
         
 		FragmentManager fm = getSupportFragmentManager();
 		waitFrag.setNames(info.getPlayers());
