@@ -257,7 +257,7 @@ containing a value of this type.
         public static final int spinnerPlayer2=0x7f0a0011;
         public static final int spinnerPlayer3=0x7f0a0014;
         public static final int spinnerPlayer4=0x7f0a0017;
-        public static final int start_simulation_button_startmenu=0x7f0a0022;
+        public static final int start_simulation_button_startmenu_neu=0x7f0a0022;
         public static final int statistics_button_startmenu=0x7f0a0024;
         public static final int strength_species_attribute_view=0x7f0a0074;
         public static final int temperature_view_create_species=0x7f0a0029;
