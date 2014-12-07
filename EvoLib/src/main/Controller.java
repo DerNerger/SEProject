@@ -57,7 +57,7 @@ public class Controller implements Runnable, Skillable{
 			try {
 				Thread.sleep(waitTime);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				break;
 			}
 			
 			
