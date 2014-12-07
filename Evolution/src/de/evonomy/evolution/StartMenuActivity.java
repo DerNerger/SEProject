@@ -31,7 +31,7 @@ public class StartMenuActivity extends Activity {
 	    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_menu);
-        startSimulation=(Button) findViewById(R.id.start_simulation_button_startmenu);
+        startSimulation=(Button) findViewById(R.id.start_simulation_button_startmenu_neu);
         multiplayer_simulation_button_startmenu = (Button) findViewById(R.id.multiplayer_simulation_button_startmenu);
         startSimulation.setOnClickListener(new View.OnClickListener() {
 			

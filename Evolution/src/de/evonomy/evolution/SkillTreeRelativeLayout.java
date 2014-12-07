@@ -41,13 +41,22 @@ public class SkillTreeRelativeLayout extends RelativeLayout {
 				.getSkillElement().getUpdate())) toPaint=paint;
 		float anchorXRoot=root.getAnchorX();
 		float anchorYRoot=root.getAnchorTopY();
+		boolean oneChildIsSkilled=false;
 		for (SkillElementView child:root.getChilds()){
+			//if child is not skillable because of already skilled neighbour, 
+			//set paint to grey again
+			if(!child.isSkillable()) toPaint=greyPaint;
+			else if(((GameActivity)context).isSkilled(root
+					.getSkillElement().getUpdate()))toPaint=paint;
+			//test if one child is Skilled, then the vertical line should be
+			//drawn black
+			if(((GameActivity)context).isSkilled(child
+					.getSkillElement().getUpdate())){
+				oneChildIsSkilled=true;
+			}
 			float anchorXChild=child.getAnchorX();
 			float anchorYChild=child.getAnchorBottomY();
-			//vertically up from root to half of height
-			canvas.drawLine(anchorXRoot, anchorYRoot, anchorXRoot
-					,anchorYRoot-(anchorYRoot-anchorYChild)/2 -(widthOfLine/2)
-					, toPaint);
+			
 			//horizontal from root to child
 			canvas.drawLine(anchorXRoot
 					,anchorYRoot-(anchorYRoot-anchorYChild)/2 ,
@@ -57,6 +66,12 @@ public class SkillTreeRelativeLayout extends RelativeLayout {
 			canvas.drawLine(anchorXChild,
 					anchorYRoot-(anchorYRoot-anchorYChild)/2+(widthOfLine/2),
 					anchorXChild, anchorYChild, toPaint);
+			//vertically up from root to half of height
+			//should be always drawn black if on child is Skilled
+			//last drawn,so it can't be overdrawn
+			canvas.drawLine(anchorXRoot, anchorYRoot, anchorXRoot
+					,anchorYRoot-(anchorYRoot-anchorYChild)/2 -(widthOfLine/2)
+					, oneChildIsSkilled ? paint : toPaint);
 		}
 		
 	}

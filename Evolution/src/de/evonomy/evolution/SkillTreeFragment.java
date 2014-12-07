@@ -149,6 +149,8 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 				rootSkillViews.add(sk);
 			}
 		}
+		
+		
 	}
 	
 	public void createSkillViewTreeFromElementTree(){
@@ -160,6 +162,22 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 				if(toAddChildren.getSkillElement().getChilds().contains(
 						toAdd.getSkillElement())){
 					toAddChildren.addChildren(toAdd);
+				}
+			}
+		}
+		//branch controlls and set unskillable for branch 
+		for(SkillElementView toCheck: skillViews ){
+			for(SkillElementView child: toCheck.getChilds()){
+				// when the childupdate is already skilled, block all
+				//other paths
+				if(((GameActivity) getActivity())
+						.isSkilled(child.getSkillElement().getUpdate())){
+					for(SkillElementView toBlock:toCheck.getChilds()){
+						if(toBlock!=child){
+							Log.e("unskillable setzen", "Skill: " +toBlock.getSkillElement().getUpdate());
+							toBlock.branchUnskillable();
+						}
+					}
 				}
 			}
 		}

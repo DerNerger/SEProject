@@ -18,12 +18,15 @@ public class SkillElementView extends LinearLayout {
 	private boolean clickable=true;
 	private Context context;
 	private SkillTreeFragment frago;
+	//is set to false, if other zweig of parent is skilled
+	private boolean isSkillable;
 	public SkillElementView(final Context context,final SkillElement element
 			,final SkillTreeFragment frago) { 
 		super(context);
 		this.element=element;
 		this.context=context;
 		this.frago=frago;
+		isSkillable=true;
 		inflate(context,R.layout.skill_element_view, this);
 		
 		childs=new LinkedList<SkillElementView>();
@@ -41,7 +44,7 @@ public class SkillElementView extends LinearLayout {
 			
 			@Override
 			public void onClick(View v) {
-				if(clickable){
+				if(clickable&&isSkillable){
 					//TODO start the Dialog to display all the information
 					SkillDialogFragment frag=
 							SkillDialogFragment
@@ -88,6 +91,15 @@ public class SkillElementView extends LinearLayout {
 		default:button.setBackgroundDrawable(getResources()
 				.getDrawable(R.drawable.ic_launcher));
 		}
+	}
+	public void branchUnskillable(){
+		isSkillable=false;
+		for(SkillElementView cu:childs){
+			cu.branchUnskillable();
+		}
+	}
+	public boolean isSkillable(){
+		return isSkillable;
 	}
 
 }
