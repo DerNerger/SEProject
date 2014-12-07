@@ -2,15 +2,18 @@ package de.evonomy.network;
 
 import android.util.Log;
 import main.Change;
+import main.Skill;
+import main.Skillable;
 import main.VisualMap;
 import de.evonomy.evolution.GameActivity;
 import gameProtocol.ChangePacket;
 import gameProtocol.GameProtocol;
 import gameProtocol.ReadyInformation;
+import gameProtocol.SkillPacket;
 import gameProtocol.VisualMapPacket;
 import simpleNet.Packet;
 
-public class GameClient extends SessionClient{
+public class GameClient extends SessionClient implements Skillable{
 	
 	private GameActivity activity;
 
@@ -61,5 +64,11 @@ public class GameClient extends SessionClient{
 
 	public void sendPacket(Packet pack){
 		super.sendPacket(pack);
+	}
+
+	@Override
+	public void skill(Skill skill) {
+		SkillPacket packet = new SkillPacket("this", "server", skill);
+		sendPacket(packet);
 	}
 }
