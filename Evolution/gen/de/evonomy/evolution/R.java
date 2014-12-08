@@ -161,7 +161,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Button_register_now=0x7f0a001f;
-        public static final int agility_species_attribute_view=0x7f0a0073;
+        public static final int agility_species_attribute_view=0x7f0a0074;
         public static final int buttonChat=0x7f0a001c;
         public static final int buttonInvitePlayer=0x7f0a000e;
         public static final int buttonStartGameWithFriends=0x7f0a0010;
@@ -170,7 +170,7 @@ containing a value of this type.
         public static final int button_create_species_start_game=0x7f0a0028;
         public static final int button_fragment_skill_dialog_show_changes=0x7f0a0051;
         public static final int button_fragment_skill_dialog_skill=0x7f0a0057;
-        public static final int button_game_activity_species_skill=0x7f0a0070;
+        public static final int button_game_activity_species_skill=0x7f0a0071;
         public static final int button_go_online=0x7f0a0007;
         public static final int button_logout=0x7f0a000c;
         public static final int button_play_online=0x7f0a0009;
@@ -180,7 +180,7 @@ containing a value of this type.
         public static final int button_select_world_planet3=0x7f0a006a;
         public static final int button_select_world_planet4=0x7f0a006c;
         public static final int button_select_world_random_generate=0x7f0a006d;
-        public static final int button_skill_element_view=0x7f0a0071;
+        public static final int button_skill_element_view=0x7f0a0072;
         public static final int checkBox1rdy=0x7f0a005f;
         public static final int checkBox2rdy=0x7f0a0061;
         public static final int checkBox3rdy=0x7f0a0063;
@@ -214,7 +214,7 @@ containing a value of this type.
         public static final int image_button_create_species_question_mark_sceleton=0x7f0a003e;
         public static final int image_view_movement_view=0x7f0a0066;
         public static final int image_view_resource_demand_view=0x7f0a0067;
-        public static final int intelligence_species_attribute_view=0x7f0a0072;
+        public static final int intelligence_species_attribute_view=0x7f0a0073;
         public static final int left_container_ll_startmenu=0x7f0a0020;
         public static final int linear_layout_fragment_skill_tree_container=0x7f0a005a;
         public static final int linear_layout_skill_body=0x7f0a004a;
@@ -245,24 +245,24 @@ containing a value of this type.
         public static final int radio_button_create_species_thick_fur=0x7f0a0043;
         public static final int radio_button_create_species_thin_fur=0x7f0a0042;
         public static final int radio_button_create_species_water=0x7f0a0037;
-        public static final int recreation_relative_layout_species_attribute_view=0x7f0a0076;
-        public static final int recreation_species_attribute_view=0x7f0a0077;
+        public static final int recreation_relative_layout_species_attribute_view=0x7f0a0077;
+        public static final int recreation_species_attribute_view=0x7f0a0078;
         public static final int resource_demand_view_fragment_skill_dialog=0x7f0a0054;
         public static final int right_container_ll_startmenu=0x7f0a0021;
-        public static final int social_species_attribute_view=0x7f0a0075;
+        public static final int social_species_attribute_view=0x7f0a0076;
         public static final int species_attribute_view_create_species=0x7f0a0045;
         public static final int species_attribute_view_fragment_skill_dialog=0x7f0a0056;
-        public static final int species_attribute_view_overview=0x7f0a007a;
+        public static final int species_attribute_view_overview=0x7f0a007b;
         public static final int speciesoverview_button_simulation_layout=0x7f0a006f;
         public static final int spinnerPlayer2=0x7f0a0011;
         public static final int spinnerPlayer3=0x7f0a0014;
         public static final int spinnerPlayer4=0x7f0a0017;
         public static final int start_simulation_button_startmenu_neu=0x7f0a0022;
         public static final int statistics_button_startmenu=0x7f0a0024;
-        public static final int strength_species_attribute_view=0x7f0a0074;
+        public static final int strength_species_attribute_view=0x7f0a0075;
         public static final int temperature_view_create_species=0x7f0a0029;
         public static final int temperature_view_fragment_skill_dialog=0x7f0a0053;
-        public static final int temperature_view_tab_element_overview=0x7f0a0079;
+        public static final int temperature_view_tab_element_overview=0x7f0a007a;
         public static final int textSp1W8=0x7f0a005e;
         public static final int textSp2W8=0x7f0a0060;
         public static final int textSp3W8=0x7f0a0062;
@@ -281,10 +281,11 @@ containing a value of this type.
         public static final int text_view_create_species_points_left_text=0x7f0a0034;
         public static final int text_view_fragment_skill_dialog_desc=0x7f0a0052;
         public static final int text_view_fragment_skill_dialog_name_skill=0x7f0a0050;
-        public static final int text_view_max_temp_temperature_view=0x7f0a007c;
-        public static final int text_view_min_temp_temperature_view=0x7f0a007b;
+        public static final int text_view_max_temp_temperature_view=0x7f0a007d;
+        public static final int text_view_min_temp_temperature_view=0x7f0a007c;
         public static final int text_view_resource_demand_view=0x7f0a0068;
-        public static final int textview_tab_element_overview_population=0x7f0a0078;
+        public static final int text_view_simulation_layout_current_pop=0x7f0a0070;
+        public static final int textview_tab_element_overview_population=0x7f0a0079;
     }
     public static final class integer {
         public static final int GamePort=0x7f040003;
@@ -337,6 +338,7 @@ containing a value of this type.
         public static final int hello_world=0x7f070002;
         public static final int host=0x7f070000;
         public static final int multiplayer_start_menu=0x7f070006;
+        public static final int population_string=0x7f070022;
         public static final int random_generate_world=0x7f070004;
         public static final int res_dem_stat_1_str=0x7f070018;
         public static final int res_dem_stat_2_str=0x7f070019;
