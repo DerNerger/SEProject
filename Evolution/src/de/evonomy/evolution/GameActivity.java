@@ -8,9 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Date;
-import java.util.HashMap;
-
-import de.evonomy.network.CreateGameFragment;
 import de.evonomy.network.GameClient;
 import de.evonomy.network.WaitForSpeciesFragment;
 
@@ -31,11 +28,9 @@ import main.VisualMap;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,7 +39,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import main.FieldType;
 public class GameActivity extends FragmentActivity implements IPlayer{
 	private MapHolder holder;
 	private LinearLayout mapLinearLayout;
@@ -230,6 +224,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 					boolean draw = holder.drawMap();
 					 if(draw){
 						 redrawMap();
+						 setWorldPopulation();
+						 setAreaPopulation();
 						 
 					 }
 				}
@@ -462,8 +458,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 							holder.registerAreaBuffer(newSelectedArea);
 						}
 						//holder.redraw(currentSelectedArea);
-						setWorldPopulation();
-						setAreaPopulation();
+						
 					
 						isDrawing=false;
 				}
