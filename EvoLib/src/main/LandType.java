@@ -63,7 +63,7 @@ public class LandType implements Serializable{
 	
 	//network-----------------------------------------------------------------
 	public static LandType parseLandType(String str){
-		String[] parts = str.split("#");
+		String[] parts = str.split(">");
 		int minTemp = Integer.parseInt(parts[0]);
 		int maxTemp = Integer.parseInt(parts[1]);
 		FieldType type = FieldType.valueOf(parts[2]);
@@ -74,10 +74,10 @@ public class LandType implements Serializable{
 	
 	public String getNetwork(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(minTemp+"#");
-		sb.append(maxTemp+"#");
-		sb.append(type+"#");
-		sb.append(naturalEnemies+"#");
+		sb.append(minTemp+">");
+		sb.append(maxTemp+">");
+		sb.append(type+">");
+		sb.append(naturalEnemies+">");
 		sb.append(resources);
 		return sb.toString();
 	}
