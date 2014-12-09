@@ -114,6 +114,7 @@ public class VisualMap {
 		Map map = Map.fromRandom(200, 100, species, pct);
 		VisualMap visMap = map.getVisualRepresentation();
 		String a = visMap.getNetwork();
+		System.out.println(a);
 		VisualMap visMap2 = VisualMap.parseVisualMap(a, 200, 100);
 	}
 }

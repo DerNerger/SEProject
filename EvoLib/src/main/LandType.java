@@ -10,6 +10,9 @@ import java.io.Serializable;
  *Ressources usw bestimmen die Überlebensfähigkeit der Spezies auf diesem LandType
  */
 public class LandType implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	public LandType(int minTemp, int maxTemp, FieldType type,
 				int naturalEnemies, int resources) {
 			super();
@@ -60,11 +63,22 @@ public class LandType implements Serializable{
 	
 	//network-----------------------------------------------------------------
 	public static LandType parseLandType(String str){
-		FieldType type = FieldType.valueOf(str);
-		return new LandType(5, 5, type, 5, 5);
+		String[] parts = str.split(">");
+		int minTemp = Integer.parseInt(parts[0]);
+		int maxTemp = Integer.parseInt(parts[1]);
+		FieldType type = FieldType.valueOf(parts[2]);
+		int naturalEnemies = Integer.parseInt(parts[3]);
+		int resources = Integer.parseInt(parts[4]);
+		return new LandType(minTemp, maxTemp, type, naturalEnemies, resources);
 	}
 	
 	public String getNetwork(){
-		return type.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(minTemp+">");
+		sb.append(maxTemp+">");
+		sb.append(type+">");
+		sb.append(naturalEnemies+">");
+		sb.append(resources);
+		return sb.toString();
 	}
 }

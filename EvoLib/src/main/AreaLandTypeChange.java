@@ -36,4 +36,11 @@ public class AreaLandTypeChange extends Change {
 		LandType newLandType = LandType.parseLandType(parts[2]);
 		return new AreaLandTypeChange(area, newLandType);
 	}
+	
+	public static void main(String[] args){
+		AreaLandTypeChange change = new AreaLandTypeChange(0, new LandType(1, 2, FieldType.DESERT, 3, 4));
+		String str = change.getNetwork();
+		System.out.println(str);
+		AreaLandTypeChange c2 = AreaLandTypeChange.parseAreaLandTypeChange(str);
+	}
 }
