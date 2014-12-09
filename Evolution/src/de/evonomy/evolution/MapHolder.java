@@ -5,7 +5,11 @@ import java.util.HashMap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import main.FieldType;
 import main.LandType;
 import main.PossibleUpdates;
@@ -19,16 +23,19 @@ public class MapHolder {
 	private static final String SPEZIESFOUR = "#FF8400";
 	private FieldRect[][] mapFields;
 	private MapArea[] areas;
-	public static final int MAXCIRCLES=3;
+	public static final int MAXCIRCLES=2;
 	private static final int LENGTHOFCIRCLE=2;
 	private HashMap<FieldType,Paint> FieldTypes;
 	private final Paint black=new Paint();
 	private Paint color;
 	private Paint fieldColor;
 	private Paint white;
-	private Canvas canvas;
-	private int heightPerBlock;
-	private int widthPerBlock;
+	SurfaceHolder mapHolder;
+	SurfaceHolder selHolder;
+	SurfaceHolder pointsHolder;
+	private boolean mapToBeDrawn=true;
+	private float heightPerBlock;
+	private float widthPerBlock;
 	private int areaBuffer=-1;
 	private int areaUnbuffer=-1;
 	/*Points to skill species!!*/
@@ -42,14 +49,19 @@ public class MapHolder {
 	//Holds current evolutions of species
 	private ArrayList<PossibleUpdates> mySkills;
 
-	public MapHolder(Canvas canvas, int height, int width,int[][] areasOfFields,LandType[] areasLandType,Species species[]){
-		this.canvas=canvas;
+	public MapHolder(SurfaceView mapHolder,SurfaceView selHolder,SurfaceView pointsHolder, int height, int width,int dispWidth,int dispHeight,int[][] areasOfFields,LandType[] areasLandType,Species species[]){
+		this.mapHolder=mapHolder.getHolder();
+		this.selHolder=selHolder.getHolder();
+		this.pointsHolder=pointsHolder.getHolder();
+		this.mapHolder.setFormat(PixelFormat.TRANSPARENT);
+		this.selHolder.setFormat(PixelFormat.TRANSPARENT);
+		this.pointsHolder.setFormat(PixelFormat.TRANSPARENT);
         initColors();
         initSpecies(species);
         points=0;
         mapFields=new FieldRect[NuMBEROFBLOCKSWIDTH][NUMBEROFBLOCKSHEIGHT];
-        heightPerBlock=height/NUMBEROFBLOCKSHEIGHT;
-        widthPerBlock=width/NuMBEROFBLOCKSWIDTH;
+        heightPerBlock=((float)dispHeight)/((float)NUMBEROFBLOCKSHEIGHT);
+        widthPerBlock=((float)dispWidth)/((float)NuMBEROFBLOCKSWIDTH);
         FieldType[] areasFieldType= new FieldType[areasLandType.length];
         int i =0;
         for(LandType currentArea:areasLandType){
@@ -68,7 +80,8 @@ public class MapHolder {
         		mapFields[x][y].setVisible(true);
         	}
         }
-        firstDraw();
+        drawMapLayout();
+        
 	}
 	private void initColors() {
 		black.setColor(Color.parseColor("#000000"));
@@ -112,53 +125,10 @@ public class MapHolder {
 	public void changeAreaLandType(int area,LandType landType){
 		
 		areas[area].changeLandType(landType,FieldTypes.get(landType.getFieldType()));
+		mapToBeDrawn=true;
 		//draw complete Map new
 	}
-	public boolean drawMap(){
-		//check for areas in buffer to be drawn lighter
-		if(areaUnbuffer!=-1){
-			//Unregister all areas
-			for(MapArea a:areas){
-				a.unregisterClicked();
-			}
-		}
-		if(areaBuffer!=-1&&areaBuffer!=areaUnbuffer){
-			registerArea(areaBuffer);
-		}
-		areaBuffer=-1;
-		areaUnbuffer=-1;
-		if(!isReadyToDraw) return false;
-		isReadyToDraw=false;
-		for(int x=0;x<NuMBEROFBLOCKSWIDTH;x++){
-			for( int y=0;y<NUMBEROFBLOCKSHEIGHT;y++){
-				if(mapFields[x][y].isVisible()){
-					double alpha=mapFields[x][y].getAlpha();
-					canvas.drawRect(mapFields[x][y].getRect(), white);
-					Paint fieldColor=areas[mapFields[x][y].getArea()].getFieldType();
-					fieldColor.setAlpha(areas[mapFields[x][y].getArea()].getAlpha());
-					canvas.drawRect(mapFields[x][y].getRect(), fieldColor);
-					//TODO draw circles
-					int[] circles=mapFields[x][y].getSpeciesCircle();
-					outerloop:
-					for(int i=0;i<circles.length;i++){
-						//if no color to draw next
-						if(circles[i]<0) break outerloop;
-						//draw a random 1x1 
-						int xC=((int) (Math.random()*(widthPerBlock-1)))+x*widthPerBlock;
-						int yC=((int) (Math.random()*(heightPerBlock-1)))+y*heightPerBlock;
-						color=speciesColors[circles[i]];
-						color.setAlpha((int)/*percentage * */(alpha*255));
-						canvas.drawRect(xC, yC, xC+LENGTHOFCIRCLE, yC+LENGTHOFCIRCLE, color);
-					}
-				}else{
-					canvas.drawRect(mapFields[x][y].getRect(), black);
-				}
-			}
-		}
-		isReadyToDraw=true;
-		
-		return true;
-	}
+
 	//
 	public void changeFieldPopulation(int x,int y, int[] populations){
 		//punkte neue ausrechnen die auf einem feld angezeigt werden sollen
@@ -166,6 +136,74 @@ public class MapHolder {
 		mapFields[x][y].calculateSpeciesCircle(populations);
 		
 	}
+	/**
+	 * These three methods build the drawing of the map
+	 * the underlying map is redrawn every x(probably 2)s, but only if a change
+	 * occured
+	 * the selecetionCanvas draws a selected area, if an area is selected,
+	 *  an ObjectAnimator gets created, which is destroyed when the selection
+	 *  changes. this layer is over the map and under
+	 *  the pointscanvas is redrawn every y(probably 0.3) seconds to draw,
+	 *  with the current data, the points for the species on the screen
+	 *  
+	 * */
+	public boolean drawMapLayout() {
+		
+		if (mapToBeDrawn) {
+			Canvas mapCanvas=mapHolder.lockCanvas();
+			if(mapCanvas==null) return false;
+			mapCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
+			for (int x = 0; x < NuMBEROFBLOCKSWIDTH; x++) {
+				for (int y = 0; y < NUMBEROFBLOCKSHEIGHT; y++) {
+					if (mapFields[x][y].isVisible()) {
+						Paint fieldColor = areas[mapFields[x][y].getArea()]
+								.getFieldType();
+						mapCanvas.drawRect(mapFields[x][y].getRect(), fieldColor);
+					}
+				}
+			}
+
+			mapToBeDrawn = false;
+			mapHolder.unlockCanvasAndPost(mapCanvas);
+		}else{
+			return false;
+		}
+		return true;
+	}
+	public void drawPointsLayout(){
+		Canvas pointsCanvas=pointsHolder.lockCanvas();
+		if(pointsCanvas==null) return;
+		pointsCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
+		for (int x = 0; x < NuMBEROFBLOCKSWIDTH; x++) {
+			for (int y = 0; y < NUMBEROFBLOCKSHEIGHT; y++) {
+				if (mapFields[x][y].isVisible()) {
+					double alpha = mapFields[x][y].getAlpha();
+					int[] circles = mapFields[x][y].getSpeciesCircle();
+					outerloop: for (int i = 0; i < circles.length; i++) {
+						// if no color to draw next
+						int tmp=circles[i];
+						if (tmp < 0)
+							break outerloop;
+						// draw a random 1x1
+						int xC =(int)( ( (Math.random() * (widthPerBlock - 1)))
+								+ x * widthPerBlock);
+						int yC =(int)( ( (Math.random() * (heightPerBlock - 1)))
+								+ y * heightPerBlock);
+						color = speciesColors[tmp];
+						color.setAlpha((int) /* percentage * */(alpha * 255));
+						pointsCanvas.drawRect(xC, yC, xC + (widthPerBlock/4)*LENGTHOFCIRCLE, yC
+								+ (heightPerBlock/4)*LENGTHOFCIRCLE, color);
+					}
+				}
+			}
+		}
+		pointsHolder.unlockCanvasAndPost(pointsCanvas);
+	}
+	public void drawAreaLayout(int area){
+		
+	}
+	
+	
 	/**
 	 * Diese Methode soll shcon beim eingehen der pakete 
 	 */
@@ -178,18 +216,7 @@ public class MapHolder {
 	public void changeFieldVisibility(int x, int y){
 		mapFields[x][y].setVisible(true);	
 	}
-	public Canvas getCanvas(){
-		return canvas;
-	}
-	//TODO firstdraw shouldnot show the whole map
-	private void firstDraw(){
-		for(int x=0;x<NuMBEROFBLOCKSWIDTH;x++){
-			for(int y=0;y<NUMBEROFBLOCKSHEIGHT;y++){
-				canvas.drawRect(mapFields[x][y].getRect(), areas[mapFields[x][y].getArea()].getFieldType());
-			}
-		}
-		isReadyToDraw=true;
-	}
+
 	private void initSpecies(Species[] species){
 		if(species==null){
 			species=new Species[4];

@@ -20,4 +20,7 @@
         <attr name="movement" format="float"/>
         
     </declare-styleable>
+    <declare-styleable name="GameGLSurfaceView">
+        
+    </declare-styleable>
 </resources>

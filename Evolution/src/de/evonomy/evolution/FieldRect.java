@@ -1,6 +1,7 @@
 package de.evonomy.evolution;
 
-import android.graphics.Rect;
+
+import android.graphics.RectF;
 
 public class FieldRect {
 	private boolean visible;
@@ -8,11 +9,12 @@ public class FieldRect {
 	private double alpha=0;;
 	//hold 6 values, if value 0 to 3 this species gets a circle, if not one circle less, maximum 6
 	private int[] speciesCircle= new int[MapHolder.MAXCIRCLES];
-	private Rect rect;
-	public FieldRect(int x, int y,int fieldHeight,int fieldWidth, int area){
+	private RectF rect;
+	public FieldRect(int x, int y,float fieldHeight,float fieldWidth, int area){
 		this.visible=false;
-		rect= new Rect(x*fieldWidth,y*fieldHeight,x*fieldWidth+fieldWidth,y*fieldHeight+fieldHeight);
+		rect= new RectF(x*fieldWidth,y*fieldHeight,x*fieldWidth+fieldWidth,y*fieldHeight+fieldHeight);
 		this.area=area;
+		
 		
 	}
 	public boolean isVisible() {
@@ -24,7 +26,7 @@ public class FieldRect {
 	public int getArea() {
 		return area;
 	}
-	public Rect getRect() {
+	public RectF getRect() {
 		return rect;
 	}
 	/*
