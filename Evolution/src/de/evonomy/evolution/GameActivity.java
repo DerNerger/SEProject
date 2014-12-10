@@ -24,6 +24,7 @@ import main.Skillable;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
@@ -188,7 +189,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
         Display display =getWindowManager().getDefaultDisplay();
         holder=new MapHolder(mapBackgroundLL,selectionLL,pointsLL, 400, 800,display.getWidth(),display.getHeight()-display.getHeight()/6, areaNumberOfFields, areasLandType,species);
 
-//        setOnTouchListeners();
+        setOnTouchListeners();
         mapHasBeenSet=true;
 	}
 	
@@ -269,6 +270,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	
 	protected void onDestroy(){
 		super.onDestroy();
+		
 		actualizeThread.interrupt();
 		controllerThread.interrupt();
 		actualizeMapThread.interrupt();
@@ -289,6 +291,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	@Override
 	public void onBackPressed(){
 		super.onBackPressed();
+		
 		finish();
 	}
 	private byte[] readFile(String path) throws IOException {
@@ -431,39 +434,47 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		}
 		
 	}
-//	private void setOnTouchListeners(){
-//		mapBackgroundLL.setOnTouchListener(new View.OnTouchListener() {
-//			
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				if(event.getAction()==MotionEvent.ACTION_DOWN){
-//						//get x and y and calculate Area from this
-//						Log.e("Simulation", "Tap down");
-//						float xEvent=event.getX();
-//						float yEvent=event.getY();
-//						//umrechnen in 
-//						Log.e("Simulation", "dim x: "+mapBackgroundLL.getWidth()+" y: "+mapBackgroundLL.getHeight());
-//						int x=(int)(xEvent*(200/(float)mapBackgroundLL.getWidth()));
-//						int y=(int)(yEvent*(100/(float)mapBackgroundLL.getHeight()));
-//						Log.e("Simulation", "Tap x: "+x+" y: "+y);
-////						int newSelectedArea=holder.getArea(x, y);
-////						if(newSelectedArea==currentSelectedArea){
-////							currentSelectedArea=-1;
-////							holder.unregisterAreaBuffer(newSelectedArea);
-////						}
-////						else{
-////							holder.unregisterAreaBuffer(currentSelectedArea==-1? 0:currentSelectedArea);
-////							currentSelectedArea=newSelectedArea;
-////							holder.registerAreaBuffer(newSelectedArea);
-////						}
-////						//holder.redraw(currentSelectedArea);
-//						
-//				}
-//				return false;
-//			}
-//		});
-//	}
-//	
+	private void setOnTouchListeners(){
+		mapHolderRL.setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction()==MotionEvent.ACTION_DOWN){
+						//get x and y and calculate Area from this
+						Log.e("Simulation", "Tap down");
+						float xEvent=event.getX();
+						float yEvent=event.getY();
+						//umrechnen in 
+						Log.e("Simulation", "dim x: "+mapHolderRL.getWidth()+" y: "+mapHolderRL.getHeight());
+						int x=(int)(xEvent*(200/(float)mapHolderRL.getWidth()));
+						int y=(int)(yEvent*(100/(float)mapHolderRL.getHeight()));
+						Log.e("Simulation", "Tap x: "+x+" y: "+y);
+						
+						int newSelectedArea=holder.getArea(x, y);
+						
+						if(newSelectedArea==currentSelectedArea){
+							currentSelectedArea=-1;
+							setWorldPopulation();
+							holder.stopObjectAnimator();
+						}
+						else{
+							currentSelectedArea=newSelectedArea;
+							setAreaPopulation();
+							holder.drawAreaLayout(newSelectedArea);
+						}
+						
+				}
+				return false;
+			}
+		});
+	}
+	@Override
+	public void onPause(){
+		super.onPause();
+		currentSelectedArea=-1;
+		setWorldPopulation();
+		holder.destroyHolder();
+	}
 }
 
 
