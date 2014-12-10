@@ -74,12 +74,14 @@ public class MapArea {
 		this.holder=holder;
 	}
 	private void invalidate(){
-		selected.setAlpha((int)(alpha*255));
+		selected.setAlpha((int) (alpha * 255));
 		Canvas selCanvas = holder.lockCanvas();
 		selCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 		for (RectF a : rects) {
 			selCanvas.drawRect(a, selected);
 		}
 		holder.unlockCanvasAndPost(selCanvas);
+
+		
 	}
 }

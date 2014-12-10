@@ -48,6 +48,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Thread actualizeThread;
 	private Thread controllerThread;
 	private Thread actualizeMapThread;
+	private Thread selectionThread;
 	
 
 	private Skillable controller;
@@ -67,7 +68,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private final String basepath = "basepathtopregeneratedmaps";
 	private boolean mapHasBeenSet=false;
 	private boolean firstSpeciesUpdate=false;
-	
+	private boolean fragmentOpened=false;
 	private SpeciesOverviewFragment frag;
 	private SkillSpeciesFragment frag2;
 	//registers Overview Tabs to update
@@ -226,7 +227,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			
 				if (mapHasBeenSet) {
 					if (holder.drawMapLayout()){
-//						redrawMap();
+
 					}
 
 				}
@@ -314,10 +315,11 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			@Override
 			public void onClick(View v) {
 				
-				if(!firstSpeciesUpdate) return;
+				if(!firstSpeciesUpdate || fragmentOpened) return;
+				fragmentOpened=true;
 				frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
 				
-				
+				noAreaSelection();
 				FragmentManager fm=getSupportFragmentManager();
 				frag.show(fm, "fragment_overview");
 			}
@@ -327,10 +329,13 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			
 			@Override
 			public void onClick(View v) {
-				if(!firstSpeciesUpdate) return;
+				if(!firstSpeciesUpdate || fragmentOpened) return;
+				fragmentOpened=true;
 				frag2=new SkillSpeciesFragment();
+				noAreaSelection();
 				FragmentManager fm=getSupportFragmentManager();
 				frag2.show(fm, "fragment_skill");
+				
 			}
 		});
         populationTextView=(TextView)
@@ -407,6 +412,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	private void setWorldPopulation(){
 		//only if no area isSelected
+		if(holder==null)return;
 		if(currentSelectedArea==-1){
 			setPopulationTextView(holder.getPopulation()[playernumber]);
 		}
@@ -427,6 +433,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	private void setAreaPopulation(){
 		//only actualize if an area is selected
+		if(holder==null)return;
 		if(currentSelectedArea!=-1){
 			setPopulationTextView(holder.getAreaPopulation(
 					currentSelectedArea, playernumber));
@@ -453,14 +460,14 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 						int newSelectedArea=holder.getArea(x, y);
 						
 						if(newSelectedArea==currentSelectedArea){
-							currentSelectedArea=-1;
-							setWorldPopulation();
-							holder.stopObjectAnimator();
+							noAreaSelection();
 						}
 						else{
-							currentSelectedArea=newSelectedArea;
-							setAreaPopulation();
-							holder.drawAreaLayout(newSelectedArea);
+							if(!fragmentOpened){
+								currentSelectedArea=newSelectedArea;
+								setAreaPopulation();
+								holder.drawAreaLayout(newSelectedArea);
+							}
 						}
 						
 				}
@@ -473,7 +480,17 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		super.onPause();
 		currentSelectedArea=-1;
 		setWorldPopulation();
-		holder.destroyHolder();
+		if(holder!=null)
+			holder.destroyHolder();
+	}
+	public void noAreaSelection(){
+		currentSelectedArea=-1;
+		setWorldPopulation();
+		if(holder!=null)
+			holder.stopObjectAnimator();
+	}
+	public void closingFragment(){
+		fragmentOpened=false;
 	}
 }
 
