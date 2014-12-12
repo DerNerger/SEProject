@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -87,13 +86,13 @@ public class CreateSpeciesActivity extends Activity {
 				if( ActivityManager.isUserAMonkey()){
 					species.setName("DaMonkey");
 				}
-				UserManager man=(UserManager) getSystemService(USER_SERVICE);
-				
-				if(man.isUserAGoat() && (species.getName().startsWith("Goat")
-						|| species.getName().startsWith("goat"))){
-					Toast.makeText(getApplicationContext(),
-						"Are you a fan of goats?", Toast.LENGTH_LONG).show();
-				}
+//				UserManager man=(UserManager) getSystemService(USER_SERVICE);
+//				
+//				if(man.isUserAGoat() && (species.getName().startsWith("Goat")
+//						|| species.getName().startsWith("goat"))){
+//					Toast.makeText(getApplicationContext(),
+//						"Are you a fan of goats?", Toast.LENGTH_LONG).show();
+//				}
 				Intent intent=new Intent(getApplicationContext(),GameActivity.class);
 				intent.putExtra(SPECIESBUNDLE, species);
 				PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");
