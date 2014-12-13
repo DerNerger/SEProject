@@ -61,6 +61,17 @@ public class StartMenuActivity extends Activity {
 				
 			}
 		});
+        
+        tmp = (Button)findViewById(R.id.loadmap_button_startmenu);
+        tmp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+				intent.putExtra(MapActivity.MAPTYPE, MapActivity.LOAD);
+				startActivity(intent);
+			}
+		});
     	
     }
 

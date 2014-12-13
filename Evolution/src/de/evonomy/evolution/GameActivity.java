@@ -5,11 +5,12 @@ import gameProtocol.PlayerInformation;
 import gameProtocol.SpeciesPacket;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.Date;
-import de.evonomy.network.GameClient;
-import de.evonomy.network.WaitForSpeciesFragment;
 
 import main.Ai;
 import main.Controller;
@@ -24,7 +25,8 @@ import main.Skillable;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
-import android.graphics.Color;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
@@ -39,6 +41,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import de.evonomy.network.GameClient;
+import de.evonomy.network.WaitForSpeciesFragment;
 public class GameActivity extends FragmentActivity implements IPlayer{
 	private int ACTUALICATIONTIME=400;
 	private int ACTUALICATIONMAPTIME=1000;
@@ -64,8 +68,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	 * default is 0 for singleplayer, ist set to another
 	 * if multiplayer*/
 	private int playernumber=0;
-	//TODO
-	private final String basepath = "basepathtopregeneratedmaps";
+	private boolean multiplayer;
 	private boolean mapHasBeenSet=false;
 	private boolean firstSpeciesUpdate=false;
 	private boolean fragmentOpened=false;
@@ -77,6 +80,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	//only used in network
 	private WaitForSpeciesFragment waitFrag;
 	
+	private Map map;
 	
 	protected void onCreate(Bundle savedInstanceState){
 	
@@ -100,8 +104,10 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        //network
 	        PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");
 	        if(info!=null){
+	        	multiplayer = true;
 		        doNetworkShit(info, playerSpecies);
 	        } else {
+	        	multiplayer = false;
 			    species = Species.getAiSpecies(playerSpecies);
 		        startController();
 	        }
@@ -291,10 +297,50 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	@Override
 	public void onBackPressed(){
-		super.onBackPressed();
+		AlertDialog alert = new AlertDialog.Builder(this).create();
 		
-		finish();
+		alert.setTitle("Wirklich aufhoeren?");
+		
+		if (multiplayer) {
+			// TODO
+		} else {
+			alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ja", new BackDialogListeners.ExitListener(this));
+			alert.setButton(AlertDialog.BUTTON_NEUTRAL, "Vorher speichern", new BackDialogListeners.ExitAndSaveListener(this));
+			alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Nein", new BackDialogListeners.ResumeListener(this));
+		}
+		alert.show();
 	}
+	
+	public void save() {
+		try {
+			byte[] mapdata = MapLoader.saveMap(map);
+			//momentan wird nur das letzte spiel geladen, benutze diese namensgebung
+			// um auswahl zu bieten
+			/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
+			Date now = new Date();
+			String filename = sdf.format(now) + ".em";*/
+			String filename = "savefile.em";
+			FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+			fos.write(mapdata);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * TODO:
+	 * Nicht unbedingt noetig. Waere aber gut im Singleplayer zu pausieren wenn back gedrueckt wurde
+	 */
+	public void pause() {
+		
+	}
+	
+	public void resume() {
+		
+	}
+	
 	private byte[] readFile(String path) throws IOException {
 		RandomAccessFile f = new RandomAccessFile(new File(path), "r");
 		
@@ -344,15 +390,36 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	
 	//only for singleplayerr
 	private void startController(){
-		Map map = null;
+		map = null;
         int mapType = getIntent().getIntExtra(MapActivity.MAPTYPE, 0);
         if (mapType == MapActivity.RANDOM) {
         	map = Map.fromRandom(WIDTH, HEIGHT, species, Map.getRandomFieldTypes());
         }
-        else {
-	        String path = basepath + "/map" + mapType + ".em"; //file ending em = evolution map
-		    try {
-		    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), readFile(path));
+        else if (mapType == MapActivity.LOAD){
+        	try {
+				byte[] mapdata = readFile(getFilesDir().getAbsolutePath() + "/savefile.em");
+				map = MapLoader.loadMap(mapdata);
+				species = map.getSpecies();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else {
+        	InputStream is;
+        	switch (mapType) {
+        	case MapActivity.MAP1: is = getResources().openRawResource(R.raw.map1); break;
+        	case MapActivity.MAP2: is = getResources().openRawResource(R.raw.map2); break;
+        	case MapActivity.MAP3: is = getResources().openRawResource(R.raw.map3); break;
+        	case MapActivity.MAP4: is = getResources().openRawResource(R.raw.map4); break;
+        	default: is = null;
+        	}
+        	ArrayList<Byte> buffer = new ArrayList<Byte>();
+        	int b;
+        	try {
+				while ((b = is.read()) != -1) buffer.add((byte)b);
+	        	byte[] mapData = new byte[buffer.size()];
+	        	for (int i = 0; i < buffer.size(); i++) mapData[i] = buffer.get(i);
+		    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), mapData);
 		    } catch (Exception e) {
 		    	//TODO do something	
 		    }
