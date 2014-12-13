@@ -12,15 +12,20 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class TemperatureView extends LinearLayout {
 	private float minTemp;
 	private float maxTemp;
+	private float minTempArea;
+	private float maxTempArea;
 	private Paint paint;
+	private Paint areaPaint;
 	private Rect r;
-	private static final long ANIMTIME=1500;
+	private Rect rArea;
+	private static final long ANIMTIME=1000;
 	public TemperatureView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setWillNotDraw(false);
@@ -28,6 +33,8 @@ public class TemperatureView extends LinearLayout {
 		try{
 			minTemp=a.getInteger(R.styleable.TemperatureView_min_temp, 1);
 			maxTemp=a.getInteger(R.styleable.TemperatureView_max_temp, 1);
+			minTemp=a.getInteger(R.styleable.TemperatureView_min_temp_area, 0);
+			maxTemp=a.getInteger(R.styleable.TemperatureView_max_temp_area, 0);
 			
 	
 		} finally{
@@ -37,10 +44,12 @@ public class TemperatureView extends LinearLayout {
 	}
 	private void init(){
 		inflate(getContext(),R.layout.temperature_view,this);
-		
+		areaPaint=new Paint();
+		areaPaint.setColor(Color.parseColor("#FF0000"));
 		paint=new Paint();
 		paint.setColor(Color.parseColor("#FF8D00"));
-		r= new Rect(0,0,0,0);;
+		r= new Rect(0,0,0,0);
+		rArea=new Rect(0,0,0,0);
 		
 	}
 	public void setMaxTemp(float maxTemp){
@@ -70,6 +79,33 @@ public class TemperatureView extends LinearLayout {
 		anim.start();
 		
 	}
+	public void setMaxTempArea(float maxTempArea){
+		this.maxTempArea=maxTempArea;
+		invalidate();
+	}
+	public void setMinTempArea(float minTempArea){
+		this.minTempArea=minTempArea;
+		invalidate();
+	}
+	public float getMinTempArea() {
+		return minTempArea;
+	}
+	public float getMaxTempArea() {
+		return maxTempArea;
+	}
+	public void changeMinTempArea(float minTempArea){
+		ObjectAnimator anim=ObjectAnimator.ofFloat(this, "minTempArea", minTempArea);
+		anim.setDuration(ANIMTIME);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+	}
+	public void changeMaxTempArea(float maxTempArea){
+		ObjectAnimator anim=ObjectAnimator.ofFloat(this, "maxTempArea", maxTempArea);
+		anim.setDuration(ANIMTIME);
+		anim.setInterpolator(new DecelerateInterpolator());
+		anim.start();
+		
+	}
 	@Override
 	protected void onDraw(Canvas canvas){
 		super.onDraw(canvas);
@@ -83,6 +119,13 @@ public class TemperatureView extends LinearLayout {
 		r.right=canvas.getWidth()/2+(int)((maxTemp/100.)*(getWidth()/2.)*(10./11.));
 		r.bottom=(int)(canvas.getHeight()*0.50);
 		canvas.drawRect(r, paint);
+		
+		rArea.left=canvas.getWidth()/2+(int)((minTempArea/100.)*(getWidth()/2.)*(10./11.));
+		rArea.top=(int)(canvas.getHeight()*0.50);
+		//genauso wie bei der linken seite
+		rArea.right=canvas.getWidth()/2+(int)((maxTempArea/100.)*(getWidth()/2.)*(10./11.));
+		rArea.bottom=(int)(canvas.getHeight()*0.60);
+		canvas.drawRect(rArea, areaPaint);
 		
 	}
 	@Override

@@ -42,5 +42,12 @@
     <string name="title_progress_dialog_update">Spezies wird weiterentwickelt</string>
     <string name="text_progress_dialog_update">Erbgut wird neu strukturiert...</string>
     <string name="population_string">Population</string>
+    <string name="natural_enemies">Natürliche Feinde:</string>
+    <string name="ressources">Ressourcen:</string>
+    <string name="desert">Wüste</string>
+    <string name="water">Wasser</string>
+    <string name="ice">Eis</string>
+    <string name="jungle">Dschungel</string>
+    <string name="land">Grasland</string>
 
 </resources>

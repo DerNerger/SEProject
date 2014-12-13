@@ -62,6 +62,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private TextView populationTextView;
 	//currently selected area
 	private int currentSelectedArea=-1;
+	private int tmpArea;
 	public final int WIDTH=200;
 	public final int HEIGHT=100;
 	/*For player number,
@@ -74,6 +75,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private boolean fragmentOpened=false;
 	private SpeciesOverviewFragment frag;
 	private SkillSpeciesFragment frag2;
+	private AreaInformationDialog informationDialog;
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
@@ -144,6 +146,17 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	public void changeAreaPopulation(int area,int[] population){
 		holder.setAreaPopulation(area, population);
 		setAreaPopulation();
+		if(informationDialog!=null){
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					informationDialog.update();
+					
+				}
+			});
+			
+		}
 	}
 	public void changeWorldPopulation(long[] population){
 		holder.changePopulation(population);
@@ -514,6 +527,17 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if(event.getAction()==MotionEvent.ACTION_DOWN){
+					Log.e("Simulation", "Tap down");
+					float xEvent=event.getX();
+					float yEvent=event.getY();
+					//umrechnen in 
+					Log.e("Simulation", "dim x: "+mapHolderRL.getWidth()+" y: "+mapHolderRL.getHeight());
+					int x=(int)(xEvent*(200/(float)mapHolderRL.getWidth()));
+					int y=(int)(yEvent*(100/(float)mapHolderRL.getHeight()));
+					
+					tmpArea=holder.getArea(x, y);
+				}
+				if(event.getAction()==MotionEvent.ACTION_UP){
 						//get x and y and calculate Area from this
 						Log.e("Simulation", "Tap down");
 						float xEvent=event.getX();
@@ -522,7 +546,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 						Log.e("Simulation", "dim x: "+mapHolderRL.getWidth()+" y: "+mapHolderRL.getHeight());
 						int x=(int)(xEvent*(200/(float)mapHolderRL.getWidth()));
 						int y=(int)(yEvent*(100/(float)mapHolderRL.getHeight()));
-						Log.e("Simulation", "Tap x: "+x+" y: "+y);
+						//Log.e("Simulation", "Tap x: "+x+" y: "+y);
 						
 						int newSelectedArea=holder.getArea(x, y);
 						
@@ -540,6 +564,29 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 				}
 				return false;
 			}
+			
+		});
+		mapHolderRL.setOnLongClickListener(new View.OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				AreaInformationDialog d=
+						AreaInformationDialog.newInstance(
+								currentSelectedArea == -1 ? 
+										tmpArea : currentSelectedArea,
+								getSpecies(), playernumber);
+				if(!firstSpeciesUpdate || fragmentOpened) return false;
+				fragmentOpened=true;
+				
+				noAreaSelection();
+				FragmentManager fm=getSupportFragmentManager();
+				d.show(fm, "area_information");
+				
+				return false;
+			}
+
+			
+			
 		});
 	}
 	@Override
@@ -558,6 +605,15 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	public void closingFragment(){
 		fragmentOpened=false;
+	}
+	public void registerAreaInformationDialog( AreaInformationDialog d){
+		informationDialog=d;		
+	}
+	public void unregisterAreaInformationDialog(){
+		informationDialog=null;		
+	}
+	public MapArea getArea(int area){
+		return holder.getAreas()[area];
 	}
 }
 
