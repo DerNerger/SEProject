@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/de.evonomy.evolution"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/no_rounded_corner_black_white"
+    
+    android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:orientation="vertical" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+             >
+            <TextView 
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/text_view_area_information_fieldtype"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="24sp"/>
+            
+        </RelativeLayout>
+        <!-- Resourcen und natürliche Feinde -->
+        <LinearLayout 
+            android:layout_height="0dp"
+            android:layout_width="fill_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <!-- Ressourcen -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+                <!-- Here texts for ressources -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/ressources"
+                        android:textColor="@color/black"
+                        android:id="@+id/text_view_area_information_ressources_title"/>
+                    
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:id="@+id/text_view_area_information_ressources"/>
+                    
+                </RelativeLayout>
+                
+            </LinearLayout>
+            <!-- Natürliche Feinde -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+                <!-- Here texts for enemies -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/natural_enemies"
+                        android:textColor="@color/black"
+                        android:id="@+id/text_view_area_information_enemies_title"/>
+                    
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:id="@+id/text_view_area_information_enemies"/>
+                    
+                </RelativeLayout>
+                
+            </LinearLayout>
+            
+        </LinearLayout>
+        
+    </LinearLayout>
+    <!-- for temperature and population -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:padding="4dp" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp" >
+            <RelativeLayout 
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+	            <TextView 
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                android:layout_centerInParent="true"
+	                android:text="@string/population_string"
+	                android:textColor="@color/black"
+	                android:textSize="18sp"/>
+            </RelativeLayout>
+            <RelativeLayout 
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2">
+	            <TextView 
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                android:layout_centerInParent="true"
+	                android:id="@+id/text_view_area_information_population"
+	                android:text="0"
+	                android:textColor="@color/black"
+	                android:textSize="18sp"/>
+            </RelativeLayout>
+            
+        </LinearLayout>
+    
+	    <de.evonomy.evolution.TemperatureView
+	        android:layout_height="0dp"
+	        android:layout_width="fill_parent"
+	        android:layout_weight="2"
+	        android:id="@+id/temperature_view_area_information"
+	        android:background="@drawable/no_rounded_corner_black_white" />
+    </LinearLayout>
+    
+    
+
+</LinearLayout>

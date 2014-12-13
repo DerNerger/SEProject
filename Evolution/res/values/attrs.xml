@@ -10,6 +10,8 @@
     <declare-styleable name="TemperatureView">
         <attr name="min_temp" format="integer"/>
         <attr name="max_temp" format="integer"/>
+        <attr name="min_temp_area" format="integer"/>
+        <attr name="max_temp_area" format="integer"/>
         
     </declare-styleable>
     <declare-styleable name="ResourceDemandView">
