@@ -305,4 +305,8 @@ public class Map implements Serializable{
         pct.put(FieldType.WATER, 0.5);
         return pct;
 	}
+	
+	public Species[] getSpecies() {
+		return species;
+	}
 }
