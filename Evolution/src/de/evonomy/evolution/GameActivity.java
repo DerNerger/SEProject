@@ -52,7 +52,6 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Thread actualizeThread;
 	private Thread controllerThread;
 	private Thread actualizeMapThread;
-	private Thread selectionThread;
 	
 
 	private Skillable controller;
@@ -570,10 +569,10 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			
 			@Override
 			public boolean onLongClick(View v) {
+				
 				AreaInformationDialog d=
 						AreaInformationDialog.newInstance(
-								currentSelectedArea == -1 ? 
-										tmpArea : currentSelectedArea,
+								tmpArea,
 								getSpecies(), playernumber);
 				if(!firstSpeciesUpdate || fragmentOpened) return false;
 				fragmentOpened=true;
