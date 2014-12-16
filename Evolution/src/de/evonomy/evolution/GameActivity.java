@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import main.Ai;
@@ -60,6 +61,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Button speziesSkillButton;
 	private TextView populationTextView;
 	private TextView selectionTextView;
+	private TextView pointsTextView;
+	private TextView timeTextView;
 	//currently selected area
 	private int currentSelectedArea=-1;
 	private int tmpArea;
@@ -168,8 +171,17 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		
 	}
 
-	public void changePointsAndTime(int[] points, Date time){
+	public void changePointsAndTime(int[] points, final Date time){
 		holder.addPoints(points[playernumber]);
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				pointsTextView.setText(holder.getPoints()+" P");
+				timeTextView.setText(time.getYear());
+				
+			}
+		});
 	}
 
 	public void updateSpecies(SpeciesUpdate speciesUpdate){
@@ -400,6 +412,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
         populationTextView=(TextView)
         		findViewById(R.id.text_view_simulation_layout_current_pop);
         selectionTextView=(TextView) findViewById(R.id.text_view_simulation_layout_current_selection);
+        pointsTextView=(TextView) findViewById(R.id.text_view_simulation_layout_points);
+        timeTextView=(TextView) findViewById(R.id.text_view_simulation_layout_time);
 	}
 	
 	//only for singleplayerr

@@ -49,6 +49,8 @@
     <string name="ice">Eis</string>
     <string name="jungle">Dschungel</string>
     <string name="land">Grasland</string>
-    <string name="world">Welt</string>
+    <string name="world">Planet</string>
+    <string name="species_overview">Überblick</string>
+    <string name="skill_species">Entwickeln!</string>
 
 </resources>
