@@ -49,5 +49,6 @@
     <string name="ice">Eis</string>
     <string name="jungle">Dschungel</string>
     <string name="land">Grasland</string>
+    <string name="world">Welt</string>
 
 </resources>

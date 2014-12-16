@@ -92,7 +92,7 @@ public class MapHolder {
 						.getRect());
 			}
 		}
-		drawMapLayout();
+		drawMapLayout(false);
 
 	}
 
@@ -164,9 +164,9 @@ public class MapHolder {
 	 * for the species on the screen
 	 * 
 	 * */
-	public boolean drawMapLayout() {
+	public boolean drawMapLayout(boolean forced) {
 
-		if (mapToBeDrawn) {
+		if (mapToBeDrawn || forced ) {
 			Canvas mapCanvas = mapHolder.lockCanvas();
 			if (mapCanvas == null)
 				return false;

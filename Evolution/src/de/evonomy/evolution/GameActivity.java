@@ -59,6 +59,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Button speziesOverviewButton;
 	private Button speziesSkillButton;
 	private TextView populationTextView;
+	private TextView selectionTextView;
 	//currently selected area
 	private int currentSelectedArea=-1;
 	private int tmpArea;
@@ -244,7 +245,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			while(!Thread.currentThread().isInterrupted()){
 			
 				if (mapHasBeenSet) {
-					if (holder.drawMapLayout()){
+					if (holder.drawMapLayout(false)){
 
 					}
 
@@ -398,6 +399,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		});
         populationTextView=(TextView)
         		findViewById(R.id.text_view_simulation_layout_current_pop);
+        selectionTextView=(TextView) findViewById(R.id.text_view_simulation_layout_current_selection);
 	}
 	
 	//only for singleplayerr
@@ -493,6 +495,15 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		//only if no area isSelected
 		if(holder==null)return;
 		if(currentSelectedArea==-1){
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.world);
+					
+				}
+			});
+			
 			setPopulationTextView(holder.getPopulation()[playernumber]);
 		}
 		
@@ -514,6 +525,49 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		//only actualize if an area is selected
 		if(holder==null)return;
 		if(currentSelectedArea!=-1){
+			switch(holder.getAreas()[currentSelectedArea].getLandType().getFieldType()){
+			case DESERT: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.desert);
+					
+				}
+			}); break;
+			case ICE: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.ice);
+					
+				}
+			}); break;
+			case JUNGLE: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.jungle);
+					
+				}
+			}); break;
+			case LAND: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.land);
+					
+				}
+			}); break;
+			case WATER: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.water);
+					
+				}
+			}); break;
+			default: break;
+			}
 			setPopulationTextView(holder.getAreaPopulation(
 					currentSelectedArea, playernumber));
 			//draw area lighter then others
@@ -545,8 +599,9 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 						Log.e("Simulation", "dim x: "+mapHolderRL.getWidth()+" y: "+mapHolderRL.getHeight());
 						int x=(int)(xEvent*(200/(float)mapHolderRL.getWidth()));
 						int y=(int)(yEvent*(100/(float)mapHolderRL.getHeight()));
-						//Log.e("Simulation", "Tap x: "+x+" y: "+y);
-						
+						Log.e("Simulation", "Tap x: "+x+" y: "+y);
+						Log.e("Simulation", "Event: Tap x: "+xEvent+" y: "+yEvent);
+						if(y>=100) return false;
 						int newSelectedArea=holder.getArea(x, y);
 						
 						if(newSelectedArea==currentSelectedArea){
@@ -595,6 +650,13 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		setWorldPopulation();
 		if(holder!=null)
 			holder.destroyHolder();
+	}
+	@Override
+	public void onResume(){
+		super.onResume();
+		if(holder!=null){
+			holder.drawMapLayout(true);
+		}
 	}
 	public void noAreaSelection(){
 		currentSelectedArea=-1;
