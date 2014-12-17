@@ -7,13 +7,12 @@ import android.animation.ObjectAnimator;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
-import android.graphics.RectF;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.LinearInterpolator;
 import main.FieldType;
 import main.LandType;
@@ -92,6 +91,12 @@ public class MapHolder {
 						.getRect());
 			}
 		}
+		for(int areac=0;areac<areas.length;areac++){
+			Path path = calculatePath(areac);
+			Log.e("Path", path+" Area: "+areac);
+			areas[areac].setPath(path);
+		}
+		checkForAreasInAreasPath();
 		drawMapLayout(false);
 
 	}
@@ -228,7 +233,7 @@ public class MapHolder {
 		anim=ObjectAnimator.ofFloat(areas[area], "alpha", 0.30f,0.79f);
 		anim.setInterpolator(new LinearInterpolator());
 		anim.setRepeatMode(ObjectAnimator.REVERSE);
-		anim.setDuration(1000);
+		anim.setDuration(650);
 		anim.setRepeatCount(ObjectAnimator.INFINITE);
 		anim.start();
 		
@@ -327,6 +332,7 @@ public class MapHolder {
 	}
 
 	public int getArea(int x, int y) {
+		if(x >= NuMBEROFBLOCKSWIDTH || y >= NUMBEROFBLOCKSHEIGHT || x<0 || y<0) return -2;
 		return mapFields[x][y].getArea();
 	}
 
@@ -346,5 +352,207 @@ public class MapHolder {
 	}
 	public void destroyHolder(){
 		stopObjectAnimator();
+	}
+	public Path calculatePath(int area){
+		Path p=new Path();
+		Point point=new Point(0,0);
+		Point startPoint=new Point(0,0);
+		//Start Punkt suchen
+		outerloop:
+		for(int i=0;i<NuMBEROFBLOCKSWIDTH;i++){
+			for(int j=0;j<NUMBEROFBLOCKSHEIGHT;j++){
+				if(mapFields[i][j].getArea()==area){
+					point.x=i;
+					point.y=j;
+					startPoint.x=i;
+					startPoint.y=j;
+					break outerloop;
+				}
+			}
+		}
+		//path an den startpunkt bewegen
+		FloatPoint st= calculatePoint(point.x,point.y,true,true);
+		p.moveTo(st.x, st.y);
+		//Von da aus im Uhrzeigersinn nach nachbarpunkt suchen
+		int lastDir=2;
+		//0 für top, 1 für rechts, 2 für unten, 3 für links
+		int counter=0;
+		drawpath:
+		while(true){
+			counter++;
+			//letzte Richtung negieren
+			lastDir=(lastDir + 2) % 4;
+			//und eins weitergehen
+			
+			//prüfen, ob in dieser Richtung ein Feld der Area liegt, ansonsten eins weitergehen
+			//k is richtungscounter
+			//Log.e("Path","Aktueller Punkt: x "+ point.x+ " y "+ point.y +" dir: "+ lastDir);
+			int k;
+			Point newPoint=new Point(0,0);
+			for(k=0;k<4;k++){
+				lastDir=(lastDir+1) % 4;
+				if(lastDir==0){
+					if(checkArea(point.x,point.y-1,area)){
+						newPoint.x=point.x;
+						newPoint.y=point.y-1;
+						//direkt linie dahin zeichnen
+						FloatPoint g= calculatePoint(point.x,point.y,true,true);
+						p.lineTo(g.x, g.y);
+						break;
+						
+					}else if(k>0){
+						//draw line to top Corner
+						FloatPoint g= calculatePoint(point.x,point.y,true,true);
+						p.lineTo(g.x, g.y);
+					}
+				}
+				else if(lastDir==1){
+					if(checkArea(point.x+1,point.y,area)){
+						newPoint.x=point.x+1;
+						newPoint.y=point.y;
+						FloatPoint g= calculatePoint(point.x,point.y,false,true);
+						p.lineTo(g.x, g.y);
+						break;
+					}
+					else if(k>0){
+						FloatPoint g= calculatePoint(point.x,point.y,false,true);
+						p.lineTo(g.x, g.y);
+					}
+				}else if(lastDir==2){
+					if(checkArea(point.x,point.y+1,area)){
+						newPoint.x=point.x;
+						newPoint.y=point.y+1;
+						//direkt linie dahin zeichnen
+						FloatPoint g= calculatePoint(point.x,point.y,false,false);
+						p.lineTo(g.x, g.y);
+						break;
+						
+					}else if(k>0){
+						FloatPoint g= calculatePoint(point.x,point.y,false,false);
+						p.lineTo(g.x, g.y);
+					}
+				}else{
+					if(checkArea(point.x-1,point.y,area)){
+						newPoint.x=point.x-1;
+						newPoint.y=point.y;
+						//direkt linie dahin zeichnen
+						FloatPoint g= calculatePoint(point.x,point.y,true,false);
+						p.lineTo(g.x, g.y);
+						break;
+						
+					}else if(k>0){
+						//draw line to top Corner
+						FloatPoint g= calculatePoint(point.x,point.y,true,false);
+						p.lineTo(g.x, g.y);
+					}
+				}
+				
+				
+			}
+			if(newPoint.x == startPoint.x && newPoint.y == startPoint.y){
+				break drawpath;
+			}
+			point.x=newPoint.x;
+			point.y=newPoint.y;
+			//if(counter>10000) break drawpath;
+		}
+		p.close();
+		
+		p.setFillType(Path.FillType.EVEN_ODD);
+		
+		return p;
+	}
+	private class Point{
+		int x;
+		int y;
+		public Point(int x, int y){
+			this.x=x;
+			this.y=y;
+		}
+	}
+	private class FloatPoint{
+		float x;
+		float y;
+		public FloatPoint(float x, float y){
+			this.x=x;
+			this.y=y;
+		}
+	}
+	private FloatPoint calculatePoint(int x, int y, boolean left, boolean top){
+		if(left && top){
+			return new FloatPoint(x*widthPerBlock,y*heightPerBlock);
+		}else if(!left && top){
+			return new FloatPoint((x+1)*widthPerBlock,y*heightPerBlock);
+		}else if(!left && !top){
+			return new FloatPoint((x+1)*widthPerBlock,(y+1)*heightPerBlock);
+		}else{
+			return new FloatPoint(x*widthPerBlock,(y+1)*heightPerBlock);
+		}
+	}
+	private boolean checkArea(int x, int y, int area){
+		if(x >= NuMBEROFBLOCKSWIDTH || y>= NUMBEROFBLOCKSHEIGHT
+				|| x < 0 || y < 0) return false;
+		if(mapFields[x][y].getArea() == area) return true;
+		return false;
+	}
+	private void checkForAreasInAreasPath(){
+		arealoop:
+		for( int i=0;i<areas.length;i++){
+			for(int x=0;x<NuMBEROFBLOCKSWIDTH;x++){
+				for(int y=0;y<NUMBEROFBLOCKSHEIGHT;y++){
+					if(mapFields[x][y].getArea()==i){
+						//check all the neighbours
+						int nachbar;
+						for(int k=0;k<7;k++){
+							nachbar=calcNeigh(x,y,k);
+							//wen ungültig, ist am rand und damit nicht eingeshcloosen
+							if(nachbar == -2){
+								areas[i].setEingeschlossenFalse();
+								continue arealoop;
+							}
+							//wenn in der gleichen Area
+							if(nachbar == i){ continue;
+							//wenn nicht prüfen, ob shcon ein nachbar gesetzt ist, wenn nicht, neu setzen,
+							//wenn shcon auf gleichheit prüfen und wenn nicht gleich 
+							}else{
+								if(areas[i].getNeighbour()==-1){
+									areas[i].setNeighbour(nachbar);
+								}else{
+									if(areas[i].getNeighbour()==nachbar){
+										continue;
+									}else{
+										areas[i].setEingeschlossenFalse();
+										continue arealoop;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for(int area=0;area<areas.length;area++){
+			if(areas[area].isEingeschlossen()){
+				Path toEdit=areas[areas[area].getNeighbour()].getPath();
+				toEdit.addPath(areas[area].getPath());
+				Path buffer=new Path();
+				buffer.moveTo(0, 0);
+				buffer.close();
+				toEdit.addPath(buffer);
+			}
+		}
+	}
+	private int calcNeigh(int x, int y,int r){
+		switch(r){
+		case 0: return getArea(x+1,y);
+		case 1: return getArea(x+1,y+1);
+		case 2: return getArea(x+1,y-1);
+		case 3: return getArea(x,y+1);
+		case 4: return getArea(x,y-1);
+		case 5: return getArea(x-1,y);
+		case 6: return getArea(x-1,y+1);
+		case 7: return getArea(x-1,y-1);
+		default: return -2;
+		}
 	}
 }

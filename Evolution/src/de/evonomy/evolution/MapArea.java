@@ -6,6 +6,7 @@ import main.LandType;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.util.Log;
@@ -19,6 +20,9 @@ public class MapArea {
 	private float alpha;
 	private Paint selected;
 	private SurfaceHolder holder;
+	private Path path;
+	private int neighbour=-1;
+	private boolean isEingeschlossen=true;
 	public MapArea(Paint FieldType,LandType landType){
 		this.rects=new LinkedList<RectF>();
 		this.FieldType=FieldType;
@@ -68,7 +72,7 @@ public class MapArea {
 	}
 	public void setAlpha(float alpha){
 		this.alpha=alpha;
-		invalidate();
+		newInvalidate();
 	}
 	public void animateClicked(SurfaceHolder holder){
 		this.holder=holder;
@@ -84,4 +88,32 @@ public class MapArea {
 
 		
 	}
+	private void newInvalidate(){
+		selected.setAlpha((int) (alpha * 255));
+		selected.setStyle(Paint.Style.FILL_AND_STROKE);
+		selected.setAntiAlias(true);
+		Canvas selCanvas = holder.lockCanvas();
+		selCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+		selCanvas.drawPath(path, selected);
+		holder.unlockCanvasAndPost(selCanvas);
+	}
+	public void setPath(Path path){
+		this.path=path;
+	}
+	public Path getPath(){
+		return path;
+	}
+	public int getNeighbour(){
+		return neighbour;
+	}
+	public void setNeighbour(int neighbour){
+		this.neighbour=neighbour;
+	}
+	public boolean isEingeschlossen(){
+		return isEingeschlossen;
+	}
+	public void setEingeschlossenFalse(){
+		isEingeschlossen=false;
+	}
+	
 }
