@@ -234,7 +234,7 @@ public class MapHolder {
 		anim=ObjectAnimator.ofFloat(areas[area], "alpha", 0.30f,0.79f);
 		anim.setInterpolator(new LinearInterpolator());
 		anim.setRepeatMode(ObjectAnimator.REVERSE);
-		anim.setDuration(650);
+		anim.setDuration(1000);
 		anim.setRepeatCount(ObjectAnimator.INFINITE);
 		anim.start();
 		

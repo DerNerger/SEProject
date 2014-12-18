@@ -3,6 +3,7 @@ package de.evonomy.evolution;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -12,6 +13,8 @@ public class SkillTreeRelativeLayout extends RelativeLayout {
 	private Paint paint;
 	private Paint greyPaint;
 	private Context context;
+	private boolean drawExtra=false;
+	private float px1,px2,py1,py2;
 	public SkillTreeRelativeLayout(Context context) {
 		super(context);
 		this.context=context;
@@ -62,6 +65,13 @@ public class SkillTreeRelativeLayout extends RelativeLayout {
 					,anchorYRoot-(anchorYRoot-anchorYChild)/2 ,
 					anchorXChild, anchorYRoot-(anchorYRoot-anchorYChild)/2
 					, toPaint);
+			if(toPaint==paint && oneChildIsSkilled){
+				drawExtra=true;
+				px1=anchorXRoot;
+				py1=anchorYRoot-(anchorYRoot-anchorYChild)/2 ;
+				px2=anchorXChild;
+				py2=anchorYRoot-(anchorYRoot-anchorYChild)/2;
+			}
 			//vertical to child
 			canvas.drawLine(anchorXChild,
 					anchorYRoot-(anchorYRoot-anchorYChild)/2+(widthOfLine/2),
@@ -73,7 +83,9 @@ public class SkillTreeRelativeLayout extends RelativeLayout {
 					,anchorYRoot-(anchorYRoot-anchorYChild)/2 -(widthOfLine/2)
 					, oneChildIsSkilled ? paint : toPaint);
 		}
-		
+		if(drawExtra){
+			canvas.drawLine(px1, py1, px2, py2, paint);
+		}
 	}
 
 }

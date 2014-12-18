@@ -1,5 +1,6 @@
 package main;
 
+import java.nio.file.StandardWatchEventKinds;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -298,6 +299,9 @@ public class SimpleMapLogic implements IMapLogic {
 			s.setIntelligence(s.getIntelligence()+2);
 			s.setSocial(s.getSocial()+2);
 			break;
+		case GILLS:
+			s.setWater(true);
+			break;
 		case BRAIN:
 			s.setIntelligence(s.getIntelligence()+5);
 			s.setSocial(s.getSocial()+5);
@@ -313,6 +317,74 @@ public class SimpleMapLogic implements IMapLogic {
 			break;
 		case EYES:
 			s.setVisibillity(s.getVisibillity()+10);
+			break;
+		case LEATHERSKIN:
+			s.setMaxTemp(s.getMaxTemp()+2);
+			s.setMinTemp(s.getMinTemp()-2);
+			break;
+		case SWEATGLAND:
+			s.setMinTemp(s.getMinTemp()-5);
+			s.setMaxTemp(s.getMaxTemp()+10);
+			break;
+		case FATLAYER:
+			s.setMinTemp(s.getMinTemp()-15);
+			s.setResourceDemand(s.getResourceDemand()+5);
+			break;
+		case FURLESSSKIN:
+			s.setMaxTemp(s.getMaxTemp()+30);
+			break;
+		case BETTERMUSCLES:
+			s.setAgility(s.getAgility()+5);
+			s.setStrength(s.getStrength()+5);
+			break;
+		case DRAGONSCALE:
+			s.setStrength(s.getStrength()+25);
+			break;
+		case COMPLEXTENDONSTRUCTUR:
+			s.setAgility(s.getAgility()+25);
+			break;
+		case CLAWARM:
+			s.setStrength(s.getStrength()+15);
+			break;
+		case EXTREMITYARM:
+			break;
+		case HANDARM:
+			s.setAgility(s.getAgility()+15);
+			break;
+		case FOOTARM:
+			s.setMovementChance(s.getMovementChance()+0.2);
+			break;
+		case HANDLEG:
+			s.setAgility(s.getAgility()+15);
+			break;
+		case EXTREMITYLEG:
+			break;
+		case FOOTLEG:
+			s.setMovementChance(s.getMovementChance()+0.2);
+			break;
+		case FINLEG:
+			s.setWater(true);
+			s.setMovementChance(s.getMovementChance()+0.2);
+			break;
+		case GENITAL:
+			s.setProcreation(s.getProcreation()+5);
+			break;
+		case SECONDGENITAL:
+			s.setProcreation(s.getProcreation()+20);
+			break;
+		case TAIL:
+			s.setAgility(s.getAgility()+2);
+			s.setStrength(s.getStrength()+2);
+			break;
+		case DECOTAIL:
+			s.setSocial(s.getSocial()+20);
+			s.setProcreation(s.getProcreation()+5);
+			break;
+		case FIGHTTAIL:
+			s.setStrength(s.getStrength()+15);
+			break;
+		case GYMNASTICTAIL:
+			s.setAgility(s.getAgility()+15);
 			break;
 		default:
 			throw new RuntimeException("Type is not valid");
