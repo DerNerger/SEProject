@@ -1,21 +1,20 @@
 package de.evonomy.evolution;
 
 
-import de.evonomy.network.LoginActivity;
+import java.io.File;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import de.evonomy.network.LoginActivity;
 
 
 public class StartMenuActivity extends Activity {
@@ -33,12 +32,34 @@ public class StartMenuActivity extends Activity {
         setContentView(R.layout.activity_start_menu);
         startSimulation=(Button) findViewById(R.id.start_simulation_button_startmenu_neu);
         multiplayer_simulation_button_startmenu = (Button) findViewById(R.id.multiplayer_simulation_button_startmenu);
+        final StartMenuActivity thisActivity = this;
         startSimulation.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(),MapActivity.class);
-				startActivity(intent);
+				Intent intent;
+
+				File file = new File(getFilesDir().getAbsolutePath() + "/savefile.em");
+				if (file.exists()) {
+					AlertDialog alert = new AlertDialog.Builder(thisActivity).create();
+					
+					alert.setTitle("Spiel laden oder neu starten?");
+					
+					alert.setButton(AlertDialog.BUTTON_POSITIVE, "Laden", new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							thisActivity.startLoad();
+						}
+					});
+					alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Neu starten", new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							thisActivity.startRandom();
+						}
+					});
+					alert.show();
+				}
 				
 			}
 		});
@@ -65,7 +86,16 @@ public class StartMenuActivity extends Activity {
     }
 
 
-
+	private void startLoad() {
+		Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+		intent.putExtra(MapActivity.MAPTYPE, MapActivity.LOAD);
+		startActivity(intent);
+	}
+	
+	private void startRandom() {
+		Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+		startActivity(intent);
+	}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

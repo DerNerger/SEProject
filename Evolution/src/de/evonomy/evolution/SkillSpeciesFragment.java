@@ -35,22 +35,24 @@ public class SkillSpeciesFragment extends DialogFragment{
 		viewPager=(ViewPager) root.findViewById(R.id.pager_skill);
 		viewPager.setAdapter(adapterSkill);
 		
-		
 		return root;
 	}
+
 	public void onStart() {
 		super.onStart();
 
 		// safety check
 		if (getDialog() == null) {
-		 return;
+			return;
 		}
 
-		
-
-		getDialog().getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
-		// ... other stuff you want to do in your onStart() method
+		getDialog().getWindow().setLayout(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
+	}
+	@Override
+	public void onStop(){
+		super.onStop();
+		((GameActivity)getActivity()).closingFragment();
 	}
 
 }

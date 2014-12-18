@@ -28,11 +28,12 @@ public class MapActivity extends Activity{
 	private String basePath = "pathtothestandardmaps";
 	
 	public static final String MAPTYPE = "maptype";
-	public static int RANDOM = 0;
-	public static int MAP1 = 1;
-	public static int MAP2 = 2;
-	public static int MAP3 = 3;
-	public static int MAP4 = 4;
+	public static final int LOAD = -1;
+	public static final int RANDOM = 0;
+	public static final int MAP1 = 1;
+	public static final int MAP2 = 2;
+	public static final int MAP3 = 3;
+	public static final int MAP4 = 4;
 	
 	
 	protected void onCreate(Bundle savedInstanceState) {

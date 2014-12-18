@@ -17,5 +17,9 @@
  <color name="navy">#000080</color>
  <color name="black">#000000</color>
  <color name="lightred">#FF2929</color>
-  <color name="lightblue">#0DF8F8</color>
+ <color name="species1">#FF0A0A</color>
+ <color name="species2">#060606</color>
+ <color name="species3">#F205DE</color>
+ <color name="species4">#FF8400</color>
+ <color name="lightblue">#0DF8F8</color>
 </resources>

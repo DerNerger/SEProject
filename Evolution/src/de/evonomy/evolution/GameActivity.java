@@ -5,11 +5,13 @@ import gameProtocol.PlayerInformation;
 import gameProtocol.SpeciesPacket;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import de.evonomy.network.GameClient;
-import de.evonomy.network.WaitForSpeciesFragment;
 
 import main.Ai;
 import main.Controller;
@@ -24,6 +26,8 @@ import main.Skillable;
 import main.Species;
 import main.SpeciesUpdate;
 import main.VisualMap;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
@@ -38,6 +42,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import de.evonomy.network.GameClient;
+import de.evonomy.network.WaitForSpeciesFragment;
 public class GameActivity extends FragmentActivity implements IPlayer{
 	private int ACTUALICATIONTIME=400;
 	private int ACTUALICATIONMAPTIME=1000;
@@ -54,27 +60,32 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	private Button speziesOverviewButton;
 	private Button speziesSkillButton;
 	private TextView populationTextView;
+	private TextView selectionTextView;
+	private TextView pointsTextView;
+	private TextView timeTextView;
 	//currently selected area
 	private int currentSelectedArea=-1;
+	private int tmpArea;
 	public final int WIDTH=200;
 	public final int HEIGHT=100;
 	/*For player number,
 	 * default is 0 for singleplayer, ist set to another
 	 * if multiplayer*/
 	private int playernumber=0;
-	//TODO
-	private final String basepath = "basepathtopregeneratedmaps";
+	private boolean multiplayer;
 	private boolean mapHasBeenSet=false;
 	private boolean firstSpeciesUpdate=false;
-	
+	private boolean fragmentOpened=false;
 	private SpeciesOverviewFragment frag;
 	private SkillSpeciesFragment frag2;
+	private AreaInformationDialog informationDialog;
 	//registers Overview Tabs to update
 	private TabElementOverviewFragment[] registeredOverviewTabs=new TabElementOverviewFragment[4];
 	
 	//only used in network
 	private WaitForSpeciesFragment waitFrag;
 	
+	private Map map;
 	
 	protected void onCreate(Bundle savedInstanceState){
 	
@@ -98,8 +109,10 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	        //network
 	        PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");
 	        if(info!=null){
+	        	multiplayer = true;
 		        doNetworkShit(info, playerSpecies);
 	        } else {
+	        	multiplayer = false;
 			    species = Species.getAiSpecies(playerSpecies);
 		        startController();
 	        }
@@ -136,6 +149,17 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	public void changeAreaPopulation(int area,int[] population){
 		holder.setAreaPopulation(area, population);
 		setAreaPopulation();
+		if(informationDialog!=null){
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					informationDialog.update();
+					
+				}
+			});
+			
+		}
 	}
 	public void changeWorldPopulation(long[] population){
 		holder.changePopulation(population);
@@ -147,8 +171,17 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		
 	}
 
-	public void changePointsAndTime(int[] points, Date time){
+	public void changePointsAndTime(int[] points, final Date time){
 		holder.addPoints(points[playernumber]);
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				pointsTextView.setText(holder.getPoints()+" P");
+				timeTextView.setText(time.getYear());
+				
+			}
+		});
 	}
 
 	public void updateSpecies(SpeciesUpdate speciesUpdate){
@@ -188,7 +221,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
         Display display =getWindowManager().getDefaultDisplay();
         holder=new MapHolder(mapBackgroundLL,selectionLL,pointsLL, 400, 800,display.getWidth(),display.getHeight()-display.getHeight()/6, areaNumberOfFields, areasLandType,species);
 
-//        setOnTouchListeners();
+        setOnTouchListeners();
         mapHasBeenSet=true;
 	}
 	
@@ -224,8 +257,8 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			while(!Thread.currentThread().isInterrupted()){
 			
 				if (mapHasBeenSet) {
-					if (holder.drawMapLayout()){
-//						redrawMap();
+					if (holder.drawMapLayout(false)){
+
 					}
 
 				}
@@ -269,6 +302,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	
 	protected void onDestroy(){
 		super.onDestroy();
+		
 		actualizeThread.interrupt();
 		controllerThread.interrupt();
 		actualizeMapThread.interrupt();
@@ -288,9 +322,50 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	@Override
 	public void onBackPressed(){
-		super.onBackPressed();
-		finish();
+		AlertDialog alert = new AlertDialog.Builder(this).create();
+		
+		alert.setTitle("Wirklich aufhoeren?");
+		
+		if (multiplayer) {
+			// TODO
+		} else {
+			alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ja", new BackDialogListeners.ExitListener(this));
+			alert.setButton(AlertDialog.BUTTON_NEUTRAL, "Vorher speichern", new BackDialogListeners.ExitAndSaveListener(this));
+			alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Nein", new BackDialogListeners.ResumeListener(this));
+		}
+		alert.show();
 	}
+	
+	public void save() {
+		try {
+			byte[] mapdata = MapLoader.saveMap(map);
+			//momentan wird nur das letzte spiel geladen, benutze diese namensgebung
+			// um auswahl zu bieten
+			/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
+			Date now = new Date();
+			String filename = sdf.format(now) + ".em";*/
+			String filename = "savefile.em";
+			FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+			fos.write(mapdata);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * TODO:
+	 * Nicht unbedingt noetig. Waere aber gut im Singleplayer zu pausieren wenn back gedrueckt wurde
+	 */
+	public void pause() {
+		
+	}
+	
+	public void resume() {
+		
+	}
+	
 	private byte[] readFile(String path) throws IOException {
 		RandomAccessFile f = new RandomAccessFile(new File(path), "r");
 		
@@ -311,10 +386,11 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			@Override
 			public void onClick(View v) {
 				
-				if(!firstSpeciesUpdate) return;
+				if(!firstSpeciesUpdate || fragmentOpened) return;
+				fragmentOpened=true;
 				frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
 				
-				
+				noAreaSelection();
 				FragmentManager fm=getSupportFragmentManager();
 				frag.show(fm, "fragment_overview");
 			}
@@ -324,27 +400,54 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			
 			@Override
 			public void onClick(View v) {
-				if(!firstSpeciesUpdate) return;
+				if(!firstSpeciesUpdate || fragmentOpened) return;
+				fragmentOpened=true;
 				frag2=new SkillSpeciesFragment();
+				noAreaSelection();
 				FragmentManager fm=getSupportFragmentManager();
 				frag2.show(fm, "fragment_skill");
+				
 			}
 		});
         populationTextView=(TextView)
         		findViewById(R.id.text_view_simulation_layout_current_pop);
+        selectionTextView=(TextView) findViewById(R.id.text_view_simulation_layout_current_selection);
+        pointsTextView=(TextView) findViewById(R.id.text_view_simulation_layout_points);
+        timeTextView=(TextView) findViewById(R.id.text_view_simulation_layout_time);
 	}
 	
 	//only for singleplayerr
 	private void startController(){
-		Map map = null;
+		map = null;
         int mapType = getIntent().getIntExtra(MapActivity.MAPTYPE, 0);
         if (mapType == MapActivity.RANDOM) {
         	map = Map.fromRandom(WIDTH, HEIGHT, species, Map.getRandomFieldTypes());
         }
-        else {
-	        String path = basepath + "/map" + mapType + ".em"; //file ending em = evolution map
-		    try {
-		    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), readFile(path));
+        else if (mapType == MapActivity.LOAD){
+        	try {
+				byte[] mapdata = readFile(getFilesDir().getAbsolutePath() + "/savefile.em");
+				map = MapLoader.loadMap(mapdata);
+				species = map.getSpecies();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else {
+        	InputStream is;
+        	switch (mapType) {
+        	case MapActivity.MAP1: is = getResources().openRawResource(R.raw.map1); break;
+        	case MapActivity.MAP2: is = getResources().openRawResource(R.raw.map2); break;
+        	case MapActivity.MAP3: is = getResources().openRawResource(R.raw.map3); break;
+        	case MapActivity.MAP4: is = getResources().openRawResource(R.raw.map4); break;
+        	default: is = null;
+        	}
+        	ArrayList<Byte> buffer = new ArrayList<Byte>();
+        	int b;
+        	try {
+				while ((b = is.read()) != -1) buffer.add((byte)b);
+	        	byte[] mapData = new byte[buffer.size()];
+	        	for (int i = 0; i < buffer.size(); i++) mapData[i] = buffer.get(i);
+		    	map = MapLoader.loadPureMap(species, new SimpleMapLogic(species), mapData);
 		    } catch (Exception e) {
 		    	//TODO do something	
 		    }
@@ -404,7 +507,17 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	private void setWorldPopulation(){
 		//only if no area isSelected
+		if(holder==null)return;
 		if(currentSelectedArea==-1){
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.world);
+					
+				}
+			});
+			
 			setPopulationTextView(holder.getPopulation()[playernumber]);
 		}
 		
@@ -424,46 +537,159 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	}
 	private void setAreaPopulation(){
 		//only actualize if an area is selected
+		if(holder==null)return;
 		if(currentSelectedArea!=-1){
+			switch(holder.getAreas()[currentSelectedArea].getLandType().getFieldType()){
+			case DESERT: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.desert);
+					
+				}
+			}); break;
+			case ICE: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.ice);
+					
+				}
+			}); break;
+			case JUNGLE: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.jungle);
+					
+				}
+			}); break;
+			case LAND: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.land);
+					
+				}
+			}); break;
+			case WATER: runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					selectionTextView.setText(R.string.water);
+					
+				}
+			}); break;
+			default: break;
+			}
 			setPopulationTextView(holder.getAreaPopulation(
 					currentSelectedArea, playernumber));
 			//draw area lighter then others
 		}
 		
 	}
-//	private void setOnTouchListeners(){
-//		mapBackgroundLL.setOnTouchListener(new View.OnTouchListener() {
-//			
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				if(event.getAction()==MotionEvent.ACTION_DOWN){
-//						//get x and y and calculate Area from this
-//						Log.e("Simulation", "Tap down");
-//						float xEvent=event.getX();
-//						float yEvent=event.getY();
-//						//umrechnen in 
-//						Log.e("Simulation", "dim x: "+mapBackgroundLL.getWidth()+" y: "+mapBackgroundLL.getHeight());
-//						int x=(int)(xEvent*(200/(float)mapBackgroundLL.getWidth()));
-//						int y=(int)(yEvent*(100/(float)mapBackgroundLL.getHeight()));
-//						Log.e("Simulation", "Tap x: "+x+" y: "+y);
-////						int newSelectedArea=holder.getArea(x, y);
-////						if(newSelectedArea==currentSelectedArea){
-////							currentSelectedArea=-1;
-////							holder.unregisterAreaBuffer(newSelectedArea);
-////						}
-////						else{
-////							holder.unregisterAreaBuffer(currentSelectedArea==-1? 0:currentSelectedArea);
-////							currentSelectedArea=newSelectedArea;
-////							holder.registerAreaBuffer(newSelectedArea);
-////						}
-////						//holder.redraw(currentSelectedArea);
-//						
-//				}
-//				return false;
-//			}
-//		});
-//	}
-//	
+	private void setOnTouchListeners(){
+		mapHolderRL.setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction()==MotionEvent.ACTION_DOWN){
+					Log.e("Simulation", "Tap down");
+					float xEvent=event.getX();
+					float yEvent=event.getY();
+					//umrechnen in 
+					Log.e("Simulation", "dim x: "+mapHolderRL.getWidth()+" y: "+mapHolderRL.getHeight());
+					int x=(int)(xEvent*(200/(float)mapHolderRL.getWidth()));
+					int y=(int)(yEvent*(100/(float)mapHolderRL.getHeight()));
+					
+					tmpArea=holder.getArea(x, y);
+				}
+				if(event.getAction()==MotionEvent.ACTION_UP){
+						//get x and y and calculate Area from this
+						Log.e("Simulation", "Tap down");
+						float xEvent=event.getX();
+						float yEvent=event.getY();
+						//umrechnen in 
+						Log.e("Simulation", "dim x: "+mapHolderRL.getWidth()+" y: "+mapHolderRL.getHeight());
+						int x=(int)(xEvent*(200/(float)mapHolderRL.getWidth()));
+						int y=(int)(yEvent*(100/(float)mapHolderRL.getHeight()));
+						Log.e("Simulation", "Tap x: "+x+" y: "+y);
+						Log.e("Simulation", "Event: Tap x: "+xEvent+" y: "+yEvent);
+						if(y>=100) return false;
+						int newSelectedArea=holder.getArea(x, y);
+						
+						if(newSelectedArea==currentSelectedArea){
+							noAreaSelection();
+						}
+						else{
+							if(!fragmentOpened){
+								currentSelectedArea=newSelectedArea;
+								setAreaPopulation();
+								holder.drawAreaLayout(newSelectedArea);
+							}
+						}
+						
+				}
+				return false;
+			}
+			
+		});
+		mapHolderRL.setOnLongClickListener(new View.OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				
+				AreaInformationDialog d=
+						AreaInformationDialog.newInstance(
+								tmpArea,
+								getSpecies(), playernumber);
+				if(!firstSpeciesUpdate || fragmentOpened) return false;
+				fragmentOpened=true;
+				
+				noAreaSelection();
+				FragmentManager fm=getSupportFragmentManager();
+				d.show(fm, "area_information");
+				
+				return false;
+			}
+
+			
+			
+		});
+	}
+	@Override
+	public void onPause(){
+		super.onPause();
+		currentSelectedArea=-1;
+		setWorldPopulation();
+		if(holder!=null)
+			holder.destroyHolder();
+	}
+	@Override
+	public void onResume(){
+		super.onResume();
+		if(holder!=null){
+			holder.drawMapLayout(true);
+		}
+	}
+	public void noAreaSelection(){
+		currentSelectedArea=-1;
+		setWorldPopulation();
+		if(holder!=null)
+			holder.stopObjectAnimator();
+	}
+	public void closingFragment(){
+		fragmentOpened=false;
+	}
+	public void registerAreaInformationDialog( AreaInformationDialog d){
+		informationDialog=d;		
+	}
+	public void unregisterAreaInformationDialog(){
+		informationDialog=null;		
+	}
+	public MapArea getArea(int area){
+		return holder.getAreas()[area];
+	}
 }
 
 

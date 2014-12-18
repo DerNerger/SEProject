@@ -5,6 +5,7 @@ import main.PossibleUpdates;
 import main.SimpleMapLogic;
 import main.Species;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CreateSpeciesActivity extends Activity {
 	public static final String SPECIESBUNDLE="spbun";
@@ -81,6 +83,16 @@ public class CreateSpeciesActivity extends Activity {
 				String name=((EditText) findViewById(R.id.edit_text_create_species_name)).getText().toString();
 				Log.e("name", name);
 				species.setName(name.length()<1?"Evolu":name);
+				if( ActivityManager.isUserAMonkey()){
+					species.setName("DaMonkey");
+				}
+//				UserManager man=(UserManager) getSystemService(USER_SERVICE);
+//				
+//				if(man.isUserAGoat() && (species.getName().startsWith("Goat")
+//						|| species.getName().startsWith("goat"))){
+//					Toast.makeText(getApplicationContext(),
+//						"Are you a fan of goats?", Toast.LENGTH_LONG).show();
+//				}
 				Intent intent=new Intent(getApplicationContext(),GameActivity.class);
 				intent.putExtra(SPECIESBUNDLE, species);
 				PlayerInformation info = (PlayerInformation) getIntent().getSerializableExtra("info");

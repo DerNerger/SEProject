@@ -49,25 +49,28 @@ public class SpeciesOverviewFragment extends DialogFragment {
 		viewPager=(ViewPager) root.findViewById(R.id.pager_overview);
 		viewPager.setAdapter(adapterOverview);
 		
-		
 		return root;
 	}
-		public void onStart() {
-			super.onStart();
-	
-			// safety check
-			if (getDialog() == null) {
-			 return;
-			}
-	
-			
-	
-			getDialog().getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-	
-			// ... other stuff you want to do in your onStart() method
+
+	public void onStart() {
+		super.onStart();
+
+		// safety check
+		if (getDialog() == null) {
+			return;
 		}
+
+		getDialog().getWindow().setLayout(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
+		
+	}
     public void changePopulation(long[]population){
     	this.population=population;
     	adapterOverview.changePopulation(0, population[0]);
     }
+    @Override
+	public void onStop(){
+		super.onStop();
+		((GameActivity)getActivity()).closingFragment();
+	}
 }
