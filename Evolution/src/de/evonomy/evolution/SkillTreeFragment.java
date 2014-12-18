@@ -73,11 +73,11 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 			break;
 		case HEAD:skills=SpeciesSkillInformation.getHeadSkills();
 			break;
-		case LEGS:skills=SpeciesSkillInformation.getLegSkills();
+		case LEGS:skills=SpeciesSkillInformation.getNextToLegSkills();
 			break;
 		case NEXTTOHEAD: skills=SpeciesSkillInformation.getNextToHeadSkills();
 			break;
-		case NEXTTOLEGS: skills=SpeciesSkillInformation.getNextToLegSkills();
+		case NEXTTOLEGS: skills=SpeciesSkillInformation.getLegSkills();
 			break;
 		default: throw new RuntimeException("Bist du behindert?Warum gibst du"+
 				" nen slot mit an den baum aufbauer den es nicht gibt?????");

@@ -24,7 +24,7 @@ public class CreateSpeciesActivity extends Activity {
 	private Species species;
 	private TemperatureView tempView;
 	private SpeciesAttributeView saview;
-	private static final int POINTSTOSPEND=22;
+	private static final int POINTSTOSPEND=15;
 	private boolean isLand;
 	private boolean carnivore;
 	private boolean isThinFur;

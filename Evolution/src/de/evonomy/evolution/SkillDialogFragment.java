@@ -174,7 +174,7 @@ public class SkillDialogFragment extends DialogFragment {
 		saview.changeAgility(species.getAgility());
 		saview.changeStrength(species.getStrength());
 		saview.changeSocial(species.getSocial());
-		saview.changeRecreation(species.getSocial());
+		saview.changeRecreation(species.getProcreation());
 		tView.changeMaxTemp(species.getMaxTemp());
 		tView.changeMinTemp(species.getMinTemp());
 		demView.setResourceDemand(species.getResourceDemand());

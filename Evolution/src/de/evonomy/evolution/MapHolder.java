@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
+import android.graphics.Shader;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

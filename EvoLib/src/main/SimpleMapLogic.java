@@ -198,7 +198,7 @@ public class SimpleMapLogic implements IMapLogic {
 		
 		double minTempStdDeviation=4;
 		double maxTempStdDeviation=4;
-		double naturalEnemiesStdDeviation=2;
+		double naturalEnemiesStdDeviation=100;
 		double resourcesStdDeviation=2;
 		
 		
@@ -218,7 +218,7 @@ public class SimpleMapLogic implements IMapLogic {
 			break;
 		case DESERT:		
 			minTemp=minTemp * minTempStdDeviation + 40;
-			maxTemp=maxTemp * maxTempStdDeviation + 70;
+			maxTemp=maxTemp * maxTempStdDeviation + 60;
 			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
 			resources = resources * resourcesStdDeviation + 10;
 			break;
@@ -244,11 +244,11 @@ public class SimpleMapLogic implements IMapLogic {
 		switch (update) {
 		case LANDSPECIES:
 			s.setWater(false);
-			s.setSocial(s.getSocial()+3);
+			s.setIntelligence(s.getIntelligence()+5);
 			break;
 		case WATESPECIES:
 			s.setWater(true);
-			s.setSocial(s.getSocial()-3);
+			s.setIntelligence(s.getIntelligence()-5);
 			break;
 		case CARNIVORE:
 			s.setStrength(s.getStrength()+5);
@@ -259,12 +259,12 @@ public class SimpleMapLogic implements IMapLogic {
 			s.setResourceDemand(s.getResourceDemand()-5);
 			break;
 		case ENDOSKELETON:
-			s.setStrength(s.getStrength()-5);
+			s.setStrength(s.getStrength()-3);
 			s.setAgility(s.getAgility()+3);
 			s.setMovementChance(s.getMovementChance()+0.05);
 			break;
 		case EXOSKELETON:
-			s.setStrength(s.getStrength()+5);
+			s.setStrength(s.getStrength()+3);
 			s.setAgility(s.getAgility()-3);
 			s.setMovementChance(s.getMovementChance()-0.05);
 			break;
@@ -294,6 +294,26 @@ public class SimpleMapLogic implements IMapLogic {
 			s.setAgility(s.getAgility()+4);
 			s.setMovementChance(s.getMovementChance()+0.3);
 			break;
+		case CENTRALNERVSYSTEM:
+			s.setIntelligence(s.getIntelligence()+2);
+			s.setSocial(s.getSocial()+2);
+			break;
+		case BRAIN:
+			s.setIntelligence(s.getIntelligence()+5);
+			s.setSocial(s.getSocial()+5);
+			break;
+		case FRONTALLOBE:
+			s.setIntelligence(s.getIntelligence()+25);
+			break;
+		case LIMBICSYSTEM:
+			s.setSocial(s.getSocial()+25);
+			break;
+		case ULTRASAOUND:
+			s.setVisibillity(s.getVisibillity()+5);
+			break;
+		case EYES:
+			s.setVisibillity(s.getVisibillity()+10);
+			break;
 		default:
 			throw new RuntimeException("Type is not valid");
 		}
@@ -303,16 +323,16 @@ public class SimpleMapLogic implements IMapLogic {
 	 * Erstellt eine Spezies mit vorgegebener standartkonfiguration.
 	 * */
 	public static Species getStandartSpecies(String name){
-		int intelligence = 25;
-		int agility = 25;
-		int strength = 25;
-		int social = 25;
-		int procreation = 25;
-		int minTemp = 10;
-		int maxTemp = 20;
-		int resourceDemand = 15;
-		double movementChance = 0.1;
-		int visibillity = 3;
+		int intelligence = 10;
+		int agility = 10;
+		int strength = 10;
+		int social = 10;
+		int procreation = 10;
+		int minTemp = 3;
+		int maxTemp = 21;
+		int resourceDemand = 10;
+		double movementChance = 0.05;
+		int visibillity = 5;
 		boolean water = false;
 		return new Species(name, intelligence, agility, strength, social, 
 				procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water);
