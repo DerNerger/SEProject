@@ -72,7 +72,7 @@ public class MapArea {
 	}
 	public void setAlpha(float alpha){
 		this.alpha=alpha;
-		newInvalidate();
+		invalidate();
 	}
 	public void animateClicked(SurfaceHolder holder){
 		this.holder=holder;
