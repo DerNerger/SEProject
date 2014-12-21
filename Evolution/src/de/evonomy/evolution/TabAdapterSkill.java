@@ -16,8 +16,11 @@ public class TabAdapterSkill extends FragmentPagerAdapter{
 
 	@Override
 	public Fragment getItem(int arg0) {
-		// TODO Auto-generated method stub
-		Fragment fragment=new FragmentSkillBody();
+		Fragment fragment;
+		if(arg0==0)
+			fragment=new FragmentSkillBody();
+		else
+			fragment=new SkillAbilityFragment();
 		return fragment;
 	}
 

@@ -15,6 +15,7 @@ public class SpeciesSkillInformation {
 	private static LinkedList<SkillElement> body;
 	private static LinkedList<SkillElement> legs;
 	private static LinkedList<SkillElement> arms;
+	private static LinkedList<SkillElement> abilities;
 
 	static {
 		setNextToHead();
@@ -23,6 +24,7 @@ public class SpeciesSkillInformation {
 		setHead();
 		setNextToLegs();
 		setLegs();
+		setAbilities();
 	}
 
 	public static LinkedList<SkillElement> getLegSkills() {
@@ -47,6 +49,9 @@ public class SpeciesSkillInformation {
 
 	public static LinkedList<SkillElement> getNextToHeadSkills() {
 		return nextToHead;
+	}
+	public static LinkedList<SkillElement> getAbilities(){
+		return abilities;
 	}
 
 	private static void setNextToHead() {
@@ -168,5 +173,43 @@ public class SpeciesSkillInformation {
 		arms.add(claw);
 		arms.add(hand);
 		arms.add(foot);
+	}
+	private static void setAbilities(){
+		abilities= new LinkedList<SkillElement>();
+		SkillElement sexual= new SkillElement(PossibleUpdates.SEXUALPROCREATION, 0);
+		SkillElement poly= new SkillElement(PossibleUpdates.POLYGAMY, 0);
+		SkillElement mono= new SkillElement(PossibleUpdates.MONOGAMY, 0);
+		SkillElement packanimal= new SkillElement(PossibleUpdates.PACKANIMAL, 0);
+		SkillElement language= new SkillElement(PossibleUpdates.LANGUAGE, 0);
+		SkillElement maverick= new SkillElement(PossibleUpdates.MAVERICK, 0);
+		SkillElement logic= new SkillElement(PossibleUpdates.LOGIC, 0);
+		SkillElement thumbs= new SkillElement(PossibleUpdates.THUMBS, 0);
+		SkillElement firemaking= new SkillElement(PossibleUpdates.FIREMAKING, 0);
+		SkillElement spitfire= new SkillElement(PossibleUpdates.SPITFIREDRAGON, 0);
+		SkillElement pheromon= new SkillElement(PossibleUpdates.PHEROMONS, 0);
+		SkillElement kidscheme= new SkillElement(PossibleUpdates.KIDSCHEME, 0);
+		SkillElement settle= new SkillElement(PossibleUpdates.SETTLE, 0);
+		sexual.addChild(poly);
+		sexual.addChild(mono);
+		packanimal.addChild(language);
+		maverick.addChild(logic);
+		thumbs.addChild(firemaking);
+		firemaking.addChild(spitfire);
+		pheromon.addChild(kidscheme);
+		abilities.add(settle);
+		abilities.add(sexual);
+		abilities.add(poly);
+		abilities.add(mono);
+		abilities.add(packanimal);
+		abilities.add(language);
+		abilities.add(maverick);
+		abilities.add(logic);
+		abilities.add(thumbs);
+		abilities.add(firemaking);
+		abilities.add(spitfire);
+		abilities.add(pheromon);
+		abilities.add(kidscheme);
+		
+		
 	}
 }

@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 
 public class FragmentSkillBody extends Fragment implements SlotSkillable {
-	public enum Slots {LEGS,ARMS,HEAD,BODY,NEXTTOHEAD,NEXTTOLEGS};
+	public enum Slots {LEGS,ARMS,HEAD,BODY,NEXTTOHEAD,NEXTTOLEGS,ABILITY};
 	private LinearLayout fragmentContainer;
 	private LinearLayout lllegs;
 	private LinearLayout llarmsl;
@@ -72,6 +72,14 @@ public class FragmentSkillBody extends Fragment implements SlotSkillable {
 						width,height));
 				llhead.setOnClickListener(new SkillListener(Slots.HEAD,
 						width,height));
+				SkillTreeFragment frag=SkillTreeFragment
+						.newInstance(Slots.HEAD, fragmentContainer.getMeasuredWidth()
+								,fragmentContainer.getMeasuredHeight(),toOvergive);
+				FragmentManager fm=getChildFragmentManager();
+				FragmentTransaction trans=fm.beginTransaction();
+				trans.replace(fragmentContainer.getId(), frag,"tree_fragment");
+//				frag.show(fm, "fragment_skill_legs");
+				trans.commit();
 				
 			}
 		});
