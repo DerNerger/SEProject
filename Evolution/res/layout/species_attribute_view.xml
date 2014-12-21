@@ -102,6 +102,10 @@
     	    android:layout_weight="1"
     	    android:padding="2dp"
     	    android:orientation="horizontal" >
+	   		<ImageView 
+	   		    android:layout_width="fill_parent"
+	   		    android:layout_height="fill_parent"
+	   		    android:src="@drawable/intelligence"/>
         
    		</LinearLayout>
    		<LinearLayout
@@ -110,6 +114,10 @@
     	    android:layout_weight="1"
     	    android:padding="2dp"
     	    android:orientation="horizontal" >
+	   		<ImageView 
+	   		    android:layout_width="fill_parent"
+	   		    android:layout_height="fill_parent"
+	   		    android:src="@drawable/agility"/>
         
    		</LinearLayout>
    		<LinearLayout
@@ -118,6 +126,10 @@
     	    android:layout_weight="1"
     	    android:padding="2dp"
     	    android:orientation="horizontal" >
+	   		<ImageView 
+	   		    android:layout_width="fill_parent"
+	   		    android:layout_height="fill_parent"
+	   		    android:src="@drawable/strength"/>
         
    		</LinearLayout>
    		<LinearLayout
@@ -126,6 +138,10 @@
     	    android:layout_weight="1"
     	    android:padding="2dp"
     	    android:orientation="horizontal" >
+	   		<ImageView 
+	   		    android:layout_width="fill_parent"
+	   		    android:layout_height="fill_parent"
+	   		    android:src="@drawable/social"/>
         
    		</LinearLayout>
    		<LinearLayout
@@ -134,6 +150,10 @@
     	    android:layout_weight="1"
     	    android:padding="2dp"
     	    android:orientation="horizontal" >
+	   		<ImageView 
+	   		    android:layout_width="fill_parent"
+	   		    android:layout_height="fill_parent"
+	   		    android:src="@drawable/procreation"/>
         
    		</LinearLayout>
         
