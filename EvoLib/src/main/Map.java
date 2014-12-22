@@ -1,14 +1,16 @@
 package main;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.HashMap;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
 
 public class Map implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	private static final int WATER_MAX = 4000;
 	
 	//attributes
 	private Field[][] fields;
@@ -67,50 +69,6 @@ public class Map implements Serializable{
 			}
 		}
 		
-		//***************** TODO: DELETE*****************************
-		/*final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				switch (fieldtypes[i][j]) {
-				case WATER:
-					image.setRGB(i, j, new Color(255, 0, 0).getRGB());
-					break;
-				case DESERT:
-					image.setRGB(i, j, new Color(0, 255, 0).getRGB());
-					break;
-				case ICE:
-					image.setRGB(i, j, new Color(0, 0, 255).getRGB());
-					break;
-				case JUNGLE:
-					image.setRGB(i, j, new Color(0, 0, 0).getRGB());
-					break;
-				case LAND:
-					image.setRGB(i, j, new Color(255, 255, 255).getRGB());
-					break;
-				default:
-					break;
-				}				
-			}
-		}
-		
-		final JFrame frame = new JFrame();
-    	frame.setSize(width+30, height+30);
-    	
-		JPanel pane = new JPanel() {
-			@Override
-			public void paint(Graphics g) {
-				g.drawImage(image, 0, 0, null);
-			}
-		};
-		frame.add(pane);
-		
-		java.awt.EventQueue.invokeLater(new Runnable() {
-		    public void run() {
-		        frame.setVisible(true);
-		    }
-		} );
-		//************************************************************/
-		
 		LinkedList<Area> areas = new LinkedList<Area>();
 		int numberArea = 0;
 		Field[] tmp = null;
@@ -138,8 +96,12 @@ public class Map implements Serializable{
 		}
 		
 		HashSet<Area> toDelete = new HashSet<>();
+		HashSet<Area> toAdd = new HashSet<>();
+		int areanumber = areas.size();
 		
 		for (Area area : areas) {
+			
+			// merge areas smaller than 10 fields into adjacent ones
 			if (area.getFields().length < 10) {
 				toDelete.add(area);
 				Field f = area.getFields()[0];
@@ -166,9 +128,51 @@ public class Map implements Serializable{
 					fd.setArea(fields[x][y].getArea());
 				}
 			}
+			
+			// split up water areas bigger than WATER_MAX fields
+			if (area.getLandType().getFieldType() == FieldType.WATER
+					&& area.getFields().length > WATER_MAX) {
+				LinkedList<Field> queue = new LinkedList<>();
+				HashSet<Field> toNewArea = new HashSet<>();
+				queue.push(area.getFields()[0]);
+				
+				//TODO: some randomness here
+				int newsize = area.getFields().length / 2;
+				
+				while (toNewArea.size() < newsize) {
+					Field f = queue.pop();
+					toNewArea.add(f);
+					for (int i = -1; i <= 1; i++) {
+						for (int j = -1; j <= 1; j++) {
+							if (Math.abs(i + j) != 1 || f.x + i < 0 || f.x + i >= width
+									|| f.y + j < 0 || f.y + j >= height) continue;
+							if (fields[f.x + i][f.y + j].getArea().getNumber() == area.getNumber()
+									&& !toNewArea.contains(fields[f.x + i][f.y + j]))
+								queue.push(fields[f.x + i][f.y + j]);
+						}
+					}
+				}
+				
+				Field[] oldAreaFields = new Field[area.getFields().length - toNewArea.size()];
+				Field[] newAreaFields = new Field[toNewArea.size()];
+				int newctr = 0, oldctr = 0;
+				Area newArea = new Area(areanumber++, new LandType(area.getLandType()), null);
+				for (Field fd : area.getFields()) {
+					if (toNewArea.contains(fd)) {
+						newAreaFields[newctr++] = fd;
+						fd.setArea(newArea);
+					}
+					else
+						oldAreaFields[oldctr++] = fd;
+				}
+				newArea.setFields(newAreaFields);
+				area.setFields(oldAreaFields);
+				toAdd.add(newArea);
+			}
 		}
 		
 		areas.removeAll(toDelete);
+		areas.addAll(toAdd);
 		
 		Area[] areaArray = new Area[areas.size()];
 		

@@ -85,6 +85,10 @@ private int number;
 		return fields;
 	}
 	
+	public void setFields(Field[] fields) {
+		this.fields = fields;
+	}
+	
 	public int[] getPopulation(){
 		calculatePopulation();
 		return population;
