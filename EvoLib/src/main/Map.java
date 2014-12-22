@@ -189,7 +189,7 @@ public class Map implements Serializable{
 	private static Field[] getFieldsInArea(int x, int y, FieldType[][] fieldtypes,
 			Field[][] fields, HashSet<Field> done) {
 		
-		LinkedList<Field> fieldsInArea = new LinkedList<Field>();
+		HashSet<Field> fieldsInArea = new HashSet<>();
 		FieldType type = fieldtypes[x][y];
 		int width = fields.length;
 		int height = fields[0].length;
@@ -200,7 +200,7 @@ public class Map implements Serializable{
 		while (!queue.isEmpty()) {
 			Field f = queue.pop();
 			done.add(f);
-			fieldsInArea.push(f);
+			fieldsInArea.add(f);
 			for (int i = -1; i <= 1; i++) {
 				for (int j = -1; j <= 1; j++) {
 					if (Math.abs(i + j) != 1 || f.x + i < 0 || f.x + i >= width
@@ -214,8 +214,9 @@ public class Map implements Serializable{
 
 		Field[] result = new Field[fieldsInArea.size()];
 		
-		for (int i = 0; i < fieldsInArea.size(); i++) {
-			result[i] = fieldsInArea.get(i);
+		int ctr = 0;
+		for (Field f : fieldsInArea) {
+			result[ctr++] = f;
 		}
 		
 		return result;
