@@ -94,6 +94,7 @@ public class Field implements Serializable{
 		return new FieldChange(x,y,population);
 	}
 	
+	@Override
 	public boolean equals(Object other) {
 		if (other == null) return false;
 		if (!(other instanceof Field)) return false;
