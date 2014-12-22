@@ -13,6 +13,15 @@ public class LandType implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	public LandType(LandType other) {
+		super();
+		this.minTemp = other.minTemp;
+		this.maxTemp = other.maxTemp;
+		this.type = other.type;
+		this.naturalEnemies = other.naturalEnemies;
+		this.resources = other.resources;
+	}
+	
 	public LandType(int minTemp, int maxTemp, FieldType type,
 				int naturalEnemies, int resources) {
 			super();
