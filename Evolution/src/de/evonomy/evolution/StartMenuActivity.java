@@ -60,7 +60,8 @@ public class StartMenuActivity extends Activity {
 					});
 					alert.show();
 				}
-				
+				else
+					startRandom();
 			}
 		});
         
