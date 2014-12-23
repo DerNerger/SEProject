@@ -21,7 +21,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CreateSpeciesActivity extends FragmentActivity implements DialogOpenable{
+public class CreateSpeciesActivity extends FragmentActivity implements
+		DialogOpenable {
 	public static final String SPECIESBUNDLE = "spbun";
 	private Species species;
 	private TemperatureView tempView;
@@ -32,7 +33,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements DialogOpe
 	private boolean isThinFur;
 	private boolean endoSkeleton;
 	private boolean isRStrategist;
-	private boolean fragmentOpened=false;
+	private boolean fragmentOpened = false;
 	private RadioButton landButton;
 	private RadioButton waterButton;
 	private RadioButton carnivoreButton;
@@ -490,11 +491,13 @@ public class CreateSpeciesActivity extends FragmentActivity implements DialogOpe
 
 			@Override
 			public void onClick(View v) {
-				if(!fragmentOpened){
+				if (!fragmentOpened) {
 					Log.e("Create", "Clicked land");
-					fragmentOpened=true;
-					InformationDialog dial=InformationDialog.newInstance(R.string.app_name, R.string.app_name);
-					FragmentManager fm= getSupportFragmentManager();
+					fragmentOpened = true;
+					InformationDialog dial = InformationDialog
+							.newInstance(R.string.land_water_title,
+									R.string.land_water_desc);
+					FragmentManager fm = getSupportFragmentManager();
 					dial.show(fm, "information_dialog");
 				}
 
@@ -504,7 +507,14 @@ public class CreateSpeciesActivity extends FragmentActivity implements DialogOpe
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				if (!fragmentOpened) {
+					Log.e("Create", "Clicked land");
+					fragmentOpened = true;
+					InformationDialog dial = InformationDialog.newInstance(
+							R.string.carnivore_title, R.string.carnivore_desc);
+					FragmentManager fm = getSupportFragmentManager();
+					dial.show(fm, "information_dialog");
+				}
 
 			}
 		});
@@ -512,7 +522,14 @@ public class CreateSpeciesActivity extends FragmentActivity implements DialogOpe
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				if (!fragmentOpened) {
+					Log.e("Create", "Clicked land");
+					fragmentOpened = true;
+					InformationDialog dial = InformationDialog.newInstance(
+							R.string.skeleton_title, R.string.skeleton_desc);
+					FragmentManager fm = getSupportFragmentManager();
+					dial.show(fm, "information_dialog");
+				}
 
 			}
 		});
@@ -520,7 +537,15 @@ public class CreateSpeciesActivity extends FragmentActivity implements DialogOpe
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				if (!fragmentOpened) {
+					Log.e("Create", "Clicked land");
+					fragmentOpened = true;
+					InformationDialog dial = InformationDialog
+							.newInstance(R.string.strategist_title,
+									R.string.strategist_desc);
+					FragmentManager fm = getSupportFragmentManager();
+					dial.show(fm, "information_dialog");
+				}
 
 			}
 		});
@@ -528,13 +553,21 @@ public class CreateSpeciesActivity extends FragmentActivity implements DialogOpe
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				if (!fragmentOpened) {
+					Log.e("Create", "Clicked land");
+					fragmentOpened = true;
+					InformationDialog dial = InformationDialog.newInstance(
+							R.string.fur_title, R.string.fur_desc);
+					FragmentManager fm = getSupportFragmentManager();
+					dial.show(fm, "information_dialog");
+				}
 
 			}
 		});
 	}
-	public void closingFragment(){
-		fragmentOpened=false;
+
+	public void closingFragment() {
+		fragmentOpened = false;
 	}
 
 }

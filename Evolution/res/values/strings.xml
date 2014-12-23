@@ -38,6 +38,7 @@
     <string name="res_dem_stat_5_str">viel</string>
     <string name="res_dem_stat_6_str">extrem viel</string>
     <string name="fragment_skill_dialog_change_button">Zeige Änderungen!</string>
+    <string name="fragment_skill_dialog_change_button_back">Änderung rückgängig!</string>
     <string name="already_bought_dialog">Schon gekauft!</string>
     <string name="title_progress_dialog_update">Spezies wird weiterentwickelt</string>
     <string name="text_progress_dialog_update">Erbgut wird neu strukturiert...</string>
@@ -51,6 +52,16 @@
     <string name="land">Grasland</string>
     <string name="world">Planet</string>
     <string name="species_overview">Überblick</string>
-    <string name="skill_species">Entwickeln!</string>
+    <string name="skill_species">Entwickeln</string>
+    <string name="land_water_title">Land- &amp; Wasser Spezies</string>
+    <string name="land_water_desc">Dieses Attribut legt fest, ob die Spezies im Wasser lebensfähig ist oder nicht. Eine Lebensfähigkeit im Wasser senkt allerdings andere Eigenschaften der Spezies.</string>
+    <string name="carnivore_title">Fleischfresser &amp; Pflanzenfresser</string>
+    <string name="carnivore_desc">Fleischfresser oder Pflanzenfresser? Ein Fleischfresser ist aufgrund besserer Proteinversorgung stärker, braucht allerdings auch mehr Resourcen und Rohstoffe als ein Pflanzenfresser!</string>
+    <string name="skeleton_title">Endo- &amp; Exoskelett</string>
+    <string name="skeleton_desc">Bei einem Exoskelett wird der Körper durch eine Außenhülle stabilisiert, wie bei einem Käfer, während eine Spezies mit Endoskelett sich durch Knochen im Inneren des Körpers stabilisieren. Dies führt zu mehr Beweglichkeit, allerdings ist man auch nicht so gut gegen Angreifer geschützt. </string>
+    <string name="strategist_title">r- &amp; K-Strategen</string>
+    <string name="strategist_desc">r- und K-Strategen bezeichnen die Fortpflanzungsstrategie der Spezies. r-Strategen haben sehr viele Nachkommen, überlassen sie dafür weitgehend sich selbst. K-Strategen haben wenig Nachkommen, kümmern sich dafür aber um diese.</string>
+    <string name="fur_title">Dünnes &amp; dickes Fell</string>
+    <string name="fur_desc">Durch dickes Fell passt man sich besser an kalte Regionen an, während man mit dünnem Fell auch in heißen Regionen überleben kann.</string>
 
 </resources>

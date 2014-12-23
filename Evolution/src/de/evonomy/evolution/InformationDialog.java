@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 public class InformationDialog extends DialogFragment {
@@ -55,6 +56,17 @@ public class InformationDialog extends DialogFragment {
 	public void onStop(){
 		super.onStop();
 		((DialogOpenable)getActivity()).closingFragment();
+	}
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (getDialog() == null) {
+			return;
+		}
+		getDialog().getWindow().setLayout(
+				(int) getResources().getDimension(R.dimen.information_dialog_width),
+				(int) getResources().getDimension(
+						R.dimen.information_dialog_height));
 	}
 
 }

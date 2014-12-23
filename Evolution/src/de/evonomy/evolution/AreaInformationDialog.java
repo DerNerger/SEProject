@@ -91,7 +91,7 @@ public class AreaInformationDialog extends DialogFragment {
 		});
 
 	}
-
+	@Override
 	public void onStart() {
 		super.onStart();
 		if (getDialog() == null) {

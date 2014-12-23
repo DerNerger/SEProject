@@ -5,5 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="skill_element_hw">50dp</dimen>
     <dimen name="area_information_height">120dp</dimen>
+    <dimen name="information_dialog_height">250dp</dimen>
+    <dimen name="information_dialog_width">350dp</dimen>
 
 </resources>

@@ -25,10 +25,11 @@ public class SkillDialogFragment extends DialogFragment {
 	private PossibleUpdates update;
 	private SkillTreeFragment frago;
 	private Species species;
+	private Species unchangedSpecies;
 	private int price;
-	private boolean transformed=false;
 	//the views
 	private Button showChanges;
+	private int clickCount=0;
 	private SpeciesAttributeView saview;
 	private TemperatureView tView;
 	private Button skillButton;
@@ -62,6 +63,8 @@ public class SkillDialogFragment extends DialogFragment {
 		this.update=(PossibleUpdates)getArguments().getSerializable(UPDATE);
 		this.species=new Species(
 				((Species)getArguments().getSerializable(SPECIES)));
+		unchangedSpecies= new Species(species);
+		SimpleMapLogic.changeSpecies(species, update);
 		this.price=(int)getArguments().getInt(PRICE);
 		this.frago=(SkillTreeFragment)getArguments().getSerializable(FRAGMENT);
 		//TODO change
@@ -120,12 +123,16 @@ public class SkillDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				//TODO change
-				if(!transformed){
-					SimpleMapLogic.changeSpecies(species, update);
-					changeViews();
-					transformed=true;
-				}
 				
+				if(clickCount%2==0){
+					changeViews();
+					showChanges.setText(R.string.fragment_skill_dialog_change_button_back);
+				}else{
+					changeViewsBack();
+					showChanges.setText(R.string.fragment_skill_dialog_change_button);
+					
+				}
+				clickCount++;
 			}
 		});
 		
@@ -163,7 +170,7 @@ public class SkillDialogFragment extends DialogFragment {
 			@Override
 			public void run() {
 				saview.initColums();
-				changeViews();
+				changeViewsBack();
 				
 			}
 		});
@@ -179,6 +186,17 @@ public class SkillDialogFragment extends DialogFragment {
 		tView.changeMinTemp(species.getMinTemp());
 		demView.setResourceDemand(species.getResourceDemand());
 		movView.setMovementChance(species.getMovementChance());
+	}
+	private void changeViewsBack(){
+		saview.changeIntelligence(unchangedSpecies.getIntelligence());
+		saview.changeAgility(unchangedSpecies.getAgility());
+		saview.changeStrength(unchangedSpecies.getStrength());
+		saview.changeSocial(unchangedSpecies.getSocial());
+		saview.changeRecreation(unchangedSpecies.getProcreation());
+		tView.changeMaxTemp(unchangedSpecies.getMaxTemp());
+		tView.changeMinTemp(unchangedSpecies.getMinTemp());
+		demView.setResourceDemand(unchangedSpecies.getResourceDemand());
+		movView.setMovementChance(unchangedSpecies.getMovementChance());
 	}
 
 }
