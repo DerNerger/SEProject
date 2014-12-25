@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 public class Map implements Serializable{
 	
@@ -72,7 +73,6 @@ public class Map implements Serializable{
 		
 		LinkedList<Area> areas = new LinkedList<Area>();
 		int numberArea = 0;
-		Field[] tmp = null;
 		Field[] fieldsInArea;
 		HashSet<Field> done = new HashSet<Field>();
 		for (int i = 0; i < width; i++) {
@@ -95,41 +95,12 @@ public class Map implements Serializable{
 		if (areas.size() < 4) {
 			res = Map.fromRandom(width, height, species, pct);
 		}
-		
+			
 		HashSet<Area> toDelete = new HashSet<>();
 		HashSet<Area> toAdd = new HashSet<>();
 		int areanumber = areas.size();
 		
 		for (Area area : areas) {
-			
-			// merge areas smaller than 10 fields into adjacent ones
-			if (area.getFields().length < 10) {
-				toDelete.add(area);
-				Field f = area.getFields()[0];
-				int x = f.x;
-				int y = f.y;
-				Field fromBiggerArea = null;
-				
-				boolean chX = false, pos = true;
-				while (fromBiggerArea == null) {
-					if (chX) pos = !pos;
-					chX = !chX;
-					x = f.x;
-					y = f.y;
-					while (0 <= x && x < width && 0 <= y && y < height) {
-						if (chX) x += pos ? 1 : -1;
-						else y += pos ? 1 : -1;
-						if ((0 <= x && x < width && 0 <= y && y < height) && !toDelete.contains(fields[x][y].getArea())) {
-							fromBiggerArea = fields[x][y];
-							break;
-						}
-					}
-				}
-				for (Field fd : area.getFields()) {
-					fd.setArea(fields[x][y].getArea());
-				}
-			}
-			
 			// split up water areas bigger than WATER_MAX fields
 			if (area.getLandType().getFieldType() == FieldType.WATER
 					&& area.getFields().length > WATER_MAX) {
@@ -173,11 +144,89 @@ public class Map implements Serializable{
 				newArea.setFields(newAreaFields);
 				area.setFields(oldAreaFields);
 				toAdd.add(newArea);
+				
+				// old area may have been split up. commence cleanup
+				int id = 0;
+				HashMap<Integer, HashSet<Field>> fieldinfo = new HashMap<>();
+				HashSet<Field> coveredFields = new HashSet<>();
+				HashSet<Field> areaFields = new HashSet<>();
+				for (Field f : area.getFields()) areaFields.add(f);
+				
+				for (Field fd : area.getFields()) {
+					if (coveredFields.contains(fd)) continue;
+					coveredFields.add(fd);
+					fieldinfo.put(id, new HashSet<Field>());
+					LinkedList<Field> fieldQueue = new LinkedList<>();
+					fieldQueue.push(fd);
+					while (!fieldQueue.isEmpty()) {
+						Field f = fieldQueue.pop();
+						fieldinfo.get(id).add(f);
+						for (int i = -1; i <= 1; i++) {
+							for (int j = -1; j <= 1; j++) {
+								if (Math.abs(i + j) != 1 || f.x + i < 0 || f.x + i >= width
+										|| f.y + j < 0 || f.y + j >= height) continue;
+								if (areaFields.contains(fields[f.x + i][f.y + j])
+										&& !coveredFields.contains(fields[f.x + i][f.y + j])) {
+									coveredFields.add(fields[f.x + i][f.y + j]);
+									fieldQueue.push(fields[f.x + i][f.y + j]);
+								}
+							}
+						}
+					}
+					id++;
+				}
+				
+				for (int i : fieldinfo.keySet()) {
+					Area currentArea = new Area(areanumber++, new LandType(area.getLandType()), null);
+					Field[] currentAreaFields = new Field[fieldinfo.get(i).size()];
+					fieldinfo.get(i).toArray(currentAreaFields);
+					currentArea.setFields(currentAreaFields);
+					toAdd.add(currentArea);
+				}
+				
+				toDelete.add(area);
+			}
+		}		
+		areas.addAll(toAdd);
+		areas.removeAll(toDelete);
+		
+		for (Area area : areas) {
+			
+			// merge areas smaller than 10 fields into adjacent ones
+			if (area.getFields().length < 10) {
+				toDelete.add(area);
+				Field f = area.getFields()[0];
+				int x = f.x;
+				int y = f.y;
+				Field fromBiggerArea = null;
+				
+				boolean chX = false, pos = true;
+				while (fromBiggerArea == null) {
+					if (chX) pos = !pos;
+					chX = !chX;
+					x = f.x;
+					y = f.y;
+					while (0 <= x && x < width && 0 <= y && y < height) {
+						if (chX) x += pos ? 1 : -1;
+						else y += pos ? 1 : -1;
+						if ((0 <= x && x < width && 0 <= y && y < height) && !toDelete.contains(fields[x][y].getArea())) {
+							fromBiggerArea = fields[x][y];
+							break;
+						}
+					}
+				}
+				Area biggerArea = fields[x][y].getArea();
+				Field[] newFieldsForArea = new Field[area.getFields().length + biggerArea.getFields().length];
+				for (int i = 0; i < area.getFields().length; i++) {
+					newFieldsForArea[i] = area.getFields()[i];
+				}
+				for (int i = area.getFields().length; i < newFieldsForArea.length; i++) {
+					newFieldsForArea[i] = biggerArea.getFields()[i - area.getFields().length];
+				}
+				biggerArea.setFields(newFieldsForArea);
 			}
 		}
-		
 		areas.removeAll(toDelete);
-		areas.addAll(toAdd);
 		
 		Area[] areaArray = new Area[areas.size()];
 		
@@ -185,9 +234,18 @@ public class Map implements Serializable{
 			areaArray[i] = areas.get(i);
 			areaArray[i].setNumber(i);
 		}
-		res.areas = areaArray;
-	
 		
+		// ----------------------------DEBUG
+		int accum = 0;
+		for (Area area : areas) {
+			accum += area.getFields().length;
+		}
+		if (accum != width * height) {
+			throw new RuntimeException("" + (accum - width * height));
+		}
+		//-----------------------------DEBUG
+		
+		res.areas = areaArray;
 		return res;
 	}
 	
@@ -321,14 +379,19 @@ public class Map implements Serializable{
 	}
 	
 	static class FieldNode {
+		private static Random r = new Random();
+		
 		public final Field f;
 		public final double p;
 		
 		public FieldNode(Field f, Field origin) {
 			this.f = f;
+
 			double dx = f.x - origin.x;
 			double dy = f.y - origin.y;
-			this.p = Math.sqrt(dx * dx + dy * dy);
+			double d = Math.sqrt(dx * dx + dy * dy);
+			double skew = r.nextGaussian() * Math.sqrt(d);
+			p = d + skew;
 		}
 	}
 	

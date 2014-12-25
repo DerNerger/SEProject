@@ -87,6 +87,9 @@ private int number;
 	
 	public void setFields(Field[] fields) {
 		this.fields = fields;
+		for (Field f : fields) {
+			f.setArea(this);
+		}
 	}
 	
 	public int[] getPopulation(){
