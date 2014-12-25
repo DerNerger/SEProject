@@ -1,10 +1,11 @@
 package main;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class Map implements Serializable{
 	
@@ -132,23 +133,27 @@ public class Map implements Serializable{
 			// split up water areas bigger than WATER_MAX fields
 			if (area.getLandType().getFieldType() == FieldType.WATER
 					&& area.getFields().length > WATER_MAX) {
-				LinkedList<Field> queue = new LinkedList<>();
+				PriorityQueue<FieldNode> queue = new PriorityQueue<>(1, new FieldComparator());
 				HashSet<Field> toNewArea = new HashSet<>();
-				queue.push(area.getFields()[0]);
+				
+				Field origin = area.getFields()[0];
+				toNewArea.add(origin);
+				queue.add(new FieldNode(origin, origin));
 				
 				//TODO: some randomness here
 				int newsize = area.getFields().length / 2;
 				
 				while (toNewArea.size() < newsize) {
-					Field f = queue.pop();
-					toNewArea.add(f);
+					Field f = queue.poll().f;
 					for (int i = -1; i <= 1; i++) {
 						for (int j = -1; j <= 1; j++) {
 							if (Math.abs(i + j) != 1 || f.x + i < 0 || f.x + i >= width
 									|| f.y + j < 0 || f.y + j >= height) continue;
 							if (fields[f.x + i][f.y + j].getArea().getNumber() == area.getNumber()
-									&& !toNewArea.contains(fields[f.x + i][f.y + j]))
-								queue.push(fields[f.x + i][f.y + j]);
+									&& !toNewArea.contains(fields[f.x + i][f.y + j])) {
+								queue.add(new FieldNode(fields[f.x + i][f.y + j], origin));
+								toNewArea.add(fields[f.x + i][f.y + j]);
+							}
 						}
 					}
 				}
@@ -313,5 +318,26 @@ public class Map implements Serializable{
 	
 	public Species[] getSpecies() {
 		return species;
+	}
+	
+	static class FieldNode {
+		public final Field f;
+		public final double p;
+		
+		public FieldNode(Field f, Field origin) {
+			this.f = f;
+			double dx = f.x - origin.x;
+			double dy = f.y - origin.y;
+			this.p = Math.sqrt(dx * dx + dy * dy);
+		}
+	}
+	
+	static class FieldComparator implements Comparator<FieldNode> {
+		@Override
+		public int compare(FieldNode f1, FieldNode f2) {
+			if (f1.p < f2.p) return -1;
+			if (f1.p > f2.p) return +1;
+			else return 0;
+		}
 	}
 }
