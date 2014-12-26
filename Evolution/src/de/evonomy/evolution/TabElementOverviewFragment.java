@@ -25,6 +25,7 @@ public class TabElementOverviewFragment extends Fragment {
 	public static final String WATER = "wate";
 	public static final String POPULATION = "popu";
 	public static final String SPECIESNAME = "name";
+	public static final String DATA= "dataa";
 	private SpeciesAttributeView saview;
 	private LinearLayout colorLayout;
 	private int intelligence;
@@ -44,7 +45,8 @@ public class TabElementOverviewFragment extends Fragment {
 	private TemperatureView tView;
 	private ResourceDemandView resView;
 	private MovementView movView;
-
+	private PopulationGraph popGraph;
+	private SpeciesData data;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
@@ -63,6 +65,7 @@ public class TabElementOverviewFragment extends Fragment {
 		resourceDemand = args.getInt(RESOURCEDEMAND);
 		visibility = args.getInt(VISIBILITY);
 		water = args.getBoolean(WATER);
+		data=(SpeciesData)args.getSerializable(DATA);
 		population = args.getLong(POPULATION);
 		saview = (SpeciesAttributeView) root
 				.findViewById(R.id.species_attribute_view_overview);
@@ -74,6 +77,9 @@ public class TabElementOverviewFragment extends Fragment {
 				.findViewById(R.id.resource_view_species_overview);
 		movView = (MovementView) root
 				.findViewById(R.id.movement_view_species_overview);
+		popGraph=(PopulationGraph)
+				root.findViewById(R.id.population_graph_overview);
+		popGraph.setData(data);
 		setColor(root);
 		changePopulation(population);
 		return root;
@@ -98,6 +104,7 @@ public class TabElementOverviewFragment extends Fragment {
 				tView.changeMinTemp(minTemp);
 				resView.setResourceDemand(resourceDemand);
 				movView.setMovementChance(movementChance);
+				popGraph.drawPopulation();
 
 			}
 		});

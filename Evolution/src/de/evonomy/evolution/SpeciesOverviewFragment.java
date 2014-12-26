@@ -20,10 +20,12 @@ import android.view.ViewGroup.LayoutParams;
 public class SpeciesOverviewFragment extends DialogFragment {
 	private Species[] species;
 	private long[] population;
+	private SpeciesData[] data;
 	TabAdapterOverview adapterOverview;
 	ViewPager viewPager;
-	public SpeciesOverviewFragment(Species[] species,long[]population){
+	public SpeciesOverviewFragment(Species[] species,long[]population,SpeciesData[] data){
 		super();
+		this.data=data;
 		this.species=species;
 		this.population=population;
 		
@@ -45,7 +47,7 @@ public class SpeciesOverviewFragment extends DialogFragment {
 	    
 		//für die Tabs
 		
-		adapterOverview= new TabAdapterOverview(getChildFragmentManager(),species,population);
+		adapterOverview= new TabAdapterOverview(getChildFragmentManager(),species,population,data);
 		viewPager=(ViewPager) root.findViewById(R.id.pager_overview);
 		viewPager.setAdapter(adapterOverview);
 		

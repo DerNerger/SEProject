@@ -22,7 +22,7 @@
         <attr name="movement" format="float"/>
         
     </declare-styleable>
-    <declare-styleable name="GameGLSurfaceView">
-        
+    <declare-styleable name="PopulationGraph">    
+        <attr name="not" format="integer"/> 
     </declare-styleable>
 </resources>

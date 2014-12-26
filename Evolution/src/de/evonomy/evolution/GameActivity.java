@@ -191,6 +191,9 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 	public boolean getPlayerNumber(int number){
 		return false;
 	}	
+	public void endGame(){
+		
+	}
 	
 	public void setMap(VisualMap map){
 	
@@ -387,7 +390,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 				
 				if(!firstSpeciesUpdate || fragmentOpened) return;
 				fragmentOpened=true;
-				frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation());
+				frag= new SpeciesOverviewFragment(holder.getSpecies(),holder.getPopulation(),holder.getSpeciesData());
 				
 				noAreaSelection();
 				FragmentManager fm=getSupportFragmentManager();

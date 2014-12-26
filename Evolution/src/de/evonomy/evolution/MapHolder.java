@@ -50,6 +50,7 @@ public class MapHolder {
 	private Paint[] speciesColors;
 	private Species[] species;
 	private long population[];
+	private SpeciesData[] data;
 	// Holds current evolutions of species
 	private ArrayList<PossibleUpdates> mySkills;
 
@@ -259,7 +260,7 @@ public class MapHolder {
 						1, 1, 1, 1, 1, 1, 1, 1, 0.1, 1, false);
 				Log.e("Species", "createdSpecies" + species[i]);
 			}
-
+			
 		}
 		this.species = species;
 		population = new long[4];
@@ -267,6 +268,10 @@ public class MapHolder {
 			population[i] = 0;
 		}
 		mySkills = new ArrayList<PossibleUpdates>();
+		data= new SpeciesData[4];
+		for(int i =0;i<data.length;i++){
+			data[i]= new SpeciesData(i);
+		}
 	}
 
 	public void updateSpecies(SpeciesUpdate update) {
@@ -292,9 +297,9 @@ public class MapHolder {
 	}
 
 	public void changePopulation(long[] population) {
-		// TODO change interface?
-		for (int i = 0; i < 4; i++) {
-
+		for (int i = 0; i < population.length; i++) {
+			data[i].addPopulation(population[i]);
+			
 			this.population[i] = population[i];
 		}
 
@@ -555,5 +560,8 @@ public class MapHolder {
 		case 7: return getArea(x-1,y-1);
 		default: return -2;
 		}
+	}
+	public SpeciesData[] getSpeciesData(){
+		return data;
 	}
 }

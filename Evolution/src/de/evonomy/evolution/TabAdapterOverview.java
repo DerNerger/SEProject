@@ -13,8 +13,10 @@ public class TabAdapterOverview extends FragmentPagerAdapter {
 	public static int TABCOUNT=4;
 	private Species[] species;
 	private long[] population;
-	public TabAdapterOverview(FragmentManager fragmentManager,Species[] species,long[]population) {
+	private SpeciesData[] data;
+	public TabAdapterOverview(FragmentManager fragmentManager,Species[] species,long[]population,SpeciesData[] data) {
 		super(fragmentManager);
+		this.data=data;
 		this.species=species;
 		this.population=population;
 	
@@ -41,7 +43,7 @@ public class TabAdapterOverview extends FragmentPagerAdapter {
 		args.putBoolean(TabElementOverviewFragment.WATER, cu.isWater());
 		args.putLong(TabElementOverviewFragment.POPULATION, population[number]);
 		args.putString(TabElementOverviewFragment.SPECIESNAME, cu.getName());
-		
+		args.putSerializable(TabElementOverviewFragment.DATA, data[number]);
 		fragment.setArguments(args);
 		return fragment;
 	}
