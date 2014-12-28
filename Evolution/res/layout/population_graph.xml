@@ -3,14 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="5dp"
-    android:background="@drawable/no_rounded_corner_black_white" >
-    <SurfaceView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/surface_view_population_graph_draw"
-        android:orientation="horizontal"
-         />
+    android:id="@+id/linear_layout_population_graph_to_add"
+    android:padding="5dp" >
+    
         
    
     

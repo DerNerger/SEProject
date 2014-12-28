@@ -124,9 +124,10 @@ public class TabElementOverviewFragment extends Fragment {
 			tmp /= 10;
 			counter++;
 		}
-
+		popGraph.drawPopulation();
 		populationView.setText(popString);
 	}
+	
 
 	public void onDestroy() {
 		super.onDestroy();

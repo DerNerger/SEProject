@@ -177,7 +177,7 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 			@Override
 			public void run() {
 				pointsTextView.setText(holder.getPoints()+" P");
-				timeTextView.setText(years+"Jahre");
+				timeTextView.setText(years+" Jahre");
 			}
 		});
 	}
