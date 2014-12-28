@@ -170,15 +170,14 @@ public class GameActivity extends FragmentActivity implements IPlayer{
 		
 	}
 
-	public void changePointsAndTime(int[] points, final Date time){
+	public void changePointsAndTime(int[] points, final long years){
 		holder.addPoints(points[playernumber]);
 		runOnUiThread(new Runnable() {
 			
 			@Override
 			public void run() {
 				pointsTextView.setText(holder.getPoints()+" P");
-				timeTextView.setText(time.getYear());
-				
+				timeTextView.setText(years+"Jahre");
 			}
 		});
 	}

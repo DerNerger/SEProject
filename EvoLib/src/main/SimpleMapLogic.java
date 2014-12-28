@@ -185,6 +185,18 @@ public class SimpleMapLogic implements IMapLogic {
 	}
 	
 	/**
+	 * {@inheritDoc}
+	 * */
+	public int[] generatePoints(long[] populationDiff) {
+		int[] points = new int[populationDiff.length];
+		for (int i = 0; i < points.length; i++) {
+			if(populationDiff[i]<0) continue; //negative growth
+			points[i] = (int) populationDiff[i] / 10;
+		}
+		return points;
+	}
+	
+	/**
 	 * generiert einen Landtype abhaengig vom uebergebenen FieldType
 	 * Die Parameter sind zwar zufaellig, jedoch wird die Verteilung vom
 	 * FieldType beeinflusst. 

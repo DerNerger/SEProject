@@ -35,7 +35,7 @@ public class Ai implements IPlayer{
 	}
 
 	@Override
-	public void changePointsAndTime(int[] points, Date time) {
+	public void changePointsAndTime(int[] points, long years) {
 		// TODO Auto-generated method stub
 		
 	}

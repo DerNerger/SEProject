@@ -14,6 +14,10 @@ public class Map implements Serializable{
 	
 	private static final int WATER_MAX = 4000;
 	
+	private long years = 0;
+	private long[] mapPopulation;
+	private long[] mapPopulationDifference;
+	
 	//attributes
 	private Field[][] fields;
 	private Species[] species;
@@ -23,6 +27,8 @@ public class Map implements Serializable{
 	private Map(int width, int height, Species[] species){
 		this.species =species;
 		this.logic = new SimpleMapLogic(species);
+		mapPopulation = new long[species.length];
+		mapPopulationDifference = new long[species.length];
 	}
 	
 	/**
@@ -287,17 +293,40 @@ public class Map implements Serializable{
 	
 	public LinkedList<Change> refreshMap(){
 		LinkedList<Change> changeList = new LinkedList<>();
+		//refresh the fields
 		for(Area area : areas){
 			changeList.addAll(area.refreshArea(logic));
 		}
+		//get the population
+		long[] pop = getMapPopulation();
+		for (int i = 0; i < mapPopulationDifference.length; i++) {
+			mapPopulationDifference[i] = pop[i] - mapPopulation[i];
+		}
+		mapPopulation = pop;
+		changeList.add(new PopulationChange(mapPopulation));
+		
+		//refresh the game time
+		years+=100000;
+		
+		return changeList;
+	}
+	
+	public LinkedList<Change> getPointsAndTimeChange(){
+		LinkedList<Change> changeList = new LinkedList<>();
+		int[] points = logic.generatePoints(mapPopulationDifference);
+		PointsTimeChange change = new PointsTimeChange(points, years);
+		changeList.add(change);
+		return changeList;
+	}
+	
+	public long[] getMapPopulation(){
 		//calculate the population
 		long[] pop = new long[species.length];
 		for (int i = 0; i < pop.length; i++) {
 			for(Area r : areas)
 				pop[i] += r.getPopulation()[i];
 		}
-		changeList.add(new PopulationChange(pop));
-		return changeList;
+		return pop;
 	}
 	
 	public LinkedList<Change> updateCircumstances(MapEvent event){

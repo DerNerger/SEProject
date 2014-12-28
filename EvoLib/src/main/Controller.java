@@ -83,6 +83,9 @@ public class Controller implements Runnable, Skillable{
 			LinkedList<Change> circumstancesChanges = map.updateCircumstances(event);
 			changes.addAll(circumstancesChanges);
 			
+			//get points and time
+			changes.addAll(map.getPointsAndTimeChange());
+			
 			sendToAll(changes);
 		}
 	}

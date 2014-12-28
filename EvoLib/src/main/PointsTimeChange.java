@@ -9,21 +9,22 @@ import java.util.Date;
 
 public class PointsTimeChange extends Change {
 	int[] points;
-	Date time;
-	public PointsTimeChange(int[]points, Date time){
+	long years;
+	
+	public PointsTimeChange(int[]points, long years){
 		this.points=points;
-		this.time=time;
+		this.years=years;
 	}
 	@Override
 	public void doChange(IPlayer player) {
-		player.changePointsAndTime(points, time);
+		player.changePointsAndTime(points, years);
 
 	}
 	@Override
 	public String getNetwork() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PointsTimeChange;");
-		sb.append(time.toString()+";");
+		sb.append(years+";");
 		for (int i = 0; i < points.length; i++) {
 			sb.append(points[i]);
 			if(i!=points.length-1)
@@ -36,11 +37,11 @@ public class PointsTimeChange extends Change {
 		String[] parts = str.split(";");
 		if(!parts[0].equals("PointsTimeChange"))
 			throw new RuntimeException(parts[0]+" kann nicht zu PointsTimeChange geparset werden.");
-		Date time = new Date(parts[1]);
+		long years = Long.parseLong(parts[1]);
 		int[] points = new int[parts.length-2];
 		for (int i = 2; i < parts.length; i++) {
 			points[i-2] = Integer.parseInt(parts[i]);
 		}
-		return new PointsTimeChange(points, time);
+		return new PointsTimeChange(points, years);
 	}
 }

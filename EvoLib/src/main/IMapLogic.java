@@ -47,4 +47,11 @@ public interface IMapLogic extends Serializable{
 	 * Startpopulation für den Spieler playerNumber
 	 * */
 	void spawnSpecies(Field [] fields, int playerNumber);
+	
+	/**
+	 * Generiert die Evolutionspunkte abhängig von dem Populationswachstum
+	 * @param population aktuelles populationswachstum
+	 * @return generierte Evolutionspunkte
+	 * */
+	int[] generatePoints(long[] populationDiff);
 }
