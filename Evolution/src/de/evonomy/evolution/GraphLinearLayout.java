@@ -53,10 +53,16 @@ public class GraphLinearLayout extends LinearLayout {
 					/ ((float) data[i].getPopulation().size());
 			Path path = new Path();
 			
-			path.moveTo(0, height);
+			
 			int x = 0;
 			long popValue;
 			int length=data[i].getPopulation().size();
+			if(length>0){
+				path.moveTo(0, height- ((float)data[i].getPopulation().get(0)
+						/ ((float) max)) * height);
+			}else{
+				path.moveTo(0, height);
+			}
 			for (int p=0;p<length;p++) {
 				popValue=data[i].getPopulation().get(p);
 				path.lineTo(x * deltaX,height- ((float)popValue / ((float) max)) * height);

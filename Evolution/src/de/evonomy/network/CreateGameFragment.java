@@ -12,6 +12,7 @@ import onlineProtocol.StartGamePacket;
 import de.evonomy.evolution.GameActivity;
 import de.evonomy.evolution.R;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -63,18 +64,19 @@ public class CreateGameFragment extends DialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-		
+		// Remove status bar
+
+		getDialog().getWindow().setFlags(
+				WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		// remove title
+		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		getDialog().getWindow().setBackgroundDrawable(
+				new ColorDrawable(Color.TRANSPARENT));
+
 		//inflate the layout for fragment
 		root=inflater.inflate(R.layout.activity_online_create_game, container,false);
-
-		//Remove status bar
-		if(Build.VERSION.SDK_INT<16){
-			getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		}
-		else
-			root.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-		 //remove title
-		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		
 		//init the activity shit
 		activity = ((OnlineActivity) getActivity());

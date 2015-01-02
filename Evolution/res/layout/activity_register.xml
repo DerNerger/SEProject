@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:alpha="0.8"
+    android:background="@drawable/pangaea"
+    android:orientation="vertical"
+    android:padding="12dp" >
 
     <TextView
         android:id="@+id/textViewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Benutzername:"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -16,13 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/username"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textViewPlayer4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Passwort:"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -30,12 +34,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/Button_register_now"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrieren" />
+        android:padding="8dp" >
+
+        <Button
+            android:id="@+id/Button_register_now"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/pressable_button"
+            android:text="Registrieren" />
+    </RelativeLayout>
 
 </LinearLayout>

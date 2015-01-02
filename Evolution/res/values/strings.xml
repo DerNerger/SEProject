@@ -63,5 +63,6 @@
     <string name="strategist_desc">r- und K-Strategen bezeichnen die Fortpflanzungsstrategie der Spezies. r-Strategen haben sehr viele Nachkommen, überlassen sie dafür weitgehend sich selbst. K-Strategen haben wenig Nachkommen, kümmern sich dafür aber um diese.</string>
     <string name="fur_title">Dünnes &amp; dickes Fell</string>
     <string name="fur_desc">Durch dickes Fell passt man sich besser an kalte Regionen an, während man mit dünnem Fell auch in heißen Regionen überleben kann.</string>
-
+	<string name="username">Benutzername</string>
+	<string name="password">Passwort</string>
 </resources>

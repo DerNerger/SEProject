@@ -1,6 +1,8 @@
 package de.evonomy.network;
 
 import de.evonomy.evolution.R;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -25,11 +27,16 @@ public class WaitForSpeciesFragment extends DialogFragment{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-		
-		//Remove status bar
-		getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		 //remove title
+		// Remove status bar
+
+		getDialog().getWindow().setFlags(
+				WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		// remove title
 		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		getDialog().getWindow().setBackgroundDrawable(
+				new ColorDrawable(Color.TRANSPARENT));
 		
 		//inflate the layout for fragment
 		root=inflater.inflate(R.layout.fragment_wait_species, container,false);
