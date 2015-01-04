@@ -97,10 +97,6 @@ public class Map implements Serializable{
 		}
 		
 		res.fields = fields;
-
-		if (areas.size() < 4) {
-			res = Map.fromRandom(width, height, species, pct);
-		}
 			
 		HashSet<Area> toDelete = new HashSet<>();
 		HashSet<Area> toAdd = new HashSet<>();
@@ -198,8 +194,8 @@ public class Map implements Serializable{
 		
 		for (Area area : areas) {
 			
-			// merge areas smaller than 10 fields into adjacent ones
-			if (area.getFields().length < 10) {
+			// merge areas smaller than 50 fields into adjacent ones
+			if (area.getFields().length < 50) {
 				toDelete.add(area);
 				Field f = area.getFields()[0];
 				int x = f.x;
@@ -236,22 +232,26 @@ public class Map implements Serializable{
 		
 		Area[] areaArray = new Area[areas.size()];
 		
+		int landareas = 0, waterareas = 0;
+		
 		for (int i = 0; i < areas.size(); i++) {
 			areaArray[i] = areas.get(i);
 			areaArray[i].setNumber(i);
+			if (areaArray[i].getLandType().getFieldType() == FieldType.WATER)
+				waterareas++;
+			else
+				landareas++;
 		}
 		
-		// ----------------------------DEBUG
-		int accum = 0;
-		for (Area area : areas) {
-			accum += area.getFields().length;
+		//this may or may not be an ugly workaround
+		if (landareas < 4 || waterareas < 4) {
+			res = Map.fromRandom(width, height, species, pct);
 		}
-		if (accum != width * height) {
-			throw new RuntimeException("" + (accum - width * height));
-		}
-		//-----------------------------DEBUG
 		
 		res.areas = areaArray;
+		
+		
+		
 		return res;
 	}
 	
