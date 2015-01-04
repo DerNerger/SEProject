@@ -1,7 +1,6 @@
 import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -70,7 +69,7 @@ public class MapChooseFrame extends JFrame {
 	
 	private void nextMap() {
 		//TODO: Add the possibility to change parameters at runtime
-		map = Map.fromRandom(WIDTH, HEIGHT, null, Map.getRandomFieldTypes());
+		map = Map.fromRandom(WIDTH, HEIGHT, new main.Species[4], Map.getRandomFieldTypes());
 		mp.setMap(map);
 	}
 	
