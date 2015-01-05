@@ -242,13 +242,13 @@ public class Map implements Serializable{
 			else
 				landareas++;
 		}
+		res.areas = areaArray;
 		
 		//this may or may not be an ugly workaround
 		if (landareas < 4 || waterareas < 4) {
 			res = Map.fromRandom(width, height, species, pct);
 		}
 		
-		res.areas = areaArray;
 		
 		
 		
