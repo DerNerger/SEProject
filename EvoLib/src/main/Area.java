@@ -108,4 +108,11 @@ private int number;
 	public void setNumber(int number){
 		this.number=number;
 	}
+	
+	public void setItEasyFor(Species s){
+		landType.setMinTemp(s.getMinTemp()+2);
+		landType.setMaxTemp(s.getMaxTemp()-2);
+		landType.setNaturalEnemies(0);
+		landType.setResources(15);
+	}
 }

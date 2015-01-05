@@ -13,6 +13,7 @@ public class Map implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private static final int WATER_MAX = 4000;
+	private static final int gameWinPop = 1000;
 	
 	private long years = 0;
 	private long[] mapPopulation;
@@ -29,6 +30,22 @@ public class Map implements Serializable{
 		this.logic = new SimpleMapLogic(species);
 		mapPopulation = new long[species.length];
 		mapPopulationDifference = new long[species.length];
+	}
+	
+	public Change gameEnds(){
+		int winner = -1;
+		for (int i = 0; i < mapPopulation.length; i++) {
+			if(mapPopulation[i]>gameWinPop){
+				winner=i;
+				break;
+			}
+		}
+		int[] points = new int[mapPopulation.length];
+		for (int i = 0; i < points.length; i++) {
+			points[i] = (int) mapPopulation[i]/100;
+		}
+		if(winner != -1) return new GameEndChange(winner, points);
+		else return null;
 	}
 	
 	/**

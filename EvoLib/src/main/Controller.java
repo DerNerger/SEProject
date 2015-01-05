@@ -86,6 +86,10 @@ public class Controller implements Runnable, Skillable{
 			//get points and time
 			changes.addAll(map.getPointsAndTimeChange());
 			
+			//check if game ends
+			Change gec = map.gameEnds();
+			if(gec!=null) changes.add(gec);
+			
 			sendToAll(changes);
 		}
 	}

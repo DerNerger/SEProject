@@ -155,18 +155,41 @@ public class SimpleMapLogic implements IMapLogic {
 		if(areas.length < species.length)
 			throw new RuntimeException("More species than areas");
 		
+		//split the areas
+		ArrayList<Area> water = new ArrayList<>();
+		ArrayList<Area> land = new ArrayList<>();
+		for(Area area : areas){
+			if(area.getLandType().getFieldType()==FieldType.WATER)
+				water.add(area);
+			else
+				land.add(area);
+		}
+		if(water.size()<4 || land.size()<4)
+			throw new RuntimeException("Es sind nicht genug areas zum spawn verfuegbar");
+		
 		//get spawnPoints
-		ArrayList<Integer> rands = new ArrayList<>();	
+		ArrayList<Area> spawnAreas = new ArrayList<>();	
 		Random rand = new Random();
-		while(rands.size()<4){
-			int nextRand = rand.nextInt(areas.length-1);
-			if(!rands.contains(nextRand))
-				rands.add(nextRand);
+		for(int i = 0; i< species.length; i++){
+			if(species[i].isWater()){
+				//spawn in water
+				int nextRand = rand.nextInt(water.size()-1);
+				while(spawnAreas.contains(water.get(nextRand)))
+					nextRand = rand.nextInt(water.size()-1);
+				spawnAreas.add(water.get(nextRand));
+			} else {
+				//spawn in land
+				int nextRand = rand.nextInt(land.size()-1);
+				while(spawnAreas.contains(land.get(nextRand)))
+					nextRand = rand.nextInt(land.size()-1);
+				spawnAreas.add(land.get(nextRand));
+			}
 		}
 		
 		//spawn the species
 		for (int i = 0; i < species.length; i++) {
-			Area spawnHere = areas[rands.get(i)];
+			Area spawnHere = spawnAreas.get(i);
+			spawnHere.setItEasyFor(species[i]);
 			spawnHere.spawnSpecies(i, this);
 		}
 	}
