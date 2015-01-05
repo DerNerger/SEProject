@@ -2,8 +2,120 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/no_rounded_corner_black_white"
     android:orientation="vertical" >
-    
-    
+
+    <!-- Title for win loose -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="2dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/no_rounded_corner_black_white" >
+
+            <TextView
+                android:id="@+id/text_view_game_end_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/youwon" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- the score you reached!! -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="2dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/no_rounded_corner_black_white" >
+
+            <TextView
+                android:id="@+id/text_view_game_end_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="5.231.552 Evolutionspunkte" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- The population you reached -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="2dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/no_rounded_corner_black_white" >
+
+            <TextView
+                android:id="@+id/text_view_game_end_population"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Population: 15.231.552" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- PopulationGraph -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:padding="2dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/no_rounded_corner_black_white" >
+
+            <de.evonomy.evolution.PopulationGraph
+                android:id="@+id/population_graph_game_end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- button -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="2dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingRight="2dp" >
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="2dp" >
+            <Button 
+                android:id="@+id/button_game_end_forward"
+                android:text="@string/gameendgoon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pressable_button"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

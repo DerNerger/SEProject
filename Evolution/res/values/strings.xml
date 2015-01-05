@@ -65,4 +65,9 @@
     <string name="fur_desc">Durch dickes Fell passt man sich besser an kalte Regionen an, während man mit dünnem Fell auch in heißen Regionen überleben kann.</string>
 	<string name="username">Benutzername</string>
 	<string name="password">Passwort</string>
+	<string name="youwon">Du bist die vorherrschende Spezies!</string>
+	<string name="youlost">Du bist im Evolutionsrennen untergegangen!</string>
+	<string name="gameendgoon">Weiter geht\'s!</string>
+	<string name="evolutionpoints">Evolutionspunkte</string>
+	
 </resources>
