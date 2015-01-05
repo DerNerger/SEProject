@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -65,7 +66,7 @@ public class GameEndFragment extends DialogFragment {
 		this.points = getArguments().getIntArray(POINTS);
 		this.population = getArguments().getLong(POPULATION);
 		this.data = (SpeciesData[]) getArguments().getSerializable(DATA);
-
+		this.setCancelable(false);
 		setViews(root);
 		return root;
 	}
@@ -75,7 +76,7 @@ public class GameEndFragment extends DialogFragment {
 		pointsView = (TextView) root
 				.findViewById(R.id.text_view_game_end_score);
 		populationView = (TextView) root
-				.findViewById(R.id.text_view_game_end_score);
+				.findViewById(R.id.text_view_game_end_population);
 		popGraph = (PopulationGraph) root
 				.findViewById(R.id.population_graph_game_end);
 		forward = (Button) root.findViewById(R.id.button_game_end_forward);
@@ -88,12 +89,12 @@ public class GameEndFragment extends DialogFragment {
 				R.string.population_string)
 				+ ": " + toRespresentation(population));
 		forward.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				dismiss();
 				getActivity().finish();
-				
+
 			}
 		});
 
@@ -134,4 +135,14 @@ public class GameEndFragment extends DialogFragment {
 		return popString;
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (getDialog() == null) {
+			return;
+		}
+		getDialog().getWindow().setLayout(
+				(int) getResources().getDimension(R.dimen.end_game_width),
+				LayoutParams.MATCH_PARENT);
+	}
 }

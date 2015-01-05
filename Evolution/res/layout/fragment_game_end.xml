@@ -23,7 +23,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/youwon" />
+                android:text="@string/youwon"
+                android:textColor="@color/black" />
         </RelativeLayout>
     </LinearLayout>
     <!-- the score you reached!! -->
@@ -44,7 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="5.231.552 Evolutionspunkte" />
+                android:text="5.231.552 Evolutionspunkte"
+                android:textColor="@color/black" />
         </RelativeLayout>
     </LinearLayout>
     <!-- The population you reached -->
@@ -65,7 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Population: 15.231.552" />
+                android:text="Population: 15.231.552"
+                android:textColor="@color/black" />
         </RelativeLayout>
     </LinearLayout>
     <!-- PopulationGraph -->
@@ -101,7 +104,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingRight="2dp" >
-            
         </LinearLayout>
 
         <LinearLayout
@@ -109,12 +111,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingLeft="2dp" >
-            <Button 
+
+            <Button
                 android:id="@+id/button_game_end_forward"
-                android:text="@string/gameendgoon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/pressable_button"/>
+                android:background="@drawable/pressable_button"
+                android:text="@string/gameendgoon" />
         </LinearLayout>
     </LinearLayout>
 
