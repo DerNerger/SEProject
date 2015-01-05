@@ -119,10 +119,10 @@ public class Map implements Serializable{
 		HashSet<Area> toAdd = new HashSet<>();
 		int areanumber = areas.size();
 		
+		Random rnd = new Random();
 		for (Area area : areas) {
 			// split up water areas bigger than WATER_MAX fields
-			if (area.getLandType().getFieldType() == FieldType.WATER
-					&& area.getFields().length > WATER_MAX) {
+			if (area.getFields().length > WATER_MAX) {
 				PriorityQueue<FieldNode> queue = new PriorityQueue<>(1, new FieldComparator());
 				HashSet<Field> toNewArea = new HashSet<>();
 				
@@ -130,8 +130,7 @@ public class Map implements Serializable{
 				toNewArea.add(origin);
 				queue.add(new FieldNode(origin, origin));
 				
-				//TODO: some randomness here
-				int newsize = area.getFields().length / 2;
+				int newsize = area.getFields().length / 2 + (int)(rnd.nextGaussian() * 200);
 				
 				while (toNewArea.size() < newsize) {
 					Field f = queue.poll().f;
