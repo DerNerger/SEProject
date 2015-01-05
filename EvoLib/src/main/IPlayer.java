@@ -12,4 +12,5 @@ public interface IPlayer {
 	void updateSpecies(SpeciesUpdate speciesUpdate);
 	boolean getPlayerNumber(int number);
 	void setMap(VisualMap map);
+	void onGameEnd(int winner, int[] points);
 }
