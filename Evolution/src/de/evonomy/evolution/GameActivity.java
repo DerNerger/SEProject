@@ -348,7 +348,8 @@ public class GameActivity extends FragmentActivity implements IPlayer,DialogOpen
 	private void endGame() {
 		if (!gameEnded) {
 			actualizeThread.interrupt();
-			controllerThread.interrupt();
+			if(controllerThread!=null)
+				controllerThread.interrupt();
 			actualizeMapThread.interrupt();
 		}
 	}
