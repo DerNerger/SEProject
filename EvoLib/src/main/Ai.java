@@ -60,7 +60,7 @@ public class Ai implements IPlayer{
 	
 
 	public Species getSpecies(){
-		String name = "the Monser";
+		String name = "the Monster";
 		int intelligence = 5;
 		int agility = 5;
 		int strength = 5;

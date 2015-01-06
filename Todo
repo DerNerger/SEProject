@@ -1,5 +1,9 @@
 Hier werden zu erledigende Aufgaben aufgeführt
-Map gererieren (David/Mongo)
-Field/Area/Landtype (Niklas)
-Logic/SimpleMapLogic/Species (Felix)
-Matchmaking Online (Felix)
+Dokumentation + Vision in Evolib + Test + Lokalisierung(Englisch und Spanisch)(David/Mongo)
+Logout mit Login direkt danach failt (Felix)
+Fehler bei Server nicht erreichbar (Felix)
+Gameende (Felix)
+Strings hinzufügen (Niklas)
+Area change anzeigen (Niklas)
+Vision in Gui (Zigeuner)
+Not implementet exceptions implementieren(Felix)

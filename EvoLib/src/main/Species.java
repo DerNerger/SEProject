@@ -208,10 +208,11 @@ public class Species implements Serializable{
 	
 	public static Species[] getAiSpecies(Species player){
 		Species[] species = new Species[4];
+		Ai ai = new Ai();
 		species[0] = player;
-		species[1] = new Species("davidDerZigeuner", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
-		species[2] = new Species("kibi", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
-		species[3] = new Species("niklas", 5, 5, 5, 5, 5, -5, 30, 5, 2, 1, true);
+		species[1] = ai.getSpecies();
+		species[2] = ai.getSpecies();
+		species[3] = ai.getSpecies();
 		return species;
 	}
 }

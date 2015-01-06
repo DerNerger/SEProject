@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.Bundle;
+import android.os.Looper;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -168,7 +169,12 @@ public class OnlineActivity extends FragmentActivity implements IClient{
 				}
 			});
 		}else{
-			Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+				}
+			});
 		}
 	}
 

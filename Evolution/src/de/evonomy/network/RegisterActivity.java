@@ -2,6 +2,8 @@ package de.evonomy.network;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.xml.datatype.Duration;
+
 import loginProtocol.LoginPacket;
 
 import register.RegisterResult;
@@ -27,6 +29,7 @@ public class RegisterActivity extends Activity implements Observer{
 	
 	private EditText editText_register_username;
 	private EditText editText_register_passWd;
+	private EditText editText_register_passWd_confirm;
 	private Button button_register;
 	private RegisterClient registerConnection;
 	private LoginClient loginConnection;
@@ -48,6 +51,7 @@ public class RegisterActivity extends Activity implements Observer{
 	private void initComponents() {
 		editText_register_username = (EditText) findViewById(R.id.editText_register_username);
 		editText_register_passWd = (EditText) findViewById(R.id.editText_register_passWd);
+		editText_register_passWd_confirm = (EditText) findViewById(R.id.editText_register_passWd_confirm);
 		button_register = (Button) findViewById(R.id.Button_register_now);
 	}
 	
@@ -57,13 +61,22 @@ public class RegisterActivity extends Activity implements Observer{
 			
 			@Override
 			public void onClick(View v) {
+				String username = editText_register_username.getText().toString();
+				String passWd = editText_register_passWd.getText().toString();
+				String passWdConfirm = editText_register_passWd_confirm.getText().toString();
+				if(!passWd.equals(passWdConfirm)){
+					Toast.makeText(getApplicationContext(), getString(R.string.pwds_not_equal), Toast.LENGTH_LONG).show();
+					return;
+				}
+				if(username.contains(";") || username.equals("")){
+					Toast.makeText(getApplicationContext(), getString(R.string.name_not_allowed), Toast.LENGTH_LONG).show();
+					return;
+				}
 				if(registerConnection==null){
 					//connect
 					registerConnection = new RegisterClient(getResources().getInteger(R.integer.RegisterPort), getString(R.string.host));
 					new Thread(registerConnection).start();
 				}
-				String username = editText_register_username.getText().toString();
-				String passWd = editText_register_passWd.getText().toString();
 				registerConnection.addObserver(usedInOnClickListener);
 				registerConnection.register(username, passWd);
 				setContentView(R.layout.activity_wait);

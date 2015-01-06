@@ -71,13 +71,12 @@ public class SimpleMapLogic implements IMapLogic {
 	 * */
 	@Override
 	public void simulateGrowth(Field field) {
-		//if(field.getPopulation()[0]!=0)
-		//	System.out.println("blaaa");
 		LandType landType = field.getArea().getLandType();
 		simulateNewMigration(field);
 		simulateProcreation(field);
-		//simulateResourceHandling(field, landType);
-		//simulateDying(field, landType);
+		simulateResourceHandling(field, landType);
+		simulateDying(field, landType);
+		simulateTempreture(field, landType);
 		simulateCollision(field);
 	}
 	
@@ -88,6 +87,7 @@ public class SimpleMapLogic implements IMapLogic {
 		int[] migration = field.getMigrations();
 		for (int i = 0; i < population.length; i++) {
 			int mig = migration[i];
+			//if(Math.random()*100 < species[i].getSocial())
 			population[i]+=mig;
 			migration[i]=0;
 		}
@@ -98,8 +98,9 @@ public class SimpleMapLogic implements IMapLogic {
 		int[] population = field.getPopulation();
 		for (int i = 0; i < population.length; i++) {
 			if(population[i]==0)continue;
-			//population[i] *= species[i].getProcreation();
-			population[i]+=1;
+			double newPop =  population[i] * 0.001*species[i].getProcreation();
+			if(newPop<1 && newPop>=0.001) newPop = 1;
+			population[i]+=newPop;
 		}
 	}
 	
@@ -108,27 +109,56 @@ public class SimpleMapLogic implements IMapLogic {
 		int[] population = field.getPopulation();
 		for (int i = 0; i < population.length; i++) {
 			if(population[i]==0)continue;
-			int resources = landType.getResources()*species[i].getIntelligence();
+			int resources = landType.getResources()*species[i].getIntelligence()*1000;
 			int demand = species[i].getResourceDemand()*population[i];
-			//population[i] = (population[i]*resources)/demand;
-			//if(demand > resources)
-			//	population[i]=demand/population[i];
+			if(demand > resources){
+				System.out.println("kappen"+population[i]);
+				//not enough resources for all
+				population[i] = resources / species[i].getResourceDemand();
+				if(species[i].getSocial()<50)
+					population[i] =  (int) ((1-(1/100.0 * (50-species[i].getSocial()))) * population[i]);
+				System.out.println("nach dem kappen"+population[i]);
+			}
 		}
 	}
 	
-	//help method to simulate the dying
+	//help method to simulate the dying from natural enemies
 	private void simulateDying(Field field, LandType landType) {
 		int[] population = field.getPopulation();
 		int enemies = landType.getNaturalEnemies();
 		for (int i = 0; i < population.length; i++) {
 			if(population[i]==0)continue;
-			if(enemies > species[i].getStrength()*population[i]){ //the species not is stronger?
+			if(enemies > species[i].getAgility()){ //the species not is stronger?
 				//DIE!
-				//population[i] /= 20;
-				population[i] = 0;
+				population[i] *= Math.random();
 			}
-			if(population[i]>5000)
-				population[i]=4999;
+		}
+	}
+	
+	//simulate the temperature
+	private void simulateTempreture(Field field, LandType landType) {
+		int[] population = field.getPopulation();
+		int minTemp = landType.getMinTemp();
+		int maxTemp = landType.getMaxTemp();
+		for (int i = 0; i < population.length; i++) {
+			int u = 0;
+			int o = 0;
+			
+			if(species[i].getMinTemp() < minTemp)
+				u = minTemp;
+			else 
+				u = species[i].getMinTemp();
+			
+			if(species[i].getMaxTemp() > maxTemp)
+				o = maxTemp;
+			else 
+				o = species[i].getMaxTemp();
+			
+			float fak = (o-u) / (float)(maxTemp - minTemp);
+			population[i]*=fak;
+			
+			if(!species[i].isWater() && landType.getFieldType()==FieldType.WATER)
+				population[i]=0;
 		}
 	}
 	
@@ -232,10 +262,10 @@ public class SimpleMapLogic implements IMapLogic {
 		double naturalEnemies=r.nextGaussian();
 		double resources=r.nextGaussian();
 		
-		double minTempStdDeviation=4;
-		double maxTempStdDeviation=4;
-		double naturalEnemiesStdDeviation=100;
-		double resourcesStdDeviation=2;
+		double minTempStdDeviation=5;
+		double maxTempStdDeviation=5;
+		double naturalEnemiesStdDeviation=4;
+		double resourcesStdDeviation=4;
 		
 		
 		//transform the random variable here(linear transformation)
@@ -243,36 +273,39 @@ public class SimpleMapLogic implements IMapLogic {
 		case LAND:
 			minTemp=minTemp * minTempStdDeviation + 10;
 			maxTemp=maxTemp * maxTempStdDeviation + 20;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
-			resources = resources * resourcesStdDeviation + 10;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 30; 
+			resources = resources * resourcesStdDeviation + 30;
 			break;
 		case WATER:	
 			minTemp=minTemp * minTempStdDeviation + 0;
-			maxTemp=maxTemp * maxTempStdDeviation + 30;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
-			resources = resources * resourcesStdDeviation + 10;
+			maxTemp=maxTemp * maxTempStdDeviation + 20;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 20; 
+			resources = resources * resourcesStdDeviation + 40;
 			break;
 		case DESERT:		
-			minTemp=minTemp * minTempStdDeviation + 40;
+			minTemp=minTemp * minTempStdDeviation + 30;
 			maxTemp=maxTemp * maxTempStdDeviation + 60;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
-			resources = resources * resourcesStdDeviation + 10;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 10; 
+			resources = resources * resourcesStdDeviation + 15;
 			break;
 		case JUNGLE:		
-			minTemp=minTemp * minTempStdDeviation + 20;
+			minTemp=minTemp * minTempStdDeviation + 15;
 			maxTemp=maxTemp * maxTempStdDeviation + 40;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
-			resources = resources * resourcesStdDeviation + 10;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 80; 
+			resources = resources * resourcesStdDeviation + 80;
 			break;
 		case ICE:	
-			minTemp=minTemp * minTempStdDeviation - 20;
-			maxTemp=maxTemp * maxTempStdDeviation + 5;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 800; 
-			resources = resources * resourcesStdDeviation + 10;
+			minTemp=minTemp * minTempStdDeviation - 25;
+			maxTemp=maxTemp * maxTempStdDeviation + 0;
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 10; 
+			resources = resources * resourcesStdDeviation + 15;
 			break;
 		default:
 			throw new RuntimeException("FieldType nicht gueltig");
 		}
+		if(minTemp>maxTemp) minTemp=maxTemp;
+		if(naturalEnemies<0) naturalEnemies = 0;
+		if(resources<0) resources = 0;
 		return new LandType((int)minTemp, (int)maxTemp, type, (int)naturalEnemies, (int)resources);
 	}
 	
@@ -434,11 +467,11 @@ public class SimpleMapLogic implements IMapLogic {
 		int agility = 10;
 		int strength = 10;
 		int social = 10;
-		int procreation = 10;
+		int procreation = 50;
 		int minTemp = 3;
 		int maxTemp = 21;
 		int resourceDemand = 10;
-		double movementChance = 0.05;
+		double movementChance = 0.85;
 		int visibillity = 5;
 		boolean water = false;
 		return new Species(name, intelligence, agility, strength, social, 

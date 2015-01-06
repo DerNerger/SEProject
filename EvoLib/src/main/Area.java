@@ -113,6 +113,6 @@ private int number;
 		landType.setMinTemp(s.getMinTemp()+2);
 		landType.setMaxTemp(s.getMaxTemp()-2);
 		landType.setNaturalEnemies(0);
-		landType.setResources(15);
+		landType.setResources(50);
 	}
 }

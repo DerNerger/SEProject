@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Warten auf andere Spieler"
+        android:textColor="@color/black"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
@@ -23,11 +24,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Spieler1"
+            android:textColor="@color/black"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <CheckBox
             android:id="@+id/checkBox1rdy"
             android:layout_width="wrap_content"
+            android:textColor="@color/gray"
             android:layout_height="wrap_content"
             android:enabled="false"
             android:text="bereit" />
@@ -44,12 +47,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Spieler2"
+            android:textColor="@color/black"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <CheckBox
             android:id="@+id/checkBox2rdy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray"
             android:enabled="false"
             android:text="bereit" />
 
@@ -65,12 +70,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Spieler3"
+            android:textColor="@color/black"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <CheckBox
             android:id="@+id/checkBox3rdy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray"
             android:enabled="false"
             android:text="bereit" />
 
@@ -86,21 +93,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Spieler4"
+            android:textColor="@color/black"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <CheckBox
             android:id="@+id/checkBox4rdy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray"
             android:enabled="false"
             android:text="bereit" />
 
     </LinearLayout>
 
-   	<ProgressBar
-   	    android:id="@+id/progressBar1"
-   	    style="?android:attr/progressBarStyleLarge"
-   	    android:layout_width="wrap_content"
-   	    android:layout_height="wrap_content" />
+   	
 
 </LinearLayout>
