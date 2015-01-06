@@ -13,7 +13,7 @@ public class Map implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private static final int WATER_MAX = 4000;
-	private static final int gameWinPop = 10000000;
+	private static final long gameWinPop = 100000000;
 	
 	private long years = 0;
 	private long[] mapPopulation;
