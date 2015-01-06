@@ -2,7 +2,9 @@ package de.evonomy.network;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.LinkedList;
 import java.util.Observable;
+import java.util.Queue;
 
 import simpleNet.IProtocol;
 import simpleNet.Packet;
@@ -36,16 +38,8 @@ public abstract class SessionClient extends Observable  implements Runnable{
 	}
 	
 	protected void sendPacket(Packet p){
-		if(client == null)//client is fast enough not connectet
-			try {
-				Thread.sleep(100);
-				sendPacket(p);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		else
-			client.sendPacket(p);
+		while(client == null);//client is fast enough  connectet
+		client.sendPacket(p);
 	}
 
 	@Override
@@ -59,9 +53,10 @@ public abstract class SessionClient extends Observable  implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		while(running)
+		while(running){
 			if(client.hasPackets())
 				processPacket(client.getNextPacket());
+		}
 		
 		try {
 			disconnect();
