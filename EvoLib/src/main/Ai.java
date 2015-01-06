@@ -72,6 +72,18 @@ public class Ai implements IPlayer{
 		double movementChance = 0.05;
 		int visibillity = 3;
 		boolean water = false;
+//		String name = "the Monster";
+//		int intelligence = 10;
+//		int agility = 86;
+//		int strength = 5;
+//		int social = 5;
+//		int procreation = 76;
+//		int minTemp = -2;
+//		int maxTemp = 50;
+//		int resourceDemand = 12;
+//		double movementChance = 0.9;
+//		int visibillity = 3;
+//		boolean water = true;
 		return new Species(name, intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water);
 	}
 

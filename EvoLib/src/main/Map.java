@@ -13,7 +13,9 @@ public class Map implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private static final int WATER_MAX = 4000;
-	private static final long gameWinPop = 100000000;
+	
+	private static final long gameWinPop = 2100000000;
+
 	
 	private long years = 0;
 	private long[] mapPopulation;
@@ -413,8 +415,8 @@ public class Map implements Serializable{
 		HashMap<FieldType, Double> pct = new HashMap<FieldType, Double>();
         pct.put(FieldType.DESERT, 0.05);
         pct.put(FieldType.ICE, 0.05);
-        pct.put(FieldType.JUNGLE, 0.1);
-        pct.put(FieldType.LAND, 0.3);
+        pct.put(FieldType.JUNGLE, 0.15);
+        pct.put(FieldType.LAND, 0.25);
         pct.put(FieldType.WATER, 0.5);
         return pct;
 	}

@@ -44,7 +44,7 @@ import android.widget.TextView;
 import de.evonomy.network.GameClient;
 import de.evonomy.network.WaitForSpeciesFragment;
 
-public class GameActivity extends FragmentActivity implements IPlayer {
+public class GameActivity extends FragmentActivity implements IPlayer,DialogOpenable {
 	private int ACTUALICATIONTIME = 400;
 	private int ACTUALICATIONMAPTIME = 1000;
 
@@ -173,7 +173,14 @@ public class GameActivity extends FragmentActivity implements IPlayer {
 
 	public void changeAreaLandType(int area, LandType landType) {
 		holder.changeAreaLandType(area, landType);
-
+		//TODO Information anzeigen
+		showInformation(R.string.app_name, R.string.app_name);
+	}
+	private void showInformation(int titleId,int descId){
+		InformationDialog frag= InformationDialog.newInstance(titleId, descId);
+		noAreaSelection();
+		FragmentManager manager= getSupportFragmentManager();
+		frag.show(manager, "information_dialog");
 	}
 
 	public void changePointsAndTime(int[] points, final long years) {
@@ -326,7 +333,7 @@ public class GameActivity extends FragmentActivity implements IPlayer {
 
 	protected void onDestroy() {
 		super.onDestroy();
-
+		endGame();
 		// delete reference to Controller
 
 		controller = null;

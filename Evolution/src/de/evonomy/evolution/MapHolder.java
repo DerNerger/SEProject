@@ -112,7 +112,7 @@ public class MapHolder {
 		water.setColor(Color.parseColor("#256DEA"));
 		FieldTypes.put(FieldType.WATER, water);
 		Paint green = new Paint();
-		green.setColor(Color.parseColor("#1FE909"));
+		green.setColor(Color.parseColor("#2EBD14"));
 		FieldTypes.put(FieldType.LAND, green);
 		Paint desert = new Paint();
 		desert.setColor(Color.parseColor("#FFFF87"));
