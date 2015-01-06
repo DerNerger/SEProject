@@ -112,12 +112,12 @@ public class SimpleMapLogic implements IMapLogic {
 			int resources = landType.getResources()*species[i].getIntelligence()*1000;
 			int demand = species[i].getResourceDemand()*population[i];
 			if(demand > resources){
-				System.out.println("kappen"+population[i]);
+				
 				//not enough resources for all
 				population[i] = resources / species[i].getResourceDemand();
 				if(species[i].getSocial()<50)
 					population[i] =  (int) ((1-(1/100.0 * (50-species[i].getSocial()))) * population[i]);
-				System.out.println("nach dem kappen"+population[i]);
+				
 			}
 		}
 	}
@@ -165,14 +165,22 @@ public class SimpleMapLogic implements IMapLogic {
 	//help method to simulate the collision
 	private void simulateCollision(Field field){
 		int[] speciesPop = field.getPopulation();
-		int max = 0;
-		for (int i = 1; i < speciesPop.length; i++) {
-			if(speciesPop[i] > speciesPop[max])
-				max = i;
-		}
+		int[] strength=new int[speciesPop.length];
+		int max =0;
 		for (int i = 0; i < speciesPop.length; i++) {
-			if(i==max) continue;
-			speciesPop[i]=-speciesPop[i];
+			//calculate the strength
+			if(speciesPop[i]==0) continue;
+			strength[i]=8*species[i].getStrength()+species[i].getIntelligence()+species[i].getSocial();
+			//calcualte the killability
+			if(strength[i]>strength[max]) max =i;
+			
+		}
+		//kill!!
+		for (int i= 0; i < speciesPop.length; i++) {
+			if(i!=max) speciesPop[i]=0;
+		}
+		for(int i =0;i<speciesPop.length;i++){
+			if(speciesPop[i]<0)speciesPop[i]=0;
 		}
 	}
 	//end help methods--------------------------------------------------------
@@ -262,8 +270,8 @@ public class SimpleMapLogic implements IMapLogic {
 		double naturalEnemies=r.nextGaussian();
 		double resources=r.nextGaussian();
 		
-		double minTempStdDeviation=5;
-		double maxTempStdDeviation=5;
+		double minTempStdDeviation=3;
+		double maxTempStdDeviation=3;
 		double naturalEnemiesStdDeviation=4;
 		double resourcesStdDeviation=4;
 		
@@ -467,13 +475,24 @@ public class SimpleMapLogic implements IMapLogic {
 		int agility = 10;
 		int strength = 10;
 		int social = 10;
-		int procreation = 50;
+		int procreation = 10;
 		int minTemp = 3;
 		int maxTemp = 21;
 		int resourceDemand = 10;
-		double movementChance = 0.85;
+		double movementChance = 0.1;
 		int visibillity = 5;
 		boolean water = false;
+//		int intelligence = 10;
+//		int agility = 90;
+//		int strength = 10;
+//		int social = 10;
+//		int procreation = 60;
+//		int minTemp = -4;
+//		int maxTemp = 50;
+//		int resourceDemand = 10;
+//		double movementChance = 0.9;
+//		int visibillity = 5;
+//		boolean water = false;
 		return new Species(name, intelligence, agility, strength, social, 
 				procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water);
 	}

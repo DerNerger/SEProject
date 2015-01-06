@@ -3,55 +3,84 @@ package main;
 import java.util.HashMap;
 
 public class CircumstancesGenerator {
-	//Verteilungsfunktion für die Mapevents
-	private double pNot=0.92;
-	private double pClimate=0.97;
-	private double pLandType=0.985;
-	private double pRadioactive=0.995;
-	private double pMeteorite=1.0;
-	
-	
-	MapEvent generateMapEvent(int numberOfAreas){
-		double eventNumber=Math.random();
+	// Verteilungsfunktion für die Mapevents
+	private double pNot = 0.94;
+	private double pClimate = 0.97;
+	private double pLandType = 0.985;
+	private double pRadioactive = 0.998;
+	private double pMeteorite = 1.0;
+
+	MapEvent generateMapEvent(int numberOfAreas) {
+		double eventNumber = Math.random();
 		MapEvent event;
-		int areaNumber= (int) (Math.random()*numberOfAreas); 
-		if(eventNumber<=pNot){
-			event=new MapEventNot(areaNumber);
-		}else if(eventNumber<=pClimate){
-			//TODO neue Temperatur bekommen
-			int minTemp=0;
-			int maxTemp=40;
-			event= new MapEventClimate(areaNumber, minTemp, maxTemp);
-		}else if(eventNumber<=pLandType){
-			//Verteilungsfunktion auf Basis von Dichtefunktion mit gleichen Werten erstellen
-			HashMap<Integer,FieldType> pF=new HashMap<Integer,FieldType>();
-			for(int i =0;i<FieldType.values().length;i++){
-				pF.put( (i+1),FieldType.values()[i]);
+		int areaNumber = (int) (Math.random() * numberOfAreas);
+		if (eventNumber <= pNot) {
+			event = new MapEventNot(areaNumber);
+		} else if (eventNumber <= pClimate) {
+			// TODO neue Temperatur bekommen
+			int minTemp = 0;
+			int maxTemp = 40;
+			event = new MapEventClimate(areaNumber, minTemp, maxTemp);
+		} else if (eventNumber <= pLandType) {
+			HashMap<FieldType, Double> dichte = Map.getRandomFieldTypes();
+			// Verteilung aufbauen
+			HashMap<FieldType, Double> verteilung = new HashMap<FieldType, Double>();
+			double last = 0;
+			for (FieldType t : dichte.keySet()) {
+				verteilung.put(t, last);
+				last += dichte.get(t);
 			}
-			//Zufllswert auf den nächsthöheren Wert der Verteilungsfunktion 
-			LandType newLandType= SimpleMapLogic.randomLandType(pF.get(((int)(Math.random()*(FieldType.values().length)+1))));
-			event=new MapEventToLandType(areaNumber, newLandType);
-		}else if(eventNumber<=pRadioactive){
-			event= new MapEventRadioactive(areaNumber);
-		}else {
-			event=new MapEventMeteorite(areaNumber);
+			// Zufllswert auf den nächsthöheren Wert der Verteilungsfunktion
+
+			double p = Math.random();
+			FieldType newType = FieldType.JUNGLE;
+			double max = -1;
+			for (FieldType t : verteilung.keySet()) {
+				if (verteilung.get(t) < p) {
+					if (verteilung.get(t) > max) {
+						newType = t;
+						max = verteilung.get(t);
+					}
+				}
+			}
+			LandType newLandType = SimpleMapLogic.randomLandType(newType);
+			event = new MapEventToLandType(areaNumber, newLandType);
+		} else if (eventNumber <= pRadioactive) {
+			event = new MapEventRadioactive(areaNumber);
+		} else {
+			event = new MapEventMeteorite(areaNumber);
 		}
-		
-		
+
 		return event;
 	}
-	public static void main(String args[]){
-		//Verteilungsfunktion auf Basis von Dichtefunktion mit gleichen Werten erstellen
-		double p=1./(double)FieldType.values().length;
-		HashMap<Double,FieldType> pF=new HashMap<Double,FieldType>();
-		for(int i =0;i<FieldType.values().length;i++){
-			pF.put( (i+1)*p,FieldType.values()[i]);
+
+	public static void main(String args[]) {
+		while (true) {
+			HashMap<FieldType, Double> dichte = Map.getRandomFieldTypes();
+			// Verteilung aufbauen
+			HashMap<FieldType, Double> verteilung = new HashMap<FieldType, Double>();
+			double last = 0;
+			for (FieldType t : dichte.keySet()) {
+				verteilung.put(t, last);
+				last += dichte.get(t);
+			}
+			// Zufllswert auf den nächsthöheren Wert der Verteilungsfunktion
+
+			double p = Math.random();
+			FieldType newType = FieldType.JUNGLE;
+			double max = -1;
+			for (FieldType t : verteilung.keySet()) {
+				if (verteilung.get(t) < p) {
+					if (verteilung.get(t) > max) {
+						newType = t;
+						max = verteilung.get(t);
+					}
+				}
+			}
+
+			System.out.println(verteilung);
+			System.out.println(newType);
 		}
-		while(true){
-		System.out.println(((int)(Math.random()*(FieldType.values().length)+1))*p);
-		System.out.println(pF.toString());
-		}
-		//LandType newLandType= SimpleMapLogic.randomLandType(pF.get(((int)(Math.random()*FieldType.values().length))*p));
-		
+
 	}
 }
