@@ -14,6 +14,7 @@ import java.util.Date;
 
 import main.Ai;
 import main.Controller;
+import main.FieldType;
 import main.IPlayer;
 import main.LandType;
 import main.Map;
@@ -44,7 +45,8 @@ import android.widget.TextView;
 import de.evonomy.network.GameClient;
 import de.evonomy.network.WaitForSpeciesFragment;
 
-public class GameActivity extends FragmentActivity implements IPlayer,DialogOpenable {
+public class GameActivity extends FragmentActivity implements IPlayer,
+		DialogOpenable {
 	private int ACTUALICATIONTIME = 400;
 	private int ACTUALICATIONMAPTIME = 1000;
 
@@ -157,7 +159,8 @@ public class GameActivity extends FragmentActivity implements IPlayer,DialogOpen
 
 				@Override
 				public void run() {
-					informationDialog.update();
+					if (informationDialog != null)
+						informationDialog.update();
 
 				}
 			});
@@ -172,15 +175,11 @@ public class GameActivity extends FragmentActivity implements IPlayer,DialogOpen
 	}
 
 	public void changeAreaLandType(int area, LandType landType) {
+
+		LandType old = holder.getAreas()[area].getLandType();
+		// TODO Information anzeigen
+		showInformation(getTitleId(landType, old), getDescId(landType, old));
 		holder.changeAreaLandType(area, landType);
-		//TODO Information anzeigen
-		showInformation(R.string.app_name, R.string.app_name);
-	}
-	private void showInformation(int titleId,int descId){
-		InformationDialog frag= InformationDialog.newInstance(titleId, descId);
-		noAreaSelection();
-		FragmentManager manager= getSupportFragmentManager();
-		frag.show(manager, "information_dialog");
 	}
 
 	public void changePointsAndTime(int[] points, final long years) {
@@ -348,7 +347,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,DialogOpen
 	private void endGame() {
 		if (!gameEnded) {
 			actualizeThread.interrupt();
-			if(controllerThread!=null)
+			if (controllerThread != null)
 				controllerThread.interrupt();
 			actualizeMapThread.interrupt();
 		}
@@ -785,4 +784,77 @@ public class GameActivity extends FragmentActivity implements IPlayer,DialogOpen
 		return holder.getAreas()[area];
 	}
 
+	private void showInformation(int titleId, int descId) {
+		InformationDialog frag = InformationDialog.newInstance(titleId, descId);
+		noAreaSelection();
+		FragmentManager manager = getSupportFragmentManager();
+		frag.show(manager, "information_dialog");
+	}
+
+	private int getTitleId(LandType newLandtype, LandType old) {
+		int id;
+
+		if (newLandtype.getFieldType() != old.getFieldType()
+				|| newLandtype.getResources() != old.getResources()
+				|| old.getNaturalEnemies() != newLandtype.getNaturalEnemies()) {
+			//
+			switch (newLandtype.getFieldType()) {
+			case DESERT:
+				id = R.string.todesert;
+				break;
+			case ICE:
+				id = R.string.iceage;
+				break;
+			case JUNGLE:
+				id = R.string.tojungle;
+				break;
+			case LAND:
+				id = R.string.toland;
+				break;
+			case WATER:
+				id = R.string.towasser;
+				break;
+			default:
+				throw new RuntimeException("No implemented landtype change");
+
+			}
+
+		} else {
+			id = R.string.climaticchange;
+		}
+		return id;
+	}
+
+	private int getDescId(LandType newLandtype, LandType old) {
+		int id;
+		if (newLandtype.getFieldType() != old.getFieldType()
+				|| newLandtype.getResources() != old.getResources()
+				|| old.getNaturalEnemies() != newLandtype.getNaturalEnemies()) {
+			//
+			switch (newLandtype.getFieldType()) {
+			case DESERT:
+				id = R.string.todesertdesc;
+				break;
+			case ICE:
+				id = R.string.iceagedesc;
+				break;
+			case JUNGLE:
+				id = R.string.tojungledesc;
+				break;
+			case LAND:
+				id = R.string.tolanddesc;
+				break;
+			case WATER:
+				id = R.string.towasserdesc;
+				break;
+			default:
+				throw new RuntimeException("No implemented landtype change");
+
+			}
+
+		} else {
+			id = R.string.climaticchangedesc;
+		}
+		return id;
+	}
 }

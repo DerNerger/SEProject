@@ -272,7 +272,7 @@ public class SimpleMapLogic implements IMapLogic {
 		
 		double minTempStdDeviation=3;
 		double maxTempStdDeviation=3;
-		double naturalEnemiesStdDeviation=4;
+		double naturalEnemiesStdDeviation=5;
 		double resourcesStdDeviation=4;
 		
 		
@@ -299,7 +299,7 @@ public class SimpleMapLogic implements IMapLogic {
 		case JUNGLE:		
 			minTemp=minTemp * minTempStdDeviation + 15;
 			maxTemp=maxTemp * maxTempStdDeviation + 40;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 80; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 60; 
 			resources = resources * resourcesStdDeviation + 80;
 			break;
 		case ICE:	

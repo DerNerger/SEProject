@@ -21,63 +21,78 @@ public class MapArea {
 	private Paint selected;
 	private SurfaceHolder holder;
 	private Path path;
-	private int neighbour=-1;
-	private boolean isEingeschlossen=true;
-	public MapArea(Paint FieldType,LandType landType){
-		this.rects=new LinkedList<RectF>();
-		this.FieldType=FieldType;
-		this.landType=landType;
-		this.population=new int[4];
-		selected=new Paint();
+	private int neighbour = -1;
+	private boolean isEingeschlossen = true;
+
+	public MapArea(Paint FieldType, LandType landType) {
+		this.rects = new LinkedList<RectF>();
+		this.FieldType = FieldType;
+		this.landType = landType;
+		this.population = new int[4];
+		selected = new Paint();
 		selected.setColor(Color.parseColor("#D5FFFC"));
-		alpha=1;
+		alpha = 1;
 	}
-	public void changeLandType(LandType landType,Paint newFieldType){
+
+	public void changeLandType(LandType landType, Paint newFieldType) {
 		this.setLandType(landType);
-		this.FieldType=newFieldType;
+		this.FieldType = newFieldType;
 	}
-	public Paint getFieldType(){
+
+	public Paint getFieldType() {
 		return FieldType;
 	}
-	private void setLandType(LandType landType){
-		this.landType=landType;
+
+	private void setLandType(LandType landType) {
+		this.landType = landType;
 	}
-	public LandType getLandType(){
+
+	public LandType getLandType() {
 		return landType;
 	}
-	public void setPopualtion(int[] newPopulation){
-		for(int i =0;i<4;i++){
-			population[i]=newPopulation[i];
+
+	public void setPopualtion(int[] newPopulation) {
+		for (int i = 0; i < 4; i++) {
+			population[i] = newPopulation[i];
 		}
 	}
-	public int getPopulaiton(int playernumber){
+
+	public int getPopulaiton(int playernumber) {
 		return population[playernumber];
 	}
-	public void registerClicked(){
+
+	public void registerClicked() {
 		Log.e("Simulation", "register Clciked");
-		alpha=(170/255);
+		alpha = (170 / 255);
 	}
-	public void unregisterClicked(){
+
+	public void unregisterClicked() {
 		Log.e("Simulation", "unregister Clciked");
-		alpha=255;
+		alpha = 255;
 	}
-	public float getAlpha(){
+
+	public float getAlpha() {
 		return alpha;
 	}
-	public void addRect(RectF a){
+
+	public void addRect(RectF a) {
 		rects.add(a);
 	}
-	public LinkedList<RectF> getRects(){
+
+	public LinkedList<RectF> getRects() {
 		return rects;
 	}
-	public void setAlpha(float alpha){
-		this.alpha=alpha;
+
+	public void setAlpha(float alpha) {
+		this.alpha = alpha;
 		invalidate();
 	}
-	public void animateClicked(SurfaceHolder holder){
-		this.holder=holder;
+
+	public void animateClicked(SurfaceHolder holder) {
+		this.holder = holder;
 	}
-	private void invalidate(){
+
+	private void invalidate() {
 		selected.setAlpha((int) (alpha * 255));
 		Canvas selCanvas = holder.lockCanvas();
 		selCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
@@ -86,9 +101,9 @@ public class MapArea {
 		}
 		holder.unlockCanvasAndPost(selCanvas);
 
-		
 	}
-	private void newInvalidate(){
+
+	private void newInvalidate() {
 		selected.setAlpha((int) (alpha * 255));
 		selected.setStyle(Paint.Style.FILL_AND_STROKE);
 		selected.setAntiAlias(true);
@@ -97,23 +112,31 @@ public class MapArea {
 		selCanvas.drawPath(path, selected);
 		holder.unlockCanvasAndPost(selCanvas);
 	}
-	public void setPath(Path path){
-		this.path=path;
+
+	public void setPath(Path path) {
+		this.path = path;
 	}
-	public Path getPath(){
+
+	public Path getPath() {
 		return path;
 	}
-	public int getNeighbour(){
+
+	public int getNeighbour() {
 		return neighbour;
 	}
-	public void setNeighbour(int neighbour){
-		this.neighbour=neighbour;
+
+	public void setNeighbour(int neighbour) {
+		this.neighbour = neighbour;
 	}
-	public boolean isEingeschlossen(){
+
+	public boolean isEingeschlossen() {
 		return isEingeschlossen;
 	}
-	public void setEingeschlossenFalse(){
-		isEingeschlossen=false;
+
+	public void setEingeschlossenFalse() {
+		isEingeschlossen = false;
 	}
+
 	
+
 }

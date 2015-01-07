@@ -75,4 +75,16 @@
 	<string name="addplayer">Spieler hinzufügen</string>
 	<string name="hintchat">Nachricht</string>
 	<string name="sendmessage">Senden!</string>
+	<string name="climaticchange">Klimawandel!</string>
+	<string name="iceage">Eiszeit!</string>
+	<string name="todesert">Klimaerwärmung!</string>
+	<string name="tojungle">Wetteränderungen!</string>
+	<string name="toland">Moderatere Verhältnisse!</string>
+	<string name="towasser">Meeresspiegel steigt!</string>
+	<string name="climaticchangedesc">In einem Lebensraum hat es einen Klimawandel gegeben. Bist du noch gut genug angepasst?</string>
+	<string name="iceagedesc">Es wird kalt! Aufgrund von Änderungen in der Atmosphäre kam es zu rapiden Abkühlungen! Es sieht aus als müsstest du dich an etwas Kälte gewöhnen!</string>
+	<string name="todesertdesc">Fehlender Regen und andere Umstände haben zu einer Austrocknung des Planeten geführt, die das Entstehen einer neuen Wüste mit sich zieht. Wenig Ressourcen aber auch Feinde und besonders Lebensfeindliche Temperaturen sind charakteristisch für eine Wüste!</string>
+	<string name="tojungledesc">Ein neuer Dschungel ist entstanden! Es wimmelt hier vor Leben, deine Spezies ist also gut versorgt, steht aber auch mehr Feinden gegenüber.</string>
+	<string name="tolanddesc">Die Lebensumstände sind auf Teilen des Planeten normaler geworden. Möglicherwese ein Vorteil für deine Spezies.</string>
+	<string name="towasserdesc">Flut! Der Planet wird von einer Flut heimgesucht, die eine größere Fläche überschwemmt hat. Kann deine Spezies im Wasser überleben? </string>
 </resources>
