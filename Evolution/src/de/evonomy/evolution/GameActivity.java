@@ -42,6 +42,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import de.evonomy.network.GameClient;
 import de.evonomy.network.WaitForSpeciesFragment;
 
@@ -787,6 +788,13 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	@Override
 	public void youLose(int playerNumber) {
 		//TODO: NIKLAS IMPLEMENT THIS SHIT
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				Toast.makeText(getApplicationContext(), "DU NOOB HAST VERLOREN!!!", Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 
 	private void showInformation(int titleId, int descId) {
