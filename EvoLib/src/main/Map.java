@@ -350,6 +350,12 @@ public class Map implements Serializable{
 		int[] points = logic.generatePoints(mapPopulationDifference);
 		PointsTimeChange change = new PointsTimeChange(points, years);
 		changeList.add(change);
+		
+		//check if player lose
+		for (int i = 0; i < mapPopulation.length; i++) {
+			if(mapPopulation[i]==0 && mapPopulationDifference[i]!=0)
+				changeList.add(new YouLoseChange(i));
+		}
 		return changeList;
 	}
 	
