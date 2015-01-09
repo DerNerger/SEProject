@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:background="@drawable/rounded_corner"
     android:padding="4dp" >
-    <Button android:layout_width="match_parent"
+    <ImageButton android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/button_skill_element_view"
         android:background="@drawable/ic_launcher"/>

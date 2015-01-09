@@ -272,7 +272,7 @@ public class SimpleMapLogic implements IMapLogic {
 		
 		double minTempStdDeviation=3;
 		double maxTempStdDeviation=3;
-		double naturalEnemiesStdDeviation=4;
+		double naturalEnemiesStdDeviation=5;
 		double resourcesStdDeviation=4;
 		
 		
@@ -299,7 +299,7 @@ public class SimpleMapLogic implements IMapLogic {
 		case JUNGLE:		
 			minTemp=minTemp * minTempStdDeviation + 15;
 			maxTemp=maxTemp * maxTempStdDeviation + 40;
-			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 80; 
+			naturalEnemies = naturalEnemies * naturalEnemiesStdDeviation + 60; 
 			resources = resources * resourcesStdDeviation + 80;
 			break;
 		case ICE:	
@@ -461,6 +461,58 @@ public class SimpleMapLogic implements IMapLogic {
 			break;
 		case GYMNASTICTAIL:
 			s.setAgility(s.getAgility()+15);
+			break;
+		case FIREMAKING:
+			s.setMinTemp(s.getMinTemp()-5);
+			s.setResourceDemand(s.getResourceDemand()-5);
+			break;
+		case KIDSCHEME:
+			s.setProcreation(s.getProcreation()+5);
+			break;
+		case LANGUAGE:
+			s.setSocial(s.getSocial()+10);
+			break;
+		case LOGIC:
+			s.setIntelligence(s.getIntelligence()+10);
+			break;
+		case MAVERICK:
+			s.setProcreation(s.getProcreation()-6);
+			s.setSocial(s.getSocial()-10);
+			s.setStrength(s.getStrength()+8);
+			s.setAgility(s.getAgility()+8);
+			break;
+		case PACKANIMAL:
+			s.setProcreation(s.getProcreation()+6);
+			s.setSocial(s.getSocial()+10);
+			s.setStrength(s.getStrength()-8);
+			s.setAgility(s.getAgility()-8);
+			break;
+		case MONOGAMY:
+			s.setProcreation(s.getProcreation()-5);
+			s.setSocial(s.getSocial()+5);
+			break;
+		case POLYGAMY:
+			s.setProcreation(s.getProcreation()+5);
+			s.setSocial(s.getSocial()-5);
+			break;
+		case THUMBS:
+			s.setAgility(s.getAgility()+5);
+			break;
+		case PHEROMONS:
+			s.setSocial(s.getSocial()+3);
+			s.setProcreation(s.getProcreation()+5);
+			break;
+		case SETTLE:
+			s.setMaxTemp(s.getMaxTemp()+10);
+			s.setMinTemp(s.getMinTemp()-10);
+			break;
+		case SEXUALPROCREATION:
+			s.setProcreation(s.getProcreation()+7);
+			break;
+		case SPITFIREDRAGON:
+			s.setStrength(s.getStrength()+25);
+			s.setResourceDemand(s.getResourceDemand()+15);
+			s.setMinTemp(s.getMinTemp()-7);
 			break;
 		default:
 			throw new RuntimeException("Type is not valid");

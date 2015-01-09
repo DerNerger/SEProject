@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public class CircumstancesGenerator {
 	// Verteilungsfunktion für die Mapevents
-	private double pNot = 0.94;
-	private double pClimate = 0.97;
+	private double pNot = 0.965;
+	private double pClimate = 0.975;
 	private double pLandType = 0.985;
-	private double pRadioactive = 0.998;
+	private double pRadioactive = 0.996;
 	private double pMeteorite = 1.0;
 
 	MapEvent generateMapEvent(int numberOfAreas) {

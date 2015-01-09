@@ -89,8 +89,7 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 		
 		findHeightAndMaxWidthOfTreeAndSetRootViews();
 		createSkillViews();
-		Log.e("SkillTreeFragment","trWidth"+treeWidth+" trHeight"
-				+treeHeight+" #skillelem"+skills.size());
+	
 		//now create a skill view tree(for drawing) from the old tree
 		createSkillViewTreeFromElementTree();
 		
@@ -158,9 +157,7 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 	public void createSkillViewTreeFromElementTree(){
 		for(SkillElementView toAddChildren:skillViews){
 			for(SkillElementView toAdd:skillViews){
-				Log.e("isChildren", toAddChildren.getSkillElement()
-						.getChilds().contains(
-						toAdd.getSkillElement())+"");
+				
 				if(toAddChildren.getSkillElement().getChilds().contains(
 						toAdd.getSkillElement())){
 					toAddChildren.addChildren(toAdd);
@@ -176,7 +173,7 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 						.isSkilled(child.getSkillElement().getUpdate())){
 					for(SkillElementView toBlock:toCheck.getChilds()){
 						if(toBlock!=child){
-							Log.e("unskillable setzen", "Skill: " +toBlock.getSkillElement().getUpdate());
+						
 							toBlock.branchUnskillable();
 						}
 					}
@@ -217,15 +214,12 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 				//von ganz unten anfangen
 				//bottom=pro ebene aufwärts ein Baumhöhtel der höhe abziehen
 				height-(depth)*(height/treeHeight));
-		Log.e("SkillViewParams", "top"+params.topMargin+" bottom"
-				+params.bottomMargin+" left"+params.leftMargin+ 
-				" right"+params.rightMargin);
-		Log.e("rrot id:", root.getSkillElement().getUpdate().name());
+
 		rl.addView(root, params);
-		Log.e("draw", "should have drawn"+root.getSkillElement().getUpdate().name());
+		
 		//count position for the depth one up
 		currentCounterOfDepth[depth]++;
-		Log.e("rootChilds", root.getChilds().size()+"");
+
 		if(root.getChilds().size()>0){
 			for(SkillElementView child: root.getChilds()){
 				drawTree(child, depth+1);
