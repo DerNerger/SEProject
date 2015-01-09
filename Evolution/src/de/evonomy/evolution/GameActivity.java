@@ -785,4 +785,9 @@ public class GameActivity extends FragmentActivity implements IPlayer,DialogOpen
 		return holder.getAreas()[area];
 	}
 
+	@Override
+	public void youLose(int playerNumber) {
+		//TODO: NIKLAS IMPLEMENT THIS SHIT
+	}
+
 }

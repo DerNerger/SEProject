@@ -36,17 +36,33 @@ public class Map implements Serializable{
 	
 	public Change gameEnds(){
 		int winner = -1;
+		
+		int nullPopulations = 0;
 		for (int i = 0; i < mapPopulation.length; i++) {
-			if(mapPopulation[i]>gameWinPop){
-				winner=i;
-				break;
+			if(mapPopulation[i]==0) nullPopulations++;
+		}
+		//check win my last living player
+		if(nullPopulations==3){
+			for (int i = 0; i < mapPopulation.length; i++) {
+				if(mapPopulation[i]!=0) winner = i;
+			}
+		} else {
+			//check win my having more than gameWinPop population
+			for (int i = 0; i < mapPopulation.length; i++) {
+				if(mapPopulation[i]>gameWinPop){
+					winner=i;
+					break;
+				}
 			}
 		}
-		int[] points = new int[mapPopulation.length];
-		for (int i = 0; i < points.length; i++) {
-			points[i] = (int) mapPopulation[i]/100;
-		}
-		if(winner != -1) return new GameEndChange(winner, points);
+		
+		if(winner != -1){
+			int[] points = new int[mapPopulation.length];
+			for (int i = 0; i < points.length; i++) {
+				points[i] = (int) mapPopulation[i]/100;
+			}
+			return new GameEndChange(winner, points);
+		} 
 		else return null;
 	}
 	

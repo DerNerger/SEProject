@@ -58,7 +58,19 @@ public class Ai implements IPlayer{
 		
 	}
 	
+	@Override
+	public void onGameEnd(int winner, int[] points) {
+		// TODO Auto-generated method stub
+		System.out.println("Ende!!");
+		
+	}
 
+	@Override
+	public void youLose(int playerNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public Species getSpecies(){
 		String name = "the Monster";
 		int intelligence = 5;
@@ -87,10 +99,4 @@ public class Ai implements IPlayer{
 		return new Species(name, intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water);
 	}
 
-	@Override
-	public void onGameEnd(int winner, int[] points) {
-		// TODO Auto-generated method stub
-		System.out.println("Ende!!");
-		
-	}
 }

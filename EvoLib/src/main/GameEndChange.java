@@ -28,7 +28,7 @@ public class GameEndChange extends Change{
 	public static GameEndChange parseGameEndChange(String str){
 		String[] parts = str.split(";");
 		if(!parts[0].equals("GameEndChange"))
-			throw new RuntimeException(parts[0]+" kann nicht zu FieldChange geparset werden");
+			throw new RuntimeException(parts[0]+" kann nicht zu GameEndChange geparset werden");
 		int winner = Integer.parseInt(parts[1]);
 		int[] points = new int[parts.length-2];
 		for (int i = 2; i < parts.length; i++) {
