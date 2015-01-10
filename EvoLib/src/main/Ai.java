@@ -29,7 +29,7 @@ public abstract class Ai implements IPlayer{
 	}
 
 	@Override
-	public void changeAreaLandType(int area, LandType landType) {
+	public void changeAreaLandType(int area, LandType landType, MapEvent.Events event) {
 		// TODO Auto-generated method stub
 		
 	}
