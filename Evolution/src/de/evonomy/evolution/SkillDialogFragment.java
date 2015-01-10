@@ -150,14 +150,150 @@ public class SkillDialogFragment extends DialogFragment {
 		if(price>((GameActivity)getActivity()).getPoints())
 			skillButton.setTextColor(getResources().getColor(R.color.red));
 		//TODO switchen und Exception
+		//sorry hab das vertauscht, tId ist die id von der description jetzt 
+		int tId = 0;
+		int dId = 0;
 		switch (update){
+		
+		case BATTLEWINGS:
+			dId = ((R.string.battlewings));
+			tId = (R.string.battlewingsdesc );break;
+		case BETTERMUSCLES:
+			dId = ((R.string.bettermuscles));
+			tId = (R.string.bettermusclesdesc );break;
+		case BRAIN:
+			dId = ((R.string.brain));
+			tId = (R.string.braindesc );break;
+		case CENTRALNERVSYSTEM:
+			dId = ((R.string.centralnervsystem));
+			tId = (R.string.centralnervsystemdesc );break;
+		case CLAWARM:
+			dId = ((R.string.clawarm));
+			tId = (R.string.clawarmdesc );break;
+		case COMPLEXTENDONSTRUCTUR:
+			dId = ((R.string.complextendonstructur));
+			tId = (R.string.complextendonstructurdesc );break;
+		case DECOTAIL:
+			dId = ((R.string.decotail));
+			tId = (R.string.decotaildesc );break;
+		case DRAGONSCALE:
+			dId = ((R.string.dragonscale));
+			tId = (R.string.dragonscaledesc );break;
+		case EXTREMITYARM:
+			dId = ((R.string.extremityarm));
+			tId = (R.string.extremityarmdesc );break;
+		case EXTREMITYLEG:
+			dId = ((R.string.extremityleg));
+			tId = (R.string.extremitylegdesc );break;
+		case EYES:
+			dId = ((R.string.eyes));
+			tId = (R.string.eyesdesc );break;
+		case FIGHTTAIL:
+			dId = ((R.string.fighttail));
+			tId = (R.string.fighttaildesc );break;
+		case FATLAYER:
+			dId = ((R.string.fatlayer));
+			tId = (R.string.fatlayerdesc );break;
+		case FINLEG:
+			dId = ((R.string.finextr));
+			tId = (R.string.finextrdesc );break;
+		case FLYWINGS:
+			dId = ((R.string.flywings));
+			tId = (R.string.flywingsdesc );break;
+		case FOOTARM:
+			dId = ((R.string.footarm));
+			tId = (R.string.footarmdesc );break;
+		case FIREMAKING:
+			dId = ((R.string.fire));
+			tId = (R.string.firedesc );break;
+		case FOOTLEG:
+			dId = ((R.string.footleg));
+			tId = (R.string.footlegdesc );break;
+		case FRONTALLOBE:
+			dId = ((R.string.frontal_lobe));
+			tId = (R.string.frontal_lobedesc );break;
+		case FURLESSSKIN:
+			dId = ((R.string.furlessskin));
+			tId = (R.string.furlessskindesc );break;
+		case GENITAL:
+			dId = ((R.string.genital));
+			tId = (R.string.genitaldesc );break;
+		case GILLS:
+			dId = ((R.string.gills));
+			tId = (R.string.gillsdesc );break;
+		case GYMNASTICTAIL:
+			dId = ((R.string.agilitytail));
+			tId = (R.string.agilitytaildesc );break;
+		case HANDARM:
+			dId = ((R.string.handarm));
+			tId = (R.string.handarmdesc );break;
+		case HANDLEG:
+			dId = ((R.string.handleg));
+			tId = (R.string.handlegdesc );break;
+		case KIDSCHEME:
+			dId = ((R.string.kidscheme));
+			tId = (R.string.kidschemedesc );break;
+		case LANGUAGE:
+			dId = ((R.string.language));
+			tId = (R.string.languagedesc );break;
+		case LEATHERSKIN:
+			dId = ((R.string.leatherskin));
+			tId = (R.string.leatherskindesc );break;
+		case LIMBICSYSTEM:
+			dId = ((R.string.limbic));
+			tId = (R.string.limbicdesc );break;
+		case LOGIC:
+			dId = ((R.string.logic));
+			tId = (R.string.logicdesc );break;
+		case MAVERICK:
+			dId = ((R.string.maverick));
+			tId = (R.string.maverickdesc );break; 
+		case MONOGAMY:
+			dId = ((R.string.monogamy));
+			tId = (R.string.monogamydesc );break;
+		case PACKANIMAL:
+			dId = ((R.string.packanimal));
+			tId = (R.string.packanimaldesc );break;
+		case PHEROMONS:
+			dId = ((R.string.pheromons));
+			tId = (R.string.pheromonsdesc );break;
+		case SECONDGENITAL:
+			dId = ((R.string.secondgenital));
+			tId = (R.string.secondgenitaldesc );break;
+		case SETTLE:
+			dId = ((R.string.settle));
+			tId = (R.string.settledesc );break;
+		case SEXUALPROCREATION:
+			dId = ((R.string.sexualprocreation));
+			tId = (R.string.sexualprocreationdesc );break;
+		case SPITFIREDRAGON:
+			dId = ((R.string.spitfire));
+			tId = (R.string.spitfiredesc );break;
+		case SWEATGLAND:
+			dId = ((R.string.sweat));
+			tId = (R.string.sweatdesc );break;
+		case TAIL:
+			dId = ((R.string.decotail));
+			tId = (R.string.decotaildesc );break;
+		case THUMBS:
+			dId = ((R.string.thumbs));
+			tId = (R.string.thumbsdesc );break;
+		case ULTRASAOUND:
+			dId = ((R.string.ultrasound));
+			tId = (R.string.ultrasounddesc );break;
+		case WINGS:
+			dId = ((R.string.wing));
+			tId = (R.string.wingdesc );break;
+		case POLYGAMY:
+			dId = ((R.string.polygamy));
+			tId = (R.string.polygamydesc );break;
+		
 		default:
+			throw new RuntimeException("Skills strings not implemented ");
 			
-			title.setText(" "+"Das ist ein Skill"+" ");
-			desc.setText("Hier steht die Beschreibung, hier steht viel" +
-					" zum Skill drin, der Skill macht so ziemlich alles " +
-					"besser und kostet so und so viel");
 		}
+		title.setText(dId);
+		desc.setText(tId);
 		
 	}
 	@Override

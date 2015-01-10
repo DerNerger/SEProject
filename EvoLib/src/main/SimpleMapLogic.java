@@ -363,6 +363,7 @@ public class SimpleMapLogic implements IMapLogic {
 			break;
 		case BATTLEWINGS:
 			s.setStrength(s.getStrength()+12);
+			s.setResourceDemand(s.getResourceDemand()+7);
 			break;
 		case WINGS:
 			s.setAgility(s.getAgility()+8);

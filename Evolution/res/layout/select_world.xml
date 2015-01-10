@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:background="@drawable/no_rounded_corner_black_white"
             android:textSize="20dp"
             android:textColor="@color/black"
             android:layout_centerInParent="true"/>
