@@ -1,8 +1,8 @@
 package main;
 
-import java.util.Date;
+import java.util.Random;
 
-public class Ai implements IPlayer{
+public abstract class Ai implements IPlayer{
 
 	@Override
 	public void changeFieldPopulation(int x, int y, int[] population) {
@@ -99,4 +99,15 @@ public class Ai implements IPlayer{
 		return new Species(name, intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water);
 	}
 
+	public static Ai getRandomAI() {
+		Random rnd = new Random();
+		double rnddouble = rnd.nextDouble();
+		if (rnddouble < .5) {
+			return new StrengthAI();
+		}
+		else {
+			return new PopulationAI();
+		}
+	}
+	
 }

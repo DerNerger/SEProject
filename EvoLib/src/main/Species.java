@@ -208,7 +208,7 @@ public class Species implements Serializable{
 	
 	public static Species[] getAiSpecies(Species player){
 		Species[] species = new Species[4];
-		Ai ai = new Ai();
+		Ai ai = Ai.getRandomAI();
 		species[0] = player;
 		species[1] = ai.getSpecies();
 		species[2] = ai.getSpecies();

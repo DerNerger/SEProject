@@ -514,7 +514,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		}
 		IPlayer[] player = new IPlayer[4];
 		for (int i = 1; i < player.length; i++) {
-			player[i] = new Ai();
+			player[i] = Ai.getRandomAI();
 		}
 		player[0] = this;
 		// Create controller
