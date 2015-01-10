@@ -10,6 +10,7 @@ public class CircumstancesGenerator {
 	private double pRadioactive = 0.996;
 	private double pMeteorite = 1.0;
 
+
 	MapEvent generateMapEvent(int numberOfAreas) {
 		double eventNumber = Math.random();
 		MapEvent event;

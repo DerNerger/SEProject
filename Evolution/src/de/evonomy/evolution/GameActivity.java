@@ -18,6 +18,7 @@ import main.FieldType;
 import main.IPlayer;
 import main.LandType;
 import main.Map;
+import main.MapEvent;
 import main.MapLoader;
 import main.PossibleUpdates;
 import main.SimpleMapLogic;

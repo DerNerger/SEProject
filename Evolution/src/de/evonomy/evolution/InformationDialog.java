@@ -55,7 +55,8 @@ public class InformationDialog extends DialogFragment {
 	@Override 
 	public void onStop(){
 		super.onStop();
-		((DialogOpenable)getActivity()).closingFragment();
+		if(! (getActivity() instanceof GameActivity))
+			((DialogOpenable)getActivity()).closingFragment();
 	}
 	@Override
 	public void onStart() {
