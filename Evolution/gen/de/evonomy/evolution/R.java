@@ -491,6 +491,8 @@ containing a value of this type.
         public static final int skeleton_title=0x7f080032;
         public static final int skill_species=0x7f08002d;
         public static final int species_overview=0x7f08002c;
+        public static final int speciesdieddesc=0x7f080051;
+        public static final int speciesdiedtitle=0x7f080050;
         public static final int strategist_desc=0x7f080035;
         public static final int strategist_title=0x7f080034;
         public static final int tab_title_skill_abilities=0x7f080017;

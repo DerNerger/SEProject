@@ -1,4 +1,7 @@
 package main;
+
+import main.MapEvent.Events;
+
 //fertig implementiert
 /**
  * 
@@ -26,7 +29,8 @@ public class AreaLandTypeChange extends Change {
 		StringBuilder sb = new StringBuilder();
 		sb.append("AreaLandTypeChange;");
 		sb.append(area+";");
-		sb.append(newLandType.getNetwork());
+		sb.append(newLandType.getNetwork()+";");
+		sb.append(event.toString());
 		return sb.toString();
 	}
 
@@ -36,11 +40,12 @@ public class AreaLandTypeChange extends Change {
 			throw new RuntimeException(parts[0]+" kann nicht zu AreaLandTypeChange geparset werden");
 		int area = Integer.parseInt(parts[1]);
 		LandType newLandType = LandType.parseLandType(parts[2]);
-		return new AreaLandTypeChange(area, newLandType);
+		MapEvent.Events event = MapEvent.Events.valueOf(parts[3]);
+		return new AreaLandTypeChange(area, newLandType, event);
 	}
 	
 	public static void main(String[] args){
-		AreaLandTypeChange change = new AreaLandTypeChange(0, new LandType(1, 2, FieldType.DESERT, 3, 4));
+		AreaLandTypeChange change = new AreaLandTypeChange(0, new LandType(1, 2, FieldType.DESERT, 3, 4), MapEvent.Events.METEORITE);
 		String str = change.getNetwork();
 		System.out.println(str);
 		AreaLandTypeChange c2 = AreaLandTypeChange.parseAreaLandTypeChange(str);
