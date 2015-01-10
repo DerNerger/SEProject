@@ -108,31 +108,18 @@ public class Controller implements Runnable, Skillable{
 		skillQ.offer(skill);
 		qLock.unlock();
 	}
-	
-	public static void main(String[] args){		
-		Species [] species = new Species[4];
-		for (int i = 0; i < species.length; i++) {
-			species[i] = new Species("Peter", 5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
-			//new Species(intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water)
-		} 
-		
-		HashMap<FieldType, Double> pct = new HashMap<>();
-		pct.put(FieldType.WATER, 0.25);
-		pct.put(FieldType.LAND, 0.25);
-		pct.put(FieldType.ICE, 0.25);
-		pct.put(FieldType.JUNGLE, 0.25);
-		
-		Map map = Map.fromRandom(200, 100, species, pct);
-		//System.out.println(map.toString());
-		
-		IPlayer[] player = new Ai[4];
-		for (int i = 0; i < player.length; i++) {
-			player[i] =  new Ai();
-		}
-		
-		Controller c =  new Controller(map, species, player);
-		new Thread(c).start();
-		
-	}
 
+	//SHOULD BE ONLY USED FOR TESTS BEGIN
+		public Map getMap() {
+			return map;
+		}
+	
+		public Species[] getSpecies() {
+			return species;
+		}
+	
+		public IPlayer[] getPlayer() {
+			return player;
+		}
+	//SHOULD BE ONLY USED FOR TESTS END
 }
