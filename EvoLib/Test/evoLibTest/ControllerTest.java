@@ -1,6 +1,5 @@
 package evoLibTest;
 
-import static org.junit.Assert.*;
 import junit.framework.Assert;
 
 import main.Ai;
@@ -9,7 +8,6 @@ import main.IPlayer;
 import main.Map;
 import main.Species;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ControllerTest {
@@ -19,7 +17,7 @@ public class ControllerTest {
 		Species[] species = new Species[4];
 		IPlayer[] player = new IPlayer[4];
 		for (int i = 0; i < species.length; i++) {
-			Ai ai = new Ai();
+			Ai ai = Ai.getRandomAI();
 			species[i] = ai.getSpecies();
 			player[i] = ai;
 		}

@@ -214,16 +214,20 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		mapHolderRL = (FrameLayout) findViewById(R.id.map_holder_rl);
 		// the surface views, representing the different layout layers
 		final SurfaceView mapBackgroundLL = new SurfaceView(this);
+		final SurfaceView fogBackground = new SurfaceView(this);
 		final SurfaceView selectionLL = new SurfaceView(this);
 		final SurfaceView pointsLL = new SurfaceView(this);
 		// must be called to make one draw on top of another
+		fogBackground.setZOrderMediaOverlay(true);
 		selectionLL.setZOrderMediaOverlay(true);
 		pointsLL.setZOrderMediaOverlay(true);
+		
 		runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 				mapHolderRL.addView(mapBackgroundLL);
+				mapHolderRL.addView(fogBackground);
 				mapHolderRL.addView(selectionLL);
 				mapHolderRL.addView(pointsLL);
 
@@ -231,7 +235,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		});
 		Display display = getWindowManager().getDefaultDisplay();
 		// scheiß deprecated
-		holder = new MapHolder(mapBackgroundLL, selectionLL, pointsLL, 400,
+		holder = new MapHolder(mapBackgroundLL,fogBackground, selectionLL, pointsLL, 400,
 				800, display.getWidth(), display.getHeight()
 						- display.getHeight() / 6, areaNumberOfFields,
 				areasLandType, species);
@@ -289,6 +293,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 					if (holder.drawMapLayout(false)) {
 
 					}
+					holder.drawFog();
 
 				}
 
@@ -514,7 +519,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		}
 		IPlayer[] player = new IPlayer[4];
 		for (int i = 1; i < player.length; i++) {
-			player[i] = new Ai();
+			player[i] = Ai.getRandomAI();
 		}
 		player[0] = this;
 		// Create controller
