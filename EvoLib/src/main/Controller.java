@@ -109,6 +109,20 @@ public class Controller implements Runnable, Skillable{
 		qLock.unlock();
 	}
 	
+	//SHOULD BE ONLY USED FOR TESTS BEGIN
+	public Map getMap() {
+		return map;
+	}
+
+	public Species[] getSpecies() {
+		return species;
+	}
+
+	public IPlayer[] getPlayer() {
+		return player;
+	}
+//SHOULD BE ONLY USED FOR TESTS END
+	
 	public static void main(String[] args){		
 		Species [] species = new Species[4];
 		for (int i = 0; i < species.length; i++) {
@@ -129,10 +143,5 @@ public class Controller implements Runnable, Skillable{
 		for (int i = 0; i < player.length; i++) {
 			player[i] =  Ai.getRandomAI();
 		}
-		
-		Controller c =  new Controller(map, species, player);
-		new Thread(c).start();
-		
 	}
-
 }
