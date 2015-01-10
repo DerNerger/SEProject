@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Evolution</string>
+	<string name="app_name">Evolution</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="random_generate_world">Zufällig generieren</string>
@@ -16,6 +16,15 @@
     </string-array>
 
     <string name="delimiterint">.</string>
+    <string name="explanation">Erklärungen</string>
+    <string name="yourname">Dein Speziesname</string>
+    <string name="selectworld">Wähle eine Welt</string>
+    <string name="selectworldone">Erste Welt</string>
+    <string name="selectworldtwo">Zweite Welt</string>
+    <string name="selectworldthree">Dritte Welt</string>
+    <string name="selectworldfour">Vierte Welt</string>
+    <string name="time">Zeit</string>
+    <string name="points">Punkte</string>
     <string name="title_activity_create_species">CreateSpeciesActivity</string>
     <string name="create_species_water">Wasserlebewesen</string>
     <string name="create_species_land">Landlebewesen</string>

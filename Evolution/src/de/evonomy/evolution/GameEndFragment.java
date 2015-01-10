@@ -122,6 +122,7 @@ public class GameEndFragment extends DialogFragment {
 
 	private String toRespresentation(long population) {
 		long tmp = population;
+		if(population==0)return "-";
 		String popString = "";
 		int counter = 1;
 		while (tmp > 0) {

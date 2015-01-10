@@ -460,6 +460,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 				fragmentOpened = true;
 				frag2 = new SkillSpeciesFragment();
 				noAreaSelection();
+
 				FragmentManager fm = getSupportFragmentManager();
 				frag2.show(fm, "fragment_skill");
 
@@ -603,9 +604,9 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 
 			@Override
 			public void run() {
-				populationTextView.setText(getResources().getString(
-						R.string.population_string)
-						+ ": " + population);
+				populationTextView.setText(// getResources().getString(
+						// R.string.population_string)
+						toRespresentation(population));
 
 			}
 		});
@@ -805,11 +806,12 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	}
 
 	private void showInformation(int titleId, int descId) {
-
-		infFrag = InformationDialog.newInstance(titleId, descId);
-		noAreaSelection();
-		FragmentManager manager = getSupportFragmentManager();
-		infFrag.show(manager, "information_dialog");
+		if (!fragmentOpened || titleId == R.string.speciesdiedtitle) {
+			infFrag = InformationDialog.newInstance(titleId, descId);
+			noAreaSelection();
+			FragmentManager manager = getSupportFragmentManager();
+			infFrag.show(manager, "information_dialog");
+		}
 
 	}
 
@@ -839,7 +841,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 
 			}
 		} else if (event == MapEvent.Events.METEORITE) {
-			id=R.string.meteorite;
+			id = R.string.meteorite;
 		} else {
 			id = R.string.climaticchange;
 		}
@@ -871,10 +873,27 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 
 			}
 		} else if (event == MapEvent.Events.METEORITE) {
-			id=R.string.meteoritedesc;
+			id = R.string.meteoritedesc;
 		} else {
 			id = R.string.climaticchangedesc;
 		}
 		return id;
+	}
+
+	private String toRespresentation(long population) {
+		long tmp = population;
+		if (population == 0)
+			return "-";
+		String popString = "";
+		int counter = 1;
+		while (tmp > 0) {
+			popString = tmp % 10 + popString;
+			if (counter % 3 == 0 && counter != (population + "").length())
+				popString = getResources().getString(R.string.delimiterint)
+						+ popString;
+			tmp /= 10;
+			counter++;
+		}
+		return popString;
 	}
 }

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/no_rounded_corner_black_white"
-                android:hint="@string/app_name" />
+                android:hint="@string/yourname" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -278,7 +278,7 @@
                                     android:layout_weight="1"
                                     android:checked="true"
                                     android:onClick="changedSelection"
-                                    android:text="Land" />
+                                    android:text="@string/create_species_land" />
 
                                 <RadioButton
                                     android:id="@+id/radio_button_create_species_water"
@@ -286,7 +286,7 @@
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
                                     android:onClick="changedSelection"
-                                    android:text="Water" />
+                                    android:text="@string/create_species_water" />
                             </RadioGroup>
 
                             <ImageButton
@@ -316,7 +316,7 @@
                                     android:layout_weight="1"
                                     android:checked="true"
                                     android:onClick="changedSelection"
-                                    android:text="Carnivore" />
+                                    android:text="@string/create_species_carnivore" />
 
                                 <RadioButton
                                     android:id="@+id/radio_button_create_species_herbivore"
@@ -324,7 +324,7 @@
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
                                     android:onClick="changedSelection"
-                                    android:text="Herbivore" />
+                                    android:text="@string/create_species_non_carnivore" />
                             </RadioGroup>
 
                             <ImageButton
@@ -354,7 +354,7 @@
                                     android:layout_weight="1"
                                     android:checked="true"
                                     android:onClick="changedSelection"
-                                    android:text="Endoskeleton" />
+                                    android:text="@string/create_species_endo_skeleton" />
 
                                 <RadioButton
                                     android:id="@+id/radio_button_create_species_exoskeleton"
@@ -362,7 +362,7 @@
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
                                     android:onClick="changedSelection"
-                                    android:text="Exoskeleton" />
+                                    android:text="@string/create_species_exo_sceleton" />
                             </RadioGroup>
 
                             <ImageButton
@@ -392,7 +392,7 @@
                                     android:layout_weight="1"
                                     android:checked="true"
                                     android:onClick="changedSelection"
-                                    android:text="r strategist" />
+                                    android:text="@string/create_species_r_strategist" />
 
                                 <RadioButton
                                     android:id="@+id/radio_button_create_species_kstrategist"
@@ -400,7 +400,7 @@
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
                                     android:onClick="changedSelection"
-                                    android:text="K strategist" />
+                                    android:text="@string/create_species_k_strategist" />
                             </RadioGroup>
 
                             <ImageButton
@@ -430,7 +430,7 @@
                                     android:layout_weight="1"
                                     android:checked="true"
                                     android:onClick="changedSelection"
-                                    android:text="Thin fur" />
+                                    android:text="@string/create_species_thin_fur" />
 
                                 <RadioButton
                                     android:id="@+id/radio_button_create_species_thick_fur"
@@ -438,7 +438,7 @@
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
                                     android:onClick="changedSelection"
-                                    android:text="Thick fur" />
+                                    android:text="@string/create_species_thick_fur" />
                             </RadioGroup>
 
                             <ImageButton

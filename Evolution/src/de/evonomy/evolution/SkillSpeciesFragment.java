@@ -53,6 +53,7 @@ public class SkillSpeciesFragment extends DialogFragment{
 	public void onStop(){
 		super.onStop();
 		((GameActivity)getActivity()).closingFragment();
+		
 	}
 
 }

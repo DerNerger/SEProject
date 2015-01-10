@@ -55,7 +55,7 @@
         	    <TextView 
         	        android:layout_width="wrap_content"
         	        android:layout_height="wrap_content"
-        	        android:text="@string/app_name"
+        	        android:text="@string/time"
         	        android:layout_centerInParent="true"
         	        android:textColor="@color/black"
         	        android:id="@+id/text_view_simulation_layout_time"
@@ -72,7 +72,7 @@
         	    <TextView 
         	        android:layout_width="wrap_content"
         	        android:layout_height="wrap_content"
-        	        android:text="@string/app_name"
+        	        android:text="@string/points"
         	        android:textSize="16dp"
         	        android:textColor="@color/black"
 					android:id="@+id/text_view_simulation_layout_points"

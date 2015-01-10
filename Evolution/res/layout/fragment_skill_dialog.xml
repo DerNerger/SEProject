@@ -31,7 +31,7 @@
 		                 android:layout_width="wrap_content"
 		                 android:layout_height="wrap_content"
 		                 android:layout_centerInParent="true"
-		                 android:text="@string/app_name"
+		                 android:text="@string/carnivore_title"
 		                 android:textSize="20sp"
 		                 
 		                 android:textColor="@color/black"
@@ -63,7 +63,7 @@
 	             <TextView 
 	                 android:layout_width="wrap_content"
 	                 android:layout_height="wrap_content"
-	                 android:text="@string/app_name"
+	                 android:text="@string/carnivore_desc"
 	                 android:id="@+id/text_view_fragment_skill_dialog_desc"
 	                 android:textSize="14sp"
 	                 android:textColor="@color/black"/>
@@ -177,7 +177,7 @@
 	            android:id="@+id/button_fragment_skill_dialog_skill"
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
-	            android:text="@string/app_name"
+	            android:text="@string/skill_species"
 	            android:textSize="20sp"
 	            android:background="@drawable/pressable_button"/>
         
