@@ -81,7 +81,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	private boolean fragmentOpened = false;
 	private boolean gameEnded = false;
 	private SpeciesOverviewFragment frag;
-	private InformationDialog infFrag; 
+	private InformationDialog infFrag;
 	private SkillSpeciesFragment frag2;
 	private AreaInformationDialog informationDialog;
 	// registers Overview Tabs to update
@@ -176,11 +176,12 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		setWorldPopulation();
 	}
 
-	public void changeAreaLandType(int area, LandType landType) {
+	public void changeAreaLandType(int area, LandType landType,
+			MapEvent.Events event) {
 		noAreaSelection();
 		LandType old = holder.getAreas()[area].getLandType();
 		// TODO Information anzeigen
-		showInformation(getTitleId(landType, old), getDescId(landType, old));
+		showInformation(getTitleId(landType, event), getDescId(landType, event));
 		holder.changeAreaLandType(area, landType);
 	}
 
@@ -683,11 +684,11 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					
+
 					float xEvent = event.getX();
 					float yEvent = event.getY();
 					// umrechnen in
-					
+
 					int x = (int) (xEvent * (200 / (float) mapHolderRL
 							.getWidth()));
 					int y = (int) (yEvent * (100 / (float) mapHolderRL
@@ -697,17 +698,16 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					// get x and y and calculate Area from this
-					
+
 					float xEvent = event.getX();
 					float yEvent = event.getY();
 					// umrechnen in
-					
-							
+
 					int x = (int) (xEvent * (200 / (float) mapHolderRL
 							.getWidth()));
 					int y = (int) (yEvent * (100 / (float) mapHolderRL
 							.getHeight()));
-					
+
 					if (y >= 100)
 						return false;
 					int newSelectedArea = holder.getArea(x, y);
@@ -768,12 +768,13 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	public void noAreaSelection() {
 		currentSelectedArea = -1;
 		setWorldPopulation();
-		if (holder != null){
+		if (holder != null) {
 			holder.stopObjectAnimator();
-			
-		}	
-		
+
+		}
+
 	}
+
 	@Override
 	public void closingFragment() {
 		fragmentOpened = false;
@@ -793,7 +794,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 
 	@Override
 	public void youLose(int playerNumber) {
-		
+
 		if (playerNumber == playernumber) {
 			int[] points = { 0, 0, 0, 0 };
 			onGameEnd(playernumber == 1 ? 0 : 1, points);
@@ -803,20 +804,18 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	}
 
 	private void showInformation(int titleId, int descId) {
-		
+
 		infFrag = InformationDialog.newInstance(titleId, descId);
 		noAreaSelection();
 		FragmentManager manager = getSupportFragmentManager();
 		infFrag.show(manager, "information_dialog");
-		
+
 	}
 
-	private int getTitleId(LandType newLandtype, LandType old) {
+	private int getTitleId(LandType newLandtype, MapEvent.Events event) {
 		int id;
 
-		if (newLandtype.getFieldType() != old.getFieldType()
-				|| newLandtype.getResources() != old.getResources()
-				|| old.getNaturalEnemies() != newLandtype.getNaturalEnemies()) {
+		if (event == MapEvent.Events.LANDTYPECHANGE) {
 			//
 			switch (newLandtype.getFieldType()) {
 			case DESERT:
@@ -838,18 +837,17 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 				throw new RuntimeException("No implemented landtype change");
 
 			}
-
+		} else if (event == MapEvent.Events.METEORITE) {
+			id=R.string.meteorite;
 		} else {
 			id = R.string.climaticchange;
 		}
 		return id;
 	}
 
-	private int getDescId(LandType newLandtype, LandType old) {
+	private int getDescId(LandType newLandtype, MapEvent.Events event) {
 		int id;
-		if (newLandtype.getFieldType() != old.getFieldType()
-				|| newLandtype.getResources() != old.getResources()
-				|| old.getNaturalEnemies() != newLandtype.getNaturalEnemies()) {
+		if (event == MapEvent.Events.LANDTYPECHANGE) {
 			//
 			switch (newLandtype.getFieldType()) {
 			case DESERT:
@@ -871,7 +869,8 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 				throw new RuntimeException("No implemented landtype change");
 
 			}
-
+		} else if (event == MapEvent.Events.METEORITE) {
+			id=R.string.meteoritedesc;
 		} else {
 			id = R.string.climaticchangedesc;
 		}
