@@ -178,6 +178,7 @@ public class MapHolder {
 	public boolean drawMapLayout(boolean forced) {
 
 		if (mapToBeDrawn || forced) {
+			
 			Canvas mapCanvas = mapHolder.lockCanvas();
 			if (mapCanvas == null)
 				return false;
@@ -263,6 +264,7 @@ public class MapHolder {
 	}
 
 	public void drawAreaLayout(int area) {
+		Log.e("Selection", "draw "+ area);
 		stopObjectAnimator();
 		areas[area].animateClicked(selHolder);
 		anim = ObjectAnimator.ofFloat(areas[area], "alpha", 0.30f, 0.79f);

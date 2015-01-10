@@ -9,13 +9,15 @@ package main;
 public class AreaLandTypeChange extends Change {
 	private int area;
 	private LandType newLandType;
-	public AreaLandTypeChange(int area, LandType newLandType){
+	private MapEvent.Events event;
+	public AreaLandTypeChange(int area, LandType newLandType, MapEvent.Events event){
 		this.area=area;
+		this.event=event;
 		this.newLandType=newLandType;
 	}
 	@Override
 	public void doChange(IPlayer player) {
-		player.changeAreaLandType(area, newLandType);
+		player.changeAreaLandType(area, newLandType,event);
 
 	}
 	

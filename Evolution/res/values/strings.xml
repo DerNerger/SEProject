@@ -87,4 +87,6 @@
 	<string name="tojungledesc">Ein neuer Dschungel ist entstanden! Es wimmelt hier vor Leben, deine Spezies ist also gut versorgt, steht aber auch mehr Feinden gegenüber.</string>
 	<string name="tolanddesc">Die Lebensumstände sind auf Teilen des Planeten normaler geworden. Möglicherwese ein Vorteil für deine Spezies.</string>
 	<string name="towasserdesc">Flut! Der Planet wird von einer Flut heimgesucht, die eine größere Fläche überschwemmt hat. Kann deine Spezies im Wasser überleben? </string>
+	<string name="speciesdiedtitle">Spezies ausgestorben!</string>
+	<string name="speciesdieddesc">Einer deiner Konkurrenten im Evolutionsrennen ist ausgestorben. Damit bist du einen Schritt näher daran, die vorherrschende Spezies zu werden!</string>
 </resources>

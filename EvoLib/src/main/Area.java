@@ -45,12 +45,12 @@ private int number;
 		return toReturn;
 	
 	}
-	public Change setLandType(LandType newType){
+	public Change setLandType(LandType newType,MapEvent.Events event){
 		//Typ wechseln
 		landType=newType;
 		//TODO Objekt des obertypen change zurückgeben, welche Informationen
 		//TODO zur darstellung des neuen FieldTyp für die Gui enthält
-		return new AreaLandTypeChange(number, newType);
+		return new AreaLandTypeChange(number, newType, event);
 		
 	}
 	public LinkedList<Change>changePopulation(float percentage){

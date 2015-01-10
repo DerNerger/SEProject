@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 
 public abstract class MapEvent {
+	public enum Events{METEORITE,CLIMATE,RADIOACTIVE,LANDTYPECHANGE};
 	private final int area;
 	
 	public MapEvent(int area){

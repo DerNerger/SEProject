@@ -21,7 +21,7 @@ public class MapEventMeteorite extends MapEvent {
 		LinkedList<Change> toReturn= new LinkedList<Change>();
 		toReturn.addAll(area.changePopulation(0f));
 		LandType newLandType= SimpleMapLogic.randomLandType(FieldType.DESERT);
-		toReturn.addFirst(area.setLandType(newLandType));
+		toReturn.addFirst(area.setLandType(newLandType,MapEvent.Events.METEORITE));
 		
 		return toReturn;
 	}

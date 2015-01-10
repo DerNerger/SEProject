@@ -21,7 +21,7 @@ public class MapEventClimate extends MapEvent {
 		area.getLandType().setMaxTemp(maxTemp);
 		area.getLandType().setMinTemp(minTemp);
 		
-		toReturn.addLast(area.setLandType(area.getLandType()));
+		toReturn.addLast(area.setLandType(area.getLandType(),MapEvent.Events.CLIMATE));
 		return toReturn;
 	}
 

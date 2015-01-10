@@ -81,6 +81,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	private boolean fragmentOpened = false;
 	private boolean gameEnded = false;
 	private SpeciesOverviewFragment frag;
+	private InformationDialog infFrag; 
 	private SkillSpeciesFragment frag2;
 	private AreaInformationDialog informationDialog;
 	// registers Overview Tabs to update
@@ -176,7 +177,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	}
 
 	public void changeAreaLandType(int area, LandType landType) {
-
+		noAreaSelection();
 		LandType old = holder.getAreas()[area].getLandType();
 		// TODO Information anzeigen
 		showInformation(getTitleId(landType, old), getDescId(landType, old));
@@ -221,7 +222,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		fogBackground.setZOrderMediaOverlay(true);
 		selectionLL.setZOrderMediaOverlay(true);
 		pointsLL.setZOrderMediaOverlay(true);
-		
+
 		runOnUiThread(new Runnable() {
 
 			@Override
@@ -235,8 +236,8 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		});
 		Display display = getWindowManager().getDefaultDisplay();
 		// scheiß deprecated
-		holder = new MapHolder(mapBackgroundLL,fogBackground, selectionLL, pointsLL, 400,
-				800, display.getWidth(), display.getHeight()
+		holder = new MapHolder(mapBackgroundLL, fogBackground, selectionLL,
+				pointsLL, 400, 800, display.getWidth(), display.getHeight()
 						- display.getHeight() / 6, areaNumberOfFields,
 				areasLandType, species);
 
@@ -682,12 +683,11 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					Log.e("Simulation", "Tap down");
+					
 					float xEvent = event.getX();
 					float yEvent = event.getY();
 					// umrechnen in
-					Log.e("Simulation", "dim x: " + mapHolderRL.getWidth()
-							+ " y: " + mapHolderRL.getHeight());
+					
 					int x = (int) (xEvent * (200 / (float) mapHolderRL
 							.getWidth()));
 					int y = (int) (yEvent * (100 / (float) mapHolderRL
@@ -697,19 +697,17 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					// get x and y and calculate Area from this
-					Log.e("Simulation", "Tap down");
+					
 					float xEvent = event.getX();
 					float yEvent = event.getY();
 					// umrechnen in
-					Log.e("Simulation", "dim x: " + mapHolderRL.getWidth()
-							+ " y: " + mapHolderRL.getHeight());
+					
+							
 					int x = (int) (xEvent * (200 / (float) mapHolderRL
 							.getWidth()));
 					int y = (int) (yEvent * (100 / (float) mapHolderRL
 							.getHeight()));
-					Log.e("Simulation", "Tap x: " + x + " y: " + y);
-					Log.e("Simulation", "Event: Tap x: " + xEvent + " y: "
-							+ yEvent);
+					
 					if (y >= 100)
 						return false;
 					int newSelectedArea = holder.getArea(x, y);
@@ -770,10 +768,13 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	public void noAreaSelection() {
 		currentSelectedArea = -1;
 		setWorldPopulation();
-		if (holder != null)
+		if (holder != null){
 			holder.stopObjectAnimator();
+			
+		}	
+		
 	}
-
+	@Override
 	public void closingFragment() {
 		fragmentOpened = false;
 	}
@@ -792,21 +793,22 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 
 	@Override
 	public void youLose(int playerNumber) {
-		//TODO: NIKLAS IMPLEMENT THIS SHIT
-		runOnUiThread(new Runnable() {
-			
-			@Override
-			public void run() {
-				Toast.makeText(getApplicationContext(), "DU NOOB HAST VERLOREN!!!", Toast.LENGTH_LONG).show();
-			}
-		});
+		
+		if (playerNumber == playernumber) {
+			int[] points = { 0, 0, 0, 0 };
+			onGameEnd(playernumber == 1 ? 0 : 1, points);
+		} else {
+			showInformation(R.string.speciesdiedtitle, R.string.speciesdieddesc);
+		}
 	}
 
 	private void showInformation(int titleId, int descId) {
-		InformationDialog frag = InformationDialog.newInstance(titleId, descId);
+		
+		infFrag = InformationDialog.newInstance(titleId, descId);
 		noAreaSelection();
 		FragmentManager manager = getSupportFragmentManager();
-		frag.show(manager, "information_dialog");
+		infFrag.show(manager, "information_dialog");
+		
 	}
 
 	private int getTitleId(LandType newLandtype, LandType old) {

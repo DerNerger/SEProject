@@ -18,7 +18,7 @@ public class MapEventToLandType extends MapEvent {
 	@Override
 	public LinkedList<Change> doChange(Area area) {
 		LinkedList<Change> toReturn=new LinkedList<Change>();
-		toReturn.addLast(area.setLandType(newLandType));
+		toReturn.addLast(area.setLandType(newLandType,MapEvent.Events.LANDTYPECHANGE));
 		return toReturn;
 	}
 
