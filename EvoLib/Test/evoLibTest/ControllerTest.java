@@ -17,7 +17,7 @@ public class ControllerTest {
 		Species[] species = new Species[4];
 		IPlayer[] player = new IPlayer[4];
 		for (int i = 0; i < species.length; i++) {
-			Ai ai = Ai.getRandomAI();
+			Ai ai = Ai.getDummyAI();
 			species[i] = ai.getSpecies();
 			player[i] = ai;
 		}

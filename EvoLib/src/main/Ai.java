@@ -2,11 +2,14 @@ package main;
 
 import java.util.Random;
 
-public abstract class Ai implements IPlayer{
-
+public class Ai implements IPlayer{
+	
+	protected Skillable skillable;
+	protected Species species;
+	protected boolean water;
+	
 	@Override
 	public void changeFieldPopulation(int x, int y, int[] population) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -72,42 +75,32 @@ public abstract class Ai implements IPlayer{
 	}
 	
 	public Species getSpecies(){
-		String name = "the Monster";
-		int intelligence = 5;
-		int agility = 5;
-		int strength = 5;
-		int social = 5;
-		int procreation = 5;
-		int minTemp = 0;
-		int maxTemp = 30;
-		int resourceDemand = 12;
-		double movementChance = 0.05;
-		int visibillity = 3;
-		boolean water = false;
-//		String name = "the Monster";
-//		int intelligence = 10;
-//		int agility = 86;
-//		int strength = 5;
-//		int social = 5;
-//		int procreation = 76;
-//		int minTemp = -2;
-//		int maxTemp = 50;
-//		int resourceDemand = 12;
-//		double movementChance = 0.9;
-//		int visibillity = 3;
-//		boolean water = true;
-		return new Species(name, intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water);
+		return species;
 	}
-
-	public static Ai getRandomAI() {
+	
+	public Ai(Skillable skillable) {
+		this.skillable = skillable;
+		this.species = SimpleMapLogic.getStandartSpecies("SupaComputa");
+		this.water = (new Random()).nextBoolean();
+		if (water) SimpleMapLogic.changeSpecies(species, PossibleUpdates.WATESPECIES);
+	}
+	
+	private Ai() {
+		this.species = SimpleMapLogic.getStandartSpecies("DummaComputa");
+	}
+	
+	public static Ai getRandomAI(Skillable skillable) {
 		Random rnd = new Random();
 		double rnddouble = rnd.nextDouble();
 		if (rnddouble < .5) {
-			return new StrengthAI();
+			return new StrengthAI(skillable);
 		}
 		else {
-			return new PopulationAI();
+			return new PopulationAI(skillable);
 		}
 	}
 	
+	public static Ai getDummyAI() {
+		return new Ai();
+	}
 }
