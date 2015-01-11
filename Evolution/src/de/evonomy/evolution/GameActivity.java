@@ -127,7 +127,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 			doNetworkShit(info, playerSpecies);
 		} else {
 			multiplayer = false;
-			species = Species.getAiSpecies(playerSpecies);
+			species = Species.getAiSpecies(playerSpecies, controller);
 			startController();
 		}
 //		actualizeThread.start();
@@ -537,7 +537,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		}
 		IPlayer[] player = new IPlayer[4];
 		for (int i = 1; i < player.length; i++) {
-			player[i] = Ai.getRandomAI();
+			player[i] = Ai.getRandomAI(controller);
 		}
 		player[0] = this;
 		// Create controller
