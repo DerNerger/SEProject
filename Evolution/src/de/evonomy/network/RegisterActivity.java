@@ -7,6 +7,8 @@ import javax.xml.datatype.Duration;
 import loginProtocol.LoginPacket;
 
 import register.RegisterResult;
+import simpleNet.Packet;
+import simpleNet.PacketType;
 
 import de.evonomy.evolution.R;
 
@@ -61,6 +63,7 @@ public class RegisterActivity extends Activity implements Observer{
 			
 			@Override
 			public void onClick(View v) {
+				setContentView(R.layout.activity_wait);
 				String username = editText_register_username.getText().toString();
 				String passWd = editText_register_passWd.getText().toString();
 				String passWdConfirm = editText_register_passWd_confirm.getText().toString();
@@ -79,13 +82,20 @@ public class RegisterActivity extends Activity implements Observer{
 				}
 				registerConnection.addObserver(usedInOnClickListener);
 				registerConnection.register(username, passWd);
-				setContentView(R.layout.activity_wait);
 			}
 		});
 	}
 
 	@Override
 	public void update(Observable observable, Object data) {
+		Packet pack = (Packet) data;
+		if(pack.getType()==PacketType.FailPacket){
+			setContentView(R.layout.activity_register);
+			initComponents();
+			initListeners();
+			Toast.makeText(getApplicationContext(), getString(R.string.noConnection), Toast.LENGTH_LONG).show();
+			return;
+		}
 		if(observable==registerConnection)
 			handleRegisterResult(data);
 		else

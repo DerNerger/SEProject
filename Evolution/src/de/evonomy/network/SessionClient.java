@@ -11,6 +11,8 @@ import simpleNet.Packet;
 import simpleNet.ProtocolClient;
 
 public abstract class SessionClient extends Observable  implements Runnable{
+	public static final int tries = 3; //tries to connect to the server
+	
 	private ProtocolClient client;
 	protected boolean running;
 	
@@ -28,7 +30,8 @@ public abstract class SessionClient extends Observable  implements Runnable{
 	
 	protected void disconnect() throws IOException{
 		running = false;
-		client.disconnect();
+		if(client!=null)
+			client.disconnect();
 	}
 	
 	protected void connect() throws UnknownHostException, IOException{
@@ -38,7 +41,21 @@ public abstract class SessionClient extends Observable  implements Runnable{
 	}
 	
 	protected void sendPacket(Packet p){
-		while(client == null);//client is fast enough  connectet
+		int t = 0;
+		while(client == null){ //client is fast enough  connectet
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			t++;
+			if(t > tries){
+				processPacket(new ServerOfflinePacket());
+				running=false;
+				return;
+			}
+		}
 		client.sendPacket(p);
 	}
 
@@ -54,7 +71,7 @@ public abstract class SessionClient extends Observable  implements Runnable{
 			e.printStackTrace();
 		}
 		while(running){
-			if(client.hasPackets())
+			if(client!=null && client.hasPackets())
 				processPacket(client.getNextPacket());
 		}
 		
