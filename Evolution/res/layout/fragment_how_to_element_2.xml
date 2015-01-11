@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/de.evonomy.evolution"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:padding="2dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/no_rounded_corner_black_white"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:textSize="18sp"
+                    android:text="@string/how_to_element_one_title"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                           
+                        android:text="@string/how_to_resource_demand"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                
+ 
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/how_to_movement"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/how_to_temperature"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            
+
+            
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:padding="2dp"
+        android:orientation="vertical" >
+        <LinearLayout 
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/no_rounded_corner_black_white">
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="20dp"
+            android:paddingBottom="15dp"
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp">
+            <de.evonomy.evolution.ResourceDemandView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                custom:demand="78"
+                custom:textSize="18"/>
+            
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="25dp"
+            android:paddingBottom="0dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp">
+            <de.evonomy.evolution.MovementView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                custom:movement="0.8"/>
+            
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="35dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="1dp"
+            android:paddingLeft="1dp">
+            <de.evonomy.evolution.TemperatureView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                custom:min_temp="-12"
+                custom:max_temp="28"
+                custom:min_temp_area="7"
+                custom:max_temp_area="43"/>
+            
+        </RelativeLayout>
+	
+        
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

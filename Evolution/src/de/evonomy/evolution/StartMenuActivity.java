@@ -18,8 +18,9 @@ import de.evonomy.network.LoginActivity;
 
 
 public class StartMenuActivity extends Activity {
-	Button startSimulation;
-	Button multiplayer_simulation_button_startmenu;
+	private Button startSimulation;
+	private Button multiplayer_simulation_button_startmenu;
+	private Button howto;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +74,12 @@ public class StartMenuActivity extends Activity {
 				startActivity(intent_login);
 			}
 		});
-        Button tmp=(Button) findViewById(R.id.statistics_button_startmenu);
-        tmp.setOnClickListener(new View.OnClickListener() {
+        howto=(Button) findViewById(R.id.explanations_button_startmenu);
+        howto.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent=new Intent(getApplicationContext(),CreateSpeciesActivity.class);
+				Intent intent=new Intent(getApplicationContext(),HowToActivity.class);
 				startActivity(intent);
 				
 			}

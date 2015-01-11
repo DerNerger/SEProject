@@ -33,8 +33,8 @@ public class TemperatureView extends LinearLayout {
 		try{
 			minTemp=a.getInteger(R.styleable.TemperatureView_min_temp, 1);
 			maxTemp=a.getInteger(R.styleable.TemperatureView_max_temp, 1);
-			minTemp=a.getInteger(R.styleable.TemperatureView_min_temp_area, 0);
-			maxTemp=a.getInteger(R.styleable.TemperatureView_max_temp_area, 0);
+			minTempArea=a.getInteger(R.styleable.TemperatureView_min_temp_area, 1);
+			maxTempArea=a.getInteger(R.styleable.TemperatureView_max_temp_area, 1);
 			
 	
 		} finally{

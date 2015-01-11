@@ -81,6 +81,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	private boolean firstSpeciesUpdate = false;
 	private boolean fragmentOpened = false;
 	private boolean gameEnded = false;
+	private boolean paused=false;
 	private SpeciesOverviewFragment frag;
 	private InformationDialog infFrag;
 	private SkillSpeciesFragment frag2;
@@ -766,6 +767,13 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 			holder.drawMapLayout(true);
 		}
 	}
+//	@Override
+//	public void onStart() {
+//		super.onStart();
+//		if (holder != null) {
+//			holder.drawMapLayout(true);
+//		}
+//	}
 
 	public void noAreaSelection() {
 		currentSelectedArea = -1;
@@ -806,6 +814,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	}
 
 	private void showInformation(int titleId, int descId) {
+		if(paused) return;
 		if (!fragmentOpened || titleId == R.string.speciesdiedtitle) {
 			infFrag = InformationDialog.newInstance(titleId, descId);
 			noAreaSelection();
@@ -896,4 +905,17 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		}
 		return popString;
 	}
+	@Override
+	public void onSaveInstanceState(Bundle outState){
+		super.onSaveInstanceState(outState);
+		paused=true;
+		
+	}
+	@Override
+	public void onRestoreInstanceState(Bundle outState){
+		super.onSaveInstanceState(outState);
+		paused=false;
+		
+	}
 }
+
