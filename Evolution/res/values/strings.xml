@@ -79,11 +79,6 @@
 	<string name="youlost">Du bist im Evolutionsrennen untergegangen!</string>
 	<string name="gameendgoon">Weiter geht\'s!</string>
 	<string name="evolutionpoints">Evolutionspunkte</string>
-	<string name="pwds_not_equal">Die Passwörter stimmen nicht überein</string>
-	<string name="name_not_allowed">Der Name enthält ungültige Zeichen oder ist leer</string>
-	<string name="addplayer">Spieler hinzufügen</string>
-	<string name="hintchat">Nachricht</string>
-	<string name="sendmessage">Senden!</string>
 	<string name="climaticchange">Klimawandel!</string>
 	<string name="meteorite">Meteoriteneinschlag!</string>
 	<string name="iceage">Eiszeit!</string>
@@ -199,5 +194,13 @@
 	<string name="wingdesc">Grundlegende Flügel, die die Geschicklichkeit erhöhen.</string>
 	<string name="polygamy">Polygamie</string>
 	<string name="polygamydesc">Deine Spezies mit Polygamie wird sich, im Gegensatz zu Monogamie, schneller Fortpflanzen.</string>
+	
+	<!-- network strings -->
+	<string name="noConnection">Verbindung zum Server nicht möglich!</string>
+	<string name="pwds_not_equal">Die Passwörter stimmen nicht überein</string>
+	<string name="name_not_allowed">Der Name enthält ungültige Zeichen oder ist leer</string>
+	<string name="addplayer">Spieler hinzufügen</string>
+	<string name="hintchat">Nachricht</string>
+	<string name="sendmessage">Senden!</string>
 	
 </resources>

@@ -3,6 +3,9 @@ package de.evonomy.network;
 import java.util.Observable;
 import java.util.Observer;
 
+import simpleNet.Packet;
+import simpleNet.PacketType;
+
 import loginProtocol.LoginPacket;
 
 import de.evonomy.evolution.R;
@@ -72,6 +75,10 @@ public class LoginActivity extends Activity implements Observer{
 					setContentView(R.layout.activity_wait);
 					String name = editText_LoginName.getText().toString();
 					String passWd = editText_PassWd.getText().toString();
+					if(name.contains(";") || passWd.contains(";") || name.equals("") || passWd.equals("")){
+						Toast.makeText(getApplicationContext(), getString(R.string.name_not_allowed), Toast.LENGTH_LONG).show();
+						return;
+					}
 					if(checkBoxSaveName.isChecked()){
 						SharedPreferences settings = getSharedPreferences("LOGINNAME", 0);
 					    SharedPreferences.Editor editor = settings.edit();
@@ -80,10 +87,9 @@ public class LoginActivity extends Activity implements Observer{
 					    editor.commit();
 					}
 					client = new LoginClient(getResources().getInteger(R.integer.LoginPort), getString(R.string.host));
-					new Thread(client).start();
-					client.login(name, passWd);
 					client.addObserver(usedInOnClickListener);
 					new Thread(client).start();
+					client.login(name, passWd);
 				}
 			});
 			
@@ -99,6 +105,14 @@ public class LoginActivity extends Activity implements Observer{
 
 		@Override
 		public void update(Observable observable, Object data) {
+			Packet pack = (Packet)data;
+			if(pack.getType()==PacketType.FailPacket){
+				setContentView(R.layout.activity_login);
+				initComponents();
+				initListeners();
+				Toast.makeText(getApplicationContext(), getString(R.string.noConnection), Toast.LENGTH_LONG).show();
+				return;
+			}
 			LoginPacket p = (LoginPacket) data;
 			if(p.getPassWd()==1){
 				goOnline(p.getName());
