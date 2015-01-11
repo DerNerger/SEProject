@@ -44,6 +44,10 @@ public class MapHolder {
 	private boolean mapToBeDrawn = true;
 	private float heightPerBlock;
 	private float widthPerBlock;
+	SurfaceView mapBackgroundLL;
+	SurfaceView fogBackground;
+	SurfaceView selectionLL;
+	SurfaceView pointsLL;
 	/* Points to skill species!! */
 	private int points;
 	public final int NUMBEROFBLOCKSHEIGHT = 100;
@@ -60,6 +64,10 @@ public class MapHolder {
 			SurfaceView pointsHolder, int height, int width, int dispWidth,
 			int dispHeight, int[][] areasOfFields, LandType[] areasLandType,
 			Species species[]) {
+		this.mapBackgroundLL=mapHolder;
+		this.fogBackground=fogHolder;
+		this.selectionLL=selHolder;
+		this.pointsLL=pointsHolder;
 		this.mapHolder = mapHolder.getHolder();
 		this.fogHolder= fogHolder.getHolder();
 		this.selHolder = selHolder.getHolder();
@@ -106,7 +114,7 @@ public class MapHolder {
 		drawMapLayout(false);
 
 	}
-
+	
 	private void initColors() {
 		black.setColor(Color.parseColor("#000000"));
 		white = new Paint();
@@ -207,6 +215,9 @@ public class MapHolder {
 			return false;
 		}
 		return true;
+	}
+	public void mapToBeDrawn(){
+		mapToBeDrawn=true;
 	}
 
 	public void drawPointsLayout() {

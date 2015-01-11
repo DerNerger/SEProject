@@ -66,6 +66,9 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	private TextView selectionTextView;
 	private TextView pointsTextView;
 	private TextView timeTextView;
+	
+	
+	 
 	// currently selected area
 	private int currentSelectedArea = -1;
 	private int tmpArea;
@@ -107,8 +110,10 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.simulation_layout);
 		initListeners();
-		actualizeThread = new Thread(actualize);
-		actualizeMapThread = new Thread(actualizeMap);
+//		actualizeThread = new Thread(actualize);
+//		actualizeMapThread = new Thread(actualizeMap);
+//		actualizeThread.start();
+//		actualizeMapThread.start();
 
 		// get the playerspecies
 		Species playerSpecies = (Species) getIntent().getExtras().get(
@@ -125,8 +130,8 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 			species = Species.getAiSpecies(playerSpecies);
 			startController();
 		}
-		actualizeThread.start();
-		actualizeMapThread.start();
+//		actualizeThread.start();
+//		actualizeMapThread.start();
 	}// end on create
 
 	// only network
@@ -291,6 +296,9 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	Runnable actualizeMap = new Runnable() {
 		@Override
 		public void run() {
+			//so it gets directly drawn on resume
+			if(holder!=null)
+				holder.mapToBeDrawn();
 			outerloop: while (!Thread.currentThread().isInterrupted()) {
 
 				if (mapHasBeenSet) {
@@ -413,11 +421,17 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	 * wenn back gedrueckt wurde
 	 */
 	public void pause() {
-
+		actualizeThread.interrupt();
+		actualizeMapThread.interrupt();
+		actualizeThread=null;
+		actualizeMapThread=null;
 	}
 
 	public void resume() {
-
+		actualizeThread = new Thread(actualize);
+		actualizeMapThread = new Thread(actualizeMap);
+		actualizeThread.start();
+		actualizeMapThread.start();
 	}
 
 	private byte[] readFile(String path) throws IOException {
@@ -754,6 +768,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	@Override
 	public void onPause() {
 		super.onPause();
+		pause();
 		currentSelectedArea = -1;
 		setWorldPopulation();
 		if (holder != null)
@@ -763,9 +778,10 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (holder != null) {
-			holder.drawMapLayout(true);
-		}
+		resume();
+//		if (holder != null) {
+//			holder.drawMapLayout(true);
+//		}
 	}
 //	@Override
 //	public void onStart() {
