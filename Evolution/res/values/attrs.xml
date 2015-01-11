@@ -16,6 +16,7 @@
     </declare-styleable>
     <declare-styleable name="ResourceDemandView">
         <attr name="demand" format="integer"/>
+        <attr name="textSize" format="integer"/>
         
     </declare-styleable>
      <declare-styleable name="MovementView">

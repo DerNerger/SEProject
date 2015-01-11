@@ -95,7 +95,16 @@
 	<string name="towasserdesc">Flut! Der Planet wird von einer Flut heimgesucht, die eine größere Fläche überschwemmt hat. Kann deine Spezies im Wasser überleben? </string>
 	<string name="speciesdiedtitle">Spezies ausgestorben!</string>
 	<string name="speciesdieddesc">Einer deiner Konkurrenten im Evolutionsrennen ist ausgestorben. Damit bist du einen Schritt näher daran, die vorherrschende Spezies zu werden!</string>
-
+	<string name="how_to_element_one_title">Deine Spezies</string>
+	<string name="how_to_intelligence">Intelligenz: Die Intelligenz deiner Spezies bestimmt die Gewinnung von Ressourcen.</string>
+	<string name="how_to_agility">Geschicklichkeit: Hilft auf der Flucht und im Kampf gegen natürliche Feinde.</string>
+	<string name="how_to_strength">Stärke: Ausschlaggebend für den Kampf gegen konkurrierende Spezies.</string>
+	<string name="how_to_social">Sozial: Bringt einen besseren Umgang miteinander bei Konflikten wie Knappheit.</string>
+	<string name="how_to_procreation">Fortpflanzung: Bestimmt, wie viel Nachkommen entstehen und überleben.</string>
+	<string name="how_to_description_game">Was ist Evolution? \n\nBei dieser Simulation geht es darum, mit deiner Spezies die vorherrschende Spezies auf einem Planenten zu werden. Dies passiert über Mutationen, die du für deine Spezies wählst, um sie bestens an die Umgebung anzupassen. Verschiedene Mutationen wirken sich anders auf die Attribute deiner Spezies aus. Auf den nächsten beiden Seiten findest du Erklärungen zu den verschiedenen Attributen deiner Spezies und wie sie sich auswirken.</string>
+	<string name="how_to_resource_demand">Ressourcenverbrauch: Der Ressourcenverbrauch gibt an, wie viel Rohstoffe ein Exemplar deiner Spezies verbraucht.</string>
+	<string name="how_to_movement">Fortbewegungsrate: Je höher die Fortbewegungsrate deiner Spezies, desto schneller breitet sie sich aus.</string>
+	<string name="how_to_temperature">Temperatur: Der obere Teil der Temperaturanzeige gibt die Spanne deiner Spezies an, die untere die Temperatur die des Bereiches.</string>
 	<!-- skill strings -->
 	<string name="battlewings">Kampfflügel</string>
 	<string name="battlewingsdesc">Kampfflügel verschaffen dir durch ihre gewaltige Kraft einen großen Vorteil im Kampf. Allerdings erhöht sich dadurch auch der Ressourcenbedarf deiner Spezies.</string>

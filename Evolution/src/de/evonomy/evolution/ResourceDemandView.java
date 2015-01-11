@@ -11,11 +11,13 @@ public class ResourceDemandView extends LinearLayout{
 	private int resourceDemand;
 	private ImageView im;
 	private TextView te;
+	private int textsize;
 	public ResourceDemandView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		TypedArray a= context.getTheme().obtainStyledAttributes(attrs, R.styleable.ResourceDemandView, 0, 0);
 		try{
 			resourceDemand=a.getInteger(R.styleable.ResourceDemandView_demand, 1);
+			textsize=a.getInteger(R.styleable.ResourceDemandView_textSize, 10);
 			
 	
 		} finally{
@@ -27,6 +29,7 @@ public class ResourceDemandView extends LinearLayout{
 		inflate(getContext(),R.layout.resource_demand_view,this);
 		im=(ImageView) findViewById(R.id.image_view_resource_demand_view);
 		te=(TextView) findViewById(R.id.text_view_resource_demand_view);
+		te.setTextSize( textsize);
 		setResourceDemand(resourceDemand);
 	}
 	public void setResourceDemand(int resourceDemand){
