@@ -75,7 +75,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int movement=0x7f01000a;
+        public static final int movement=0x7f01000b;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -83,7 +83,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int not=0x7f01000b;
+        public static final int not=0x7f01000c;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -108,6 +108,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int strength=0x7f010002;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textSize=0x7f01000a;
     }
     public static final class color {
         public static final int aqua=0x7f060009;
@@ -241,154 +249,157 @@ containing a value of this type.
         public static final int wings=0x7f020057;
     }
     public static final class id {
-        public static final int Button_register_now=0x7f0b001e;
-        public static final int agility_species_attribute_view=0x7f0b0086;
-        public static final int buttonChat=0x7f0b001a;
-        public static final int buttonInvitePlayer=0x7f0b000c;
-        public static final int buttonStartGameWithFriends=0x7f0b000e;
-        public static final int button_Login=0x7f0b0004;
-        public static final int button_create_Onlinegame=0x7f0b0008;
-        public static final int button_create_species_start_game=0x7f0b0027;
-        public static final int button_fragment_skill_dialog_show_changes=0x7f0b005f;
-        public static final int button_fragment_skill_dialog_skill=0x7f0b0065;
-        public static final int button_game_activity_species_skill=0x7f0b0083;
-        public static final int button_game_end_forward=0x7f0b0050;
-        public static final int button_go_online=0x7f0b0005;
-        public static final int button_logout=0x7f0b000a;
-        public static final int button_play_online=0x7f0b0007;
-        public static final int button_register=0x7f0b0003;
-        public static final int button_select_world_planet1=0x7f0b0078;
-        public static final int button_select_world_planet2=0x7f0b007a;
-        public static final int button_select_world_planet3=0x7f0b0079;
-        public static final int button_select_world_planet4=0x7f0b007b;
-        public static final int button_select_world_random_generate=0x7f0b007c;
-        public static final int button_skill_element_view=0x7f0b0084;
-        public static final int checkBox1rdy=0x7f0b006d;
-        public static final int checkBox2rdy=0x7f0b006f;
-        public static final int checkBox3rdy=0x7f0b0071;
-        public static final int checkBox4rdy=0x7f0b0073;
-        public static final int checkBoxPlayer2Rdy=0x7f0b0011;
-        public static final int checkBoxPlayer3Rdy=0x7f0b0014;
-        public static final int checkBoxPlayer4Rdy=0x7f0b0017;
-        public static final int checkBoxSaveUsername=0x7f0b0002;
-        public static final int editTextChatMsg=0x7f0b0019;
-        public static final int editTextInvitePlayer=0x7f0b000b;
-        public static final int editText_LoginName=0x7f0b0000;
-        public static final int editText_PassWd=0x7f0b0001;
-        public static final int editText_register_passWd=0x7f0b001c;
-        public static final int editText_register_passWd_confirm=0x7f0b001d;
-        public static final int editText_register_username=0x7f0b001b;
-        public static final int edit_text_create_species_name=0x7f0b0026;
-        public static final int explanations_button_startmenu=0x7f0b0024;
-        public static final int image_button_create_species_minus_agility=0x7f0b002c;
-        public static final int image_button_create_species_minus_intelligence=0x7f0b002a;
-        public static final int image_button_create_species_minus_procreation=0x7f0b0032;
-        public static final int image_button_create_species_minus_social=0x7f0b0030;
-        public static final int image_button_create_species_minus_strength=0x7f0b002e;
-        public static final int image_button_create_species_plus_agility=0x7f0b002b;
-        public static final int image_button_create_species_plus_intelligence=0x7f0b0029;
-        public static final int image_button_create_species_plus_procreation=0x7f0b0031;
-        public static final int image_button_create_species_plus_social=0x7f0b002f;
-        public static final int image_button_create_species_plus_strength=0x7f0b002d;
-        public static final int image_button_create_species_question_mark_carnivore=0x7f0b003a;
-        public static final int image_button_create_species_question_mark_fur=0x7f0b0043;
-        public static final int image_button_create_species_question_mark_landwater=0x7f0b0037;
-        public static final int image_button_create_species_question_mark_rkstrategist=0x7f0b0040;
-        public static final int image_button_create_species_question_mark_sceleton=0x7f0b003d;
-        public static final int image_view_movement_view=0x7f0b0074;
-        public static final int image_view_resource_demand_view=0x7f0b0076;
-        public static final int intelligence_species_attribute_view=0x7f0b0085;
-        public static final int left_container_ll_startmenu=0x7f0b001f;
-        public static final int linear_layout_fragment_skill_tree_container=0x7f0b0068;
-        public static final int linear_layout_population_graph_to_add=0x7f0b0075;
-        public static final int linear_layout_skill_ability=0x7f0b0053;
-        public static final int linear_layout_skill_body=0x7f0b0058;
-        public static final int linear_layout_skill_head=0x7f0b0055;
-        public static final int linear_layout_skill_left_body=0x7f0b0057;
-        public static final int linear_layout_skill_left_head=0x7f0b0054;
-        public static final int linear_layout_skill_left_legs=0x7f0b005a;
-        public static final int linear_layout_skill_legs=0x7f0b005b;
-        public static final int linear_layout_skill_right_body=0x7f0b0059;
-        public static final int linear_layout_skill_right_head=0x7f0b0056;
-        public static final int linear_layout_skill_right_legs=0x7f0b005c;
-        public static final int linear_layout_species_overview_player_color=0x7f0b008b;
-        public static final int ll_fragment_skill_body_fragment_container=0x7f0b005d;
-        public static final int map_holder_rl=0x7f0b007d;
-        public static final int movement_view_skill_dialog=0x7f0b0063;
-        public static final int movement_view_species_overview=0x7f0b008c;
-        public static final int multiplayer_simulation_button_startmenu=0x7f0b0022;
-        public static final int pager_overview=0x7f0b0069;
-        public static final int pager_skill=0x7f0b0066;
-        public static final int pager_title_strip_overview=0x7f0b006a;
-        public static final int pager_title_strip_skill=0x7f0b0067;
-        public static final int population_graph_game_end=0x7f0b004f;
-        public static final int population_graph_overview=0x7f0b0090;
-        public static final int progressBar1=0x7f0b0025;
-        public static final int radio_button_create_species_carnivore=0x7f0b0038;
-        public static final int radio_button_create_species_endoskeleton=0x7f0b003b;
-        public static final int radio_button_create_species_exoskeleton=0x7f0b003c;
-        public static final int radio_button_create_species_herbivore=0x7f0b0039;
-        public static final int radio_button_create_species_kstrategist=0x7f0b003f;
-        public static final int radio_button_create_species_land=0x7f0b0035;
-        public static final int radio_button_create_species_rstrategist=0x7f0b003e;
-        public static final int radio_button_create_species_thick_fur=0x7f0b0042;
-        public static final int radio_button_create_species_thin_fur=0x7f0b0041;
-        public static final int radio_button_create_species_water=0x7f0b0036;
-        public static final int recreation_relative_layout_species_attribute_view=0x7f0b0089;
-        public static final int recreation_species_attribute_view=0x7f0b008a;
-        public static final int resource_demand_view_fragment_skill_dialog=0x7f0b0062;
-        public static final int resource_view_species_overview=0x7f0b008d;
-        public static final int right_container_ll_startmenu=0x7f0b0020;
-        public static final int social_species_attribute_view=0x7f0b0088;
-        public static final int species_attribute_view_create_species=0x7f0b0044;
-        public static final int species_attribute_view_fragment_skill_dialog=0x7f0b0064;
-        public static final int species_attribute_view_overview=0x7f0b0091;
-        public static final int speciesoverview_button_simulation_layout=0x7f0b007e;
-        public static final int spinnerPlayer2=0x7f0b000f;
-        public static final int spinnerPlayer3=0x7f0b0012;
-        public static final int spinnerPlayer4=0x7f0b0015;
-        public static final int start_simulation_button_startmenu_neu=0x7f0b0021;
-        public static final int statistics_button_startmenu=0x7f0b0023;
-        public static final int strength_species_attribute_view=0x7f0b0087;
-        public static final int temperature_view_area_information=0x7f0b004b;
-        public static final int temperature_view_create_species=0x7f0b0028;
-        public static final int temperature_view_fragment_skill_dialog=0x7f0b0061;
-        public static final int temperature_view_tab_element_overview=0x7f0b008e;
-        public static final int textSp1W8=0x7f0b006c;
-        public static final int textSp2W8=0x7f0b006e;
-        public static final int textSp3W8=0x7f0b0070;
-        public static final int textSp4W8=0x7f0b0072;
-        public static final int textView1=0x7f0b006b;
-        public static final int textViewChat=0x7f0b0018;
-        public static final int textViewPlayer1=0x7f0b000d;
-        public static final int textViewPlayer2=0x7f0b0010;
-        public static final int textViewPlayer3=0x7f0b0013;
-        public static final int textViewPlayer4=0x7f0b0016;
-        public static final int textViewUsername=0x7f0b0006;
-        public static final int textView_search_opponent=0x7f0b0009;
-        public static final int text_view_area_information_enemies=0x7f0b0049;
-        public static final int text_view_area_information_enemies_title=0x7f0b0048;
-        public static final int text_view_area_information_fieldtype=0x7f0b0045;
-        public static final int text_view_area_information_population=0x7f0b004a;
-        public static final int text_view_area_information_ressources=0x7f0b0047;
-        public static final int text_view_area_information_ressources_title=0x7f0b0046;
-        public static final int text_view_create_species_points_left_number=0x7f0b0034;
-        public static final int text_view_create_species_points_left_text=0x7f0b0033;
-        public static final int text_view_fragment_skill_dialog_desc=0x7f0b0060;
-        public static final int text_view_fragment_skill_dialog_name_skill=0x7f0b005e;
-        public static final int text_view_game_end_population=0x7f0b004e;
-        public static final int text_view_game_end_score=0x7f0b004d;
-        public static final int text_view_game_end_title=0x7f0b004c;
-        public static final int text_view_information_dialog_desc=0x7f0b0052;
-        public static final int text_view_information_dialog_title=0x7f0b0051;
-        public static final int text_view_max_temp_temperature_view=0x7f0b0093;
-        public static final int text_view_min_temp_temperature_view=0x7f0b0092;
-        public static final int text_view_resource_demand_view=0x7f0b0077;
-        public static final int text_view_simulation_layout_current_pop=0x7f0b0082;
-        public static final int text_view_simulation_layout_current_selection=0x7f0b0081;
-        public static final int text_view_simulation_layout_points=0x7f0b0080;
-        public static final int text_view_simulation_layout_time=0x7f0b007f;
-        public static final int textview_tab_element_overview_population=0x7f0b008f;
+        public static final int Button_register_now=0x7f0b0020;
+        public static final int agility_species_attribute_view=0x7f0b0089;
+        public static final int buttonChat=0x7f0b001c;
+        public static final int buttonInvitePlayer=0x7f0b000e;
+        public static final int buttonStartGameWithFriends=0x7f0b0010;
+        public static final int button_Login=0x7f0b0006;
+        public static final int button_create_Onlinegame=0x7f0b000a;
+        public static final int button_create_species_start_game=0x7f0b0029;
+        public static final int button_fragment_skill_dialog_show_changes=0x7f0b0062;
+        public static final int button_fragment_skill_dialog_skill=0x7f0b0068;
+        public static final int button_game_activity_species_skill=0x7f0b0086;
+        public static final int button_game_end_forward=0x7f0b0052;
+        public static final int button_go_online=0x7f0b0007;
+        public static final int button_logout=0x7f0b000c;
+        public static final int button_play_online=0x7f0b0009;
+        public static final int button_register=0x7f0b0005;
+        public static final int button_select_world_planet1=0x7f0b007b;
+        public static final int button_select_world_planet2=0x7f0b007d;
+        public static final int button_select_world_planet3=0x7f0b007c;
+        public static final int button_select_world_planet4=0x7f0b007e;
+        public static final int button_select_world_random_generate=0x7f0b007f;
+        public static final int button_skill_element_view=0x7f0b0087;
+        public static final int checkBox1rdy=0x7f0b0070;
+        public static final int checkBox2rdy=0x7f0b0072;
+        public static final int checkBox3rdy=0x7f0b0074;
+        public static final int checkBox4rdy=0x7f0b0076;
+        public static final int checkBoxPlayer2Rdy=0x7f0b0013;
+        public static final int checkBoxPlayer3Rdy=0x7f0b0016;
+        public static final int checkBoxPlayer4Rdy=0x7f0b0019;
+        public static final int checkBoxSaveUsername=0x7f0b0004;
+        public static final int editTextChatMsg=0x7f0b001b;
+        public static final int editTextInvitePlayer=0x7f0b000d;
+        public static final int editText_LoginName=0x7f0b0002;
+        public static final int editText_PassWd=0x7f0b0003;
+        public static final int editText_register_passWd=0x7f0b001e;
+        public static final int editText_register_passWd_confirm=0x7f0b001f;
+        public static final int editText_register_username=0x7f0b001d;
+        public static final int edit_text_create_species_name=0x7f0b0028;
+        public static final int explanations_button_startmenu=0x7f0b0026;
+        public static final int image_button_create_species_minus_agility=0x7f0b002e;
+        public static final int image_button_create_species_minus_intelligence=0x7f0b002c;
+        public static final int image_button_create_species_minus_procreation=0x7f0b0034;
+        public static final int image_button_create_species_minus_social=0x7f0b0032;
+        public static final int image_button_create_species_minus_strength=0x7f0b0030;
+        public static final int image_button_create_species_plus_agility=0x7f0b002d;
+        public static final int image_button_create_species_plus_intelligence=0x7f0b002b;
+        public static final int image_button_create_species_plus_procreation=0x7f0b0033;
+        public static final int image_button_create_species_plus_social=0x7f0b0031;
+        public static final int image_button_create_species_plus_strength=0x7f0b002f;
+        public static final int image_button_create_species_question_mark_carnivore=0x7f0b003c;
+        public static final int image_button_create_species_question_mark_fur=0x7f0b0045;
+        public static final int image_button_create_species_question_mark_landwater=0x7f0b0039;
+        public static final int image_button_create_species_question_mark_rkstrategist=0x7f0b0042;
+        public static final int image_button_create_species_question_mark_sceleton=0x7f0b003f;
+        public static final int image_view_movement_view=0x7f0b0077;
+        public static final int image_view_resource_demand_view=0x7f0b0079;
+        public static final int intelligence_species_attribute_view=0x7f0b0088;
+        public static final int left_container_ll_startmenu=0x7f0b0021;
+        public static final int linear_layout_fragment_skill_tree_container=0x7f0b006b;
+        public static final int linear_layout_how_to_container=0x7f0b0000;
+        public static final int linear_layout_population_graph_to_add=0x7f0b0078;
+        public static final int linear_layout_skill_ability=0x7f0b0056;
+        public static final int linear_layout_skill_body=0x7f0b005b;
+        public static final int linear_layout_skill_head=0x7f0b0058;
+        public static final int linear_layout_skill_left_body=0x7f0b005a;
+        public static final int linear_layout_skill_left_head=0x7f0b0057;
+        public static final int linear_layout_skill_left_legs=0x7f0b005d;
+        public static final int linear_layout_skill_legs=0x7f0b005e;
+        public static final int linear_layout_skill_right_body=0x7f0b005c;
+        public static final int linear_layout_skill_right_head=0x7f0b0059;
+        public static final int linear_layout_skill_right_legs=0x7f0b005f;
+        public static final int linear_layout_species_overview_player_color=0x7f0b008e;
+        public static final int ll_fragment_skill_body_fragment_container=0x7f0b0060;
+        public static final int map_holder_rl=0x7f0b0080;
+        public static final int movement_view_skill_dialog=0x7f0b0066;
+        public static final int movement_view_species_overview=0x7f0b008f;
+        public static final int multiplayer_simulation_button_startmenu=0x7f0b0024;
+        public static final int pager_how_to=0x7f0b0001;
+        public static final int pager_overview=0x7f0b006c;
+        public static final int pager_skill=0x7f0b0069;
+        public static final int pager_title_strip_overview=0x7f0b006d;
+        public static final int pager_title_strip_skill=0x7f0b006a;
+        public static final int population_graph_game_end=0x7f0b0051;
+        public static final int population_graph_overview=0x7f0b0093;
+        public static final int progressBar1=0x7f0b0027;
+        public static final int radio_button_create_species_carnivore=0x7f0b003a;
+        public static final int radio_button_create_species_endoskeleton=0x7f0b003d;
+        public static final int radio_button_create_species_exoskeleton=0x7f0b003e;
+        public static final int radio_button_create_species_herbivore=0x7f0b003b;
+        public static final int radio_button_create_species_kstrategist=0x7f0b0041;
+        public static final int radio_button_create_species_land=0x7f0b0037;
+        public static final int radio_button_create_species_rstrategist=0x7f0b0040;
+        public static final int radio_button_create_species_thick_fur=0x7f0b0044;
+        public static final int radio_button_create_species_thin_fur=0x7f0b0043;
+        public static final int radio_button_create_species_water=0x7f0b0038;
+        public static final int recreation_relative_layout_species_attribute_view=0x7f0b008c;
+        public static final int recreation_species_attribute_view=0x7f0b008d;
+        public static final int resource_demand_view_fragment_skill_dialog=0x7f0b0065;
+        public static final int resource_view_species_overview=0x7f0b0090;
+        public static final int right_container_ll_startmenu=0x7f0b0022;
+        public static final int social_species_attribute_view=0x7f0b008b;
+        public static final int species_attribute_view_create_species=0x7f0b0046;
+        public static final int species_attribute_view_fragment_skill_dialog=0x7f0b0067;
+        public static final int species_attribute_view_how_to=0x7f0b0053;
+        public static final int species_attribute_view_overview=0x7f0b0094;
+        public static final int speciesoverview_button_simulation_layout=0x7f0b0081;
+        public static final int spinnerPlayer2=0x7f0b0011;
+        public static final int spinnerPlayer3=0x7f0b0014;
+        public static final int spinnerPlayer4=0x7f0b0017;
+        public static final int start_simulation_button_startmenu_neu=0x7f0b0023;
+        public static final int statistics_button_startmenu=0x7f0b0025;
+        public static final int strength_species_attribute_view=0x7f0b008a;
+        public static final int temperature_view_area_information=0x7f0b004d;
+        public static final int temperature_view_create_species=0x7f0b002a;
+        public static final int temperature_view_fragment_skill_dialog=0x7f0b0064;
+        public static final int temperature_view_tab_element_overview=0x7f0b0091;
+        public static final int textSp1W8=0x7f0b006f;
+        public static final int textSp2W8=0x7f0b0071;
+        public static final int textSp3W8=0x7f0b0073;
+        public static final int textSp4W8=0x7f0b0075;
+        public static final int textView1=0x7f0b006e;
+        public static final int textViewChat=0x7f0b001a;
+        public static final int textViewPlayer1=0x7f0b000f;
+        public static final int textViewPlayer2=0x7f0b0012;
+        public static final int textViewPlayer3=0x7f0b0015;
+        public static final int textViewPlayer4=0x7f0b0018;
+        public static final int textViewUsername=0x7f0b0008;
+        public static final int textView_search_opponent=0x7f0b000b;
+        public static final int text_view_area_information_enemies=0x7f0b004b;
+        public static final int text_view_area_information_enemies_title=0x7f0b004a;
+        public static final int text_view_area_information_fieldtype=0x7f0b0047;
+        public static final int text_view_area_information_population=0x7f0b004c;
+        public static final int text_view_area_information_ressources=0x7f0b0049;
+        public static final int text_view_area_information_ressources_title=0x7f0b0048;
+        public static final int text_view_create_species_points_left_number=0x7f0b0036;
+        public static final int text_view_create_species_points_left_text=0x7f0b0035;
+        public static final int text_view_fragment_skill_dialog_desc=0x7f0b0063;
+        public static final int text_view_fragment_skill_dialog_name_skill=0x7f0b0061;
+        public static final int text_view_game_end_population=0x7f0b0050;
+        public static final int text_view_game_end_score=0x7f0b004f;
+        public static final int text_view_game_end_title=0x7f0b004e;
+        public static final int text_view_information_dialog_desc=0x7f0b0055;
+        public static final int text_view_information_dialog_title=0x7f0b0054;
+        public static final int text_view_max_temp_temperature_view=0x7f0b0096;
+        public static final int text_view_min_temp_temperature_view=0x7f0b0095;
+        public static final int text_view_resource_demand_view=0x7f0b007a;
+        public static final int text_view_simulation_layout_current_pop=0x7f0b0085;
+        public static final int text_view_simulation_layout_current_selection=0x7f0b0084;
+        public static final int text_view_simulation_layout_points=0x7f0b0083;
+        public static final int text_view_simulation_layout_time=0x7f0b0082;
+        public static final int textview_tab_element_overview_population=0x7f0b0092;
     }
     public static final class integer {
         public static final int GamePort=0x7f050003;
@@ -397,33 +408,37 @@ containing a value of this type.
         public static final int RegisterPort=0x7f050000;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_online=0x7f030002;
-        public static final int activity_online_create_game=0x7f030003;
-        public static final int activity_register=0x7f030004;
-        public static final int activity_start_menu=0x7f030005;
-        public static final int activity_wait=0x7f030006;
-        public static final int create_species=0x7f030007;
-        public static final int fragment_area_information=0x7f030008;
-        public static final int fragment_game_end=0x7f030009;
-        public static final int fragment_information_dialog=0x7f03000a;
-        public static final int fragment_skill_ability=0x7f03000b;
-        public static final int fragment_skill_body=0x7f03000c;
-        public static final int fragment_skill_dialog=0x7f03000d;
-        public static final int fragment_skill_species=0x7f03000e;
-        public static final int fragment_skill_tree=0x7f03000f;
-        public static final int fragment_species_overview=0x7f030010;
-        public static final int fragment_wait_species=0x7f030011;
-        public static final int movement_view=0x7f030012;
-        public static final int population_graph=0x7f030013;
-        public static final int resource_demand_view=0x7f030014;
-        public static final int select_world=0x7f030015;
-        public static final int simulation_layout=0x7f030016;
-        public static final int skill_element_view=0x7f030017;
-        public static final int species_attribute_view=0x7f030018;
-        public static final int tab_element_overview=0x7f030019;
-        public static final int temperature_view=0x7f03001a;
+        public static final int activity_how_to=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_online=0x7f030003;
+        public static final int activity_online_create_game=0x7f030004;
+        public static final int activity_register=0x7f030005;
+        public static final int activity_start_menu=0x7f030006;
+        public static final int activity_wait=0x7f030007;
+        public static final int create_species=0x7f030008;
+        public static final int fragment_area_information=0x7f030009;
+        public static final int fragment_game_end=0x7f03000a;
+        public static final int fragment_how_to_element_1=0x7f03000b;
+        public static final int fragment_how_to_element_2=0x7f03000c;
+        public static final int fragment_how_to_element_zero=0x7f03000d;
+        public static final int fragment_information_dialog=0x7f03000e;
+        public static final int fragment_skill_ability=0x7f03000f;
+        public static final int fragment_skill_body=0x7f030010;
+        public static final int fragment_skill_dialog=0x7f030011;
+        public static final int fragment_skill_species=0x7f030012;
+        public static final int fragment_skill_tree=0x7f030013;
+        public static final int fragment_species_overview=0x7f030014;
+        public static final int fragment_wait_species=0x7f030015;
+        public static final int movement_view=0x7f030016;
+        public static final int population_graph=0x7f030017;
+        public static final int resource_demand_view=0x7f030018;
+        public static final int select_world=0x7f030019;
+        public static final int simulation_layout=0x7f03001a;
+        public static final int skill_element_view=0x7f03001b;
+        public static final int species_attribute_view=0x7f03001c;
+        public static final int tab_element_overview=0x7f03001d;
+        public static final int temperature_view=0x7f03001e;
     }
     public static final class raw {
         public static final int map1=0x7f040000;
@@ -433,29 +448,29 @@ containing a value of this type.
     }
     public static final class string {
         public static final int action_settings=0x7f080003;
-        public static final int addplayer=0x7f08004a;
-        public static final int agilitytail=0x7f080089;
-        public static final int agilitytaildesc=0x7f08008a;
+        public static final int addplayer=0x7f0800bd;
+        public static final int agilitytail=0x7f08008e;
+        public static final int agilitytaildesc=0x7f08008f;
         public static final int already_bought_dialog=0x7f080029;
         public static final int app_name=0x7f080001;
         /**  skill strings 
          */
-        public static final int battlewings=0x7f08005d;
-        public static final int battlewingsdesc=0x7f08005e;
-        public static final int bettermuscles=0x7f08005f;
-        public static final int bettermusclesdesc=0x7f080060;
-        public static final int brain=0x7f080061;
-        public static final int braindesc=0x7f080062;
+        public static final int battlewings=0x7f080062;
+        public static final int battlewingsdesc=0x7f080063;
+        public static final int bettermuscles=0x7f080064;
+        public static final int bettermusclesdesc=0x7f080065;
+        public static final int brain=0x7f080066;
+        public static final int braindesc=0x7f080067;
         public static final int carnivore_desc=0x7f08003a;
         public static final int carnivore_title=0x7f080039;
-        public static final int centralnervsystem=0x7f080063;
-        public static final int centralnervsystemdesc=0x7f080064;
-        public static final int clawarm=0x7f080065;
-        public static final int clawarmdesc=0x7f080066;
-        public static final int climaticchange=0x7f08004d;
-        public static final int climaticchangedesc=0x7f080054;
-        public static final int complextendonstructur=0x7f080067;
-        public static final int complextendonstructurdesc=0x7f080068;
+        public static final int centralnervsystem=0x7f080068;
+        public static final int centralnervsystemdesc=0x7f080069;
+        public static final int clawarm=0x7f08006a;
+        public static final int clawarmdesc=0x7f08006b;
+        public static final int climaticchange=0x7f080048;
+        public static final int climaticchangedesc=0x7f08004f;
+        public static final int complextendonstructur=0x7f08006c;
+        public static final int complextendonstructurdesc=0x7f08006d;
         public static final int create_species_button_play=0x7f08001d;
         public static final int create_species_carnivore=0x7f080015;
         public static final int create_species_endo_skeleton=0x7f080017;
@@ -468,94 +483,104 @@ containing a value of this type.
         public static final int create_species_thick_fur=0x7f08001c;
         public static final int create_species_thin_fur=0x7f08001b;
         public static final int create_species_water=0x7f080013;
-        public static final int decotail=0x7f080069;
-        public static final int decotaildesc=0x7f08006a;
+        public static final int decotail=0x7f08006e;
+        public static final int decotaildesc=0x7f08006f;
         public static final int delimiterint=0x7f080008;
         public static final int desert=0x7f08002f;
-        public static final int dragonscale=0x7f08006b;
-        public static final int dragonscaledesc=0x7f08006c;
+        public static final int dragonscale=0x7f080070;
+        public static final int dragonscaledesc=0x7f080071;
         public static final int evolutionpoints=0x7f080047;
         public static final int explanation=0x7f080009;
-        public static final int extremityarm=0x7f08006d;
-        public static final int extremityarmdesc=0x7f08006e;
-        public static final int extremityleg=0x7f08006f;
-        public static final int extremitylegdesc=0x7f080070;
-        public static final int eyes=0x7f080071;
-        public static final int eyesdesc=0x7f080072;
-        public static final int fatlayer=0x7f080075;
-        public static final int fatlayerdesc=0x7f080076;
-        public static final int fighttail=0x7f080073;
-        public static final int fighttaildesc=0x7f080074;
-        public static final int finextr=0x7f080077;
-        public static final int finextrdesc=0x7f080078;
-        public static final int fire=0x7f08007d;
-        public static final int firedesc=0x7f08007e;
-        public static final int flywings=0x7f080079;
-        public static final int flywingsdesc=0x7f08007a;
-        public static final int footarm=0x7f08007b;
-        public static final int footarmdesc=0x7f08007c;
-        public static final int footleg=0x7f08007f;
-        public static final int footlegdesc=0x7f080080;
+        public static final int extremityarm=0x7f080072;
+        public static final int extremityarmdesc=0x7f080073;
+        public static final int extremityleg=0x7f080074;
+        public static final int extremitylegdesc=0x7f080075;
+        public static final int eyes=0x7f080076;
+        public static final int eyesdesc=0x7f080077;
+        public static final int fatlayer=0x7f08007a;
+        public static final int fatlayerdesc=0x7f08007b;
+        public static final int fighttail=0x7f080078;
+        public static final int fighttaildesc=0x7f080079;
+        public static final int finextr=0x7f08007c;
+        public static final int finextrdesc=0x7f08007d;
+        public static final int fire=0x7f080082;
+        public static final int firedesc=0x7f080083;
+        public static final int flywings=0x7f08007e;
+        public static final int flywingsdesc=0x7f08007f;
+        public static final int footarm=0x7f080080;
+        public static final int footarmdesc=0x7f080081;
+        public static final int footleg=0x7f080084;
+        public static final int footlegdesc=0x7f080085;
         public static final int fragment_skill_dialog_change_button=0x7f080027;
         public static final int fragment_skill_dialog_change_button_back=0x7f080028;
-        public static final int frontal_lobe=0x7f080081;
-        public static final int frontal_lobedesc=0x7f080082;
+        public static final int frontal_lobe=0x7f080086;
+        public static final int frontal_lobedesc=0x7f080087;
         public static final int fur_desc=0x7f080040;
         public static final int fur_title=0x7f08003f;
-        public static final int furlessskin=0x7f080083;
-        public static final int furlessskindesc=0x7f080084;
+        public static final int furlessskin=0x7f080088;
+        public static final int furlessskindesc=0x7f080089;
         public static final int gameendgoon=0x7f080046;
-        public static final int genital=0x7f080085;
-        public static final int genitaldesc=0x7f080086;
-        public static final int gills=0x7f080087;
-        public static final int gillsdesc=0x7f080088;
-        public static final int handarm=0x7f08008b;
-        public static final int handarmdesc=0x7f08008c;
-        public static final int handleg=0x7f08008d;
-        public static final int handlegdesc=0x7f08008e;
+        public static final int genital=0x7f08008a;
+        public static final int genitaldesc=0x7f08008b;
+        public static final int gills=0x7f08008c;
+        public static final int gillsdesc=0x7f08008d;
+        public static final int handarm=0x7f080090;
+        public static final int handarmdesc=0x7f080091;
+        public static final int handleg=0x7f080092;
+        public static final int handlegdesc=0x7f080093;
         public static final int hello_world=0x7f080002;
-        public static final int hintchat=0x7f08004b;
+        public static final int hintchat=0x7f0800be;
         public static final int host=0x7f080000;
+        public static final int how_to_agility=0x7f08005a;
+        public static final int how_to_description_game=0x7f08005e;
+        public static final int how_to_element_one_title=0x7f080058;
+        public static final int how_to_intelligence=0x7f080059;
+        public static final int how_to_movement=0x7f080060;
+        public static final int how_to_procreation=0x7f08005d;
+        public static final int how_to_resource_demand=0x7f08005f;
+        public static final int how_to_social=0x7f08005c;
+        public static final int how_to_strength=0x7f08005b;
+        public static final int how_to_temperature=0x7f080061;
         public static final int ice=0x7f080031;
-        public static final int iceage=0x7f08004f;
-        public static final int iceagedesc=0x7f080056;
+        public static final int iceage=0x7f08004a;
+        public static final int iceagedesc=0x7f080051;
         public static final int jungle=0x7f080032;
-        public static final int kidscheme=0x7f08008f;
-        public static final int kidschemedesc=0x7f080090;
+        public static final int kidscheme=0x7f080094;
+        public static final int kidschemedesc=0x7f080095;
         public static final int land=0x7f080033;
         public static final int land_water_desc=0x7f080038;
         public static final int land_water_title=0x7f080037;
-        public static final int language=0x7f080091;
-        public static final int languagedesc=0x7f080092;
-        public static final int leatherskin=0x7f080093;
-        public static final int leatherskindesc=0x7f080094;
-        public static final int limbic=0x7f080095;
-        public static final int limbicdesc=0x7f080096;
-        public static final int logic=0x7f080097;
-        public static final int logicdesc=0x7f080098;
-        public static final int maverick=0x7f080099;
-        public static final int maverickdesc=0x7f08009a;
-        public static final int meteorite=0x7f08004e;
-        public static final int meteoritedesc=0x7f080055;
-        public static final int monogamy=0x7f08009b;
-        public static final int monogamydesc=0x7f08009c;
+        public static final int language=0x7f080096;
+        public static final int languagedesc=0x7f080097;
+        public static final int leatherskin=0x7f080098;
+        public static final int leatherskindesc=0x7f080099;
+        public static final int limbic=0x7f08009a;
+        public static final int limbicdesc=0x7f08009b;
+        public static final int logic=0x7f08009c;
+        public static final int logicdesc=0x7f08009d;
+        public static final int maverick=0x7f08009e;
+        public static final int maverickdesc=0x7f08009f;
+        public static final int meteorite=0x7f080049;
+        public static final int meteoritedesc=0x7f080050;
+        public static final int monogamy=0x7f0800a0;
+        public static final int monogamydesc=0x7f0800a1;
         public static final int multiplayer_start_menu=0x7f080006;
-        public static final int name_not_allowed=0x7f080049;
+        public static final int name_not_allowed=0x7f0800bc;
         public static final int natural_enemies=0x7f08002d;
         /**  network strings 
          */
-        public static final int noConnection=0x7f0800b5;
-        public static final int packanimal=0x7f08009d;
-        public static final int packanimaldesc=0x7f08009e;
+        public static final int noConnection=0x7f0800ba;
+        public static final int packanimal=0x7f0800a2;
+        public static final int packanimaldesc=0x7f0800a3;
         public static final int password=0x7f080042;
         public static final int passwordconfirm=0x7f080043;
-        public static final int pheromons=0x7f08009f;
-        public static final int pheromonsdesc=0x7f0800a0;
+        public static final int pheromons=0x7f0800a4;
+        public static final int pheromonsdesc=0x7f0800a5;
         public static final int points=0x7f080011;
-        public static final int polygamy=0x7f0800b3;
-        public static final int polygamydesc=0x7f0800b4;
+        public static final int polygamy=0x7f0800b8;
+        public static final int polygamydesc=0x7f0800b9;
         public static final int population_string=0x7f08002c;
-        public static final int pwds_not_equal=0x7f080048;
+        public static final int pwds_not_equal=0x7f0800bb;
         public static final int random_generate_world=0x7f080004;
         public static final int res_dem_stat_1_str=0x7f080021;
         public static final int res_dem_stat_2_str=0x7f080022;
@@ -564,56 +589,56 @@ containing a value of this type.
         public static final int res_dem_stat_5_str=0x7f080025;
         public static final int res_dem_stat_6_str=0x7f080026;
         public static final int ressources=0x7f08002e;
-        public static final int secondgenital=0x7f0800a1;
-        public static final int secondgenitaldesc=0x7f0800a2;
+        public static final int secondgenital=0x7f0800a6;
+        public static final int secondgenitaldesc=0x7f0800a7;
         public static final int selectworld=0x7f08000b;
         public static final int selectworldfour=0x7f08000f;
         public static final int selectworldone=0x7f08000c;
         public static final int selectworldthree=0x7f08000e;
         public static final int selectworldtwo=0x7f08000d;
-        public static final int sendmessage=0x7f08004c;
-        public static final int settle=0x7f0800a3;
-        public static final int settledesc=0x7f0800a4;
-        public static final int sexualprocreation=0x7f0800a5;
-        public static final int sexualprocreationdesc=0x7f0800a6;
+        public static final int sendmessage=0x7f0800bf;
+        public static final int settle=0x7f0800a8;
+        public static final int settledesc=0x7f0800a9;
+        public static final int sexualprocreation=0x7f0800aa;
+        public static final int sexualprocreationdesc=0x7f0800ab;
         public static final int singleplayer_start_menu=0x7f080007;
         public static final int skeleton_desc=0x7f08003c;
         public static final int skeleton_title=0x7f08003b;
         public static final int skill_species=0x7f080036;
         public static final int species_overview=0x7f080035;
-        public static final int speciesdieddesc=0x7f08005c;
-        public static final int speciesdiedtitle=0x7f08005b;
-        public static final int spitfire=0x7f0800a7;
-        public static final int spitfiredesc=0x7f0800a8;
+        public static final int speciesdieddesc=0x7f080057;
+        public static final int speciesdiedtitle=0x7f080056;
+        public static final int spitfire=0x7f0800ac;
+        public static final int spitfiredesc=0x7f0800ad;
         public static final int strategist_desc=0x7f08003e;
         public static final int strategist_title=0x7f08003d;
-        public static final int sweat=0x7f0800a9;
-        public static final int sweatdesc=0x7f0800aa;
+        public static final int sweat=0x7f0800ae;
+        public static final int sweatdesc=0x7f0800af;
         public static final int tab_title_skill_abilities=0x7f080020;
         public static final int tab_title_skill_body=0x7f08001f;
-        public static final int tail=0x7f0800ab;
-        public static final int taildesc=0x7f0800ac;
+        public static final int tail=0x7f0800b0;
+        public static final int taildesc=0x7f0800b1;
         public static final int text_progress_dialog_update=0x7f08002b;
-        public static final int thumbs=0x7f0800ad;
-        public static final int thumbsdesc=0x7f0800ae;
+        public static final int thumbs=0x7f0800b2;
+        public static final int thumbsdesc=0x7f0800b3;
         public static final int time=0x7f080010;
         public static final int title_activity_create_species=0x7f080012;
         public static final int title_activity_game=0x7f080005;
         public static final int title_progress_dialog_update=0x7f08002a;
-        public static final int todesert=0x7f080050;
-        public static final int todesertdesc=0x7f080057;
-        public static final int tojungle=0x7f080051;
-        public static final int tojungledesc=0x7f080058;
-        public static final int toland=0x7f080052;
-        public static final int tolanddesc=0x7f080059;
-        public static final int towasser=0x7f080053;
-        public static final int towasserdesc=0x7f08005a;
-        public static final int ultrasound=0x7f0800af;
-        public static final int ultrasounddesc=0x7f0800b0;
+        public static final int todesert=0x7f08004b;
+        public static final int todesertdesc=0x7f080052;
+        public static final int tojungle=0x7f08004c;
+        public static final int tojungledesc=0x7f080053;
+        public static final int toland=0x7f08004d;
+        public static final int tolanddesc=0x7f080054;
+        public static final int towasser=0x7f08004e;
+        public static final int towasserdesc=0x7f080055;
+        public static final int ultrasound=0x7f0800b4;
+        public static final int ultrasounddesc=0x7f0800b5;
         public static final int username=0x7f080041;
         public static final int water=0x7f080030;
-        public static final int wing=0x7f0800b1;
-        public static final int wingdesc=0x7f0800b2;
+        public static final int wing=0x7f0800b6;
+        public static final int wingdesc=0x7f0800b7;
         public static final int world=0x7f080034;
         public static final int youlost=0x7f080045;
         public static final int yourname=0x7f08000a;
@@ -654,7 +679,7 @@ containing a value of this type.
            @see #MovementView_movement
          */
         public static final int[] MovementView = {
-            0x7f01000a
+            0x7f01000b
         };
         /**
           <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#movement}
@@ -681,7 +706,7 @@ containing a value of this type.
            @see #PopulationGraph_not
          */
         public static final int[] PopulationGraph = {
-            0x7f01000b
+            0x7f01000c
         };
         /**
           <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#not}
@@ -704,11 +729,13 @@ containing a value of this type.
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #ResourceDemandView_demand de.evonomy.evolution:demand}</code></td><td></td></tr>
+           <tr><td><code>{@link #ResourceDemandView_textSize de.evonomy.evolution:textSize}</code></td><td></td></tr>
            </table>
            @see #ResourceDemandView_demand
+           @see #ResourceDemandView_textSize
          */
         public static final int[] ResourceDemandView = {
-            0x7f010009
+            0x7f010009, 0x7f01000a
         };
         /**
           <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#demand}
@@ -724,6 +751,20 @@ containing a value of this type.
           @attr name de.evonomy.evolution:demand
         */
         public static final int ResourceDemandView_demand = 0;
+        /**
+          <p>This symbol is the offset where the {@link de.evonomy.evolution.R.attr#textSize}
+          attribute's value can be found in the {@link #ResourceDemandView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name de.evonomy.evolution:textSize
+        */
+        public static final int ResourceDemandView_textSize = 1;
         /** Attributes that can be used with a SpeciesAttributeView.
            <p>Includes the following attributes:</p>
            <table>

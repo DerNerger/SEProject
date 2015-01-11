@@ -18,15 +18,17 @@ public class Controller implements Runnable, Skillable{
 	private Lock qLock;
 	private Queue<Skill> skillQ;
 	private static final int waitTime = 1000; //in milliseconds!!!
+	private boolean load;
 	
 	
 
-	public Controller(Map map, Species[] species, IPlayer[] player) {
+	public Controller(Map map, Species[] species, IPlayer[] player, boolean load) {
 		this.map = map;
 		this.species = species;
 		this.player = player;
 		this.circumstancesGenerator = new CircumstancesGenerator();
 		this.skillQ = new LinkedList<>();
+		this.load = load;
 		qLock  = new ReentrantLock();
 	}
 
@@ -42,7 +44,8 @@ public class Controller implements Runnable, Skillable{
 		for(IPlayer p : player)
 			p.setMap(m);
 		
-		map.spawnSpecies();
+		if(!load)
+			map.spawnSpecies();
 		
 		//bradcast the species
 		for (int i = 0; i < species.length; i++) {

@@ -63,7 +63,6 @@ public class RegisterActivity extends Activity implements Observer{
 			
 			@Override
 			public void onClick(View v) {
-				setContentView(R.layout.activity_wait);
 				String username = editText_register_username.getText().toString();
 				String passWd = editText_register_passWd.getText().toString();
 				String passWdConfirm = editText_register_passWd_confirm.getText().toString();
@@ -71,7 +70,7 @@ public class RegisterActivity extends Activity implements Observer{
 					Toast.makeText(getApplicationContext(), getString(R.string.pwds_not_equal), Toast.LENGTH_LONG).show();
 					return;
 				}
-				if(username.contains(";") || username.equals("")){
+				if(username.contains(";") || username.equals("") || passWd.contains(";")){
 					Toast.makeText(getApplicationContext(), getString(R.string.name_not_allowed), Toast.LENGTH_LONG).show();
 					return;
 				}
@@ -81,6 +80,7 @@ public class RegisterActivity extends Activity implements Observer{
 					new Thread(registerConnection).start();
 				}
 				registerConnection.addObserver(usedInOnClickListener);
+				setContentView(R.layout.activity_wait);
 				registerConnection.register(username, passWd);
 			}
 		});

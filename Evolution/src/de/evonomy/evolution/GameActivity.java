@@ -165,7 +165,6 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 				public void run() {
 					if (informationDialog != null)
 						informationDialog.update();
-
 				}
 			});
 
@@ -533,7 +532,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		for (int i = 0; i < species.length; i++) {
 			copy[i] = new Species(species[i]);
 		}
-		Controller controller = new Controller(map, copy, player);
+		Controller controller = new Controller(map, copy, player, mapType == MapActivity.LOAD);
 		this.controller = controller;
 		controllerThread = new Thread(controller);
 		controllerThread.start();

@@ -22,7 +22,7 @@ public class ControllerTest {
 			player[i] = ai;
 		}
 		Map map = Map.fromRandom(200, 100, species, Map.getRandomFieldTypes());
-		Controller c = new Controller(map, species, player);
+		Controller c = new Controller(map, species, player, false);
 		
 		//start the test
 		//test the species
