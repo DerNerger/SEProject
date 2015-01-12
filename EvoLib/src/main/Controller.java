@@ -30,6 +30,11 @@ public class Controller implements Runnable, Skillable{
 		this.skillQ = new LinkedList<>();
 		this.load = load;
 		qLock  = new ReentrantLock();
+		//set the controller
+		for(IPlayer p : player){
+			p.setSkillable(this);
+		}
+			
 	}
 
 	@Override
@@ -81,10 +86,12 @@ public class Controller implements Runnable, Skillable{
 			map.simulateMigration();
 			changes.addAll(map.refreshMap());
 			
-			//simulate map-event
-			MapEvent event = circumstancesGenerator.generateMapEvent(map.getNumberOfAreas());
-			LinkedList<Change> circumstancesChanges = map.updateCircumstances(event);
-			changes.addAll(circumstancesChanges);
+			if(map.getYears() > 10000000){
+				//simulate map-event
+				MapEvent event = circumstancesGenerator.generateMapEvent(map.getNumberOfAreas());
+				LinkedList<Change> circumstancesChanges = map.updateCircumstances(event);
+				changes.addAll(circumstancesChanges);
+			}
 			
 			//get points and time
 			changes.addAll(map.getPointsAndTimeChange());

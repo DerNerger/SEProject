@@ -3,8 +3,8 @@ package main;
 import java.util.Random;
 
 public class PopulationAI extends Ai {
-	public PopulationAI(Skillable s, int playernumber) {
-		super(s, playernumber);
+	public PopulationAI(int playernumber) {
+		super(playernumber);
 		SimpleMapLogic.changeSpecies(species, PossibleUpdates.HERBIVORE);
 		species.setProcreation(species.getProcreation() + 7);
 		species.setAgility(species.getSocial() + 4);

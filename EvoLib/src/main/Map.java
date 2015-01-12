@@ -18,6 +18,7 @@ public class Map implements Serializable{
 
 	
 	private long years = 0;
+
 	private long[] mapPopulation;
 	private long[] mapPopulationDifference;
 	
@@ -471,5 +472,9 @@ public class Map implements Serializable{
 			if (f1.p > f2.p) return +1;
 			else return 0;
 		}
+	}
+	
+	public long getYears() {
+		return years;
 	}
 }
