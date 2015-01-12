@@ -14,4 +14,5 @@ public interface IPlayer {
 	void setMap(VisualMap map);
 	void onGameEnd(int winner, int[] points);
 	void youLose(int playerNumber);
+	void setSkillable(Skillable s);
 }

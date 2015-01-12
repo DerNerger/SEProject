@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class StrengthAI extends Ai {
 	
-	public StrengthAI(Skillable s, int playernumber) {
-		super(s, playernumber);
+	public StrengthAI(int playernumber) {
+		super(playernumber);
 		SimpleMapLogic.changeSpecies(species, PossibleUpdates.KSTRATEGIST);
 		SimpleMapLogic.changeSpecies(species, PossibleUpdates.THICKFUR);
 		species.setStrength(species.getStrength() + 10);

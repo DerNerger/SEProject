@@ -49,6 +49,7 @@ import de.evonomy.network.WaitForSpeciesFragment;
 
 public class GameActivity extends FragmentActivity implements IPlayer,
 		DialogOpenable {
+	
 	private int ACTUALICATIONTIME = 400;
 	private int ACTUALICATIONMAPTIME = 1000;
 
@@ -125,7 +126,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 			doNetworkShit(info, playerSpecies);
 		} else {
 			multiplayer = false;
-			species = Species.getAiSpecies(playerSpecies, controller);
+			species = Species.getAiSpecies(playerSpecies);
 			startController();
 		}
 //		actualizeThread.start();
@@ -535,7 +536,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		}
 		IPlayer[] player = new IPlayer[4];
 		for (int i = 1; i < player.length; i++) {
-			player[i] = Ai.getRandomAI(controller, i);
+			player[i] = Ai.getRandomAI(i);
 		}
 		player[0] = this;
 		// Create controller
@@ -922,13 +923,16 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	public void onSaveInstanceState(Bundle outState){
 		super.onSaveInstanceState(outState);
 		paused=true;
-		
 	}
+	
 	@Override
 	public void onRestoreInstanceState(Bundle outState){
 		super.onSaveInstanceState(outState);
 		paused=false;
-		
+	}
+	
+	public void setSkillable(Skillable s){
+		//Do not implement this
 	}
 }
 

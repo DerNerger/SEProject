@@ -84,9 +84,8 @@ public class Ai implements IPlayer{
 		return species;
 	}
 	
-	public Ai(Skillable skillable, int playernumber) {
+	public Ai(int playernumber) {
 		this.numUpdates = 0;
-		this.skillable = skillable;
 		this.species = SimpleMapLogic.getStandartSpecies("SupaComputa");
 		this.points = 10;
 		this.water = (new Random()).nextBoolean();
@@ -100,18 +99,23 @@ public class Ai implements IPlayer{
 		this.species = SimpleMapLogic.getStandartSpecies("DummaComputa");
 	}
 	
-	public static Ai getRandomAI(Skillable skillable, int playernumber) {
+	public static Ai getRandomAI(int playernumber) {
 		Random rnd = new Random();
 		double rnddouble = rnd.nextDouble();
 		if (rnddouble < .5) {
-			return new StrengthAI(skillable, playernumber);
+			return new StrengthAI(playernumber);
 		}
 		else {
-			return new PopulationAI(skillable, playernumber);
+			return new PopulationAI(playernumber);
 		}
 	}
 	
 	public static Ai getDummyAI() {
 		return new Ai();
+	}
+
+	@Override
+	public void setSkillable(Skillable s) {
+		this.skillable = s;
 	}
 }

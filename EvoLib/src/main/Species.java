@@ -208,11 +208,11 @@ public class Species implements Serializable{
 				movementChance, visibillity, water);
 	}
 	
-	public static Species[] getAiSpecies(Species player, Skillable controller){
+	public static Species[] getAiSpecies(Species player){
 		Species[] species = new Species[4];
-		Ai ai_1 = Ai.getRandomAI(controller, 1);
-		Ai ai_2 = Ai.getRandomAI(controller, 2);
-		Ai ai_3 = Ai.getRandomAI(controller, 3);
+		Ai ai_1 = Ai.getRandomAI(1);
+		Ai ai_2 = Ai.getRandomAI(2);
+		Ai ai_3 = Ai.getRandomAI(3);
 		species[0] = player;
 		species[1] = ai_1.getSpecies();
 		species[2] = ai_2.getSpecies();
