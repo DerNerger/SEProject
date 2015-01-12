@@ -146,5 +146,8 @@ public class Controller implements Runnable, Skillable{
 		for (int i = 0; i < player.length; i++) {
 			player[i] =  Ai.getDummyAI();
 		}
+		
+		Controller c = new Controller(map, species, player, false);
+		new Thread(c).start();
 	}
 }
