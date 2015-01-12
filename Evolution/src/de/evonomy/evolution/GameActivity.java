@@ -157,8 +157,9 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	public void changeVisibility(int x, int y) {
 		holder.getMapFields()[x][y].setVisible(true);
 	}
-
+	
 	public void changeAreaPopulation(int area, int[] population) {
+		//Log.e("Population", "changed area Population"+area);
 		holder.setAreaPopulation(area, population);
 		setAreaPopulation();
 		if (informationDialog != null) {

@@ -96,7 +96,7 @@ public class MapHolder {
 			for (int y = 0; y < NUMBEROFBLOCKSHEIGHT; y++) {
 				mapFields[x][y] = new FieldRect(x, y, heightPerBlock,
 						widthPerBlock, areasOfFields[x][y]);
-				mapFields[x][y].setVisible(false);
+				mapFields[x][y].setVisible(true);
 				// add to area
 				areas[mapFields[x][y].getArea()].addRect(mapFields[x][y]
 						.getRect());
@@ -167,28 +167,28 @@ public class MapHolder {
 		// punkte neue ausrechnen die auf einem feld angezeigt werden sollen
 		// daraus ein Array von Rects machen
 		mapFields[x][y].calculateSpeciesCircle(populations);
-		if (visibleFields.contains(mapFields[x][y]) || populations[0] == 0) return;
-		visibleFields.add(mapFields[x][y]);
-		int visi = species[0].getVisibillity();
-		LinkedList<FieldRect> queue = new LinkedList<FieldRect>();
-		queue.addLast(mapFields[x][y]);
-		while (!queue.isEmpty()) {
-			FieldRect f = queue.pop();
-			for (int i = -1; i <= 1; i++) {
-				for (int j = -1; j <= 1; j++) {
-					if (f.x + i < 0 || f.x + i >= NuMBEROFBLOCKSWIDTH
-							|| f.y + j < 0 || f.y + j >= NUMBEROFBLOCKSHEIGHT
-							|| mapFields[f.x + i][f.y + j].isVisible()) continue;
-					int dx = f.x + i - x;
-					int dy = f.y + j - y;
-					double distance = Math.sqrt(dx * dx + dy * dy);
-					if (distance < visi) {
-						queue.addLast(mapFields[f.x + i][f.y + j]);
-						mapFields[f.x + i][f.y + j].setVisible(true);
-					}
-				}
-			}
-		}
+//		if (visibleFields.contains(mapFields[x][y]) || populations[0] == 0) return;
+//		visibleFields.add(mapFields[x][y]);
+//		int visi = species[0].getVisibillity();
+//		LinkedList<FieldRect> queue = new LinkedList<FieldRect>();
+//		queue.addLast(mapFields[x][y]);
+//		while (!queue.isEmpty()) {
+//			FieldRect f = queue.pop();
+//			for (int i = -1; i <= 1; i++) {
+//				for (int j = -1; j <= 1; j++) {
+//					if (f.x + i < 0 || f.x + i >= NuMBEROFBLOCKSWIDTH
+//							|| f.y + j < 0 || f.y + j >= NUMBEROFBLOCKSHEIGHT
+//							|| mapFields[f.x + i][f.y + j].isVisible()) continue;
+//					int dx = f.x + i - x;
+//					int dy = f.y + j - y;
+//					double distance = Math.sqrt(dx * dx + dy * dy);
+//					if (distance < visi) {
+//						queue.addLast(mapFields[f.x + i][f.y + j]);
+//						mapFields[f.x + i][f.y + j].setVisible(true);
+//					}
+//				}
+//			}
+//		}
 	}
 
 	/**

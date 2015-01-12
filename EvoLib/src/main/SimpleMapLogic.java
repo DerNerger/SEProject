@@ -390,10 +390,10 @@ public class SimpleMapLogic implements IMapLogic {
 			s.setSocial(s.getSocial()+25);
 			break;
 		case ULTRASAOUND:
-			s.setVisibillity(s.getVisibillity()+5);
+			s.setVisibillity(s.getVisibillity()+20);
 			break;
 		case EYES:
-			s.setVisibillity(s.getVisibillity()+10);
+			s.setVisibillity(s.getVisibillity()+40);
 			break;
 		case LEATHERSKIN:
 			s.setMaxTemp(s.getMaxTemp()+2);
