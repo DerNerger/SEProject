@@ -26,6 +26,17 @@ public class SpeciesSkillInformation {
 		setLegs();
 		setAbilities();
 	}
+	public static LinkedList<SkillElement> getAllSkills(){
+		LinkedList<SkillElement> elements= new LinkedList<SkillElement>();
+		elements.addAll(abilities);
+		elements.addAll(arms);
+		elements.addAll(legs);
+		elements.addAll(body);
+		elements.addAll(head);
+		elements.addAll(nextToLegs);
+		elements.addAll(nextToHead);
+		return elements;
+	}
 
 	public static LinkedList<SkillElement> getLegSkills() {
 		return legs;
