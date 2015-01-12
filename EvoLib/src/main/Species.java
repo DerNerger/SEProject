@@ -85,6 +85,8 @@ public class Species implements Serializable{
 	}
 
 	public void setIntelligence(int intelligence) {
+		if(intelligence>100) intelligence=100;
+		if(intelligence<=0) intelligence=1;
 		this.intelligence = intelligence;
 	}
 
@@ -93,6 +95,8 @@ public class Species implements Serializable{
 	}
 
 	public void setAgility(int agility) {
+		if(agility>100) agility=100;
+		if(agility<=0) agility=1;
 		this.agility = agility;
 	}
 
@@ -101,6 +105,8 @@ public class Species implements Serializable{
 	}
 
 	public void setStrength(int strength) {
+		if(strength>100) strength=100;
+		if(strength<=0) strength=1;
 		this.strength = strength;
 	}
 
@@ -109,6 +115,8 @@ public class Species implements Serializable{
 	}
 
 	public void setSocial(int social) {
+		if(social>100) social=100;
+		if(social<=0) social=1;
 		this.social = social;
 	}
 
@@ -117,6 +125,8 @@ public class Species implements Serializable{
 	}
 
 	public void setProcreation(int procreation) {
+		if(procreation>100) procreation=100;
+		if(procreation<=0) procreation=1;
 		this.procreation = procreation;
 	}
 
@@ -125,6 +135,8 @@ public class Species implements Serializable{
 	}
 
 	public void setMinTemp(int minTemp) {
+		if(minTemp>100) minTemp=100;
+		if(minTemp<=-100) minTemp=-100;
 		this.minTemp = minTemp;
 	}
 
@@ -133,6 +145,8 @@ public class Species implements Serializable{
 	}
 
 	public void setMaxTemp(int maxTemp) {
+		if(maxTemp>100) maxTemp=100;
+		if(maxTemp<=-100) maxTemp=-100;
 		this.maxTemp = maxTemp;
 	}
 
@@ -141,6 +155,8 @@ public class Species implements Serializable{
 	}
 
 	public void setResourceDemand(int resourceDemand) {
+		if(resourceDemand>100) resourceDemand=100;
+		if(resourceDemand<=0) resourceDemand=1;
 		this.resourceDemand = resourceDemand;
 	}
 
@@ -149,6 +165,8 @@ public class Species implements Serializable{
 	}
 
 	public void setMovementChance(double movementChance) {
+		if(movementChance>1) movementChance=1;
+		if(movementChance<=0) movementChance=0.01;
 		this.movementChance = movementChance;
 	}
 
@@ -157,6 +175,8 @@ public class Species implements Serializable{
 	}
 
 	public void setVisibillity(int visibillity) {
+		if(visibillity>100) visibillity=100;
+		if(visibillity<=0) visibillity=1;
 		this.visibillity = visibillity;
 	}
 
@@ -169,6 +189,7 @@ public class Species implements Serializable{
 	}
 	
 	public void setName(String name) {
+		//if(name.equals("Hitler")) name="Shitler";
 		this.name = name;
 	}
 	
