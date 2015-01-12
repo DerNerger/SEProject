@@ -119,16 +119,16 @@
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_plus_intelligence"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                   
                                     android:background="@drawable/plusblue" />
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_minus_intelligence"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                   
                                     android:background="@drawable/minusblue" />
                             </LinearLayout>
                             <!-- Agility plus minus -->
@@ -141,16 +141,14 @@
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_plus_agility"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/plusred" />
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_minus_agility"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/minusred" />
                             </LinearLayout>
                             <!-- Strength plus minus -->
@@ -163,16 +161,14 @@
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_plus_strength"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/plusyellow" />
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_minus_strength"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/minusyellow" />
                             </LinearLayout>
                             <!-- Socail plus minus -->
@@ -185,16 +181,14 @@
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_plus_social"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/pluslightblue" />
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_minus_social"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/minuslightblue" />
                             </LinearLayout>
                             <!-- Procreation plus minus -->
@@ -207,16 +201,14 @@
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_plus_procreation"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/plusgreen" />
 
                                 <ImageButton
                                     android:id="@+id/image_button_create_species_minus_procreation"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/minusgreen" />
                             </LinearLayout>
                             <!-- Left points -->

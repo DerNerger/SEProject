@@ -6,7 +6,10 @@ import main.SimpleMapLogic;
 import main.Species;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -98,6 +101,11 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				if (ActivityManager.isUserAMonkey()) {
 					species.setName("DaMonkey");
 				}
+				if(isPackageInstalled("com.android.isola", getApplicationContext())){
+					species.setName("Chabo: "+name);
+					
+				};
+				
 				// UserManager man=(UserManager) getSystemService(USER_SERVICE);
 				//
 				// if(man.isUserAGoat() && (species.getName().startsWith("Goat")
@@ -121,6 +129,15 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 			}
 		});
 
+	}
+	private boolean isPackageInstalled(String packagename, Context context) {
+	    PackageManager pm = context.getPackageManager();
+	    try {
+	        pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);
+	        return true;
+	    } catch (NameNotFoundException e) {
+	        return false;
+	    }
 	}
 
 	@Override
