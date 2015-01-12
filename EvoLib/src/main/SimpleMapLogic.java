@@ -1,8 +1,6 @@
 package main;
 
-import java.nio.file.StandardWatchEventKinds;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 
@@ -61,6 +59,8 @@ public class SimpleMapLogic implements IMapLogic {
 			if(Math.random() < species[i].getMovementChance()){
 				newMigration[i] += (int) (source.getPopulation()[i]*0.1);
 				population[i] -= (int) (source.getPopulation()[i]*0.1);
+				if(population[i]>0 && population[i]<10)
+					newMigration[i]+=1;
 			}
 		}
 		target.setMigrations(newMigration);

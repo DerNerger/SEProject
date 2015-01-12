@@ -115,6 +115,47 @@ public class SpeciesUpdate extends Change {
 		player.updateSpecies(this);
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SpeciesUpdate other = (SpeciesUpdate) obj;
+		if (agility != other.agility)
+			return false;
+		if (intelligence != other.intelligence)
+			return false;
+		if (maxTemp != other.maxTemp)
+			return false;
+		if (minTemp != other.minTemp)
+			return false;
+		if (Double.doubleToLongBits(movementChange) != Double
+				.doubleToLongBits(other.movementChange))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (playerNumber != other.playerNumber)
+			return false;
+		if (procreation != other.procreation)
+			return false;
+		if (resourceDemand != other.resourceDemand)
+			return false;
+		if (social != other.social)
+			return false;
+		if (strength != other.strength)
+			return false;
+		if (vision != other.vision)
+			return false;
+		if (water != other.water)
+			return false;
+		return true;
+	}
 	public String getNetwork(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("SpeciesUpdate;");

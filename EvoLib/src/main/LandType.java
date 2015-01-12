@@ -70,6 +70,29 @@ public class LandType implements Serializable{
 		return this.type;
 	}
 	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LandType other = (LandType) obj;
+		if (maxTemp != other.maxTemp)
+			return false;
+		if (minTemp != other.minTemp)
+			return false;
+		if (naturalEnemies != other.naturalEnemies)
+			return false;
+		if (resources != other.resources)
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
+
 	//network-----------------------------------------------------------------
 	public static LandType parseLandType(String str){
 		String[] parts = str.split(">");

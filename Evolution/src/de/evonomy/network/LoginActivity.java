@@ -72,7 +72,6 @@ public class LoginActivity extends Activity implements Observer{
 				
 				@Override
 				public void onClick(View v) {
-					setContentView(R.layout.activity_wait);
 					String name = editText_LoginName.getText().toString();
 					String passWd = editText_PassWd.getText().toString();
 					if(name.contains(";") || passWd.contains(";") || name.equals("") || passWd.equals("")){
@@ -86,6 +85,7 @@ public class LoginActivity extends Activity implements Observer{
 					    editor.putString("LOGINPW", passWd);
 					    editor.commit();
 					}
+					setContentView(R.layout.activity_wait);
 					client = new LoginClient(getResources().getInteger(R.integer.LoginPort), getString(R.string.host));
 					client.addObserver(usedInOnClickListener);
 					new Thread(client).start();

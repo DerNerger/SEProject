@@ -29,7 +29,7 @@ public class VisibilityChange extends Change {
 	public static VisibilityChange parseVisibilityChange(String str){
 		String[] parts = str.split(";");
 		if(!parts[0].equals("VisibilityChange"))
-			throw new RuntimeException(parts[0]+" kann nicht zu AreaLandTypeChange geparset werden");
+			throw new RuntimeException(parts[0]+" kann nicht zu VisibilityChange geparset werden");
 		int x = Integer.parseInt(parts[1]);
 		int y = Integer.parseInt(parts[2]);
 		return new VisibilityChange(x, y);

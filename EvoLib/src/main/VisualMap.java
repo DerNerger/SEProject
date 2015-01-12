@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Dimension;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.crypto.spec.OAEPParameterSpec;
@@ -98,23 +99,22 @@ public class VisualMap {
 		}
 		return areaNumberOfFields;
 	}
-	
-	public static void main(String[] args){
-		Species [] species = new Species[4];
-		for (int i = 0; i < species.length; i++) {
-			species[i] = new Species("Peter", 5, 5, 5, 5, 5, -5, 30, 5, 0.2, 1, true);
-			//new Species(intelligence, agility, strength, social, procreation, minTemp, maxTemp, resourceDemand, movementChance, visibillity, water)
-		} 
-		
-		HashMap<FieldType, Double> pct = new HashMap<>();
-		pct.put(FieldType.WATER, 0.25);
-		pct.put(FieldType.LAND, 0.25);
-		pct.put(FieldType.ICE, 0.25);
-		pct.put(FieldType.JUNGLE, 0.25);
-		Map map = Map.fromRandom(200, 100, species, pct);
-		VisualMap visMap = map.getVisualRepresentation();
-		String a = visMap.getNetwork();
-		System.out.println(a);
-		VisualMap visMap2 = VisualMap.parseVisualMap(a, 200, 100);
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VisualMap other = (VisualMap) obj;
+		if (!Arrays.deepEquals(areaNumberOfFields, other.areaNumberOfFields))
+			return false;
+		if (!Arrays.equals(types, other.types))
+			return false;
+		return true;
 	}
+	
+	
 }
