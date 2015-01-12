@@ -1,5 +1,6 @@
 package main;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Ai implements IPlayer{
@@ -7,6 +8,11 @@ public class Ai implements IPlayer{
 	protected Skillable skillable;
 	protected Species species;
 	protected boolean water;
+	protected int points;
+	protected LinkedList<PossibleUpdates> skills;
+	protected LinkedList<PossibleUpdates> body;
+	protected int playernumber;
+	protected int numUpdates;
 	
 	@Override
 	public void changeFieldPopulation(int x, int y, int[] population) {
@@ -68,7 +74,7 @@ public class Ai implements IPlayer{
 		
 	}
 
-	@Override
+	@Override 
 	public void youLose(int playerNumber) {
 		// TODO Auto-generated method stub
 		
@@ -78,10 +84,15 @@ public class Ai implements IPlayer{
 		return species;
 	}
 	
-	public Ai(Skillable skillable) {
+	public Ai(Skillable skillable, int playernumber) {
+		this.numUpdates = 0;
 		this.skillable = skillable;
 		this.species = SimpleMapLogic.getStandartSpecies("SupaComputa");
+		this.points = 10;
 		this.water = (new Random()).nextBoolean();
+		this.skills = new LinkedList<>();
+		this.body = new LinkedList<>();
+		this.playernumber = playernumber;
 		if (water) SimpleMapLogic.changeSpecies(species, PossibleUpdates.WATESPECIES);
 	}
 	
@@ -89,14 +100,14 @@ public class Ai implements IPlayer{
 		this.species = SimpleMapLogic.getStandartSpecies("DummaComputa");
 	}
 	
-	public static Ai getRandomAI(Skillable skillable) {
+	public static Ai getRandomAI(Skillable skillable, int playernumber) {
 		Random rnd = new Random();
 		double rnddouble = rnd.nextDouble();
 		if (rnddouble < .5) {
-			return new StrengthAI(skillable);
+			return new StrengthAI(skillable, playernumber);
 		}
 		else {
-			return new PopulationAI(skillable);
+			return new PopulationAI(skillable, playernumber);
 		}
 	}
 	

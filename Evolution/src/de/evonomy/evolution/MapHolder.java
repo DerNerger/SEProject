@@ -1,8 +1,16 @@
 package de.evonomy.evolution;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 
+import main.FieldType;
+import main.LandType;
+import main.PossibleUpdates;
+import main.Species;
+import main.SpeciesUpdate;
 import android.animation.ObjectAnimator;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,16 +18,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
-import android.graphics.Shader;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.animation.LinearInterpolator;
-import main.FieldType;
-import main.LandType;
-import main.PossibleUpdates;
-import main.Species;
-import main.SpeciesUpdate;
 
 public class MapHolder {
 	private static final String SPEZIESONE = "#FF0A0A";
@@ -55,7 +57,9 @@ public class MapHolder {
 	private SpeciesData[] data;
 	// Holds current evolutions of species
 	private ArrayList<PossibleUpdates> mySkills;
-
+	
+	private HashSet<FieldRect> visibleFields;
+	
 	public MapHolder(SurfaceView mapHolder,SurfaceView fogHolder, SurfaceView selHolder,
 			SurfaceView pointsHolder, int height, int width, int dispWidth,
 			int dispHeight, int[][] areasOfFields, LandType[] areasLandType,
@@ -68,6 +72,7 @@ public class MapHolder {
 		this.fogHolder.setFormat(PixelFormat.TRANSPARENT);
 		this.selHolder.setFormat(PixelFormat.TRANSPARENT);
 		this.pointsHolder.setFormat(PixelFormat.TRANSPARENT);
+		this.visibleFields = new HashSet<FieldRect>();
 		initColors();
 		initSpecies(species);
 		points = 0;
@@ -91,7 +96,7 @@ public class MapHolder {
 			for (int y = 0; y < NUMBEROFBLOCKSHEIGHT; y++) {
 				mapFields[x][y] = new FieldRect(x, y, heightPerBlock,
 						widthPerBlock, areasOfFields[x][y]);
-				mapFields[x][y].setVisible(true);
+				mapFields[x][y].setVisible(false);
 				// add to area
 				areas[mapFields[x][y].getArea()].addRect(mapFields[x][y]
 						.getRect());
@@ -162,7 +167,28 @@ public class MapHolder {
 		// punkte neue ausrechnen die auf einem feld angezeigt werden sollen
 		// daraus ein Array von Rects machen
 		mapFields[x][y].calculateSpeciesCircle(populations);
-
+		if (visibleFields.contains(mapFields[x][y]) || populations[0] == 0) return;
+		visibleFields.add(mapFields[x][y]);
+		int visi = species[0].getVisibillity();
+		LinkedList<FieldRect> queue = new LinkedList<FieldRect>();
+		queue.addLast(mapFields[x][y]);
+		while (!queue.isEmpty()) {
+			FieldRect f = queue.pop();
+			for (int i = -1; i <= 1; i++) {
+				for (int j = -1; j <= 1; j++) {
+					if (f.x + i < 0 || f.x + i >= NuMBEROFBLOCKSWIDTH
+							|| f.y + j < 0 || f.y + j >= NUMBEROFBLOCKSHEIGHT
+							|| mapFields[f.x + i][f.y + j].isVisible()) continue;
+					int dx = f.x + i - x;
+					int dy = f.y + j - y;
+					double distance = Math.sqrt(dx * dx + dy * dy);
+					if (distance < visi) {
+						queue.addLast(mapFields[f.x + i][f.y + j]);
+						mapFields[f.x + i][f.y + j].setVisible(true);
+					}
+				}
+			}
+		}
 	}
 
 	/**

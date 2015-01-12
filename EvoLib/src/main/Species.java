@@ -38,6 +38,8 @@ public class Species implements Serializable{
 	
 	private boolean water;//Faehigkeit im Wasser zu leben
 	
+	private Field startingField;
+	
 	/**
 	 * Erstellt ein Objekt der Klasse Species und initialisiert alle Attribute
 	 * mit den uebergebenen Parametern.
@@ -73,7 +75,7 @@ public class Species implements Serializable{
 		this.visibillity = copy.visibillity;
 		this.water = copy.water;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -208,9 +210,9 @@ public class Species implements Serializable{
 	
 	public static Species[] getAiSpecies(Species player, Skillable controller){
 		Species[] species = new Species[4];
-		Ai ai_1 = Ai.getRandomAI(controller);
-		Ai ai_2 = Ai.getRandomAI(controller);
-		Ai ai_3 = Ai.getRandomAI(controller);
+		Ai ai_1 = Ai.getRandomAI(controller, 1);
+		Ai ai_2 = Ai.getRandomAI(controller, 2);
+		Ai ai_3 = Ai.getRandomAI(controller, 3);
 		species[0] = player;
 		species[1] = ai_1.getSpecies();
 		species[2] = ai_2.getSpecies();

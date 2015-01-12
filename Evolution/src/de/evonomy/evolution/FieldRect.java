@@ -6,7 +6,10 @@ import android.graphics.RectF;
 public class FieldRect {
 	private boolean visible;
 	private int area;
-	private double alpha=0;;
+	private double alpha=0;
+	
+	public final int x, y;
+	
 	//hold 6 values, if value 0 to 3 this species gets a circle, if not one circle less, maximum 6
 	private int[] speciesCircle= new int[MapHolder.MAXCIRCLES];
 	private RectF rect;
@@ -14,8 +17,8 @@ public class FieldRect {
 		this.visible=false;
 		rect= new RectF(x*fieldWidth,y*fieldHeight,x*fieldWidth+fieldWidth,y*fieldHeight+fieldHeight);
 		this.area=area;
-		
-		
+		this.x = x;
+		this.y = y;
 	}
 	public boolean isVisible() {
 		return visible;

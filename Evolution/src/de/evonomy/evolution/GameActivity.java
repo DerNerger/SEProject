@@ -66,8 +66,6 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	private TextView selectionTextView;
 	private TextView pointsTextView;
 	private TextView timeTextView;
-	
-	
 	 
 	// currently selected area
 	private int currentSelectedArea = -1;
@@ -363,10 +361,10 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 
 	private void endGame() {
 		if (!gameEnded) {
-			actualizeThread.interrupt();
+			//actualizeThread.interrupt();
 			if (controllerThread != null)
 				controllerThread.interrupt();
-			actualizeMapThread.interrupt();
+			//actualizeMapThread.interrupt();
 		}
 	}
 
@@ -537,7 +535,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		}
 		IPlayer[] player = new IPlayer[4];
 		for (int i = 1; i < player.length; i++) {
-			player[i] = Ai.getRandomAI(controller);
+			player[i] = Ai.getRandomAI(controller, i);
 		}
 		player[0] = this;
 		// Create controller
