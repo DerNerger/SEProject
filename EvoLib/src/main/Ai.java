@@ -126,7 +126,7 @@ public class Ai implements IPlayer{
 	}
 	
 	public static Ai getDummyAI() {
-		return new Ai();
+		return new Ai(0);
 	}
 
 	@Override

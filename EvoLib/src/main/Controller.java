@@ -76,6 +76,9 @@ public class Controller implements Runnable, Skillable{
 				int number = nextSkill.getPlayerNumber();
 				SpeciesUpdate update = nextSkill.skill(species[number]);
 				changes.add(update);
+				if (nextSkill.getType() == PossibleUpdates.EYES
+						|| nextSkill.getType() == PossibleUpdates.ULTRASAOUND)
+					map.resetVisibility(number);
 			}
 			qLock.unlock();
 

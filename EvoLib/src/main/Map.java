@@ -28,11 +28,20 @@ public class Map implements Serializable{
 	private Area[] areas;
 	private IMapLogic logic;
 	
+	private int width, height;
+	
+	private boolean[][][] visiArray;
+	private boolean[][][] visibleFields;
+	
 	private Map(int width, int height, Species[] species){
 		this.species =species;
+		this.width = width;
+		this.height = height;
 		this.logic = new SimpleMapLogic(species);
 		mapPopulation = new long[species.length];
 		mapPopulationDifference = new long[species.length];
+		visiArray = new boolean[4][width][height];
+		visibleFields = new boolean[4][width][height];
 	}
 	
 	public Change gameEnds(){
@@ -380,8 +389,44 @@ public class Map implements Serializable{
 	
 	public LinkedList<Change> calculateVisibility(){
 		LinkedList<Change> changeList = new LinkedList<>();
-		//TODO: implement this algorithm here or in map-logic????
+		for (int player = 0; player < 4; player++) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					if (visiArray[player][i][j] || fields[i][j].getPopulation()[player] == 0) continue;
+					visiArray[player][i][j] = true;
+					int visi = species[player].getVisibillity();
+					LinkedList<Field> queue = new LinkedList<Field>();
+					queue.addLast(fields[i][j]);
+					while (!queue.isEmpty()) {
+						Field f = queue.pop();
+						for (int x = -1; x <= 1; x++) {
+							for (int y = -1; y <= 1; y++) {
+								if (f.x + x < 0 || f.x + x >= width
+										|| f.y + y < 0 || f.y + y >= height
+										|| visibleFields[player][f.x + x][f.y + y]) continue;
+								int dx = f.x + x - i;
+								int dy = f.y + y - j;
+								double distance = Math.sqrt(dx * dx + dy * dy);
+								if (distance < visi) {
+									queue.addLast(fields[f.x + x][f.y + y]);
+									visibleFields[player][f.x + x][f.y + y] = true;
+									changeList.add(new VisibilityChange(f.x + x, f.y + y));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		return changeList;
+	}
+	
+	public void resetVisibility(int playernumber) {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				visiArray[playernumber][i][j] = false;
+			}
+		}
 	}
 	
 	public VisualMap getVisualRepresentation(){

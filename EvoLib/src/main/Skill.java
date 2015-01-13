@@ -30,6 +30,10 @@ public  class Skill {
 		return sb.toString();
 	}
 	
+	public PossibleUpdates getType() {
+		return type;
+	}
+	
 	public static Skill parseSkill(String str){
 		String[] parts = str.split(";");
 		if(!parts[0].equals("Skill"))
