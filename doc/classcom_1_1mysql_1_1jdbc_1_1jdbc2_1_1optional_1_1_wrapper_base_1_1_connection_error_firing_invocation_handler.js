@@ -1,0 +1,5 @@
+var classcom_1_1mysql_1_1jdbc_1_1jdbc2_1_1optional_1_1_wrapper_base_1_1_connection_error_firing_invocation_handler =
+[
+    [ "ConnectionErrorFiringInvocationHandler", "classcom_1_1mysql_1_1jdbc_1_1jdbc2_1_1optional_1_1_wrapper_base_1_1_connection_error_firing_invocation_handler.html#abebb0ab4a560298d817ceb144c690f43", null ],
+    [ "invoke", "classcom_1_1mysql_1_1jdbc_1_1jdbc2_1_1optional_1_1_wrapper_base_1_1_connection_error_firing_invocation_handler.html#a1e56d38d05e41eb4ccd98fdf95f91f82", null ]
+];

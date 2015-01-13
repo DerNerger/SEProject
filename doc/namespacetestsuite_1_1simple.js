@@ -1,0 +1,27 @@
+var namespacetestsuite_1_1simple =
+[
+    [ "jdbc4", "namespacetestsuite_1_1simple_1_1jdbc4.html", "namespacetestsuite_1_1simple_1_1jdbc4" ],
+    [ "BlobTest", "classtestsuite_1_1simple_1_1_blob_test.html", "classtestsuite_1_1simple_1_1_blob_test" ],
+    [ "CallableStatementTest", "classtestsuite_1_1simple_1_1_callable_statement_test.html", "classtestsuite_1_1simple_1_1_callable_statement_test" ],
+    [ "CharsetTests", "classtestsuite_1_1simple_1_1_charset_tests.html", "classtestsuite_1_1simple_1_1_charset_tests" ],
+    [ "ConnectionTest", "classtestsuite_1_1simple_1_1_connection_test.html", "classtestsuite_1_1simple_1_1_connection_test" ],
+    [ "DataSourceTest", "classtestsuite_1_1simple_1_1_data_source_test.html", "classtestsuite_1_1simple_1_1_data_source_test" ],
+    [ "DateTest", "classtestsuite_1_1simple_1_1_date_test.html", "classtestsuite_1_1simple_1_1_date_test" ],
+    [ "EscapeProcessingTest", "classtestsuite_1_1simple_1_1_escape_processing_test.html", "classtestsuite_1_1simple_1_1_escape_processing_test" ],
+    [ "MetadataTest", "classtestsuite_1_1simple_1_1_metadata_test.html", "classtestsuite_1_1simple_1_1_metadata_test" ],
+    [ "MiniAdminTest", "classtestsuite_1_1simple_1_1_mini_admin_test.html", "classtestsuite_1_1simple_1_1_mini_admin_test" ],
+    [ "NumbersTest", "classtestsuite_1_1simple_1_1_numbers_test.html", "classtestsuite_1_1simple_1_1_numbers_test" ],
+    [ "ReadOnlyCallableStatementTest", "classtestsuite_1_1simple_1_1_read_only_callable_statement_test.html", "classtestsuite_1_1simple_1_1_read_only_callable_statement_test" ],
+    [ "ResultSetTest", "classtestsuite_1_1simple_1_1_result_set_test.html", "classtestsuite_1_1simple_1_1_result_set_test" ],
+    [ "ServerControllerTest", "classtestsuite_1_1simple_1_1_server_controller_test.html", "classtestsuite_1_1simple_1_1_server_controller_test" ],
+    [ "SimpleTransformer", "classtestsuite_1_1simple_1_1_simple_transformer.html", "classtestsuite_1_1simple_1_1_simple_transformer" ],
+    [ "SplitDBdotNameTest", "classtestsuite_1_1simple_1_1_split_d_bdot_name_test.html", "classtestsuite_1_1simple_1_1_split_d_bdot_name_test" ],
+    [ "SSLTest", "classtestsuite_1_1simple_1_1_s_s_l_test.html", "classtestsuite_1_1simple_1_1_s_s_l_test" ],
+    [ "StatementsTest", "classtestsuite_1_1simple_1_1_statements_test.html", "classtestsuite_1_1simple_1_1_statements_test" ],
+    [ "TestBug57662Logger", "classtestsuite_1_1simple_1_1_test_bug57662_logger.html", "classtestsuite_1_1simple_1_1_test_bug57662_logger" ],
+    [ "TestLifecycleInterceptor", "classtestsuite_1_1simple_1_1_test_lifecycle_interceptor.html", "classtestsuite_1_1simple_1_1_test_lifecycle_interceptor" ],
+    [ "TransactionTest", "classtestsuite_1_1simple_1_1_transaction_test.html", "classtestsuite_1_1simple_1_1_transaction_test" ],
+    [ "TraversalTest", "classtestsuite_1_1simple_1_1_traversal_test.html", "classtestsuite_1_1simple_1_1_traversal_test" ],
+    [ "UpdatabilityTest", "classtestsuite_1_1simple_1_1_updatability_test.html", "classtestsuite_1_1simple_1_1_updatability_test" ],
+    [ "XATest", "classtestsuite_1_1simple_1_1_x_a_test.html", "classtestsuite_1_1simple_1_1_x_a_test" ]
+];

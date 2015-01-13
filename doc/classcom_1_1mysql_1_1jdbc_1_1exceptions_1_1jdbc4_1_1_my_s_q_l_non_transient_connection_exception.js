@@ -1,0 +1,7 @@
+var classcom_1_1mysql_1_1jdbc_1_1exceptions_1_1jdbc4_1_1_my_s_q_l_non_transient_connection_exception =
+[
+    [ "MySQLNonTransientConnectionException", "classcom_1_1mysql_1_1jdbc_1_1exceptions_1_1jdbc4_1_1_my_s_q_l_non_transient_connection_exception.html#ad4e8910c64e60372c15db5f112b11c67", null ],
+    [ "MySQLNonTransientConnectionException", "classcom_1_1mysql_1_1jdbc_1_1exceptions_1_1jdbc4_1_1_my_s_q_l_non_transient_connection_exception.html#aa7dfe84d77ad3802b75f1f1a87bb0b03", null ],
+    [ "MySQLNonTransientConnectionException", "classcom_1_1mysql_1_1jdbc_1_1exceptions_1_1jdbc4_1_1_my_s_q_l_non_transient_connection_exception.html#af89a474f02531612843db45e5b32af5e", null ],
+    [ "MySQLNonTransientConnectionException", "classcom_1_1mysql_1_1jdbc_1_1exceptions_1_1jdbc4_1_1_my_s_q_l_non_transient_connection_exception.html#a18467fc2a6f3cd1878fbcd2ab97bfa45", null ]
+];

@@ -1,0 +1,5 @@
+var classcom_1_1mysql_1_1jdbc_1_1_load_balancing_connection_proxy_1_1_connection_error_firing_invocation_handler =
+[
+    [ "ConnectionErrorFiringInvocationHandler", "classcom_1_1mysql_1_1jdbc_1_1_load_balancing_connection_proxy_1_1_connection_error_firing_invocation_handler.html#a8c52ef232532fc1b1e9ab0592e5f61d9", null ],
+    [ "invoke", "classcom_1_1mysql_1_1jdbc_1_1_load_balancing_connection_proxy_1_1_connection_error_firing_invocation_handler.html#aed8b1debd4db5d0cec4f46b5ca14f25c", null ]
+];
