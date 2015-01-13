@@ -101,10 +101,10 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				if (ActivityManager.isUserAMonkey()) {
 					species.setName("DaMonkey");
 				}
-				if(isPackageInstalled("com.android.isola", getApplicationContext())){
-					species.setName("Chabo: "+name);
+//				if(isPackageInstalled("com.android.isola", getApplicationContext())){
+//					species.setName("Chabo: "+name);
 					
-				};
+//				};
 				
 				// UserManager man=(UserManager) getSystemService(USER_SERVICE);
 				//
