@@ -72,8 +72,7 @@ public class Ai implements IPlayer{
 
 	@Override
 	public boolean getPlayerNumber(int number) {
-		// TODO Auto-generated method stub
-		return false;
+		return number == playernumber;
 	}
 
 	@Override

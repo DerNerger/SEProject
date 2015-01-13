@@ -393,7 +393,6 @@ public class Map implements Serializable{
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++) {
 					if (visiArray[player][i][j] || fields[i][j].getPopulation()[player] == 0) continue;
-					visiArray[player][i][j] = true;
 					int visi = species[player].getVisibillity();
 					LinkedList<Field> queue = new LinkedList<Field>();
 					queue.addLast(fields[i][j]);
@@ -403,14 +402,15 @@ public class Map implements Serializable{
 							for (int y = -1; y <= 1; y++) {
 								if (f.x + x < 0 || f.x + x >= width
 										|| f.y + y < 0 || f.y + y >= height
-										|| visibleFields[player][f.x + x][f.y + y]) continue;
+										|| visiArray[player][f.x + x][f.y + y]) continue;
 								int dx = f.x + x - i;
 								int dy = f.y + y - j;
 								double distance = Math.sqrt(dx * dx + dy * dy);
 								if (distance < visi) {
 									queue.addLast(fields[f.x + x][f.y + y]);
 									visibleFields[player][f.x + x][f.y + y] = true;
-									changeList.add(new VisibilityChange(f.x + x, f.y + y));
+									visiArray[player][f.x + x][f.y + y] = true;
+									changeList.add(new VisibilityChange(f.x + x, f.y + y, player));
 								}
 							}
 						}

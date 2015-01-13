@@ -8,13 +8,16 @@ package main;
 public class VisibilityChange extends Change {
 	private int x;
 	private int y;
-	public VisibilityChange(int x, int y){
+	private int playernumber;
+	public VisibilityChange(int x, int y, int playernumber){
 		this.x=x;
 		this.y=y;
+		this.playernumber = playernumber;
 	}
 	@Override
 	public void doChange(IPlayer player) {
-		player.changeVisibility(x, y);
+		//if (player.getPlayerNumber(playernumber))
+			player.changeVisibility(x, y);
 	}
 	
 	@Override
@@ -22,7 +25,8 @@ public class VisibilityChange extends Change {
 		StringBuilder sb = new StringBuilder();
 		sb.append("VisibilityChange;");
 		sb.append(x+";");
-		sb.append(y);
+		sb.append(y+";");
+		sb.append(playernumber);
 		return sb.toString();
 	}
 	
@@ -32,6 +36,7 @@ public class VisibilityChange extends Change {
 			throw new RuntimeException(parts[0]+" kann nicht zu VisibilityChange geparset werden");
 		int x = Integer.parseInt(parts[1]);
 		int y = Integer.parseInt(parts[2]);
-		return new VisibilityChange(x, y);
+		int playernumber = Integer.parseInt(parts[3]);
+		return new VisibilityChange(x, y, playernumber);
 	}
 }
