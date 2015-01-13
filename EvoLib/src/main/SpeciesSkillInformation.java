@@ -1,5 +1,6 @@
 package main;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -16,7 +17,9 @@ public class SpeciesSkillInformation {
 	private static LinkedList<SkillElement> legs;
 	private static LinkedList<SkillElement> arms;
 	private static LinkedList<SkillElement> abilities;
-
+	private static LinkedList<SkillElement> all;
+	private static HashMap<PossibleUpdates, Integer> prices;
+	
 	static {
 		setNextToHead();
 		setArms();
@@ -25,19 +28,17 @@ public class SpeciesSkillInformation {
 		setNextToLegs();
 		setLegs();
 		setAbilities();
+		setAll();
+		setPrices();
 	}
 	public static LinkedList<SkillElement> getAllSkills(){
-		LinkedList<SkillElement> elements= new LinkedList<SkillElement>();
-		elements.addAll(abilities);
-		elements.addAll(arms);
-		elements.addAll(legs);
-		elements.addAll(body);
-		elements.addAll(head);
-		elements.addAll(nextToLegs);
-		elements.addAll(nextToHead);
-		return elements;
+		return all;
 	}
-
+	
+	public static int getPrice(PossibleUpdates update) {
+		return prices.get(update);
+	}
+	
 	public static LinkedList<SkillElement> getLegSkills() {
 		return legs;
 	}
@@ -221,6 +222,23 @@ public class SpeciesSkillInformation {
 		abilities.add(pheromon);
 		abilities.add(kidscheme);
 		
-		
+	}
+	
+	private static void setAll() {
+		all = new LinkedList<SkillElement>();
+		all.addAll(abilities);
+		all.addAll(arms);
+		all.addAll(legs);
+		all.addAll(body);
+		all.addAll(head);
+		all.addAll(nextToLegs);
+		all.addAll(nextToHead);
+	}
+	
+	private static void setPrices() {
+		prices = new HashMap<>();
+		for (SkillElement elem : all) {
+			prices.put(elem.getUpdate(), elem.getPrice());
+		}
 	}
 }

@@ -1,11 +1,10 @@
 package main;
 
-import java.util.Random;
-
 public class StrengthAI extends Ai {
 	
 	public StrengthAI(int playernumber) {
 		super(playernumber);
+		species.setName("SupaStark");
 		SimpleMapLogic.changeSpecies(species, PossibleUpdates.KSTRATEGIST);
 		SimpleMapLogic.changeSpecies(species, PossibleUpdates.THICKFUR);
 		species.setStrength(species.getStrength() + 10);
@@ -26,22 +25,5 @@ public class StrengthAI extends Ai {
 		skills.addLast(PossibleUpdates.THUMBS);
 		skills.addLast(PossibleUpdates.FIREMAKING);
 		skills.addLast(PossibleUpdates.SPITFIREDRAGON);
-	}
-	
-	@Override
-	public void updateSpecies(SpeciesUpdate speciesUpdate) {
-		//TODO: see if we can actually afford that shit
-		//stupid workaround for now
-		numUpdates++;
-		if (numUpdates % 10 != 0) return;
-		
-		Random rnd = new Random();
-		if (rnd.nextDouble() > .8) {
-			if (body.isEmpty()) return;
-			skillable.skill(new Skill(body.pop(), playernumber));
-		} else {
-			if (skills.isEmpty()) return;
-			skillable.skill(new Skill(skills.pop(), playernumber));
-		}
 	}
 }

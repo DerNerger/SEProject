@@ -1,10 +1,9 @@
 package main;
 
-import java.util.Random;
-
 public class PopulationAI extends Ai {
 	public PopulationAI(int playernumber) {
 		super(playernumber);
+		species.setName("SupaViele");
 		SimpleMapLogic.changeSpecies(species, PossibleUpdates.HERBIVORE);
 		species.setProcreation(species.getProcreation() + 7);
 		species.setAgility(species.getSocial() + 4);
@@ -27,22 +26,5 @@ public class PopulationAI extends Ai {
 		skills.addLast(PossibleUpdates.LANGUAGE);
 		skills.addLast(PossibleUpdates.POLYGAMY);
 		skills.addLast(PossibleUpdates.SETTLE);
-	}
-	
-	@Override
-	public void updateSpecies(SpeciesUpdate speciesUpdate) {
-		//TODO: see if we can actually afford that shit
-		//stupid workaround for now
-		numUpdates++;
-		if (numUpdates % 10 != 0) return;
-		
-		Random rnd = new Random();
-		if (rnd.nextDouble() > .7) {
-			if (body.isEmpty()) return;
-			skillable.skill(new Skill(body.pop(), playernumber));
-		} else {
-			if (skills.isEmpty()) return;
-			skillable.skill(new Skill(skills.pop(), playernumber));
-		}
 	}
 }

@@ -45,8 +45,23 @@ public class Ai implements IPlayer{
 
 	@Override
 	public void changePointsAndTime(int[] points, long years) {
-		// TODO Auto-generated method stub
-		int i = 0;
+		this.points += points[playernumber];
+		
+		Random rnd = new Random();
+		if (rnd.nextDouble() > .7)
+			doSkill(body);
+		else
+			doSkill(skills);
+	}
+	
+	protected void doSkill(LinkedList<PossibleUpdates> skillQ) {
+		if (skillQ.isEmpty()) return;
+		PossibleUpdates update = skillQ.peek();
+		int price = SpeciesSkillInformation.getPrice(update);
+		if (this.points >= price) {
+			skillable.skill(new Skill(skillQ.pop(), playernumber));
+			this.points -= price;
+		}
 	}
 
 	@Override
