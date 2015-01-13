@@ -1,0 +1,26 @@
+var classmain_1_1_ai =
+[
+    [ "Ai", "classmain_1_1_ai.html#a68fbc2fc2f65f7c30882fbda3a9abcea", null ],
+    [ "changeAreaLandType", "classmain_1_1_ai.html#a18717fc22451c9807428490f8af7559a", null ],
+    [ "changeAreaPopulation", "classmain_1_1_ai.html#ae22f10445c2b41d753778c46cf95b327", null ],
+    [ "changeFieldPopulation", "classmain_1_1_ai.html#a011a86de46bf20d1ef8f18e5abf3bbb4", null ],
+    [ "changePointsAndTime", "classmain_1_1_ai.html#aaf8873fcbf3b047f1a3856e9ff2b7aea", null ],
+    [ "changeVisibility", "classmain_1_1_ai.html#a9c9bc3c1dfeafe7a718b55c76c6d943d", null ],
+    [ "changeWorldPopulation", "classmain_1_1_ai.html#aebd3be13d50d28f7543ebff6c3039675", null ],
+    [ "doSkill", "classmain_1_1_ai.html#a1d803e11a05ffc82a6d76c58a5bfa9f7", null ],
+    [ "getPlayerNumber", "classmain_1_1_ai.html#a8febbbdf99f831e448930bea79f3d9b9", null ],
+    [ "getSpecies", "classmain_1_1_ai.html#a2ee5b5b807975947914360b53f28309e", null ],
+    [ "onGameEnd", "classmain_1_1_ai.html#a695d8227d393356803d4d5f910225a72", null ],
+    [ "setMap", "classmain_1_1_ai.html#a4d4da08beb05d7b6cdefe7516ee228c2", null ],
+    [ "setSkillable", "classmain_1_1_ai.html#a20f6375455ba5315902d380450a65ab8", null ],
+    [ "updateSpecies", "classmain_1_1_ai.html#ad21a7e7039e80521879b778b76b1c61b", null ],
+    [ "youLose", "classmain_1_1_ai.html#a4b109f2381c4174968082c5699c4d402", null ],
+    [ "body", "classmain_1_1_ai.html#a8c8b71e64850c2ee7279c5c0c9454b35", null ],
+    [ "numUpdates", "classmain_1_1_ai.html#a6d98105650dcdd1dd30eec4619362adb", null ],
+    [ "playernumber", "classmain_1_1_ai.html#ac5e5b490910fd12e9e84527cb1d21ec7", null ],
+    [ "points", "classmain_1_1_ai.html#a4fe45069053bc768674a591e6493e373", null ],
+    [ "skillable", "classmain_1_1_ai.html#aecfed6895a64826ef136201090e452ed", null ],
+    [ "skills", "classmain_1_1_ai.html#a0cc5102c2e003e884e55c7e5e3388e17", null ],
+    [ "species", "classmain_1_1_ai.html#a34842962a2e4569d4951f5d30bc5cb12", null ],
+    [ "water", "classmain_1_1_ai.html#ae1e17b641ee5ed26b9a65ab72ff154e7", null ]
+];

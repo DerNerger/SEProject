@@ -1,0 +1,27 @@
+var namespaceonline_protocol =
+[
+    [ "AuthenticationPacket", "classonline_protocol_1_1_authentication_packet.html", "classonline_protocol_1_1_authentication_packet" ],
+    [ "ChatMessageToClient", "classonline_protocol_1_1_chat_message_to_client.html", "classonline_protocol_1_1_chat_message_to_client" ],
+    [ "ChatMessageToServer", "classonline_protocol_1_1_chat_message_to_server.html", "classonline_protocol_1_1_chat_message_to_server" ],
+    [ "ClientConnectedPacket", "classonline_protocol_1_1_client_connected_packet.html", "classonline_protocol_1_1_client_connected_packet" ],
+    [ "ClientLeftPacket", "classonline_protocol_1_1_client_left_packet.html", "classonline_protocol_1_1_client_left_packet" ],
+    [ "ClientLogoutPacket", "classonline_protocol_1_1_client_logout_packet.html", "classonline_protocol_1_1_client_logout_packet" ],
+    [ "ClientPacket", "classonline_protocol_1_1_client_packet.html", "classonline_protocol_1_1_client_packet" ],
+    [ "ConnectionLost", "classonline_protocol_1_1_connection_lost.html", "classonline_protocol_1_1_connection_lost" ],
+    [ "CreateGamePacket", "classonline_protocol_1_1_create_game_packet.html", "classonline_protocol_1_1_create_game_packet" ],
+    [ "CreateStatusPacket", "classonline_protocol_1_1_create_status_packet.html", "classonline_protocol_1_1_create_status_packet" ],
+    [ "GameStartsPacket", "classonline_protocol_1_1_game_starts_packet.html", "classonline_protocol_1_1_game_starts_packet" ],
+    [ "IClient", "interfaceonline_protocol_1_1_i_client.html", "interfaceonline_protocol_1_1_i_client" ],
+    [ "ImReadyPacket", "classonline_protocol_1_1_im_ready_packet.html", "classonline_protocol_1_1_im_ready_packet" ],
+    [ "InvitePackage", "classonline_protocol_1_1_invite_package.html", "classonline_protocol_1_1_invite_package" ],
+    [ "InvitePacketToServer", "classonline_protocol_1_1_invite_packet_to_server.html", "classonline_protocol_1_1_invite_packet_to_server" ],
+    [ "InviteResult", "classonline_protocol_1_1_invite_result.html", "classonline_protocol_1_1_invite_result" ],
+    [ "IServer", "interfaceonline_protocol_1_1_i_server.html", "interfaceonline_protocol_1_1_i_server" ],
+    [ "KickPacket", "classonline_protocol_1_1_kick_packet.html", "classonline_protocol_1_1_kick_packet" ],
+    [ "LeaveGamePacket", "classonline_protocol_1_1_leave_game_packet.html", "classonline_protocol_1_1_leave_game_packet" ],
+    [ "OnlineProtocol", "classonline_protocol_1_1_online_protocol.html", "classonline_protocol_1_1_online_protocol" ],
+    [ "ServerPacket", "classonline_protocol_1_1_server_packet.html", "classonline_protocol_1_1_server_packet" ],
+    [ "SessionIdPacket", "classonline_protocol_1_1_session_id_packet.html", "classonline_protocol_1_1_session_id_packet" ],
+    [ "SlotTypeChange", "classonline_protocol_1_1_slot_type_change.html", "classonline_protocol_1_1_slot_type_change" ],
+    [ "StartGamePacket", "classonline_protocol_1_1_start_game_packet.html", "classonline_protocol_1_1_start_game_packet" ]
+];
