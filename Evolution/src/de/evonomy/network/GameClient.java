@@ -4,6 +4,7 @@ import android.util.Log;
 import main.Change;
 import main.Skill;
 import main.Skillable;
+import main.SpeciesUpdate;
 import main.VisualMap;
 import de.evonomy.evolution.GameActivity;
 import gameProtocol.ChangePacket;
@@ -59,6 +60,9 @@ public class GameClient extends SessionClient implements Skillable{
 	
 	private void processChangePacket(ChangePacket packet) {
 		Change c = packet.getChange();
+//		if( c instanceof SpeciesUpdate){
+//			Log.e("Packet", packet.toString());
+//		}
 		c.doChange(activity);
 	}
 
