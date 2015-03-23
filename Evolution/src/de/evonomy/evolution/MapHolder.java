@@ -188,7 +188,20 @@ public class MapHolder {
 			if (mapCanvas == null)
 				return false;
 			mapCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-			for (int x = 0; x < NuMBEROFBLOCKSWIDTH; x++) {
+			//this is the new way of drawing the map,
+			//based on area paths, more suitable for 
+			//Kantenglättung and texturierung
+			for(MapArea area:areas){
+				Paint fieldColor = area.getFieldType();
+				mapCanvas.drawPath(area.getPath(), fieldColor);
+			}
+			
+			
+			
+			//this is the old way to draw the map, based on 
+			//the tiles of the map. 
+			
+			/*for (int x = 0; x < NuMBEROFBLOCKSWIDTH; x++) {
 				for (int y = 0; y < NUMBEROFBLOCKSHEIGHT; y++) {
 					
 						Paint fieldColor = areas[mapFields[x][y].getArea()]
@@ -204,7 +217,7 @@ public class MapHolder {
 //						}
 					
 				}
-			}
+			}*/
 
 			mapToBeDrawn = false;
 			mapHolder.unlockCanvasAndPost(mapCanvas);
@@ -278,7 +291,7 @@ public class MapHolder {
 		anim = ObjectAnimator.ofFloat(areas[area], "alpha", 0.30f, 0.79f);
 		anim.setInterpolator(new LinearInterpolator());
 		anim.setRepeatMode(ObjectAnimator.REVERSE);
-		anim.setDuration(500);
+		anim.setDuration(900);
 		anim.setRepeatCount(ObjectAnimator.INFINITE);
 		anim.start();
 
@@ -513,12 +526,21 @@ public class MapHolder {
 
 			}
 			if (newPoint.x == startPoint.x && newPoint.y == startPoint.y) {
+//				if(lastDir==3){
+//					FloatPoint g = calculatePoint(newPoint.x-1, newPoint.y, true,
+//							false);
+//					areas[area].addPoint(new FloatPoint(g.x, g.y));
+//					p.lineTo(g.x, g.y);
+//				}
 				break drawpath;
 			}
 			point.x = newPoint.x;
 			point.y = newPoint.y;
 			// if(counter>10000) break drawpath;
 		}
+		//Noch einmal um das Startfeld herum
+		
+		
 		p.close();
 
 		p.setFillType(Path.FillType.EVEN_ODD);
