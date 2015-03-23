@@ -1,5 +1,6 @@
 package de.evonomy.evolution;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import main.LandType;
@@ -23,17 +24,23 @@ public class MapArea {
 	private Path path;
 	private int neighbour = -1;
 	private boolean isEingeschlossen = true;
-
+	private ArrayList<MapHolder.FloatPoint> points;
 	public MapArea(Paint FieldType, LandType landType) {
 		this.rects = new LinkedList<RectF>();
 		this.FieldType = FieldType;
 		this.landType = landType;
 		this.population = new int[4];
+		this.points=new ArrayList<MapHolder.FloatPoint>();
 		selected = new Paint();
 		selected.setColor(Color.parseColor("#D5FFFC"));
 		alpha = 1;
 	}
-
+	public void addPoint(MapHolder.FloatPoint p){
+		points.add(p);
+	}
+	public ArrayList<MapHolder.FloatPoint> getPoints(){
+		return points;
+	}
 	public void changeLandType(LandType landType, Paint newFieldType) {
 		this.setLandType(landType);
 		this.FieldType = newFieldType;
@@ -85,7 +92,7 @@ public class MapArea {
 
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
-		invalidate();
+		newInvalidate();
 	}
 
 	public void animateClicked(SurfaceHolder holder) {
@@ -137,6 +144,17 @@ public class MapArea {
 		isEingeschlossen = false;
 	}
 
-	
+	public boolean contains(MapHolder.FloatPoint test) {
+	      int i;
+	      int j;
+	      boolean result = false;
+	      for (i = 0, j = points.size() - 1; i < points.size(); j = i++) {
+	        if ((points.get(i).y > test.y) != (points.get(j).y > test.y) &&
+	            (test.x < (points.get(j).x - points.get(i).x) * (test.y - points.get(i).y) / (points.get(j).y-points.get(i).y) + points.get(i).x)) {
+	          result = !result;
+	         }
+	      }
+	      return result;
+	    }
 
 }

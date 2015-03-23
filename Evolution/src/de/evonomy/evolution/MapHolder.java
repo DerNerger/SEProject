@@ -96,7 +96,7 @@ public class MapHolder {
 			for (int y = 0; y < NUMBEROFBLOCKSHEIGHT; y++) {
 				mapFields[x][y] = new FieldRect(x, y, heightPerBlock,
 						widthPerBlock, areasOfFields[x][y]);
-				mapFields[x][y].setVisible(false);
+				mapFields[x][y].setVisible(true);
 				// add to area
 				areas[mapFields[x][y].getArea()].addRect(mapFields[x][y]
 						.getRect());
@@ -107,7 +107,8 @@ public class MapHolder {
 			Log.e("Path", path + " Area: " + areac);
 			areas[areac].setPath(path);
 		}
-		checkForAreasInAreasPath();
+		//checkForAreasInAreasPath();
+		setInnerAreas();
 		drawMapLayout(false);
 
 	}
@@ -277,7 +278,7 @@ public class MapHolder {
 		anim = ObjectAnimator.ofFloat(areas[area], "alpha", 0.30f, 0.79f);
 		anim.setInterpolator(new LinearInterpolator());
 		anim.setRepeatMode(ObjectAnimator.REVERSE);
-		anim.setDuration(1000);
+		anim.setDuration(500);
 		anim.setRepeatCount(ObjectAnimator.INFINITE);
 		anim.start();
 
@@ -447,6 +448,7 @@ public class MapHolder {
 						// direkt linie dahin zeichnen
 						FloatPoint g = calculatePoint(point.x, point.y, true,
 								true);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 						break;
 
@@ -454,6 +456,7 @@ public class MapHolder {
 						// draw line to top Corner
 						FloatPoint g = calculatePoint(point.x, point.y, true,
 								true);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 					}
 				} else if (lastDir == 1) {
@@ -462,11 +465,13 @@ public class MapHolder {
 						newPoint.y = point.y;
 						FloatPoint g = calculatePoint(point.x, point.y, false,
 								true);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 						break;
 					} else if (k > 0) {
 						FloatPoint g = calculatePoint(point.x, point.y, false,
 								true);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 					}
 				} else if (lastDir == 2) {
@@ -476,12 +481,14 @@ public class MapHolder {
 						// direkt linie dahin zeichnen
 						FloatPoint g = calculatePoint(point.x, point.y, false,
 								false);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 						break;
 
 					} else if (k > 0) {
 						FloatPoint g = calculatePoint(point.x, point.y, false,
 								false);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 					}
 				} else {
@@ -491,6 +498,7 @@ public class MapHolder {
 						// direkt linie dahin zeichnen
 						FloatPoint g = calculatePoint(point.x, point.y, true,
 								false);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 						break;
 
@@ -498,6 +506,7 @@ public class MapHolder {
 						// draw line to top Corner
 						FloatPoint g = calculatePoint(point.x, point.y, true,
 								false);
+						areas[area].addPoint(new FloatPoint(g.x, g.y));
 						p.lineTo(g.x, g.y);
 					}
 				}
@@ -517,7 +526,7 @@ public class MapHolder {
 		return p;
 	}
 
-	private class Point {
+	public class Point {
 		int x;
 		int y;
 
@@ -527,7 +536,7 @@ public class MapHolder {
 		}
 	}
 
-	private class FloatPoint {
+	public class FloatPoint {
 		float x;
 		float y;
 
@@ -535,6 +544,7 @@ public class MapHolder {
 			this.x = x;
 			this.y = y;
 		}
+		
 	}
 
 	private FloatPoint calculatePoint(int x, int y, boolean left, boolean top) {
@@ -635,5 +645,32 @@ public class MapHolder {
 
 	public SpeciesData[] getSpeciesData() {
 		return data;
+	}
+	private void setInnerAreas(){
+		for(MapArea aussen:areas){
+			for(MapArea innen:areas){
+				if(aussen==innen){
+					continue;
+				}
+				boolean contains=true;
+				for(FloatPoint test:innen.getPoints()){
+					if(!aussen.contains(test)){
+						contains=false;
+						break;
+					}
+				}
+				if(contains){
+					addTo(aussen,innen);
+				}
+			}
+		}
+	}
+	private void addTo(MapArea outta,MapArea inna){
+		Path toEdit = outta.getPath();
+		toEdit.addPath(inna.getPath());
+		Path buffer = new Path();
+		buffer.moveTo(0, 0);
+		buffer.close();
+		toEdit.addPath(buffer);
 	}
 }

@@ -29,6 +29,7 @@ import main.SpeciesUpdate;
 import main.VisualMap;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
@@ -222,6 +223,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		mapHolderRL = (FrameLayout) findViewById(R.id.map_holder_rl);
 		// the surface views, representing the different layout layers
 		final SurfaceView mapBackgroundLL = new SurfaceView(this);
+		//mapBackgroundLL.setBackgroundResource(R.drawable.backgroundmap);
 		final SurfaceView fogBackground = new SurfaceView(this);
 		final SurfaceView selectionLL = new SurfaceView(this);
 		final SurfaceView pointsLL = new SurfaceView(this);
