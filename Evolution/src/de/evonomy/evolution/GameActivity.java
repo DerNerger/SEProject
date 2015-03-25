@@ -248,7 +248,8 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		holder = new MapHolder(mapBackgroundLL, fogBackground, selectionLL,
 				pointsLL, 400, 800, display.getWidth(), display.getHeight()
 						- display.getHeight() / 6, areaNumberOfFields,
-				areasLandType, species);
+				areasLandType, species,getResources()
+				);
 
 		setOnTouchListeners();
 		mapHasBeenSet = true;

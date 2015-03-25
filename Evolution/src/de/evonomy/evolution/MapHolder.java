@@ -12,12 +12,18 @@ import main.PossibleUpdates;
 import main.Species;
 import main.SpeciesUpdate;
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
+import android.graphics.Shader;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -60,10 +66,21 @@ public class MapHolder {
 	
 	private HashSet<FieldRect> visibleFields;
 	
+	
+	
+	//to implement for other types
+	private Paint fillPaint;
+	private Bitmap fillBMP;
+	private BitmapShader fillBMPShader;
+	
+	
+	
+	
 	public MapHolder(SurfaceView mapHolder,SurfaceView fogHolder, SurfaceView selHolder,
 			SurfaceView pointsHolder, int height, int width, int dispWidth,
 			int dispHeight, int[][] areasOfFields, LandType[] areasLandType,
-			Species species[]) {
+			Species species[],Resources res
+			) {
 		this.mapHolder = mapHolder.getHolder();
 		this.fogHolder= fogHolder.getHolder();
 		this.selHolder = selHolder.getHolder();
@@ -73,7 +90,7 @@ public class MapHolder {
 		this.selHolder.setFormat(PixelFormat.TRANSPARENT);
 		this.pointsHolder.setFormat(PixelFormat.TRANSPARENT);
 		this.visibleFields = new HashSet<FieldRect>();
-		initColors();
+		initColors(res);
 		initSpecies(species);
 		points = 0;
 		mapFields = new FieldRect[NuMBEROFBLOCKSWIDTH][NUMBEROFBLOCKSHEIGHT];
@@ -113,7 +130,7 @@ public class MapHolder {
 
 	}
 	
-	private void initColors() {
+	private void initColors(Resources res) {
 		black.setColor(Color.parseColor("#000000"));
 		white = new Paint();
 		white.setColor(Color.parseColor("#FFFFFF"));
@@ -148,6 +165,23 @@ public class MapHolder {
 		speciesColors[2].setColor(Color.parseColor(SPEZIESTHREE));
 		speciesColors[3] = new Paint();
 		speciesColors[3].setColor(Color.parseColor(SPEZIESFOUR));
+		
+		
+		
+		
+		//here other types
+		
+		fillBMP=BitmapFactory.decodeResource(res, R.drawable.tileland);
+		fillBMPShader=new BitmapShader(fillBMP, Shader.TileMode.REPEAT,
+				Shader.TileMode.REPEAT);
+		fillPaint=new Paint();
+		fillPaint.setColor(0xFFFFFFFF);
+		fillPaint.setStyle(Paint.Style.FILL);
+		fillPaint.setShader(fillBMPShader);
+		
+		
+		
+		
 
 	}
 
@@ -186,14 +220,15 @@ public class MapHolder {
 			
 			Canvas mapCanvas = mapHolder.lockCanvas();
 			if (mapCanvas == null)
-				return false;
+				return false; 
+			
 			mapCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 			//this is the new way of drawing the map,
 			//based on area paths, more suitable for 
 			//Kantenglättung and texturierung
 			for(MapArea area:areas){
-				Paint fieldColor = area.getFieldType();
-				mapCanvas.drawPath(area.getPath(), fieldColor);
+				drawArea(mapCanvas, area.getLandType().getFieldType(), area);
+				
 			}
 			
 			
@@ -695,4 +730,18 @@ public class MapHolder {
 		buffer.close();
 		toEdit.addPath(buffer);
 	}
+	private void edgeRefine(){
+		MapArea a=areas[0];
+		Path p=a.getPath();
+		
+	}
+	private void drawArea(Canvas canvas,FieldType t,MapArea area){
+		Paint fieldColor = area.getFieldType();
+		if(t!=FieldType.LAND){
+			canvas.drawPath(area.getPath(), fieldColor);
+		}else{
+			canvas.drawPath(area.getPath(), fillPaint);
+		}
+	}
+	
 }
