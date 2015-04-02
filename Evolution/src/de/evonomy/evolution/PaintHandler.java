@@ -21,10 +21,10 @@ public class PaintHandler {
 		
 		switch(t){
 		case DESERT:
-			fillBMP=BitmapFactory.decodeResource(res, R.drawable.tileland);
+			fillBMP=BitmapFactory.decodeResource(res, R.drawable.tilesand);
 			break;
 		case ICE: 
-			fillBMP=BitmapFactory.decodeResource(res, R.drawable.tileland);
+			fillBMP=BitmapFactory.decodeResource(res, R.drawable.tileice);
 			break;
 		case JUNGLE:
 			fillBMP=BitmapFactory.decodeResource(res, R.drawable.tilejungle);

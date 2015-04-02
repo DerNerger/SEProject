@@ -164,19 +164,6 @@ public class MapHolder {
 		
 		
 		
-		//here other types
-		
-		/*fillBMP=BitmapFactory.decodeResource(res, R.drawable.tileland);
-		fillBMPShader=new BitmapShader(fillBMP, Shader.TileMode.REPEAT,
-				Shader.TileMode.REPEAT);
-		fillPaint=new Paint();
-		fillPaint.setColor(0xFFFFFFFF);
-		fillPaint.setStyle(Paint.Style.FILL);
-		fillPaint.setShader(fillBMPShader);*/
-		
-		
-		
-		
 
 	}
 
@@ -719,10 +706,7 @@ public class MapHolder {
 		buffer.close();
 		toEdit.addPath(buffer);
 	}
-	private void edgeRefine(){
-		
-		
-	}
+	
 	private void drawArea(Canvas canvas,FieldType t,MapArea area){
 		canvas.drawPath(area.getPath(), FieldTypes.get(area.getLandType().getFieldType()));
 		
