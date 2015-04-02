@@ -299,7 +299,7 @@ public class MapHolder {
 		Log.e("Selection", "draw "+ area);
 		stopObjectAnimator();
 		areas[area].animateClicked(selHolder);
-		anim = ObjectAnimator.ofFloat(areas[area], "alpha", 0.30f, 0.79f);
+		anim = ObjectAnimator.ofFloat(areas[area], "alpha", 0.30f, 0.55f);
 		anim.setInterpolator(new LinearInterpolator());
 		anim.setRepeatMode(ObjectAnimator.REVERSE);
 		anim.setDuration(900);
