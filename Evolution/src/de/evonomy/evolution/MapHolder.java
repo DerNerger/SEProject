@@ -553,9 +553,9 @@ public class MapHolder {
 		
 		
 		p.close();
-
+		
 		p.setFillType(Path.FillType.EVEN_ODD);
-
+		
 		return p;
 	}
 

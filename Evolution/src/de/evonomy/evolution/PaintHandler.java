@@ -12,7 +12,7 @@ import android.graphics.PathEffect;
 import android.graphics.Shader;
 
 public class PaintHandler {
-	
+	//6 beide
 	public static int RADIUSMASKFILTER=6;
 	public static Paint getShaderPaint(FieldType t,Resources res){
 		Paint p = new Paint();
@@ -50,7 +50,7 @@ public class PaintHandler {
 		p.setShader(fillBMPShader);
 		p.setAntiAlias(true);
 //		p.setPathEffect(new CornerPathEffect(10));
-		p.setMaskFilter(new BlurMaskFilter(RADIUSMASKFILTER, BlurMaskFilter.Blur.NORMAL ));
+		p.setMaskFilter(new BlurMaskFilter(RADIUSMASKFILTER, BlurMaskFilter.Blur.INNER ));
 		
 		p.setStrokeJoin(Paint.Join.BEVEL);
 		p.setStrokeCap(Paint.Cap.ROUND);
