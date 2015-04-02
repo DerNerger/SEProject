@@ -82,9 +82,9 @@ public class MapArea {
 		return alpha;
 	}
 
-	public void addRect(RectF a) {
-		rects.add(a);
-	}
+//	public void addRect(RectF a) {
+//		rects.add(a);
+//	}
 
 	public LinkedList<RectF> getRects() {
 		return rects;

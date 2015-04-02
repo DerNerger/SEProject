@@ -68,12 +68,6 @@ public class MapHolder {
 	
 	
 	
-	//to implement for other types
-	private Paint fillPaint;
-	private Bitmap fillBMP;
-	private BitmapShader fillBMPShader;
-	
-	
 	
 	
 	public MapHolder(SurfaceView mapHolder,SurfaceView fogHolder, SurfaceView selHolder,
@@ -115,8 +109,9 @@ public class MapHolder {
 						widthPerBlock, areasOfFields[x][y]);
 				mapFields[x][y].setVisible(true);
 				// add to area
-				areas[mapFields[x][y].getArea()].addRect(mapFields[x][y]
-						.getRect());
+				//do not delete!!
+//				areas[mapFields[x][y].getArea()].addRect(mapFields[x][y]
+//						.getRect());
 			}
 		}
 		for (int areac = 0; areac < areas.length; areac++) {
@@ -135,21 +130,21 @@ public class MapHolder {
 		white = new Paint();
 		white.setColor(Color.parseColor("#FFFFFF"));
 		FieldTypes = new HashMap<FieldType, Paint>();
-		Paint water = new Paint();
-		water.setColor(Color.parseColor("#256DEA"));
+		
+		Paint water = PaintHandler.getShaderPaint(FieldType.WATER, res);
+//		water.setColor(Color.parseColor("#256DEA"));
 		FieldTypes.put(FieldType.WATER, water);
-		Paint green = new Paint();
-		green.setColor(Color.parseColor("#2EBD14"));
+		Paint green = PaintHandler.getShaderPaint(FieldType.LAND, res);
+//		green.setColor(Color.parseColor("#2EBD14"));
 		FieldTypes.put(FieldType.LAND, green);
-		Paint desert = new Paint();
-		desert.setColor(Color.parseColor("#FFFF87"));
+		Paint desert = PaintHandler.getShaderPaint(FieldType.DESERT, res);
+//		desert.setColor(Color.parseColor("#FFFF87"));
 		FieldTypes.put(FieldType.DESERT, desert);
-		Paint ice = new Paint();
-		ice.setColor(Color.parseColor("#EBFFFF"));
-		// ice.setAlpha(160);
+		Paint ice = PaintHandler.getShaderPaint(FieldType.ICE, res);
+//		ice.setColor(Color.parseColor("#EBFFFF"));
 		FieldTypes.put(FieldType.ICE, ice);
-		Paint jungle = new Paint();
-		jungle.setColor(Color.parseColor("#1CA205"));
+		Paint jungle = PaintHandler.getShaderPaint(FieldType.JUNGLE, res);
+//		jungle.setColor(Color.parseColor("#1CA205"));
 		jungle.setAlpha(ALPHA);
 		desert.setAlpha(ALPHA);
 		water.setAlpha(ALPHA);
@@ -171,13 +166,13 @@ public class MapHolder {
 		
 		//here other types
 		
-		fillBMP=BitmapFactory.decodeResource(res, R.drawable.tileland);
+		/*fillBMP=BitmapFactory.decodeResource(res, R.drawable.tileland);
 		fillBMPShader=new BitmapShader(fillBMP, Shader.TileMode.REPEAT,
 				Shader.TileMode.REPEAT);
 		fillPaint=new Paint();
 		fillPaint.setColor(0xFFFFFFFF);
 		fillPaint.setStyle(Paint.Style.FILL);
-		fillPaint.setShader(fillBMPShader);
+		fillPaint.setShader(fillBMPShader);*/
 		
 		
 		
@@ -241,12 +236,6 @@ public class MapHolder {
 					
 						Paint fieldColor = areas[mapFields[x][y].getArea()]
 								.getFieldType();
-//						if (!mapFields[x][y].isVisible()) {
-//							fieldColor.setAlpha(FOGOFWARALPHA);
-//							mapCanvas.drawRect(mapFields[x][y].getRect(),
-//									fieldColor);
-//							fieldColor.setAlpha(ALPHA);
-////						} else {
 							mapCanvas.drawRect(mapFields[x][y].getRect(),
 									fieldColor);
 //						}
@@ -731,17 +720,12 @@ public class MapHolder {
 		toEdit.addPath(buffer);
 	}
 	private void edgeRefine(){
-		MapArea a=areas[0];
-		Path p=a.getPath();
+		
 		
 	}
 	private void drawArea(Canvas canvas,FieldType t,MapArea area){
-		Paint fieldColor = area.getFieldType();
-		if(t!=FieldType.LAND){
-			canvas.drawPath(area.getPath(), fieldColor);
-		}else{
-			canvas.drawPath(area.getPath(), fillPaint);
-		}
+		canvas.drawPath(area.getPath(), FieldTypes.get(area.getLandType().getFieldType()));
+		
 	}
 	
 }
