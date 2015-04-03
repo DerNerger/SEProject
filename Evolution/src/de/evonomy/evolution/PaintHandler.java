@@ -51,6 +51,7 @@ public class PaintHandler {
 		p.setAntiAlias(true);
 //		p.setPathEffect(new CornerPathEffect(10));
 		p.setMaskFilter(new BlurMaskFilter(RADIUSMASKFILTER, BlurMaskFilter.Blur.INNER ));
+	
 		
 		p.setStrokeJoin(Paint.Join.BEVEL);
 		p.setStrokeCap(Paint.Cap.ROUND);

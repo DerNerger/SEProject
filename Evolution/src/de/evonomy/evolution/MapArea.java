@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import main.LandType;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -33,6 +35,11 @@ public class MapArea {
 		this.points=new ArrayList<MapHolder.FloatPoint>();
 		selected = new Paint();
 		selected.setColor(Color.parseColor("#D5FFFC"));
+		//Leider nicht effizient genug!
+		//selected.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.INNER));
+		selected.setStyle(Paint.Style.FILL_AND_STROKE);
+		selected.setDither(false);
+		selected.setAntiAlias(true);
 		alpha = 1;
 	}
 	public void addPoint(MapHolder.FloatPoint p){
@@ -112,8 +119,7 @@ public class MapArea {
 
 	private void newInvalidate() {
 		selected.setAlpha((int) (alpha * 255));
-		selected.setStyle(Paint.Style.FILL_AND_STROKE);
-		selected.setAntiAlias(true);
+		
 		Canvas selCanvas = holder.lockCanvas();
 		selCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 		selCanvas.drawPath(path, selected);

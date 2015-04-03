@@ -17,6 +17,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
+import android.graphics.BlurMaskFilter;
+import android.graphics.BlurMaskFilter.Blur;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -129,6 +131,7 @@ public class MapHolder {
 		black.setColor(Color.parseColor("#000000"));
 		white = new Paint();
 		white.setColor(Color.parseColor("#FFFFFF"));
+		
 		FieldTypes = new HashMap<FieldType, Paint>();
 		
 		Paint water = PaintHandler.getShaderPaint(FieldType.WATER, res);
