@@ -68,11 +68,11 @@ public class SpeciesSkillInformation {
 
 	private static void setNextToHead() {
 		nextToHead = new LinkedList<SkillElement>();
-		SkillElement wings = new SkillElement(PossibleUpdates.WINGS, 0);
-		SkillElement flywings = new SkillElement(PossibleUpdates.FLYWINGS, 0);
+		SkillElement wings = new SkillElement(PossibleUpdates.WINGS);
+		SkillElement flywings = new SkillElement(PossibleUpdates.FLYWINGS);
 		wings.addChild(flywings);
 		SkillElement battlewings = new SkillElement(
-				PossibleUpdates.BATTLEWINGS, 0);
+				PossibleUpdates.BATTLEWINGS);
 		wings.addChild(battlewings);
 
 		nextToHead.add(wings);
@@ -83,14 +83,13 @@ public class SpeciesSkillInformation {
 
 	private static void setNextToLegs() {
 		nextToLegs = new LinkedList<SkillElement>();
-		SkillElement genital = new SkillElement(PossibleUpdates.GENITAL, 0);
+		SkillElement genital = new SkillElement(PossibleUpdates.GENITAL);
 		SkillElement secondgenital = new SkillElement(
-				PossibleUpdates.SECONDGENITAL, 0);
-		SkillElement tail = new SkillElement(PossibleUpdates.TAIL, 0);
-		SkillElement decotail = new SkillElement(PossibleUpdates.DECOTAIL, 0);
-		SkillElement fighttail = new SkillElement(PossibleUpdates.FIGHTTAIL, 0);
-		SkillElement gymtail = new SkillElement(PossibleUpdates.GYMNASTICTAIL,
-				0);
+				PossibleUpdates.SECONDGENITAL);
+		SkillElement tail = new SkillElement(PossibleUpdates.TAIL);
+		SkillElement decotail = new SkillElement(PossibleUpdates.DECOTAIL);
+		SkillElement fighttail = new SkillElement(PossibleUpdates.FIGHTTAIL);
+		SkillElement gymtail = new SkillElement(PossibleUpdates.GYMNASTICTAIL);
 		genital.addChild(secondgenital);
 		tail.addChild(decotail);
 		tail.addChild(fighttail);
@@ -106,11 +105,10 @@ public class SpeciesSkillInformation {
 
 	private static void setLegs() {
 		legs = new LinkedList<SkillElement>();
-		SkillElement extremity = new SkillElement(PossibleUpdates.EXTREMITYLEG,
-				0);
-		SkillElement hand = new SkillElement(PossibleUpdates.HANDLEG, 0);
-		SkillElement foot = new SkillElement(PossibleUpdates.FOOTLEG, 0);
-		SkillElement fin = new SkillElement(PossibleUpdates.FINLEG, 0);
+		SkillElement extremity = new SkillElement(PossibleUpdates.EXTREMITYLEG);
+		SkillElement hand = new SkillElement(PossibleUpdates.HANDLEG );
+		SkillElement foot = new SkillElement(PossibleUpdates.FOOTLEG );
+		SkillElement fin = new SkillElement(PossibleUpdates.FINLEG );
 		extremity.addChild(hand);
 		extremity.addChild(foot);
 		extremity.addChild(fin);
@@ -123,15 +121,14 @@ public class SpeciesSkillInformation {
 
 	private static void setBody() {
 		body = new LinkedList<SkillElement>();
-		SkillElement leather = new SkillElement(PossibleUpdates.LEATHERSKIN, 0);
-		SkillElement sweat = new SkillElement(PossibleUpdates.SWEATGLAND, 0);
-		SkillElement fat = new SkillElement(PossibleUpdates.FATLAYER, 0);
-		SkillElement furless = new SkillElement(PossibleUpdates.FURLESSSKIN, 0);
-		SkillElement muscles = new SkillElement(PossibleUpdates.BETTERMUSCLES,
-				0);
-		SkillElement scale = new SkillElement(PossibleUpdates.DRAGONSCALE, 0);
+		SkillElement leather = new SkillElement(PossibleUpdates.LEATHERSKIN );
+		SkillElement sweat = new SkillElement(PossibleUpdates.SWEATGLAND );
+		SkillElement fat = new SkillElement(PossibleUpdates.FATLAYER );
+		SkillElement furless = new SkillElement(PossibleUpdates.FURLESSSKIN );
+		SkillElement muscles = new SkillElement(PossibleUpdates.BETTERMUSCLES);
+		SkillElement scale = new SkillElement(PossibleUpdates.DRAGONSCALE );
 		SkillElement tendon = new SkillElement(
-				PossibleUpdates.COMPLEXTENDONSTRUCTUR, 0);
+				PossibleUpdates.COMPLEXTENDONSTRUCTUR );
 		leather.addChild(sweat);
 		leather.addChild(muscles);
 		sweat.addChild(fat);
@@ -150,14 +147,13 @@ public class SpeciesSkillInformation {
 
 	private static void setHead() {
 		head = new LinkedList<SkillElement>();
-		SkillElement cnf = new SkillElement(PossibleUpdates.CENTRALNERVSYSTEM,
-				0);
-		SkillElement ultra = new SkillElement(PossibleUpdates.ULTRASAOUND, 0);
-		SkillElement brain = new SkillElement(PossibleUpdates.BRAIN, 0);
-		SkillElement lobe = new SkillElement(PossibleUpdates.FRONTALLOBE, 0);
-		SkillElement limbic = new SkillElement(PossibleUpdates.LIMBICSYSTEM, 0);
-		SkillElement eyes = new SkillElement(PossibleUpdates.EYES, 0);
-		SkillElement gills = new SkillElement(PossibleUpdates.GILLS, 0);
+		SkillElement cnf = new SkillElement(PossibleUpdates.CENTRALNERVSYSTEM);
+		SkillElement ultra = new SkillElement(PossibleUpdates.ULTRASAOUND );
+		SkillElement brain = new SkillElement(PossibleUpdates.BRAIN );
+		SkillElement lobe = new SkillElement(PossibleUpdates.FRONTALLOBE );
+		SkillElement limbic = new SkillElement(PossibleUpdates.LIMBICSYSTEM );
+		SkillElement eyes = new SkillElement(PossibleUpdates.EYES );
+		SkillElement gills = new SkillElement(PossibleUpdates.GILLS );
 		cnf.addChild(brain);
 		brain.addChild(lobe);
 		brain.addChild(limbic);
@@ -174,11 +170,10 @@ public class SpeciesSkillInformation {
 
 	private static void setArms() {
 		arms = new LinkedList<SkillElement>();
-		SkillElement extremity = new SkillElement(PossibleUpdates.EXTREMITYARM,
-				0);
-		SkillElement claw = new SkillElement(PossibleUpdates.CLAWARM, 0);
-		SkillElement hand = new SkillElement(PossibleUpdates.HANDARM, 0);
-		SkillElement foot = new SkillElement(PossibleUpdates.FOOTARM, 0);
+		SkillElement extremity = new SkillElement(PossibleUpdates.EXTREMITYARM);
+		SkillElement claw = new SkillElement(PossibleUpdates.CLAWARM );
+		SkillElement hand = new SkillElement(PossibleUpdates.HANDARM );
+		SkillElement foot = new SkillElement(PossibleUpdates.FOOTARM );
 		extremity.addChild(claw);
 		extremity.addChild(hand);
 		extremity.addChild(foot);
@@ -189,19 +184,19 @@ public class SpeciesSkillInformation {
 	}
 	private static void setAbilities(){
 		abilities= new LinkedList<SkillElement>();
-		SkillElement sexual= new SkillElement(PossibleUpdates.SEXUALPROCREATION, 0);
-		SkillElement poly= new SkillElement(PossibleUpdates.POLYGAMY, 0);
-		SkillElement mono= new SkillElement(PossibleUpdates.MONOGAMY, 0);
-		SkillElement packanimal= new SkillElement(PossibleUpdates.PACKANIMAL, 0);
-		SkillElement language= new SkillElement(PossibleUpdates.LANGUAGE, 0);
-		SkillElement maverick= new SkillElement(PossibleUpdates.MAVERICK, 0);
-		SkillElement logic= new SkillElement(PossibleUpdates.LOGIC, 0);
-		SkillElement thumbs= new SkillElement(PossibleUpdates.THUMBS, 0);
-		SkillElement firemaking= new SkillElement(PossibleUpdates.FIREMAKING, 0);
-		SkillElement spitfire= new SkillElement(PossibleUpdates.SPITFIREDRAGON, 0);
-		SkillElement pheromon= new SkillElement(PossibleUpdates.PHEROMONS, 0);
-		SkillElement kidscheme= new SkillElement(PossibleUpdates.KIDSCHEME, 0);
-		SkillElement settle= new SkillElement(PossibleUpdates.SETTLE, 0);
+		SkillElement sexual= new SkillElement(PossibleUpdates.SEXUALPROCREATION );
+		SkillElement poly= new SkillElement(PossibleUpdates.POLYGAMY );
+		SkillElement mono= new SkillElement(PossibleUpdates.MONOGAMY );
+		SkillElement packanimal= new SkillElement(PossibleUpdates.PACKANIMAL );
+		SkillElement language= new SkillElement(PossibleUpdates.LANGUAGE );
+		SkillElement maverick= new SkillElement(PossibleUpdates.MAVERICK );
+		SkillElement logic= new SkillElement(PossibleUpdates.LOGIC );
+		SkillElement thumbs= new SkillElement(PossibleUpdates.THUMBS );
+		SkillElement firemaking= new SkillElement(PossibleUpdates.FIREMAKING );
+		SkillElement spitfire= new SkillElement(PossibleUpdates.SPITFIREDRAGON );
+		SkillElement pheromon= new SkillElement(PossibleUpdates.PHEROMONS );
+		SkillElement kidscheme= new SkillElement(PossibleUpdates.KIDSCHEME );
+		SkillElement settle= new SkillElement(PossibleUpdates.SETTLE );
 		sexual.addChild(poly);
 		sexual.addChild(mono);
 		packanimal.addChild(language);
