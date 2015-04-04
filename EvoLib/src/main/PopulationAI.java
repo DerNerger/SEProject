@@ -4,7 +4,7 @@ public class PopulationAI extends Ai {
 	public PopulationAI(int playernumber) {
 		super(playernumber);
 		species.setName("SupaViele");
-		SimpleMapLogic.changeSpecies(species, PossibleUpdates.HERBIVORE);
+		SimpleMapLogic.changeSpecies(species, PossibleUpdates.HERBIVORE,false);
 		species.setProcreation(species.getProcreation() + 7);
 		species.setAgility(species.getSocial() + 4);
 		species.setIntelligence(species.getIntelligence() + 4);

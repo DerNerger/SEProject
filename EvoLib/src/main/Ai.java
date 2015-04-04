@@ -59,7 +59,7 @@ public class Ai implements IPlayer{
 		PossibleUpdates update = skillQ.peek();
 		int price = SpeciesSkillInformation.getPrice(update);
 		if (this.points >= price) {
-			skillable.skill(new Skill(skillQ.pop(), playernumber));
+			skillable.skill(new Skill(skillQ.pop(), playernumber,false));
 			this.points -= price;
 		}
 	}
@@ -106,7 +106,7 @@ public class Ai implements IPlayer{
 		this.skills = new LinkedList<>();
 		this.body = new LinkedList<>();
 		this.playernumber = playernumber;
-		if (water) SimpleMapLogic.changeSpecies(species, PossibleUpdates.WATESPECIES);
+		if (water) SimpleMapLogic.changeSpecies(species, PossibleUpdates.WATESPECIES,false);
 	}
 	
 	private Ai() {

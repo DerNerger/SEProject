@@ -78,6 +78,7 @@ public class SpeciesSkillInformation {
 		nextToHead.add(wings);
 		nextToHead.add(flywings);
 		nextToHead.add(battlewings);
+		
 	}
 
 	private static void setNextToLegs() {

@@ -4,11 +4,12 @@ public  class Skill {
 	
 	private PossibleUpdates type;
 	private int playerNumber;
-	
-	public Skill(PossibleUpdates type, int playerNumber) {
+	private boolean reverse;
+	public Skill(PossibleUpdates type, int playerNumber,boolean reverse) {
 		super();
 		this.type = type;
 		this.playerNumber = playerNumber;
+		this.reverse=reverse;
 	}
 
 	public int getPlayerNumber() {
@@ -17,7 +18,7 @@ public  class Skill {
 	
 	public SpeciesUpdate skill(Species s){
 		//TODO implement Update
-		
+		//reverse in den methodenaufruf hier drunter rein, getNetwork ggf überarbeiten
 		SimpleMapLogic.changeSpecies(s, type);
 		return new SpeciesUpdate(s,playerNumber);
 	}

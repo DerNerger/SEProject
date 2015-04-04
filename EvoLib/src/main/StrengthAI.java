@@ -5,8 +5,9 @@ public class StrengthAI extends Ai {
 	public StrengthAI(int playernumber) {
 		super(playernumber);
 		species.setName("SupaStark");
-		SimpleMapLogic.changeSpecies(species, PossibleUpdates.KSTRATEGIST);
-		SimpleMapLogic.changeSpecies(species, PossibleUpdates.THICKFUR);
+		//false von Niklas ergänzt
+		SimpleMapLogic.changeSpecies(species, PossibleUpdates.KSTRATEGIST,false);
+		SimpleMapLogic.changeSpecies(species, PossibleUpdates.THICKFUR,false);
 		species.setStrength(species.getStrength() + 10);
 		species.setAgility(species.getAgility() + 5);
 		body.addLast(PossibleUpdates.TAIL);
