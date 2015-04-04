@@ -13,8 +13,10 @@ public class SkillElement {
 	private boolean isRoot=true;
 	private PossibleUpdates update; 
 	private int price;
-	public SkillElement(PossibleUpdates update,int price){
+	public SkillElement(PossibleUpdates update){
 		this.update=update;
+		this.price=SkillLogic.getSkillCosts(update, false);
+		
 		directRequiredFor=new LinkedList<SkillElement>();
 		indirectRequired=new LinkedList<SkillElement>();
 		

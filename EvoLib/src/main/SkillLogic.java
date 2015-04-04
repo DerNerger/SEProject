@@ -219,4 +219,26 @@ public class SkillLogic {
 		}
 		return s;
 	}
+	public static int getSkillCosts(PossibleUpdates update,boolean reverse){
+		SkillValue v=getSkillValue(update, reverse);
+		/*
+		 * Here is the formula to calculate the costs of a skill
+		 * */
+		int sum=0;
+		sum+=Math.abs(v.getAgility());
+		sum+=Math.abs(v.getIntelligence());
+		sum+=Math.abs(v.getMaxTemp());
+		sum+=Math.abs(v.getMinTemp());
+		sum+=Math.abs(v.getMovementChance());
+		sum+=Math.abs(v.getProcreation());
+		sum+=Math.abs(v.getResourceDemand());
+		sum+=Math.abs(v.getSocial());
+		sum+=Math.abs(v.getStrength());
+		sum+=Math.abs(v.getVisibillity());
+		sum+=Math.abs(v.isChangesWater()?25:0);
+		return (int)Math.pow(sum, 1.5);
+		
+		
+		
+	}
 }
