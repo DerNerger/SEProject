@@ -5,6 +5,7 @@ public  class Skill {
 	private PossibleUpdates type;
 	private int playerNumber;
 	private boolean reverse;
+	
 	public Skill(PossibleUpdates type, int playerNumber,boolean reverse) {
 		super();
 		this.type = type;

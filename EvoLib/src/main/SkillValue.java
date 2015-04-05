@@ -137,4 +137,21 @@ public class SkillValue {
 		SimpleMapLogic.changeSpecies(s, PossibleUpdates.GILLS, true);
 		System.out.println("After gills reverse:"+s.isWater());
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		if(intelligence!=0)sb.append("intelligence="+intelligence+" ");
+		if(agility!=0)sb.append("agility="+agility+" ");
+		if(strength!=0)sb.append("strength="+strength+" ");
+		if(social!=0)sb.append("social="+social+" ");
+		if(procreation!=0)sb.append("procreation="+procreation+" ");
+		if(minTemp!=0)sb.append("minTemp="+minTemp+" ");
+		if(maxTemp!=0)sb.append("maxTemp="+maxTemp+" ");
+		if(resourceDemand!=0)sb.append("resourceDemand="+resourceDemand+" ");
+		if(movementChance!=0)sb.append("movementChance="+movementChance+" ");
+		if(visibillity!=0)sb.append("visibillity="+visibillity+" ");
+		if(changesWater)sb.append("water="+water+" ");
+		return sb.toString();
+	}
 }
