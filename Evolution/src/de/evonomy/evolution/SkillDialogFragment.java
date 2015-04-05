@@ -37,6 +37,7 @@ public class SkillDialogFragment extends DialogFragment {
 	private TextView desc;
 	private ResourceDemandView demView;
 	private MovementView movView;
+	private boolean isSkilled;
 	public static SkillDialogFragment newInstance(PossibleUpdates update,Species species,int price,SkillTreeFragment frago){
 		SkillDialogFragment frag=new SkillDialogFragment();
 		Bundle args=new Bundle();
@@ -63,8 +64,9 @@ public class SkillDialogFragment extends DialogFragment {
 		this.update=(PossibleUpdates)getArguments().getSerializable(UPDATE);
 		this.species=new Species(
 				((Species)getArguments().getSerializable(SPECIES)));
+		isSkilled=!((GameActivity)getActivity()).isSkilled(update);
 		unchangedSpecies= new Species(species);
-		SimpleMapLogic.changeSpecies(species, update);
+		SimpleMapLogic.changeSpecies(species, update,isSkilled);
 		this.price=(int)getArguments().getInt(PRICE);
 		this.frago=(SkillTreeFragment)getArguments().getSerializable(FRAGMENT);
 		//TODO change
@@ -109,7 +111,7 @@ public class SkillDialogFragment extends DialogFragment {
 				Log.e("bla", "Pressed to update");
 				if(((GameActivity)getActivity()).subtractPoints(price)&&
 						!((GameActivity)getActivity()).isSkilled(update)){
-					((GameActivity)getActivity()).sendSkillUpdate(update);
+					((GameActivity)getActivity()).sendSkillUpdate(update,isSkilled);
 					frago.redraw();
 					dismiss();
 					
@@ -141,11 +143,12 @@ public class SkillDialogFragment extends DialogFragment {
 		if(!((GameActivity)getActivity()).isSkilled(update))
 			skillButton.setText(price+" P");
 		else{
-			skillButton.setText(getResources().getString(R.string.already_bought_dialog));
+			skillButton.setText(price+" P");
+			/*skillButton.setText(getResources().getString(R.string.already_bought_dialog));
 			showChanges.setText(R.string.already_bought_dialog);
 			showChanges.setClickable(false);
 			showChanges.setFocusable(false);
-			showChanges.setEnabled(false);
+			showChanges.setEnabled(false);*/
 		}
 		if(price>((GameActivity)getActivity()).getPoints())
 			skillButton.setTextColor(getResources().getColor(R.color.red));

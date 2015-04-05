@@ -579,10 +579,10 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 		return holder.getSpecies()[playernumber];
 	}
 
-	public void sendSkillUpdate(PossibleUpdates update) {
+	public void sendSkillUpdate(PossibleUpdates update, boolean reverse) {
 		holder.addSkill(update);
-		SimpleMapLogic.changeSpecies(getSpecies(), update);
-		controller.skill(new Skill(update, playernumber));
+		SimpleMapLogic.changeSpecies(getSpecies(), update,reverse);
+		controller.skill(new Skill(update, playernumber,reverse));
 	}
 
 	public boolean subtractPoints(int changeBy) {
