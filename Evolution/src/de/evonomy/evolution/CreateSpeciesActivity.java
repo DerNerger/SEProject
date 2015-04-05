@@ -157,7 +157,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				isLand = true;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
 				SimpleMapLogic.changeSpecies(species,
-						PossibleUpdates.LANDSPECIES);
+						PossibleUpdates.LANDSPECIES, true);
 
 			}
 		}
@@ -168,7 +168,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				isLand = false;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
 				SimpleMapLogic.changeSpecies(species,
-						PossibleUpdates.WATESPECIES);
+						PossibleUpdates.WATESPECIES, true);
 			}
 		}
 		if (tmpButton.getId() == carnivoreButton.getId()) {
@@ -178,7 +178,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				carnivore = true;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
 				SimpleMapLogic
-						.changeSpecies(species, PossibleUpdates.CARNIVORE);
+						.changeSpecies(species, PossibleUpdates.CARNIVORE, true);
 			}
 		}
 		if (tmpButton.getId() == herbivoreButton.getId()) {
@@ -188,7 +188,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				carnivore = false;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
 				SimpleMapLogic
-						.changeSpecies(species, PossibleUpdates.HERBIVORE);
+						.changeSpecies(species, PossibleUpdates.HERBIVORE, true);
 			}
 		}
 		if (tmpButton.getId() == endoButton.getId()) {
@@ -198,7 +198,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				endoSkeleton = true;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
 				SimpleMapLogic.changeSpecies(species,
-						PossibleUpdates.ENDOSKELETON);
+						PossibleUpdates.ENDOSKELETON, true);
 			}
 		}
 		if (tmpButton.getId() == exoButton.getId()) {
@@ -209,7 +209,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId()
 						+ endoSkeleton);
 				SimpleMapLogic.changeSpecies(species,
-						PossibleUpdates.EXOSKELETON);
+						PossibleUpdates.EXOSKELETON, true);
 			}
 		}
 		if (tmpButton.getId() == rStratButton.getId()) {
@@ -219,7 +219,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				isRStrategist = true;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
 				SimpleMapLogic.changeSpecies(species,
-						PossibleUpdates.RSTRATEGIST);
+						PossibleUpdates.RSTRATEGIST, true);
 			}
 		}
 		if (tmpButton.getId() == kStratButton.getId()) {
@@ -229,7 +229,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 				isRStrategist = false;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
 				SimpleMapLogic.changeSpecies(species,
-						PossibleUpdates.KSTRATEGIST);
+						PossibleUpdates.KSTRATEGIST, true);
 			}
 		}
 		if (tmpButton.getId() == thinFurButton.getId()) {
@@ -238,7 +238,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 			else {
 				isThinFur = true;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
-				SimpleMapLogic.changeSpecies(species, PossibleUpdates.THINFUR);
+				SimpleMapLogic.changeSpecies(species, PossibleUpdates.THINFUR, true);
 			}
 		}
 		if (tmpButton.getId() == thickFurButton.getId()) {
@@ -247,7 +247,7 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 			else {
 				isThinFur = false;
 				Log.e("Button clicked", "Id: " + ((RadioButton) view).getId());
-				SimpleMapLogic.changeSpecies(species, PossibleUpdates.THICKFUR);
+				SimpleMapLogic.changeSpecies(species, PossibleUpdates.THICKFUR, true);
 			}
 		}
 		actualizeViews();
@@ -297,18 +297,18 @@ public class CreateSpeciesActivity extends FragmentActivity implements
 			isThinFur = false;
 		SimpleMapLogic.changeSpecies(species,
 				isLand ? PossibleUpdates.LANDSPECIES
-						: PossibleUpdates.WATESPECIES);
+						: PossibleUpdates.WATESPECIES, true);
 		SimpleMapLogic.changeSpecies(species,
 				carnivore ? PossibleUpdates.CARNIVORE
-						: PossibleUpdates.HERBIVORE);
+						: PossibleUpdates.HERBIVORE, true);
 		SimpleMapLogic.changeSpecies(species,
 				endoSkeleton ? PossibleUpdates.ENDOSKELETON
-						: PossibleUpdates.EXOSKELETON);
+						: PossibleUpdates.EXOSKELETON, true);
 		SimpleMapLogic.changeSpecies(species,
 				isRStrategist ? PossibleUpdates.RSTRATEGIST
-						: PossibleUpdates.KSTRATEGIST);
+						: PossibleUpdates.KSTRATEGIST, true);
 		SimpleMapLogic.changeSpecies(species,
-				isThinFur ? PossibleUpdates.THINFUR : PossibleUpdates.THICKFUR);
+				isThinFur ? PossibleUpdates.THINFUR : PossibleUpdates.THICKFUR, true);
 	}
 
 	private void initImageButtons() {
