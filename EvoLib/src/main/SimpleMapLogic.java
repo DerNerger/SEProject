@@ -318,7 +318,8 @@ public class SimpleMapLogic implements IMapLogic {
 	}
 	
 	public static void changeSpecies(Species s, PossibleUpdates update,boolean reverse){
-		SkillValue sv=SkillLogic.getSkillValue(update, reverse);
+		SkillLogic skillLogic = SkillLogic.getSkillLogic();
+		SkillValue sv=skillLogic.getSkillValue(update, reverse);
 		sv.processOnSpecies(s);
 		
 	}

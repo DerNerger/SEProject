@@ -15,7 +15,7 @@ public class SkillElement {
 	private int price;
 	public SkillElement(PossibleUpdates update){
 		this.update=update;
-		this.price=SkillLogic.getSkillCosts(update, false);
+		this.price=SkillLogic.getSkillLogic().getSkillCosts(update, false);
 		
 		directRequiredFor=new LinkedList<SkillElement>();
 		indirectRequired=new LinkedList<SkillElement>();

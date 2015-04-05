@@ -26,26 +26,66 @@ public class SkillTreeParser {
 	}
 	
 	public SkillTreeCollection parseSkillTreeCollection(){
+		short nodeType = skillTreeNode.getNodeType();
 		SkillTreeCollection collection = new SkillTreeCollection();
-		Element element = (Element) skillTreeNode;
-		for (int i = 0; i < element.getChildNodes().getLength(); i++) {
-			SkillTree tree = parseSkillTree(element.getChildNodes().item(i));
-			if(tree!=null)
-				collection.addSkillTree(tree);
+		//procress the SkillCollection
+		if(nodeType==Node.ELEMENT_NODE){
+			Element element = (Element) skillTreeNode;
+			if(!element.getNodeName().equals("SkillCollection"))
+				throw new RuntimeException("XML-File is incorrect. Unknown Tag:"+element.getNodeName());
+			
+			//procress the children
+			for (int i = 0; i < element.getChildNodes().getLength(); i++) {
+				Node child = element.getChildNodes().item(i);
+				short childNodeType = child.getNodeType();
+				if(childNodeType==Node.ELEMENT_NODE){
+					addSubTrees(child, collection);
+				}
+			}
 		}
 		return collection;
+	}
+	
+	private void addSubTrees(Node child, SkillTreeCollection collection){
+		//parse the children
+		Element childElement = (Element) child;
+		String childName = childElement.getNodeName();
+		if(childName.equals("Preselection")){
+			//add all Preselection
+			for(int j=0; j<childElement.getChildNodes().getLength();j++){
+				SkillTree tree = parseSkillTree(childElement.getChildNodes().item(j));
+				if(tree!=null)
+					collection.addPreselection(tree);
+			}
+		} else if(childName.equals("Bodyextensions")){
+			//add all Bodyextensions
+			for(int j=0; j<childElement.getChildNodes().getLength();j++){
+				SkillTree tree = parseSkillTree(childElement.getChildNodes().item(j));
+				if(tree!=null)
+					collection.addBodyextensions(tree);
+			}
+		} else if(childName.equals("Ability")){
+			//add all Abilities
+			for(int j=0; j<childElement.getChildNodes().getLength();j++){
+				SkillTree tree = parseSkillTree(childElement.getChildNodes().item(j));
+				if(tree!=null)
+					collection.addAbility(tree);
+			}
+		} else {
+			throw new RuntimeException("XML-File is incorrect. Unknown Tag:"+childElement.getNodeName());
+		}
 	}
 	
 	private SkillTree parseSkillTree(Node aNode){
 		short nodeType = aNode.getNodeType();
 		if (nodeType == Node.ELEMENT_NODE) {
-			//gtet the element
+			//get the element
 			Element element = (Element) aNode;
 			
 			//create the tree
 			SkillTree tree = new SkillTree(element);
 			
-			//add the childs
+			//add the children
 			for (int i = 0; i < element.getChildNodes().getLength(); i++) {
 				SkillTree child = parseSkillTree(element.getChildNodes().item(i));
 				if(child!=null)

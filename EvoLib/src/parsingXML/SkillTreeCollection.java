@@ -7,18 +7,34 @@ import java.util.Queue;
 import main.PossibleUpdates;
 import main.SkillValue;
 
-public class SkillTreeCollection implements Iterable<SkillTree>{
-	private LinkedList<SkillTree> skillTrees;
+public class SkillTreeCollection{
+	
+	private LinkedList<SkillTree> preselection;
+	private LinkedList<SkillTree> bodyextensions;
+	private LinkedList<SkillTree> abilities;
+	
 	private HashMap<PossibleUpdates, SkillValue> values;
 	
 	public SkillTreeCollection(){
-		skillTrees = new LinkedList<>();
+		preselection = new LinkedList<>();
+		bodyextensions = new LinkedList<>();
+		abilities = new LinkedList<>();
 		values = new HashMap<>();
 	}
 	
-	public void addSkillTree(SkillTree tree){
-		skillTrees.add(tree);
-		
+	public void addPreselection(SkillTree tree){
+		preselection.add(tree);
+	}
+	
+	public void addBodyextensions(SkillTree tree){
+		bodyextensions.add(tree);
+	}
+	
+	public void addAbility(SkillTree tree){
+		abilities.add(tree);
+	}
+	
+	private void putToHashMap(SkillTree tree){
 		Queue<SkillTree> trees = tree.getChilds();
 		while(!trees.isEmpty()){
 			SkillTree t = trees.poll();
@@ -29,15 +45,21 @@ public class SkillTreeCollection implements Iterable<SkillTree>{
 	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		for(SkillTree tree : skillTrees){
+		sb.append("Preselection:\n");
+		for(SkillTree tree : preselection){
+			sb.append("["+tree.toString()+"]\n");
+		}
+		
+		sb.append("Bodyextensions\n");
+		for(SkillTree tree : bodyextensions){
+			sb.append("["+tree.toString()+"]\n");
+		}
+		
+		sb.append("Abilities:\n");
+		for(SkillTree tree : abilities){
 			sb.append("["+tree.toString()+"]\n");
 		}
 		return sb.toString();
-	}
-
-	@Override
-	public Iterator<SkillTree> iterator() {
-		return skillTrees.iterator();
 	}
 	
 	public SkillValue getSkillValue(PossibleUpdates update){
