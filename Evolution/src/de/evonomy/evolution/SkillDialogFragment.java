@@ -64,9 +64,17 @@ public class SkillDialogFragment extends DialogFragment {
 		this.update=(PossibleUpdates)getArguments().getSerializable(UPDATE);
 		this.species=new Species(
 				((Species)getArguments().getSerializable(SPECIES)));
+		
+		
 		isSkilled=((GameActivity)getActivity()).isSkilled(update);
+		Log.e("Skill", isSkilled+"");
+		Log.e("Skill", "Raw species      "+species.toString());
 		unchangedSpecies= new Species(species);
+		Log.e("Skill", "unchanged species"+unchangedSpecies.toString());
 		SimpleMapLogic.changeSpecies(species, update,isSkilled);
+		Log.e("Skill", "changed species  "+species.toString());
+		
+		
 		this.price=(int)getArguments().getInt(PRICE);
 		this.frago=(SkillTreeFragment)getArguments().getSerializable(FRAGMENT);
 		//TODO change
