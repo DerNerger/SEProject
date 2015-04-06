@@ -141,7 +141,7 @@ public class SkillValue {
 		s.setSocial(s.getSocial()+social);
 		s.setStrength(s.getStrength()+strength);
 		s.setVisibillity(s.getVisibillity()+visibillity);
-		s.setWater(isChangesWater()?water:isWater());
+		s.setWater(isChangesWater()?water:s.isWater());
 	}
 	public static void main(String args[]){
 		Species s= new Species("P", 5, 5, 5, 5, 5, 5, 10, 5, 5, 5, false);
