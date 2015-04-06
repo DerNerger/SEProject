@@ -1,6 +1,8 @@
 package main;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -11,8 +13,11 @@ import parsingXML.SkillTreeParser;
 
 public class SkillLogic {
 	
+	private static InputStream stream; //TODO: this only a hotfix for the xml-parser
+	public static void setStream(InputStream s){stream = s;}
+	
 	//static instance
-	private static SkillLogic instance;
+	private static SkillLogic instance = null;
 	
 	//object attributes
 	private SkillTreeCollection skillTrees;
@@ -70,9 +75,9 @@ public class SkillLogic {
 	
 	public SkillLogic(){
 		try {
-			SkillTreeParser parser = new SkillTreeParser("skills.xml");
+			SkillTreeParser parser = new SkillTreeParser(stream);
 			skillTrees = parser.parseSkillTreeCollection();
-		} catch (ParserConfigurationException | SAXException | IOException e) {
+		} catch (ParserConfigurationException | SAXException | IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}

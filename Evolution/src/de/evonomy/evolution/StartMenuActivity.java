@@ -2,6 +2,9 @@ package de.evonomy.evolution;
 
 
 import java.io.File;
+import java.io.InputStream;
+
+import main.SkillLogic;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,6 +27,8 @@ public class StartMenuActivity extends Activity {
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
+		InputStream is = getResources().openRawResource(R.raw.skills);
+		SkillLogic.setStream(is);
     	//Remove title bar
 	    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

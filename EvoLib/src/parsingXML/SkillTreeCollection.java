@@ -24,18 +24,22 @@ public class SkillTreeCollection{
 	
 	public void addPreselection(SkillTree tree){
 		preselection.add(tree);
+		putToHashMap(tree);
 	}
 	
 	public void addBodyextensions(SkillTree tree){
 		bodyextensions.add(tree);
+		putToHashMap(tree);
 	}
 	
 	public void addAbility(SkillTree tree){
 		abilities.add(tree);
+		putToHashMap(tree);
 	}
 	
 	private void putToHashMap(SkillTree tree){
-		Queue<SkillTree> trees = tree.getChilds();
+		Queue<SkillTree> trees = new LinkedList<SkillTree>();
+		trees.add(tree);
 		while(!trees.isEmpty()){
 			SkillTree t = trees.poll();
 			values.put(t.getSkillName(), t.getSkillValue());
@@ -45,6 +49,11 @@ public class SkillTreeCollection{
 	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
+		sb.append("HashMap:\n[");
+		for(PossibleUpdates update : values.keySet()){
+			sb.append(update+"->"+values.get(update)+", ");
+		}
+		sb.append("]\n");
 		sb.append("Preselection:\n");
 		for(SkillTree tree : preselection){
 			sb.append("["+tree.toString()+"]\n");

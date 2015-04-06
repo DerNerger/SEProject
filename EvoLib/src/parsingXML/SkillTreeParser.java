@@ -1,6 +1,9 @@
 package parsingXML;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,10 +21,10 @@ public class SkillTreeParser {
 	
 	private Node skillTreeNode;
 	
-	public SkillTreeParser(String filename) throws ParserConfigurationException, SAXException, IOException{
+	public SkillTreeParser(InputStream is) throws ParserConfigurationException, SAXException, IOException, URISyntaxException{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		Document document = builder.parse(new File(filename));
+		Document document = builder.parse(is);
 		skillTreeNode = document.getDocumentElement();
 	}
 	
@@ -101,9 +104,4 @@ public class SkillTreeParser {
 		}
 	}
 	
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException{
-		SkillTreeParser parser = new SkillTreeParser("skills.xml");
-		SkillTreeCollection collection = parser.parseSkillTreeCollection();
-		System.out.println(collection);
-	}
 }

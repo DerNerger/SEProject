@@ -451,6 +451,7 @@ containing a value of this type.
         public static final int map2=0x7f040001;
         public static final int map3=0x7f040002;
         public static final int map4=0x7f040003;
+        public static final int skills=0x7f040004;
     }
     public static final class string {
         public static final int action_settings=0x7f080003;
