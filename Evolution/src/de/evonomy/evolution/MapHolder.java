@@ -380,6 +380,9 @@ public class MapHolder {
 	public void addSkill(PossibleUpdates update) {
 		mySkills.add(update);
 	}
+	public void deleteSkill(PossibleUpdates update){
+		mySkills.remove(update);
+	}
 
 	public boolean isSkilled(PossibleUpdates update) {
 		return mySkills.contains(update);
