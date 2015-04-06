@@ -1,5 +1,7 @@
 package main;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -31,7 +33,8 @@ public class SkillLogic {
 	}
 	
 	public SkillValue getSkillValue(PossibleUpdates update,boolean reverse){
-		SkillValue s = skillTrees.getSkillValue(update);
+		SkillValue temp = skillTrees.getSkillValue(update);
+		SkillValue s = new SkillValue(temp);
 		if(reverse){
 			s.setAgility(s.getAgility()*-1);
 			s.setIntelligence(s.getIntelligence()*-1);
@@ -80,5 +83,18 @@ public class SkillLogic {
 		} catch (ParserConfigurationException | SAXException | IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException{
+		SkillLogic.setStream(new FileInputStream("skills.xml"));
+		SkillLogic l = SkillLogic.getSkillLogic();
+		SkillValue val = l.getSkillValue(PossibleUpdates.CENTRALNERVSYSTEM,false);
+		System.out.println(val);
+		val = l.getSkillValue(PossibleUpdates.CENTRALNERVSYSTEM,true);
+		System.out.println(val);
+		val = l.getSkillValue(PossibleUpdates.CENTRALNERVSYSTEM,false);
+		System.out.println(val);
+		val = l.getSkillValue(PossibleUpdates.CENTRALNERVSYSTEM,true);
+		System.out.println(val);
 	}
 }

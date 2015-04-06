@@ -39,6 +39,23 @@ public class SkillValue {
 		this.water =false;
 		this.changesWater=false;
 	}
+	
+	public SkillValue(SkillValue value) {
+		super();
+		this.intelligence = value.intelligence;
+		this.agility = value.agility;
+		this.strength = value.strength;
+		this.social = value.social;
+		this.procreation = value.procreation;
+		this.minTemp = value.minTemp;
+		this.maxTemp = value.maxTemp;
+		this.resourceDemand = value.resourceDemand;
+		this.movementChance = value.movementChance;
+		this.visibillity = value.visibillity;
+		this.water = value.water;
+		this.changesWater = value.changesWater;
+	}
+	
 	public int getIntelligence() {
 		return intelligence;
 	}
