@@ -64,7 +64,7 @@ public class SkillDialogFragment extends DialogFragment {
 		this.update=(PossibleUpdates)getArguments().getSerializable(UPDATE);
 		this.species=new Species(
 				((Species)getArguments().getSerializable(SPECIES)));
-		isSkilled=!((GameActivity)getActivity()).isSkilled(update);
+		isSkilled=((GameActivity)getActivity()).isSkilled(update);
 		unchangedSpecies= new Species(species);
 		SimpleMapLogic.changeSpecies(species, update,isSkilled);
 		this.price=(int)getArguments().getInt(PRICE);
@@ -109,8 +109,8 @@ public class SkillDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				Log.e("bla", "Pressed to update");
-				if(((GameActivity)getActivity()).subtractPoints(price)&&
-						!((GameActivity)getActivity()).isSkilled(update)){
+				if(((GameActivity)getActivity()).subtractPoints(price)/*&&
+						!((GameActivity)getActivity()).isSkilled(update)*/){
 					((GameActivity)getActivity()).sendSkillUpdate(update,isSkilled);
 					frago.redraw();
 					dismiss();
