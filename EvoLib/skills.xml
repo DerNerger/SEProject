@@ -2,90 +2,90 @@
 <SkillCollection>    
     
     <Preselection>
-        <Skill name="LANDSPECIES" water="false" intelligence="+5"/>
+        <Skill name="LANDSPECIES" water="false" intelligence="5"/>
 		<Skill name="WATESPECIES" water="true" intelligence="-5"/>
-		<Skill name="CARNIVORE" strength="+5" resourceDemand="+5"/>
+		<Skill name="CARNIVORE" strength="5" resourceDemand="5"/>
 		<Skill name="HERBIVORE" strength="-5" resourceDemand="-5"/>
-		<Skill name="ENDOSKELETON" strength="-3" agility="+3" movementChance="+0.05"/>
-		<Skill name="EXOSKELETON" strength="+3" agility="-3" movementChance="-0.05"/>
-		<Skill name="RSTRATEGIST" procreation="+5" strength="-5"/>
-		<Skill name="KSTRATEGIST" procreation="-5" strength="+5"/>
-		<Skill name="THINFUR" minTemp="+20" maxTemp="+20"/>
+		<Skill name="ENDOSKELETON" strength="-3" agility="3" movementChance="0.05"/>
+		<Skill name="EXOSKELETON" strength="3" agility="-3" movementChance="-0.05"/>
+		<Skill name="RSTRATEGIST" procreation="5" strength="-5"/>
+		<Skill name="KSTRATEGIST" procreation="-5" strength="5"/>
+		<Skill name="THINFUR" minTemp="20" maxTemp="20"/>
 		<Skill name="THICKFUR" minTemp="-20" maxTemp="-20"/>
     </Preselection>
     
 	<Bodyextensions>
-		<Skill name="WINGS" agility="+8">
-		    <Skill name="BATTLEWINGS" strength="+12" resourceDemand="+7"/>
-		    <Skill name="FLYWINGS" agility="+4" movementChance="+0.3"/>
+		<Skill name="WINGS" agility="8">
+		    <Skill name="BATTLEWINGS" strength="12" resourceDemand="7"/>
+		    <Skill name="FLYWINGS" agility="4" movementChance="0.3"/>
 		</Skill>
 	
-		<Skill name="CENTRALNERVSYSTEM" intelligence="+2" social="+2">
-		    <Skill name="BRAIN" intelligence="+5" social="+5">
-		        <Skill name="FRONTALLOBE" intelligence="+25" />
-				<Skill name="LIMBICSYSTEM" social="+25" />
+		<Skill name="CENTRALNERVSYSTEM" intelligence="2" social="2">
+		    <Skill name="BRAIN" intelligence="5" social="5">
+		        <Skill name="FRONTALLOBE" intelligence="25" />
+				<Skill name="LIMBICSYSTEM" social="25" />
 		    </Skill>
 		</Skill>
 		
 		<Skill name="GILLS" water="true"/>
 	
-		<Skill name="ULTRASAOUND" visibillity="+20" >
-		    <Skill name="EYES" visibillity="+40" />
+		<Skill name="ULTRASAOUND" visibillity="20" >
+		    <Skill name="EYES" visibillity="40" />
 		</Skill>
 	
-		<Skill name="LEATHERSKIN" maxTemp="+2" minTemp="-2">
-		    <Skill name="SWEATGLAND" maxTemp="+10" minTemp="-5">
-		        <Skill name="FATLAYER" maxTemp="+5" minTemp="-15"/>
-				<Skill name="FURLESSSKIN" maxTemp="+30"/>
+		<Skill name="LEATHERSKIN" maxTemp="2" minTemp="-2">
+		    <Skill name="SWEATGLAND" maxTemp="10" minTemp="-5">
+		        <Skill name="FATLAYER" maxTemp="5" minTemp="-15"/>
+				<Skill name="FURLESSSKIN" maxTemp="30"/>
 		    </Skill>
-		    <Skill name="BETTERMUSCLES" agility="+5" strength="+5">
-		        <Skill name="DRAGONSCALE"  strength="+25"/>
-				<Skill name="COMPLEXTENDONSTRUCTUR"  agility="+25"/>
+		    <Skill name="BETTERMUSCLES" agility="5" strength="5">
+		        <Skill name="DRAGONSCALE"  strength="25"/>
+				<Skill name="COMPLEXTENDONSTRUCTUR"  agility="25"/>
 		    </Skill>
 		</Skill>
 		
 		<Skill name="EXTREMITYARM">
-			<Skill name="CLAWARM"  strength="+15"/>
-			<Skill name="HANDARM" agility="+15"/>
-			<Skill name="FOOTARM" movementChance="+0.2"/>
+			<Skill name="CLAWARM"  strength="15"/>
+			<Skill name="HANDARM" agility="15"/>
+			<Skill name="FOOTARM" movementChance="0.2"/>
 		</Skill>
 	
 		<Skill name="EXTREMITYLEG">
-		    <Skill name="HANDLEG" agility="+15"/>	
-			<Skill name="FOOTLEG" movementChance="+0.2"/>
-			<Skill name="FINLEG" movementChance="+0.2" water="true"/>
+		    <Skill name="HANDLEG" agility="15"/>	
+			<Skill name="FOOTLEG" movementChance="0.2"/>
+			<Skill name="FINLEG" movementChance="0.2" water="true"/>
 		</Skill>
 	
-		<Skill name="GENITAL" procreation="+5">
-		    <Skill name="SECONDGENITAL" procreation="+20"/>
+		<Skill name="GENITAL" procreation="5">
+		    <Skill name="SECONDGENITAL" procreation="20"/>
 		</Skill>
 		
-		<Skill name="TAIL" agility="+2" strength="+2">
-		    <Skill name="DECOTAIL" social="+20" procreation="+5"/>
-			<Skill name="FIGHTTAIL" strength="+15"/>
-			<Skill name="GYMNASTICTAIL" agility="+15"/>
+		<Skill name="TAIL" agility="2" strength="2">
+		    <Skill name="DECOTAIL" social="20" procreation="5"/>
+			<Skill name="FIGHTTAIL" strength="15"/>
+			<Skill name="GYMNASTICTAIL" agility="15"/>
 		</Skill>    
 	</Bodyextensions>
 	
 	<Ability>
-		<Skill name="SETTLE" maxTemp="+10" minTemp="-10"/>	
-		<Skill name="SEXUALPROCREATION" procreation="+7">
-		    <Skill name="MONOGAMY" procreation="-5" social="+5"/>
-			<Skill name="POLYGAMY" procreation="+5" social="-5"/>
+		<Skill name="SETTLE" maxTemp="10" minTemp="-10"/>	
+		<Skill name="SEXUALPROCREATION" procreation="7">
+		    <Skill name="MONOGAMY" procreation="-5" social="5"/>
+			<Skill name="POLYGAMY" procreation="5" social="-5"/>
 		</Skill>
-		<Skill name="PACKANIMAL" procreation="+6" social="+10" strength="-8" agility="-8">
-		    <Skill name="LANGUAGE" social="+10"/>
+		<Skill name="PACKANIMAL" procreation="6" social="10" strength="-8" agility="-8">
+		    <Skill name="LANGUAGE" social="10"/>
 		</Skill>
-		<Skill name="MAVERICK" procreation="-6" social="-10" strength="+8" agility="+8">
-		    <Skill name="LOGIC" intelligence="+10"/>
+		<Skill name="MAVERICK" procreation="-6" social="-10" strength="8" agility="8">
+		    <Skill name="LOGIC" intelligence="10"/>
 		</Skill>
-		<Skill name="THUMBS" agility="+5">
+		<Skill name="THUMBS" agility="5">
 		    <Skill name="FIREMAKING" minTemp="-5" resourceDemand="-5">
-		        <Skill name="SPITFIREDRAGON" strength="+25" resourceDemand="+15" minTemp="-7"/>
+		        <Skill name="SPITFIREDRAGON" strength="25" resourceDemand="15" minTemp="-7"/>
 		    </Skill>
 		</Skill>
-		<Skill name="PHEROMONS" social="+3" procreation="+5">
-		    <Skill name="KIDSCHEME" procreation="+5"/>
+		<Skill name="PHEROMONS" social="3" procreation="5">
+		    <Skill name="KIDSCHEME" procreation="5"/>
 		</Skill>	    
 	</Ability>
 </SkillCollection>
