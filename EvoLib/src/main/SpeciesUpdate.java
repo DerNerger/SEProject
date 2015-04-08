@@ -1,5 +1,8 @@
 package main;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SpeciesUpdate extends Change {
 	
 	private String name;
@@ -15,6 +18,7 @@ public class SpeciesUpdate extends Change {
 	private boolean water;
 	private int vision;
 	private int playerNumber;
+	private Set<PossibleUpdates> skills;
 	
 	public SpeciesUpdate(Species s, int playerNumber) {
 		this.name = s.getName();
@@ -30,7 +34,13 @@ public class SpeciesUpdate extends Change {
 		this.movementChange = s.getMovementChance();
 		this.water = s.isWater();
 		this.vision = s.getVisibillity();
+		skills = new HashSet<>(s.getSkills());
 	}
+	
+	public Set<PossibleUpdates> getSkills(){
+		return skills;
+	}
+	
 	public int getPlayerNumber() {
 		return playerNumber;
 	}

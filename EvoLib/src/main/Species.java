@@ -1,6 +1,8 @@
 package main;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Felix Kibellus
@@ -40,6 +42,8 @@ public class Species implements Serializable{
 	
 	private Field startingField;
 	
+	private Set<PossibleUpdates> skilled;
+	
 	/**
 	 * Erstellt ein Objekt der Klasse Species und initialisiert alle Attribute
 	 * mit den uebergebenen Parametern.
@@ -60,6 +64,7 @@ public class Species implements Serializable{
 		this.movementChance = movementChance;
 		this.visibillity = visibillity;
 		this.water = water;
+		skilled = new HashSet<>();
 	}
 	public Species(Species copy){
 		this.name = copy.name;
@@ -74,10 +79,23 @@ public class Species implements Serializable{
 		this.movementChance = copy.movementChance;
 		this.visibillity = copy.visibillity;
 		this.water = copy.water;
+		skilled = new HashSet<>(copy.skilled);
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void skill(PossibleUpdates update){
+		skilled.add(update);
+	}
+	
+	public void unskill(PossibleUpdates update){
+		skilled.remove(update);
+	}
+	
+	public Set<PossibleUpdates> getSkills(){
+		return skilled;
 	}
 
 	public int getIntelligence() {
