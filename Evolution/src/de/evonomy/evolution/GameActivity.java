@@ -374,7 +374,7 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	}
 
 	public boolean isSkilled(PossibleUpdates up) {
-		return holder.isSkilled(up);
+		return holder.isSkilled(up,playernumber);
 	}
 
 	@Override
@@ -581,9 +581,9 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 
 	public void sendSkillUpdate(PossibleUpdates update, boolean reverse) {
 		if(!reverse)
-			holder.addSkill(update);
+			holder.addSkill(update,playernumber);
 		else
-			holder.deleteSkill(update);
+			holder.deleteSkill(update,playernumber);
 		SimpleMapLogic.changeSpecies(getSpecies(), update,reverse);
 		controller.skill(new Skill(update, playernumber,reverse));
 	}

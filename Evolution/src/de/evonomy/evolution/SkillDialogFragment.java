@@ -116,7 +116,9 @@ public class SkillDialogFragment extends DialogFragment {
 			
 			@Override
 			public void onClick(View v) {
-				Log.e("bla", "Pressed to update");
+				//Log.e("bla", "Pressed to update");
+				
+				
 				if(((GameActivity)getActivity()).subtractPoints(price)/*&&
 						!((GameActivity)getActivity()).isSkilled(update)*/){
 					((GameActivity)getActivity()).sendSkillUpdate(update,isSkilled);

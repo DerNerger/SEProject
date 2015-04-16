@@ -64,7 +64,7 @@ public class MapHolder {
 	private long population[];
 	private SpeciesData[] data;
 	// Holds current evolutions of species
-	private ArrayList<PossibleUpdates> mySkills;
+	//private ArrayList<PossibleUpdates> mySkills;
 	
 	private HashSet<FieldRect> visibleFields;
 	
@@ -335,7 +335,7 @@ public class MapHolder {
 		for (int i = 0; i < 4; i++) {
 			population[i] = 0;
 		}
-		mySkills = new ArrayList<PossibleUpdates>();
+		//mySkills = new ArrayList<PossibleUpdates>();
 		data = new SpeciesData[4];
 		for (int i = 0; i < data.length; i++) {
 			data[i] = new SpeciesData(i);
@@ -356,6 +356,9 @@ public class MapHolder {
 		cu.setResourceDemand(update.getResourceDemand());
 		cu.setVisibillity(update.getVision());
 		cu.setWater(update.isWater());
+		//TODO wenn es probleme gibt, sollte hier u.U. auch
+		//die skill liste ueberschirben werden
+		//ist aber nicht nötig, da man diese auch lokal hat
 		Log.e("Species", "new Species name" + update.getName());
 		cu.setName(update.getName());
 	}
@@ -377,15 +380,18 @@ public class MapHolder {
 		return this.population;
 	}
 
-	public void addSkill(PossibleUpdates update) {
-		mySkills.add(update);
+	public void addSkill(PossibleUpdates update, int speciesNumber) {
+		//mySkills.add(update);
+		
+		species[speciesNumber].skill(update);
 	}
-	public void deleteSkill(PossibleUpdates update){
-		mySkills.remove(update);
+	public void deleteSkill(PossibleUpdates update, int speciesNumber){
+		//mySkills.remove(update);
+		species[speciesNumber].unskill(update);
 	}
 
-	public boolean isSkilled(PossibleUpdates update) {
-		return mySkills.contains(update);
+	public boolean isSkilled(PossibleUpdates update, int speciesNumber) {
+		return species[speciesNumber].getSkills().contains(update);
 	}
 
 	public int getPoints() {

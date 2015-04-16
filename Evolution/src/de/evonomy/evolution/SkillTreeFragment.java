@@ -143,7 +143,7 @@ public class SkillTreeFragment extends Fragment implements Serializable{
 		skillViews=new LinkedList <SkillElementView>();
 		rootSkillViews=new LinkedList <SkillElementView>();
 		for(SkillElement sk:skills){
-			skillViews.add(new SkillElementView(getActivity(), sk,this));
+			skillViews.add(new SkillElementView(getActivity(), sk,this,skills));
 		}
 		for(SkillElementView sk:skillViews){
 			if(sk.getSkillElement().isRoot()){

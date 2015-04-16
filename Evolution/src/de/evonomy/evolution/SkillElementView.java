@@ -23,16 +23,20 @@ public class SkillElementView extends LinearLayout {
 	private boolean clickable = true;
 	private Context context;
 	private SkillTreeFragment frago;
+	private LinkedList<SkillElement> skills;
 	// is set to false, if other zweig of parent is skilled
 	private boolean isSkillable;
+	private boolean childIsSkilled;
 
 	public SkillElementView(final Context context, final SkillElement element,
-			final SkillTreeFragment frago) {
+			final SkillTreeFragment frago,LinkedList<SkillElement> skills) {
 		super(context);
 		this.element = element;
 		this.context = context;
 		this.frago = frago;
+		this.skills=skills;
 		isSkillable = true;
+		childIsSkilled=false;
 		inflate(context, R.layout.skill_element_view, this);
 
 		childs = new LinkedList<SkillElementView>();
@@ -41,9 +45,20 @@ public class SkillElementView extends LinearLayout {
 			this.setAlpha(0.5f);
 			if (element.getParent() != null
 					&& !((GameActivity) context).isSkilled(element.getParent()
-							.getUpdate()))
+							.getUpdate())){
 				clickable = false;
+				
+			}
 
+		}
+		for(SkillElement ski:skills){
+			if(((GameActivity) context).isSkilled(ski.getUpdate()) && 
+					ski.getParent()!= null &&
+					ski.getParent().getUpdate()
+					==element.getUpdate()){
+				clickable=false;
+				childIsSkilled=true;
+			}
 		}
 		setImage();
 		button.setOnClickListener(new OnClickListener() {
@@ -62,7 +77,12 @@ public class SkillElementView extends LinearLayout {
 					frag.show(fm, "fragment_skill_dialog");
 
 				}
-
+				else if(childIsSkilled){
+					Toast.makeText(context,
+							context.getString(
+							R.string.fragment_skill_dialog_not_backsillable),
+							Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 	}
