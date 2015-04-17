@@ -160,11 +160,12 @@ public class SpeciesSkillInformation {
 		ultra.addChild(eyes);
 		head.add(gills);
 		head.add(cnf);
-		head.add(ultra);
+//		head.add(ultra);
 		head.add(brain);
 		head.add(lobe);
 		head.add(limbic);
-		head.add(eyes);
+//		head.add(eyes);
+		//sachne fuer vision auskommentiert
 
 	}
 
