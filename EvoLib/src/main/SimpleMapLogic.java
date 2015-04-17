@@ -318,11 +318,22 @@ public class SimpleMapLogic implements IMapLogic {
 	}
 	
 	public static void changeSpecies(Species s, PossibleUpdates update,boolean reverse){
+		
 		SkillLogic skillLogic = SkillLogic.getSkillLogic();
 		SkillValue sv=skillLogic.getSkillValue(update, reverse);
-		if(reverse) s.unskill(update);
-		else s.skill(update);
-		sv.processOnSpecies(s);
+		int costs=skillLogic.getSkillCosts(update, reverse);
+		if(s.substractPoints(costs)){
+			if (reverse)
+				s.unskill(update);
+			else
+				s.skill(update);
+
+			sv.processOnSpecies(s);
+		}else{
+			System.out.println("IRGENDWAS LÄUFT SCHIEF!!!! Die EvoLib darf" +
+					"keine skillsbefehle bekommen," +
+					" wofür sie nicht genügend punkte hat!");
+		}
 		
 	}
 	

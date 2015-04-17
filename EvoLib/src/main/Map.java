@@ -360,6 +360,11 @@ public class Map implements Serializable{
 		int[] points = logic.generatePoints(mapPopulationDifference);
 		PointsTimeChange change = new PointsTimeChange(points, years);
 		changeList.add(change);
+		//add points to Species
+		for(int i = 0; i<species.length; i++){
+			species[i].addPoints(points[i]);
+		}
+		
 		
 		//check if player lose
 		for (int i = 0; i < mapPopulation.length; i++) {

@@ -394,15 +394,19 @@ public class MapHolder {
 		return species[speciesNumber].getSkills().contains(update);
 	}
 
-	public int getPoints() {
-		return points;
+	public int getPoints(int speciesNumber) {
+		return species[speciesNumber].getPoints();
 	}
 
-	public void addPoints(int toAdd) {
-		points += toAdd;
+	public void addPoints(int toAdd, int speciesNumber) {
+		species[speciesNumber].addPoints(toAdd);
+	}
+	
+	public boolean substractPoints(int toSub, int speciesNumber) {
+		return species[speciesNumber].substractPoints(toSub);
 	}
 
-	public void setPoints(int points) {
+	private void setPoints(int points, int speciesNumber) {
 		this.points = points;
 	}
 

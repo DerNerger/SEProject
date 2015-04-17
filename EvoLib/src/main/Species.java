@@ -44,6 +44,8 @@ public class Species implements Serializable{
 	
 	private Set<PossibleUpdates> skilled;
 	
+	private int points;
+	
 	/**
 	 * Erstellt ein Objekt der Klasse Species und initialisiert alle Attribute
 	 * mit den uebergebenen Parametern.
@@ -65,6 +67,7 @@ public class Species implements Serializable{
 		this.visibillity = visibillity;
 		this.water = water;
 		skilled = new HashSet<>();
+		points=0;
 	}
 	public Species(Species copy){
 		this.name = copy.name;
@@ -80,10 +83,26 @@ public class Species implements Serializable{
 		this.visibillity = copy.visibillity;
 		this.water = copy.water;
 		skilled = new HashSet<>(copy.skilled);
+		this.points=copy.points;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public int getPoints(){
+		return points;
+	}
+	
+	public boolean substractPoints(int points){
+		if(this.points>=points){
+			this.points-=points;
+			return true;
+		}
+		return false;
+	}
+	public void addPoints(int points){
+		this.points+=points;
 	}
 	
 	public void skill(PossibleUpdates update){

@@ -17,7 +17,7 @@ public class Controller implements Runnable, Skillable{
 	
 	private Lock qLock;
 	private Queue<Skill> skillQ;
-	private static final int waitTime = 2000; //in milliseconds!!!
+	private static final int waitTime = 0; //in milliseconds!!!
 	private boolean load;
 	
 	

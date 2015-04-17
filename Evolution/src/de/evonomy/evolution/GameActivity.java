@@ -193,12 +193,12 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	}
 
 	public void changePointsAndTime(int[] points, final long years) {
-		holder.addPoints(points[playernumber]);
+		holder.addPoints(points[playernumber],playernumber);
 		runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
-				pointsTextView.setText(holder.getPoints() + " P");
+				pointsTextView.setText(holder.getPoints(playernumber) + " P");
 				timeTextView.setText(years + " Jahre");
 			}
 		});
@@ -589,15 +589,11 @@ public class GameActivity extends FragmentActivity implements IPlayer,
 	}
 
 	public boolean subtractPoints(int changeBy) {
-		if (holder.getPoints() >= changeBy) {
-			holder.addPoints(-changeBy);
-			return true;
-		}
-		return false;
+			return holder.substractPoints(changeBy,playernumber);
 	}
 
 	public int getPoints() {
-		return holder.getPoints();
+		return holder.getPoints(playernumber);
 	}
 
 	private void setWorldPopulation() {
